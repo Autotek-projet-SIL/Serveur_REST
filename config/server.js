@@ -14,7 +14,6 @@ app.get('/', (req, res) => {
 })
 
 
-app.use("/",routeLocataire)
 
 
 
