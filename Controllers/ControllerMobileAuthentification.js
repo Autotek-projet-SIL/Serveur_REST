@@ -1,45 +1,31 @@
 const serviceMobileAuthentification = require('../Services/ServiceMobileAuthentification.js')
 const firebaseVerifyToken = require("../config/firebase.js")
 
+// Inscription d'un locataire
 const inscriptionLocataire = async (request, response) => {
-    try {
-        await firebaseVerifyToken.verifyToken(request)
-        await serviceMobileAuthentification.inscriptionLocataire(request, response)
-    } catch (e) {
-        response.status(403)
-    }
+    firebaseVerifyToken.verifyToken(request)
+        .then((res) => {
+            serviceMobileAuthentification.inscriptionLocataire(request, response)
+        })
+        .catch((err) => {
+            response.status(403).send("Requete rejetée")
+        });
 }
+
+// Connexion d'un locataire
 const connexionLocataire = async (request, response) => {
-    try {
-        console.log("hello world")
-        await firebaseVerifyToken.verifyToken(request)
-        console.log("hello world")
-        await serviceMobileAuthentification.connexionLocataire(request, response)
-    } catch (e) {
-        response.status(403)
-    }
+    firebaseVerifyToken.verifyToken(request)
+        .then((res) => {
+            serviceMobileAuthentification.connexionLocataire(request, response)
+        })
+        .catch((err) => {
+            response.status(403).send("Requete rejetée")
+        });
 }
-const getPhotoIdentite = async (request, response) => {
-    try {
-        await firebaseVerifyToken.verifyToken(request)
-        await serviceMobileAuthentification.getPhotoIdentite(request, response)
-    } catch (e) {
-        response.status(403)
-    }
-}
-const getPhotoSelfie = async (request, response) => {
-    try {
-        await firebaseVerifyToken.verifyToken(request)
-        await serviceMobileAuthentification.getPhotoSelfie(request, response)
-    } catch (e) {
-        response.status(403)
-    }
-}
+
 //Exporter les fonctions  
 module.exports =
 {
     inscriptionLocataire,
     connexionLocataire,
-    getPhotoIdentite,
-    getPhotoSelfie
 }
