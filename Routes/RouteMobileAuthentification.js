@@ -4,6 +4,7 @@ const routerMobileAuthentification = express.Router()
 const controllerMobileAuthentification = require('../Controllers/ControllerMobileAuthentification.js')
 
 routerMobileAuthentification.post('/locataire',controllerMobileAuthentification.inscriptionLocataire)
-routerMobileAuthentification.post('/photoIdentite',controllerMobileAuthentification.addPhotoIdentite)
-routerMobileAuthentification.post('/photoSelfie',controllerMobileAuthentification.addPhotoSelfie)
+routerMobileAuthentification.get('/locataire/:email',controllerMobileAuthentification.connexionLocataire)
+routerMobileAuthentification.get('/photoselfie/:id',controllerMobileAuthentification.getPhotoSelfie)
+routerMobileAuthentification.get('/photoidentite/:id',controllerMobileAuthentification.getPhotoIdentite)
 module.exports= routerMobileAuthentification

@@ -1,11 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const routeLocataire = require('../Routes/RouteMobileAuthentification.js')
+const routeMobileAuthentification = require('../Routes/RouteMobileAuthentification.js')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/",routeLocataire)
+app.use("/",routeMobileAuthentification)
 app.get('/', (req, res) => {
     res.send('App is working')
 })

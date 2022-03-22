@@ -1,32 +1,45 @@
 const serviceMobileAuthentification = require('../Services/ServiceMobileAuthentification.js')
+const firebaseVerifyToken = require("../config/firebase.js")
 
 const inscriptionLocataire = async (request, response) => {
     try {
-        serviceMobileAuthentification.inscriptionLocataire(request, response)
+        await firebaseVerifyToken.verifyToken(request)
+        await serviceMobileAuthentification.inscriptionLocataire(request, response)
     } catch (e) {
-        throw new Error(e.message)
+        response.status(403)
     }
 }
-
-const addPhotoIdentite = async (request, response) => {
+const connexionLocataire = async (request, response) => {
     try {
-        serviceMobileAuthentification.addPhotoIdentite(request, response)
+        console.log("hello world")
+        await firebaseVerifyToken.verifyToken(request)
+        console.log("hello world")
+        await serviceMobileAuthentification.connexionLocataire(request, response)
     } catch (e) {
-        throw new Error(e.message)
+        response.status(403)
     }
 }
-
-const addPhotoSelfie = async (request, response) => {
+const getPhotoIdentite = async (request, response) => {
     try {
-        serviceMobileAuthentification.addPhotoSelfie(request, response)
+        await firebaseVerifyToken.verifyToken(request)
+        await serviceMobileAuthentification.getPhotoIdentite(request, response)
     } catch (e) {
-        throw new Error(e.message)
+        response.status(403)
+    }
+}
+const getPhotoSelfie = async (request, response) => {
+    try {
+        await firebaseVerifyToken.verifyToken(request)
+        await serviceMobileAuthentification.getPhotoSelfie(request, response)
+    } catch (e) {
+        response.status(403)
     }
 }
 //Exporter les fonctions  
-module.exports = 
+module.exports =
 {
     inscriptionLocataire,
-    addPhotoIdentite,
-    addPhotoSelfie
+    connexionLocataire,
+    getPhotoIdentite,
+    getPhotoSelfie
 }
