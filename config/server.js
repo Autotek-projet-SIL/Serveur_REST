@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/",routeMobileAuthentification)
 app.use("/",routeWebAuthentification)
 app.get('/', (req, res) => {
-    res.send('App is working')
+    res.send('Autotek Web server')
 })
 
 app.listen(port, () => console.log('Server running on port 3000 ...'))
