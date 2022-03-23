@@ -24,8 +24,8 @@ const getDemandeInscriptionById = async (request, response) => {
 // Ajouter un demandeinscription dans la BDD
 const addDemandeInscription = async (request, response) => {
   let body = request.body
-  pool.query('INSERT INTO demandeinscription(statut, date_inscription,id_locataire) VALUES ($1, $2, $3)',
-    [body.statut, body.date_inscription, body.id], (error, results) => {
+  pool.query('INSERT INTO demandeinscription(statut, date_inscription,id_locataire,email) VALUES ($1, $2, $3, $4)',
+    [body.statut, body.date_inscription, body.id,body.email], (error, results) => {
       if (error) {
         throw error
       }
