@@ -31,11 +31,12 @@ const getLocataireByEmail = async (request, response) => {
     response.status(200).json(results.rows)
   })
 }
+
 // Ajouter un locataire dans la BDD
 const addLocataire = async (request, response) => {
   let body = request.body
-  pool.query('INSERT INTO locataire(id_locataire, nom, prenom, numero_telephone, email, mot_de_passe,statut_compte)VALUES ($1, $2, $3, $4, $5, $6,$7)',
-    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe, body.statut_compte], (error, results) => {
+  pool.query('INSERT INTO locataire(id_locataire, nom, prenom, numero_telephone, email, mot_de_passe,statut_compte,photo_identite_recto,photo_identite_verso,photo_selfie) VALUES ($1, $2, $3, $4, $5, $6,$7,$8,$9,$10)',
+    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe, body.statut_compte,body.photo_identite_recto,body.photo_identite_verso,body.photo_selfie], (error, results) => {
       if (error) {
         throw error
       }
@@ -47,8 +48,8 @@ const addLocataire = async (request, response) => {
 const updateLocataire = (request, response) => {
   let id = request.params.id
   let body = request.body
-  pool.query('UPDATE locataire SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6, statut_compte=$7 WHERE id_locataire=$1',
-    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+  pool.query('UPDATE locataire SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6, statut_compte=$7, photo_identite_recto=$8,photo_identite_verso=$9,photo_selfie=$10 WHERE id_locataire=$1',
+    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.photo_identite_recto,body.photo_identite_verso,body.photo_selfie], (error, results) => {
       if (error) {
         throw error
       }
