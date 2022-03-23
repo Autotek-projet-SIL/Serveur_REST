@@ -56,6 +56,16 @@ const updateLocataire = (request, response) => {
       response.status(200).send(`Locataire ${body.nom} ${body.prenom} a été modifié avec succés.`)
     })
 }
+const updateLocataireStatus = async (request, response , status) => {
+  let id_locataire=request.params.id
+  pool.query('UPDATE locataire SET statut_compte=$2 WHERE id_locataire=$1',
+    [id_locataire, status], (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`Le compte du locataire ${id_locataire} à été validé.`)
+    })
+}
 
 // Supprimer un locataire
 const deleteLocataire = (request, response) => {
@@ -76,5 +86,7 @@ module.exports = {
   getLocataires,
   addLocataire,
   updateLocataire,
+  deleteLocataire,
+  updateLocataireStatus,
   deleteLocataire
 }

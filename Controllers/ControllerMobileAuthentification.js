@@ -11,6 +11,16 @@ const inscriptionLocataire = async (request, response) => {
             response.status(403).send("Requete rejetée")
         });
 }
+//Ajout demande d'inscription
+
+const ajoutDemandeInscription = async (request, response) => {
+    try {
+        await serviceMobileAuthentification.ajoutDemandeInscription(request, response)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 
 // Connexion d'un locataire
 const connexionLocataire = async (request, response) => {
@@ -28,4 +38,5 @@ module.exports =
 {
     inscriptionLocataire,
     connexionLocataire,
+    ajoutDemandeInscription
 }
