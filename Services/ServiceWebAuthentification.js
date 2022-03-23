@@ -5,7 +5,7 @@ const ModelLocataire = require('../Models/ModelLocataire.js')
 
 const validerDemandeInscription = async (request, response) => {
     try {
-        await ModelDemandeInscription.updateDemandeInscription(request, response , "validé")
+        await ModelDemandeInscription.updateDemandeInscription(request, response , "validée")
         await ModelLocataire.updateLocataireStatus(request, response , true)
 
     } catch (e) {
@@ -14,7 +14,7 @@ const validerDemandeInscription = async (request, response) => {
 }
 const refuserDemandeInscription = async (request, response) => {
     try {
-        await ModelDemandeInscription.updateDemandeInscription(request, response, "refusé")
+        await ModelDemandeInscription.updateDemandeInscription(request, response, "refusée")
         await ModelJustificatif.addJustificatif(request, response)
       
     } catch (e) {

@@ -1,4 +1,3 @@
-const { request } = require("http")
 const pool = require("../config/bd")
 
 // Recuperer la liste des locataires
@@ -34,34 +33,34 @@ const getATCByEmail = async (request, response) => {
 const addATC = async (request, response) => {
   let body = request.body
   pool.query('INSERT INTO atc(id_atc, nom, prenom, numero_telephone, email, mot_de_passe,est_root)VALUES ($1, $2, $3, $4, $5, $6,$7)',
-    [body.id_atc, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.est_root], (error, results) => {
+    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.est_root], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`ATC ${body.nom} ${body.prenom} a été ajouté avec succés.`)
+      response.status(200)
     })
 }
 // Mettre a jour les informations d'un ATC
 const updateATC = async (request, response) => {
-  let id_atc=request.params.id
+  let id=request.params.id
   let body = request.body
   pool.query('UPDATE atc SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6 WHERE id_atc=$1',
-    [id_atc, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`ATC ${body.nom} ${body.prenom} a été modifié avec succés.`)
+      response.status(200)
     })
 }
 // Supprimer un ATC
 const deleteATC = async (request, response) => {
-  let id_atc=request.params.id
+  let id=request.params.id
   pool.query('DELETE FROM atc WHERE id_atc=$1',
-    [id_atc], (error, results) => {
+    [id], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Le ATC a été supprimé avec succés.`)
+      response.status(200)
     })
 }
 //Exporter les fonctions du modele

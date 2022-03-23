@@ -1,9 +1,9 @@
-const { request } = require("http")
 const pool = require("../config/bd")
 
 // Recuperer la liste des demandeinscriptions
 const getDemandesInscription = async (request, response) => {
-  pool.query('SELECT * FROM demandeinscription where statut = "en attente" order by date_inscription', (error, results) => {
+  let status = "en attente"
+  pool.query('SELECT * FROM demandeinscription where statut = $1 order by date_inscription',[status], (error, results) => {
     if (error) {
       throw error
     }
@@ -12,8 +12,8 @@ const getDemandesInscription = async (request, response) => {
 }
 // Recuperer un demandeinscription avec un id
 const getDemandeInscriptionById = async (request, response) => {
-  let id = request.params.id
-  pool.query('SELECT * FROM demandeinscription WHERE id_demande_inscription=$1', [id], (error, results) => {
+  let id_demande_inscription = request.params.id_demande_inscription
+  pool.query('SELECT * FROM demandeinscription WHERE id_demande_inscription=$1', [id_demande_inscription], (error, results) => {
     if (error) {
       throw error
     }
@@ -24,34 +24,31 @@ const getDemandeInscriptionById = async (request, response) => {
 // Ajouter un demandeinscription dans la BDD
 const addDemandeInscription = async (request, response) => {
   let body = request.body
-  pool.query('INSERT INTO demandeinscription(id_demande_inscription, statut, date_inscription,id_locataire)VALUES ($1, $2, $3, $4)',
-    [body.id_demande_inscription, body.statut, body.date_inscription, body.id_locataire], (error, results) => {
+  pool.query('INSERT INTO demandeinscription(statut, date_inscription,id_locataire) VALUES ($1, $2, $3)',
+    [body.statut, body.date_inscription, body.id], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`La demandeinscription a été ajouté avec succés.`)
     })
 }
 // Mettre a jour les informations d'un demandeinscription
 const updateDemandeInscription = async (request, response , status) => {
-  let id_demande_inscription = request.params.id_demande
+  let id_demande_inscription = request.params.id_demande_inscription
   pool.query('UPDATE demandeinscription SET statut=$2 WHERE id_demande_inscription=$1',
     [id_demande_inscription, status], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`demandeinscription  a été modifié avec succés.`)
     })
 }
 // Supprimer un demandeinscription
 const deleteDemandeInscription = async (request, response) => {
-  let id_demande_inscription=request.params.id
+  let id_demande_inscription=request.params.id_demande_inscription
   pool.query('DELETE FROM demandeinscription WHERE id_demande_inscription=$1',
     [id_demande_inscription], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Le demandeinscription a été supprimé avec succés.`)
     })
 }
 //Exporter les fonctions du modele

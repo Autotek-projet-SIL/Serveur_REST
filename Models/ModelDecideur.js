@@ -1,4 +1,3 @@
-const { request } = require("http")
 const pool = require("../config/bd")
 
 // Recuperer la liste des décideurs
@@ -34,34 +33,34 @@ const getDecideurByEmail = async (request, response) => {
 const addDecideur = async (request, response) => {
   let body = request.body
   pool.query('INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe)VALUES ($1, $2, $3, $4, $5, $6)',
-    [body.id_decideur, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Decideur ${body.nom} ${body.prenom} a été ajouté avec succés.`)
+      response.status(200)
     })
 }
 // Mettre a jour les informations d'un decideur
 const updateDecideur = async (request, response) => {
-  let id_decideur=request.params.id
+  let id=request.params.id
   let body = request.body
   pool.query('UPDATE decideur SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6 WHERE id_decideur=$1',
-    [id_decideur, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Decideur ${body.nom} ${body.prenom} a été modifié avec succés.`)
+      response.status(200)
     })
 }
 // Supprimer un decideur
 const deleteDecideur = async (request, response) => {
-  let id_decideur=request.params.id
+  let id=request.params.id
   pool.query('DELETE FROM decideur WHERE id_decideur=$1',
-    [id_decideur], (error, results) => {
+    [id], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Le decideur a été supprimé avec succés.`)
+      response.status(200)
     })
 }
 //Exporter les fonctions du modele
