@@ -1,23 +1,17 @@
 const serviceMobileAuthentification = require('../Services/ServiceMobileAuthentification.js')
 const firebaseVerifyToken = require("../config/firebase.js")
 
-const inscriptionLocataire = async (request, response) => {
-    try {
-        await firebaseVerifyToken.verifyToken(request)
-        await serviceMobileAuthentification.inscriptionLocataire(request, response)
-    } catch (e) {
-        response.status(403)
-    }
+const inscriptionLocataire = (request, response) => {
+    firebaseVerifyToken.verifyToken(request, response)
+    serviceMobileAuthentification.inscriptionLocataire(request, response)
 }
 const connexionLocataire = async (request, response) => {
-    try {
-        console.log("hello world")
-        await firebaseVerifyToken.verifyToken(request)
-        console.log("hello world")
-        await serviceMobileAuthentification.connexionLocataire(request, response)
-    } catch (e) {
-        response.status(403)
-    }
+    firebaseVerifyToken.verifyToken(request, response)
+        .catch(console.error)
+        .then(() => console.log('We do cleanup here'));
+    await serviceMobileAuthentification.connexionLocataire(request, response)
+
+
 }
 const getPhotoIdentite = async (request, response) => {
     try {
