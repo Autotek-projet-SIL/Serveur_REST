@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0f9676f2-203e-4082-a56a-ed87290aaea0/resourceGroups/NetworkWatcherRG/providers/Microsoft.Web/sites/AutotekWebServer",
+    "appService.deploySubpath": "."
+}
