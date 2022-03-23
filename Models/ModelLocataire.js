@@ -40,7 +40,6 @@ const addLocataire = async (request, response) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Locataire ${body.nom} ${body.prenom} a été ajouté avec succés.`)
     })
 }
 
@@ -53,7 +52,15 @@ const updateLocataire = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Locataire ${body.nom} ${body.prenom} a été modifié avec succés.`)
+    })
+}
+const updateLocataireStatus = async (request, response , status) => {
+  let id=request.params.id;
+  pool.query('UPDATE locataire SET statut_compte=$2 WHERE id_locataire=$1',
+    [id, status], (error, results) => {
+      if (error) {
+        throw error
+      }
     })
 }
 
@@ -65,7 +72,6 @@ const deleteLocataire = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`Le locataire a été supprimé avec succés.`)
     })
 }
 
@@ -76,5 +82,7 @@ module.exports = {
   getLocataires,
   addLocataire,
   updateLocataire,
+  deleteLocataire,
+  updateLocataireStatus,
   deleteLocataire
 }
