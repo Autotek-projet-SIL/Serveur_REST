@@ -3,7 +3,7 @@ const pool = require("../config/bd")
 
 // Recuperer la liste des demandeinscriptions
 const getDemandesInscription = async (request, response) => {
-  pool.query('SELECT * FROM demandeinscription', (error, results) => {
+  pool.query('SELECT * FROM demandeinscription where statut = "en attente" order by date_inscription', (error, results) => {
     if (error) {
       throw error
     }

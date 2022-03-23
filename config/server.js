@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const routeLocataire = require('../Routes/RouteLocataire.js')
+const routeLocataire = require('../Routes/RouteWebAuthentification.js')
 
 app.use(bodyParser.json());
 

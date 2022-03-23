@@ -22,9 +22,20 @@ const refuserDemandeInscription = async (request, response) => {
     }
 }
 
+const getDemandesInscription = async (request, response) => {
+    try {
+        await ModelDemandeInscription.getDemandesInscription(request,response)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+
+
 //Exporter les fonctions du service
 module.exports = 
 {
     validerDemandeInscription,
-    refuserDemandeInscription
+    refuserDemandeInscription,
+    getDemandesInscription
 }

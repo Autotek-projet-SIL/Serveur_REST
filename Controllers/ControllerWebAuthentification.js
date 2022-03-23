@@ -22,10 +22,19 @@ const refuserDemandeInscription = async (request, response) => {
         throw new Error(e.message)
     }
 }
+const getDemandesInscription = async (request, response) => {
+    try {
+        await serviceWebAuthentification.getDemandesInscription(request, response)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 //Exporter les fonctions  
 module.exports = 
 {
     ajoutJustificatif,
     validerDemandeInscription,
-    refuserDemandeInscription
+    refuserDemandeInscription, 
+    getDemandesInscription
 }
