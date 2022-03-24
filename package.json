@@ -4,7 +4,7 @@
   "description": "",
   "main": "bd.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc --reporter=html jasmine",
     "start": "node server.js"
   },
   "keywords": [],
@@ -14,7 +14,10 @@
     "express": "^4.17.3",
     "firebase": "^9.6.9",
     "firebase-admin": "^10.0.2",
+    "jasmine": "^4.0.2",
     "nodemon": "^1.11.1",
-    "pg": "^8.7.3"
+    "nyc": "^15.1.0",
+    "pg": "^8.7.3",
+    "request": "^2.88.2"
   }
 }
