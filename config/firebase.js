@@ -55,7 +55,7 @@ module.exports =
 const { initializeApp } = require("firebase/app")
 const { getAuth, signInWithCustomToken, signOut } = require("firebase/auth")
 var admin = require("firebase-admin");
-var serviceAccount = require("../autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
+var serviceAccount = require("./autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });

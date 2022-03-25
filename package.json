@@ -1,21 +1,27 @@
 {
-  "name": "exemple-architecture-rest-api",
+  "name": "services_rest",
   "version": "1.0.0",
-  "description": "",
-  "main": "bd.js",
+  "description": "Services REST consommés par les clients",
+  "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=html jasmine",
-    "start": "node server.js"
+    "test": "nyc --reporter=html jasmine"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Autotek-projet-SIL/Services_REST.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Autotek-projet-SIL/Services_REST/issues"
+  },
+  "homepage": "https://github.com/Autotek-projet-SIL/Services_REST#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "firebase": "^9.6.9",
+    "firebase": "^9.6.10",
     "firebase-admin": "^10.0.2",
     "jasmine": "^4.0.2",
-    "nodemon": "^1.11.1",
+    "nodemon": "^2.0.15",
     "nyc": "^15.1.0",
     "pg": "^8.7.3",
     "request": "^2.88.2"
