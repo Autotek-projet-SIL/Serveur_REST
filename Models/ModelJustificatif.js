@@ -1,4 +1,4 @@
-const pool = require("../config/bd")
+const pool=require("../config/config_pool")
 
 // Recuperer un justificatif avec un id
 const getJustificatifById = async (request, response) => {

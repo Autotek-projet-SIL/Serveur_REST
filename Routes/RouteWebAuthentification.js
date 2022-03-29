@@ -3,8 +3,8 @@ const routerWebAuthentification = express.Router()
 
 const controllerWebAuthentification = require('../Controllers/ControllerWebAuthentification.js')
 
-routerWebAuthentification.put('/valider_demande/:id/demande/:id_demande_inscription',controllerWebAuthentification.validerDemandeInscription)
-routerWebAuthentification.put('/refuser_demande/:id/demande/:id_demande_inscription',controllerWebAuthentification.refuserDemandeInscription)
-routerWebAuthentification.get('/demandesInscription',controllerWebAuthentification.getDemandesInscription)
-
+routerWebAuthentification.put('/authentification_web/valider_demande/:email/demande/:id_demande_inscription',controllerWebAuthentification.validerDemandeInscription)
+routerWebAuthentification.put('/authentification_web/refuser_demande/:email/demande/:id_demande_inscription',controllerWebAuthentification.refuserDemandeInscription)
+routerWebAuthentification.get('/authentification_web/locataire/',controllerWebAuthentification.getLocataires)
+routerWebAuthentification.get('/authentification_web/demandeinscription/',controllerWebAuthentification.getDemandesInscription)
 module.exports= routerWebAuthentification

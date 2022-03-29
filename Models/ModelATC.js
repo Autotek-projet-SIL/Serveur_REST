@@ -1,4 +1,4 @@
-const pool = require("../config/bd")
+const pool=require("../config/config_pool")
 
 // Recuperer la liste des locataires
 const getATCs = async (request, response) => {

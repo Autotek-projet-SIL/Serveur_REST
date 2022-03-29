@@ -1,34 +1,53 @@
-const { verify } = require('crypto')
 const serviceWebAuthentification = require('../Services/ServiceWebAuthentification.js')
+const firebaseVerifyToken = require("../config/firebase.js")
+
+const getLocataires = async (request, response) => {
+    firebaseVerifyToken.verifyToken(request)
+        .then(async (res) => {
+            await serviceWebAuthentification.getLocataires(request, response)
+        })
+        .catch((err) => {
+            response.status(403).send("Forbidden")
+        });
+}
 
 const validerDemandeInscription = async (request, response) => {
-    try {
-        await serviceWebAuthentification.validerDemandeInscription(request, response)
-        response.status(200).send("Demande d'inscription validée avec succés")
-    } catch (e) {
-        throw new Error(e.message)
-    }
+    firebaseVerifyToken.verifyToken(request)
+        .then(async (res) => {
+            await serviceWebAuthentification.validerDemandeInscription(request, response)
+            response.status(200).send("Demande d'inscription validée avec succés")
+        })
+        .catch((err) => {
+            response.status(403).send("Forbidden")
+        });
 }
+
 const refuserDemandeInscription = async (request, response) => {
-    try {
-        await serviceWebAuthentification.refuserDemandeInscription(request, response)
-        response.status(200).send("Demande d'inscription refusée")
-    } catch (e) {
-        throw new Error(e.message)
-    }
+    firebaseVerifyToken.verifyToken(request)
+        .then(async (res) => {
+            await serviceWebAuthentification.refuserDemandeInscription(request, response)
+            response.status(200).send("Demande d'inscription refusée")
+        })
+        .catch((err) => {
+            response.status(403).send("Forbidden")
+        });
 }
+
 const getDemandesInscription = async (request, response) => {
-    try {
-        await serviceWebAuthentification.getDemandesInscription(request, response)
-    } catch (e) {
-        throw new Error(e.message)
-    }
+    firebaseVerifyToken.verifyToken(request)
+        .then(async (res) => {
+            await serviceWebAuthentification.getDemandesInscription(request, response)
+        })
+        .catch((err) => {
+            response.status(403).send("Forbidden")
+        });
 }
 
 //Exporter les fonctions  
-module.exports = 
+module.exports =
 {
     validerDemandeInscription,
-    refuserDemandeInscription, 
-    getDemandesInscription
+    refuserDemandeInscription,
+    getDemandesInscription,
+    getLocataires,
 }

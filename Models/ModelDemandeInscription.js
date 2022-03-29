@@ -1,9 +1,8 @@
-const pool = require("../config/bd")
+const pool=require("../config/config_pool")
 
 // Recuperer la liste des demandeinscriptions
 const getDemandesInscription = async (request, response) => {
-  let status = "en attente"
-  pool.query('SELECT * FROM demandeinscription where statut = $1 order by date_inscription',[status], (error, results) => {
+  pool.query('SELECT * FROM demandeinscription order by date_inscription', (error, results) => {
     if (error) {
       throw error
     }
@@ -33,9 +32,9 @@ const addDemandeInscription = async (request, response) => {
 }
 // Mettre a jour les informations d'un demandeinscription
 const updateDemandeInscription = async (request, response , status) => {
-  let id_demande_inscription = request.params.id_demande_inscription
-  pool.query('UPDATE demandeinscription SET statut=$2 WHERE id_demande_inscription=$1',
-    [id_demande_inscription, status], (error, results) => {
+  let email = request.params.email
+  pool.query('UPDATE demandeinscription SET statut=$2 WHERE email=$1',
+    [email, status], (error, results) => {
       if (error) {
         throw error
       }

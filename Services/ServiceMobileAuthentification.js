@@ -7,7 +7,7 @@ const inscriptionLocataire = async (request, response) => {
         await modelLocataire.addLocataire(request, response)
         await modelDemandeInscription.addDemandeInscription(request, response)
     } catch (e) {
-        throw new Error(e.message)
+        console.log(e)
     }
 }
 
@@ -16,7 +16,7 @@ const connexionLocataire = async (request, response) => {
     try {
         await modelLocataire.getLocataireByEmail(request, response)
     } catch (e) {
-        throw new Error(e.message)
+        console.log(e)
     }
 }
 
@@ -24,5 +24,5 @@ const connexionLocataire = async (request, response) => {
 module.exports =
 {
     inscriptionLocataire,
-    connexionLocataire
+    connexionLocataire,
 }
