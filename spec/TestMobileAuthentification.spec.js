@@ -2,33 +2,33 @@ process.env.NODE_ENV = "test_unitaire"
 const app = require("../config/server_test")
 const axios = require("axios");
 const url = "http://localhost:4000/"
-
+console.log("=========================================================")
+console.log("           Tests service MobileAuthentification")
+console.log("=========================================================")
 describe("Tester l'inscription des locataires", () => {
     let data = {
-        "token": "token de firebase",
-        "id": "test",
-        "nom": "test",
-        "prenom": "test",
-        "email": "test@gmail.com",
-        "mot_de_passe": "test",
-        "numero_telephone": "test",
-        "photo_identite_recto": "test",
-        "photo_identite_verso": "test",
-        "photo_selfie": "test",
+        "token": "avPraesPu0hkkvlsRaHhcGx3VSph2",
+        "id": "KWPhaKsPu0hkkhsRaHhcGx3VSph2",
+        "nom": "Madani",
+        "prenom": "Nassim",
+        "email": "madaninassim@gmail.com",
+        "mot_de_passe": "kjl28vcn",
+        "numero_telephone": "0645321321",
+        "photo_identite_recto": "nassim_photo",
+        "photo_identite_verso": "nassim_photo",
+        "photo_selfie": "nassim_photo",
         "statut_compte": "false",
         "statut": "en attente",
-        "date_inscription": "1996-12-02"
+        "date_inscription": "2022-03-30"
     }
     beforeAll(() => {
         axios.post(url + 'authentification_mobile/locataire_inscription/', data
         )
             .then(res => {
-                console.log(`statusCode: ${res.status}`)
-            }).catch(error => {
-                console.log(error)
+                expect(res.statut).toEqual(200)
             })
     });
-    it("Si l'utilisateur existe le test passe", () => {
+    it("Si l'utilisateur a été inserée le test passe", () => {
        axios
             .get(url + 'authentification_mobile/locataire_connexion/test@gmail.com')
             .then(res => {

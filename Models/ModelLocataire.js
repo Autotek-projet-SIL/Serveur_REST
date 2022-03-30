@@ -57,8 +57,6 @@ const addLocataire = async (request, response) => {
         throw (error)
       }
     })
-    console.log("Je suis la fonction addLocataire");
-
 }
 
 // Mettre a jour les informations d'un locataire

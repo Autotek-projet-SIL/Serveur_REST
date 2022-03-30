@@ -234,5 +234,30 @@ pool.query(
     `
 )
 
+pool.query(
+    `
+    INSERT INTO public.locataire(
+        id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
+        VALUES ('test_locataire','test_locataire', 'test_locataire', '0541251311', 'test_locataire@gmail.com', 'test_locataire', 'false', 'test_locataire', 'test_locataire', 'test_locataire');
+    `
+)
 
+pool.query(
+    `
+        INSERT INTO public.am(id_am, nom, prenom, numero_telephone, email, mot_de_passe, photo_am)
+        VALUES ('test_am','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am');
+    `
+)
+pool.query(
+    `
+        INSERT INTO public.decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe, photo_decideur)
+        VALUES ('test_decideur','test_decideur', 'test_decideur', '0541251311', 'test_decideur@gmail.com', 'test_decideur','test_decideur');
+    `
+)
+pool.query(
+    `
+        INSERT INTO public.atc(id_atc, nom, prenom, numero_telephone, email, mot_de_passe,est_root, photo_atc)
+        VALUES ('test_atc','test_atc', 'test_atc', '0541251311', 'test_atc@gmail.com', 'test_atc','false','test_atc');
+    `
+)
 module.exports = pool

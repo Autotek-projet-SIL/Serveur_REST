@@ -29,7 +29,6 @@ const addDemandeInscription = async (request, response) => {
         throw error
       }
     })
-    console.log("Je suis la fonction addDemandeInscription");
 }
 // Mettre a jour les informations d'un demandeinscription
 const updateDemandeInscription = async (request, response , status) => {
