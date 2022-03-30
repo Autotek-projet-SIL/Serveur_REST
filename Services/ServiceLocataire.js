@@ -6,7 +6,6 @@ const getLocataireByEmail = async (request, response) => {
         await ModelLocataire.getLocataireByEmail(request, response)
 
     } catch (e) {
-        response.status(520).send("Unknown Error")
         console.log(e)
     }
 }
@@ -16,7 +15,6 @@ const getLocataireById = async (request, response) => {
     try {
         await ModelLocataire.getLocataireById(request, response)
     } catch (e) {
-        response.status(520).send("Unknown Error")
         console.log(e)
     }
 }
@@ -26,7 +24,6 @@ const updateLocataire = async (request, response) => {
     try {
         await ModelLocataire.updateLocataire(request, response)
     } catch (e) {
-        response.status(520).send("Unknown Error")
         console.log(e)
     }
 }
@@ -36,7 +33,6 @@ const deleteLocataire = async (request, response) => {
     try {
         await ModelLocataire.deleteLocataire(request, response)
     } catch (e) {
-        response.status(520).send("Unknown Error")
         console.log(e)
     }
 }
@@ -47,7 +43,6 @@ const getLocataires = async (request, response) => {
         await ModelLocataire.getLocataires(request, response)
 
     } catch (e) {
-        response.status(520).send("Unknown Error")
         console.log(e)
     }
 }

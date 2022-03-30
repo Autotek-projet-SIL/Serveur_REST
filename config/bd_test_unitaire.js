@@ -226,6 +226,13 @@ pool.query(
     `
 )
 
+pool.query(
+    `
+    INSERT INTO public.locataire(
+        id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
+        VALUES ('test_locataire','test_locataire', 'test_locataire','0541251311', 'test_locataire@gmail.com','test_locataire', 'false','test_locataire', 'test_locataire', 'test_locataire');
+    `
+)
 
 
 module.exports = pool

@@ -26,9 +26,22 @@ const connexionLocataire = async (request, response) => {
     });
 }
 
+// Connexion d'un agence de maitenance
+const connexionAM = async (request, response) => {
+    firebaseVerifyToken.verifyToken(request)
+    .then(async (res) => {
+        await serviceMobileAuthentification.connexionAM(request, response)
+    })
+    .catch((err) => {
+        console.log(err)
+        response.status(403).send("Forbidden")
+    });
+}
+
 //Exporter les fonctions  
 module.exports =
 {
     inscriptionLocataire,
     connexionLocataire,
+    connexionAM
 }

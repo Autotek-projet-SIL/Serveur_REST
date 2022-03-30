@@ -32,8 +32,8 @@ const getATCByEmail = async (request, response) => {
 // Ajouter un ATC dans la BDD
 const addATC = async (request, response) => {
   let body = request.body
-  pool.query('INSERT INTO atc(id_atc, nom, prenom, numero_telephone, email, mot_de_passe,est_root)VALUES ($1, $2, $3, $4, $5, $6,$7)',
-    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.est_root], (error, results) => {
+  pool.query('INSERT INTO atc(id_atc, nom, prenom, numero_telephone, email, mot_de_passe,est_root,photo_atc)VALUES ($1, $2, $3, $4, $5, $6,$7,$8)',
+    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.est_root,body.photo_atc], (error, results) => {
       if (error) {
         throw error
       }
@@ -44,8 +44,8 @@ const addATC = async (request, response) => {
 const updateATC = async (request, response) => {
   let id=request.params.id
   let body = request.body
-  pool.query('UPDATE atc SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6 WHERE id_atc=$1',
-    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+  pool.query('UPDATE atc SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6, est_root=$7, photo_atc=$8 WHERE id_atc=$1',
+    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.est_root,body.photo_atc], (error, results) => {
       if (error) {
         throw error
       }

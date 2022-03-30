@@ -32,8 +32,8 @@ const getDecideurByEmail = async (request, response) => {
 // Ajouter un décideur dans la BDD
 const addDecideur = async (request, response) => {
   let body = request.body
-  pool.query('INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe)VALUES ($1, $2, $3, $4, $5, $6)',
-    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+  pool.query('INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe,photo_decideur)VALUES ($1, $2, $3, $4, $5, $6,$7)',
+    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.decideur], (error, results) => {
       if (error) {
         throw error
       }
@@ -44,8 +44,8 @@ const addDecideur = async (request, response) => {
 const updateDecideur = async (request, response) => {
   let id=request.params.id
   let body = request.body
-  pool.query('UPDATE decideur SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6 WHERE id_decideur=$1',
-    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe], (error, results) => {
+  pool.query('UPDATE decideur SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6, photo_decideur=$7 WHERE id_decideur=$1',
+    [id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.photo_decideur], (error, results) => {
       if (error) {
         throw error
       }

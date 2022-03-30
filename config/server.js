@@ -5,11 +5,14 @@ const port = process.env.PORT || 3000
 const routeMobileAuthentification = require('../Routes/RouteMobileAuthentification.js')
 const routeWebAuthentification = require('../Routes/RouteWebAuthentification.js')
 const routeLocataire = require('../Routes/RouteLocataire.js')
+const routeGestionProfils = require('../Routes/RouteGestionProfils')
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routeMobileAuthentification)
 app.use("/", routeWebAuthentification)
 app.use("/", routeLocataire)
+app.use("/",routeGestionProfils)
 app.get('/', (req, res) => {
     res.send('Autotek Web server')
 })

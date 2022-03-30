@@ -1,16 +1,6 @@
 const serviceWebAuthentification = require('../Services/ServiceWebAuthentification.js')
 const firebaseVerifyToken = require("../config/firebase.js")
 
-const getLocataires = async (request, response) => {
-    firebaseVerifyToken.verifyToken(request)
-        .then(async (res) => {
-            await serviceWebAuthentification.getLocataires(request, response)
-        })
-        .catch((err) => {
-            response.status(403).send("Forbidden")
-        });
-}
-
 const validerDemandeInscription = async (request, response) => {
     firebaseVerifyToken.verifyToken(request)
         .then(async (res) => {
@@ -43,11 +33,30 @@ const getDemandesInscription = async (request, response) => {
         });
 }
 
+const getDecideurByEmail = async (request, response) => {
+    firebaseVerifyToken.verifyToken(request)
+        .then(async (res) => {
+            await serviceWebAuthentification.getDecideurByEmail(request, response)
+        })
+        .catch((err) => {
+            response.status(403).send("Forbidden")
+        });
+}
+const getATCByEmail = async (request, response) => {
+    firebaseVerifyToken.verifyToken(request)
+        .then(async (res) => {
+            await serviceWebAuthentification.getATCByEmail(request, response)
+        })
+        .catch((err) => {
+            response.status(403).send("Forbidden")
+        });
+}
 //Exporter les fonctions  
 module.exports =
 {
     validerDemandeInscription,
     refuserDemandeInscription,
     getDemandesInscription,
-    getLocataires,
+    getDecideurByEmail,
+    getATCByEmail
 }
