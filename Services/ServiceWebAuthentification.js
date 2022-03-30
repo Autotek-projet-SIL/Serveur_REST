@@ -18,7 +18,7 @@ const getLocataires = async (request, response) => {
 //Valider la demande d'inscription d'un locataire
 const validerDemandeInscription = async (request, response) => {
     try {
-        await ModelDemandeInscription.updateDemandeInscription(request, response , "validée")
+        await ModelDemandeInscription.updateDemandeInscription(request, response , "validee")
         await ModelLocataire.updateLocataireStatus(request, response , true)
 
     } catch (e) {
