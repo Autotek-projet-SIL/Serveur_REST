@@ -230,14 +230,6 @@ pool.query(
     `
     INSERT INTO public.locataire(
         id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
-        VALUES ('test_locataire','test_locataire', 'test_locataire','0541251311', 'test_locataire@gmail.com','test_locataire', 'false','test_locataire', 'test_locataire', 'test_locataire');
-    `
-)
-
-pool.query(
-    `
-    INSERT INTO public.locataire(
-        id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
         VALUES ('test_locataire','test_locataire', 'test_locataire', '0541251311', 'test_locataire@gmail.com', 'test_locataire', 'false', 'test_locataire', 'test_locataire', 'test_locataire');
     `
 )
@@ -259,5 +251,12 @@ pool.query(
         INSERT INTO public.atc(id_atc, nom, prenom, numero_telephone, email, mot_de_passe,est_root, photo_atc)
         VALUES ('test_atc','test_atc', 'test_atc', '0541251311', 'test_atc@gmail.com', 'test_atc','false','test_atc');
     `
+)
+pool.query(
+    `
+    INSERT INTO public.demandeinscription(
+    statut, date_inscription, id_locataire, email)
+    VALUES ('en attente','2022-03-30','test_locataire','test_locataire@gmail.com');
+   `
 )
 module.exports = pool
