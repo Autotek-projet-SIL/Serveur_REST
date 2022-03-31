@@ -259,4 +259,7 @@ pool.query(
     VALUES ('en attente','2022-03-30','test_locataire','test_locataire@gmail.com');
    `
 )
+pool.query("Select * from locataire;",(error,results)=>{
+console.log(results)
+})
 module.exports = pool

@@ -34,9 +34,8 @@ describe("Tester le service MobileAuthentification", () => {
                     if (res.data.length !== 0) {
                         expect(res.data[0].email).toEqual("madaninassim@gmail.com")
                         expect(res.data[0].id_locataire).toEqual("KWPhaKsPu0hkkhsRaHhcGx3VSph2")
-                        console.log("\n **** Inscription des utilisateurs.Test Passed! ****")
                     } else {
-                        throw new Error("\n **** Inscription des utilisateurs.Test Fail! ****")
+                        throw new Error("\n **** Probleme lors de l'insertion du locataire ****")
                     }
                 })
         });
@@ -49,9 +48,8 @@ describe("Tester le service MobileAuthentification", () => {
                     if (res.data.length !== 0) {
                         expect(res.data[0].email).toEqual("test_locataire@gmail.com")
                         expect(res.data[0].id_locataire).toEqual("test_locataire")
-                        console.log("\n **** Connexion des locataires.Test Passed! ****")
                     } else {
-                        throw new Error("\n **** Connexion des locataires.Test Fail! ****")
+                        throw new Error("\n **** Aucun locataire trouvé avec l'email ****")
                     }
                 })
         });
@@ -64,9 +62,8 @@ describe("Tester le service MobileAuthentification", () => {
                     if (res.data.length !== 0) {
                         expect(res.data[0].email).toEqual("test_am@gmail.com")
                         expect(res.data[0].id_am).toEqual("test_am")
-                        console.log("\n **** Connexion des agents de maintenance.Test Passed! ****")
                     } else {
-                        throw new Error("\n **** Connexion des agents de maintenance.Test Fail! ****")
+                        throw new Error("\n **** Aucun agent de maintenance trouvé avec l'email ****")
                     }
                 })
         });
