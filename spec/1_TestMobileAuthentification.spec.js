@@ -1,4 +1,5 @@
 process.env.NODE_ENV = "test_unitaire"
+jasmine.DEFAULT_TIMEOUT_INTERVAL=10000
 const app = require("../config/server_test")
 const axios = require("axios");
 const url = "http://localhost:4000/"
