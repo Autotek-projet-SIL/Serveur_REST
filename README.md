@@ -26,9 +26,19 @@ Puisque REST est un ensemble de directives mises en œuvre à la demande, les AP
 Notre REST API suit l'architecture suivante :
 ![Architecture du REST API](https://www.coreycleary.me/_next/static/media/Express-REST-API-Struc.aa7ecaa0c41dbb7344c70665a5f5e259.png)
 
+## Types de requetes http:
+
+- GET — / | displayHome()
+- GET — /users | getUsers()
+- GET — /users/:id | getUserById()
+- POST — users | createUser()
+- PUT — /users/:id | updateUser()
+- DELETE — /users/:id | deleteUser()
+
 ## Technologies utilisées:
 
 - NodeJs pour la logique du REST API.
 - PostgresSQL comme SGBD.
-- Azure database for postgresql heberger la base de données dans le cloud.
+- Azure database for postgresql pour heberger la base de données dans le cloud.
 - Heroku pour heberger le REST API dans le cloud.
+- Jasmine et Karma pour les tests unitaires. 
