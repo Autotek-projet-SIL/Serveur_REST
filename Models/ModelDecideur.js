@@ -32,8 +32,8 @@ const getDecideurByEmail = async (request, response) => {
 // Ajouter un décideur dans la BDD
 const addDecideur = async (request, response) => {
   let body = request.body
-  pool.query('INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe,photo_decideur)VALUES ($1, $2, $3, $4, $5, $6,$7)',
-    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe,body.decideur], (error, results) => {
+  pool.query('INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe, photo_decideur)VALUES ($1, $2, $3, $4, $5, $6, $7)',
+    [body.id, body.nom, body.prenom, body.numero_telephone, body.email, body.mot_de_passe, body.photo_decideur], (error, results) => {
       if (error) {
         throw error
       }

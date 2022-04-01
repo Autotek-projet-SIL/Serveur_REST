@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "test_unitaire"
+/*process.env.NODE_ENV = "test_unitaire"
 const app = require("../config/server_test")
 const axios = require("axios");
 const url = "http://localhost:4000/"
@@ -120,3 +120,5 @@ describe("Tester le service WebAuthentification", () => {
         });
     })
 })
+
+*/

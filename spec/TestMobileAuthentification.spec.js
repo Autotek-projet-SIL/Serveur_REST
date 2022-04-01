@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "test_unitaire"
+/*process.env.NODE_ENV = "test_unitaire"
 const app = require("../config/server_test")
 const axios = require("axios");
 const url = "http://localhost:4000/"
@@ -54,6 +54,7 @@ describe("Tester le service MobileAuthentification", () => {
                 })
         });
     })
+    
     describe("Tester la connexion des agents de maintenance", () => {
         it("Si l'agnet de maintenance existe le test passe", () => {
             axios
@@ -69,3 +70,4 @@ describe("Tester le service MobileAuthentification", () => {
         });
     })
 });
+*/
