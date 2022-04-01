@@ -29,7 +29,7 @@ const getAMById = async (request, response) => {
 const getAMByEmail = async (request, response) => {
   let email = request.params.email
   pool.query(`
-  select am.id_am, am.nom, am.prenom, am.numero_telephone, am.email, am.photo_am,tache.id_tache, tache.objet,tache.descriptif,tache.etat,tache.date_debut,tache.date_fin 
+  select am.id_am, am.nom, am.prenom, am.numero_telephone,am.mot_de_passe, am.email, am.photo_am,tache.id_tache, tache.objet,tache.descriptif,tache.etat,tache.date_debut,tache.date_fin 
   from am left join tache ON tache.id_am = am.id_am where am.email =$1
   `, [email], (error, results) => {
     if (error) {

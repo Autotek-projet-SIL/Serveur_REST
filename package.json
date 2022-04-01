@@ -25,14 +25,10 @@
     "nodemon": "^2.0.15",
     "nyc": "^15.1.0",
     "pg": "^8.7.3",
-    "pg-mem": "^2.3.5",
-    "pg-promise": "^10.11.1",
-    "pg-transaction": "^1.0.4",
-    "request": "^2.88.2"
+    "pg-mem": "^2.3.5"
   },
   "devDependencies": {
     "jasmine": "^4.0.2",
-    "jasmine-spec-reporter": "^7.0.0",
-    "supertest": "^6.2.2"
+    "jasmine-spec-reporter": "^7.0.0"
   }
 }

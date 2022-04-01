@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routeMobileAuthentification)
 app.use("/", routeWebAuthentification)
-app.use("/",routeGestionProfils)
+app.use("/", routeGestionProfils)
 app.get('/', (req, res) => {
     res.send('Autotek Web server')
 })

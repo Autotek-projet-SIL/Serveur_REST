@@ -77,11 +77,10 @@ const auth = getAuth(app);
 
 //Verifier un token d'un utilisateur
 const verifyToken = async (request) => {
-  if (process.env.NODE_ENV === "production") {
+  //if (process.env.NODE_ENV === "production") {
     return new Promise((resolve, reject) => {
       const uid = "Iq00u5CdEAcJiYSpd7u8M8AnT423"
       admin.auth().createCustomToken(uid).then((customToken) => {
-        customToken=""
         signInWithCustomToken(auth, customToken)
           .then((userCredential) => {
             // Signed in
@@ -93,9 +92,8 @@ const verifyToken = async (request) => {
       }
       )
     })
-  }
+  //}
 }
-
 // Exporter la fonction de verification du token
 module.exports =
 {
