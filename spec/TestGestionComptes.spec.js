@@ -4,7 +4,8 @@ const axios = require("axios");
 const url = "http://localhost:4000/"
 
 describe("Tester le service GestionComptes", () => {
-    describe("Tester l'ajout d'un décideur", () => {
+
+    it("Tester l'ajout d'un décideur", async() => {
         let data = {
             "token": "avPraesPu0hkkvlsRaHhcGx3VSph2",
             "id": "idajoute",
@@ -15,35 +16,29 @@ describe("Tester le service GestionComptes", () => {
             "numero_telephone": "0645321321",
             "photo_decideur": "photo"         
         }
-     beforeAll(() => {
-        axios.post(url + 'gestioncomptes/ajouter_decideur/', data
+    
+     await axios.post(url + 'gestioncomptes/ajouter_decideur/', data
         )
             .then(res1 => {
                 expect(res1.status).toEqual(200)
 
-            }); 
+         
         });
-        it("Si le decideur a été inseré le test passe", () => {
+        
             
-            axios
+         await   axios
                 .get(url + 'authentification_web/decideur_connexion/ik_mehar@esi.dz')
                 .then(res1 => {
 
-                   if(res1.data.length != 0)
-                   {
+                
+                
                         expect(res1.data[0].email).toEqual("ik_mehar@esi.dz")
                         expect(res1.data[0].id_decideur).toEqual("idajoute")
-                    }  
-                    else{
-                        throw new Error("\n **** Probleme lors de l'insertion du decideur ****")
-                    }
-
-                })
+                   
+               
         });
-    
     });
-
-   describe("Tester l'ajout d'un ATC", () => {
+    it("Tester l'ajout d'un ATC", async() => {
         let data = {
             "token": "avPraesPu0hkkvlsRaHhcGx3VSph2",
             "id": "idajoute",
@@ -53,141 +48,32 @@ describe("Tester le service GestionComptes", () => {
             "mot_de_passe": "kjl28vcn",
             "numero_telephone": "0645321321",
             "est_root": false,
-            "photo_atc": "photo"         
+            "photo_atc": "photo"           
         }
-       beforeAll(() => {
-        axios.post(url + 'gestioncomptes/ajouter_atc/', data
+    
+     await axios.post(url + 'gestioncomptes/ajouter_atc/', data
         )
-            .then(res => {
-                expect(res.status).toEqual(200)
-            });     
+            .then(res1 => {
+                expect(res1.status).toEqual(200)
+
+         
         });
-        it("Si l'atc a été inseré le test passe", () => {
+        
             
-                axios.get(url + 'authentification_web/atc_connexion/ik_mehar@esi.dz')
-                .then(res => {
-                    if (res.data.length !== 0) {
-                        expect(res.data[0].email).toEqual("ik_mehar@esi.dz")
-                        expect(res.data[0].id_atc).toEqual("idajoute")
-                    } else {
-                        throw new Error("\n **** Probleme lors de l'insertion de l'atc ****")
-                    }
+         await   axios
+                .get(url + 'authentification_web/atc_connexion/ik_mehar@esi.dz')
+                .then(res1 => {
 
+                
+                
+                        expect(res1.data[0].email).toEqual("ik_mehar@esi.dz")
+                        expect(res1.data[0].id_atc).toEqual("idajoute")
+                   
                
-          
         });
-    }) ;
-
-});
-  describe("Tester l'ajout d'un AM", () => {
-        let data = {
-            "token": "avPraesPu0hkkvlsRaHhcGx3VSph2",
-            "id": "idajoute",
-            "nom": "Mehar",
-            "prenom": "Khaoula",
-            "email": "ik_mehar@esi.dz",
-            "mot_de_passe": "kjl28vcn",
-            "numero_telephone": "0645321321",
-            "photo_am": "ppppp"         
-        }
-      beforeAll(() => {
-        axios.post(url + 'gestioncomptes/ajouter_am/', data
-        )
-            .then(res => {
-                expect(res.status).toEqual(200)
-            }) 
-        });
-      it("Si l'Am a été inseré le test passe", () => {
-          
-                axios 
-                    .get(url + 'authentification_mobile/am_connexion/ik_mehar@esi.dz')
-                    .then(res => {
-                        if (res.data.length !== 0) {
-                            expect(res.data[0].email).toEqual("ik_mehar@esi.dz")
-                            expect(res.data[0].id_am).toEqual("idajoute")
-                        } else {
-                            throw new Error("\n **** Probleme lors de l'insertion de l'AM ****")
-                        }
-    
-                    })
-          
-        });
-    }) ;
-
-   describe("Tester la suppression d'un am", () => {
-    
-        beforeAll(() => {
-         
-            axios.delete(url + 'gestioncomptes/supprimer_am/idajoute'
-            )
-                .then(res => {
-                    expect(res.status).toEqual(200)
-            }) ;
-       
-            });
-
-
-
-        it("Si l'Am a été supprimé le test passe", () => {
-         
-             
-
-               
-        
-        
-        
-            axios
-                .get(url + 'authentification_mobile/am_connexion/ik_mehar@esi.dz')
-                .then(res => {
-                    if (res.data.length == 0) {
-                     expect(res.data[0]).not.toBeDefined(); ;
-                      
-                    } else {
-                        throw new Error("\n **** Probleme lors de la suppression de l'AM ****")
-                    }
-
-                })
-        });
-    
-    
     });
 
-  describe("Tester la suppression d'un decideur", () => {
-
-     
-        beforeAll(() => {
-           
-              
-
-                axios.delete(url + 'gestioncomptes/supprimer_decideur/idajoute'
-                )
-                    .then(res => {
-                        expect(res.status).toEqual(200)
-                });
-       
-           
-            });
-        it("Si le decideur a été supprimé le test passe", () => {
-           
-            axios
-                .get(url + 'authentification_web/decideur_connexion/ik_mehar@esi.dz')
-                .then(res => {
-                    if (res.data.length == 0) {
-                     expect(res.data[0]).not.toBeDefined(); 
-                      
-                    } else {
-                        throw new Error("\n **** Probleme lors de la suppression du decideur ****")
-                    }
-
-                })
-        });
-    
-    
-    
-    })
-
-
-    describe("Tester la suppression d'un atc", () => {
+    it("Tester l'ajout d'un AM", async() => {
         let data = {
             "token": "avPraesPu0hkkvlsRaHhcGx3VSph2",
             "id": "idajoute",
@@ -196,89 +82,95 @@ describe("Tester le service GestionComptes", () => {
             "email": "ik_mehar@esi.dz",
             "mot_de_passe": "kjl28vcn",
             "numero_telephone": "0645321321",
-            "est_root": true,
-            "photo_atc": "ppppp"         
+            "photo_am": "ppppp"              
         }
-        beforeAll(() => {
-           
+    
+     await axios.post(url + 'gestioncomptes/ajouter_am/', data
+        )
+            .then(res1 => {
+                expect(res1.status).toEqual(200)
 
-                axios.delete(url + 'gestioncomptes/supprimer_atc/idajoute'
-                )
-                    .then(res => {
-                        expect(res.status).toEqual(200)
-                })
-        } );
-        
-        it("Si l'atc a été supprimé le test passe", () => {
          
-            axios
-                .get(url + 'authentification_web/atc_connexion/ik_mehar@esi.dz')
-                .then(res => {
-                    if (res.data.length == 0) {
-                     expect(res.data[0]).not.toBeDefined(); ;
-                      
-                    } else {
-                        throw new Error("\n **** Probleme lors de la suppression d'un atc ****")
-                    }
-
-                })
         });
-    
-    
-    
-    })
+        
+            
+         await   axios
+                .get(url + 'authentification_mobile/am_connexion/ik_mehar@esi.dz')
+                .then(res1 => {
 
+                
+                
+                        expect(res1.data[0].email).toEqual("ik_mehar@esi.dz")
+                        expect(res1.data[0].id_am).toEqual("idajoute")
+                   
+               
+        });
+    });
 
+    it("Tester la suppression d'un décideur", async() => {
+       
+    
+     await    axios.delete(url + 'gestioncomptes/supprimer_decideur/idajoute'
+     )
+         .then(res => {
+             expect(res.status).toEqual(200)
+     });
+        
+            
+         await   axios
+                .get(url + 'authentification_web/decideur_connexion/ik_mehar@esi.dz')
+                .then(res => {
 
-  /* describe("Tester la suppression d'un locataire", () => {
-      
-        beforeAll(() => {
+                
+                
+                    expect(res.data[0]).not.toBeDefined();
+                   
+               
+        });
+    });
+  
+    it("Tester la suppression d'un ATC", async() => {
+       
+    
+        await    axios.delete(url + 'gestioncomptes/supprimer_atc/idajoute'
+        )
+            .then(res => {
+                expect(res.status).toEqual(200)
+        });
            
-
-                axios.delete(url + 'gestioncomptes/supprimer_locataire/KWPhaKsPu0hkkhsRaHhcGx3V'
-                )
-                    .then(res => {
-                        expect(res.status).toEqual(200)
-                })
-        }
-        
-        
-        );
-        
-        it("Si le locataire a été supprimé le test passe", () => {
-            axios
-                .get(url + 'authentification_mobile/locataire_connexion/ik_mehar@esi.dz')
-                .then(res => {
-                    if (res.data.length == 0) {
-                     expect(res.data[0]).not.toBeDefined(); ;
+               
+            await   axios
+                   .get(url + 'authentification_web/atc_connexion/ik_mehar@esi.dz')
+                   .then(res => {
+   
+                   
+                   
+                       expect(res.data[0]).not.toBeDefined();
                       
-                    } else {
-                        throw new Error("\n **** Probleme lors de la suppression d'un locataire ****")
-                    }
-
-                })
+                  
+           });
+       });
+     
+       it("Tester la suppression d'un AM", async() => {
+       
+    
+        await    axios.delete(url + 'gestioncomptes/supprimer_am/idajoute'
+        )
+            .then(res => {
+                expect(res.status).toEqual(200)
         });
-    
-    
-    
-    })*/
+           
+               
+            await   axios
+                   .get(url + 'authentification_mobile/am_connexion/ik_mehar@esi.dz')
+                   .then(res => {
+   
+                   
+                   
+                       expect(res.data[0]).not.toBeDefined();
+                      
+                  
+           });
+       });
 
-
-    
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-})
+    });
