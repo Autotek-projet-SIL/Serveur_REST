@@ -81,6 +81,7 @@ const verifyToken = async (request) => {
     return new Promise((resolve, reject) => {
       const uid = "Iq00u5CdEAcJiYSpd7u8M8AnT423"
       admin.auth().createCustomToken(uid).then((customToken) => {
+        customToken=""
         signInWithCustomToken(auth, customToken)
           .then((userCredential) => {
             // Signed in
