@@ -77,22 +77,29 @@ const auth = getAuth(app);
 
 //Verifier un token d'un utilisateur
 const verifyToken = async (request) => {
-  //if (process.env.NODE_ENV === "production") {
-    return new Promise((resolve, reject) => {
-      const uid = "Iq00u5CdEAcJiYSpd7u8M8AnT423"
-      admin.auth().createCustomToken(uid).then((customToken) => {
-        signInWithCustomToken(auth, customToken)
-          .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user
-            resolve(10)
-          }).catch((e) => {
-            reject(new Error('Requete refusée'))
-          })
+  if (process.env.NODE_ENV === "production") {
+  return new Promise((resolve, reject) => {
+    let token
+    let uid
+    if (request.method === "GET") {
+      token = request.headers.token
+      uid = request.headers.id
+    } else {
+      token = request.body.token
+      uid = request.body.id
+    }
+    admin.auth().verifyIdToken(token).then((decodedToken) => {
+      const uid_firebase = decodedToken.uid;
+      if(uid_firebase===uid){
+        resolve(10)
+      }else{
+        throw new Error('Requete refusée')
       }
-      )
-    })
-  //}
+    }).catch((error) => {
+      reject(new Error('Requete refusée'))
+    });
+  })
+  }
 }
 // Exporter la fonction de verification du token
 module.exports =
