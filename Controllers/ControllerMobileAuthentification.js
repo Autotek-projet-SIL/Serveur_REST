@@ -38,10 +38,23 @@ const connexionAM = async (request, response) => {
     });
 }
 
+//Envoyer une nouvelle demande d'inscription
+const envoyerDemandeInscription = async (request, response) => {
+    firebaseVerifyToken.verifyToken(request)
+    .then(async (res) => {
+        await serviceMobileAuthentification.envoyerDemandeInscription(request, response)
+        response.status(200).send("Nouvelle demande enregistrée avec succés")
+    })
+    .catch((err) => {
+        console.log(err)
+        response.status(403).send("Forbidden")
+    });
+}
 //Exporter les fonctions  
 module.exports =
 {
     inscriptionLocataire,
     connexionLocataire,
-    connexionAM
+    connexionAM,
+    envoyerDemandeInscription
 }

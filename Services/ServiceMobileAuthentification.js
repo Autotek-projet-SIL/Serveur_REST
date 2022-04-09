@@ -30,11 +30,21 @@ const connexionAM = async (request, response) => {
     }
 }
 
+// Envoyer une nouvelle demande d'inscription
+const envoyerDemandeInscription = async (request, response) => {
+    try {
+        await modelDemandeInscription.addDemandeInscription(request, response)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 
 // Exporter les fonctions du service
 module.exports =
 {
     inscriptionLocataire,
     connexionLocataire,
-    connexionAM
+    connexionAM,
+    envoyerDemandeInscription
 }

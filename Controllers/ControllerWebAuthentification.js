@@ -5,6 +5,7 @@ const validerDemandeInscription = async (request, response) => {
     firebaseVerifyToken.verifyToken(request)
         .then(async (res) => {
             await serviceWebAuthentification.validerDemandeInscription(request, response)
+            firebaseVerifyToken.sendNotification("Demande d'inscription validée","Votre demande d'inscription a été validée",request,response)
             response.status(200).send("Demande d'inscription validée avec succés")
         })
         .catch((err) => {
@@ -16,6 +17,7 @@ const refuserDemandeInscription = async (request, response) => {
     firebaseVerifyToken.verifyToken(request)
         .then(async (res) => {
             await serviceWebAuthentification.refuserDemandeInscription(request, response)
+            firebaseVerifyToken.sendNotification("Demande d'inscription refusée","Votre demande d'inscription a été refusée",request,response)
             response.status(200).send("Demande d'inscription refusée")
         })
         .catch((err) => {
