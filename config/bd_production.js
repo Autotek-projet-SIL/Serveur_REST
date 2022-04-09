@@ -1,10 +1,10 @@
 const Pool = require('pg').Pool
 
 const poolProduction = new Pool({
-  user: 'utilisateur_autotek@serveurautotekbdd',
+  user: 'postgres_admin@serveurautotekbdd',
   host: 'serveurautotekbdd.postgres.database.azure.com',
   database: 'autotek',
-  password: 'Autotek2022**',
+  password: 'Autotek2022*',
   port: 5432,
 })
 
