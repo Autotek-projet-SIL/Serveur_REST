@@ -1,10 +1,18 @@
-// Importer les fonctions de firebase pour l'authentification
-const { initializeApp } = require("firebase/app")
-const { getAuth } = require("firebase/auth")
-var admin = require("firebase-admin");
-var serviceAccount = require("./autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
+// Declaration de variables
+const { initializeApp } = require("firebase/app");
+const { getAuth } = require("firebase/auth");
+let admin = require("firebase-admin");
+let serviceAccount = require("./autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
+let FCM = require("fcm-node");
+
+// Adresse du serveur de cloud messaging
+let serverKey =
+  "AAAATUL1ohc:APA91bGtBYeGQzb7lXlGOfyXwv3YIOwhGNnQ88aGL3HeBexcHnZ9XJHUuwWKUFAyS7IZn4vTwbWeIGxZfH29Ta69zoesutvyHJVXUrzBKNrj3B5seMaWmOpaT0DvnOHkbJoQ9GA7ZtDd";
+let fcm = new FCM(serverKey);
+
+// Initisaliser l'admin SDK de FireBase
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 // Informations de la configuration de l'application firebase
@@ -21,58 +29,65 @@ const firebaseConfig = {
 // Initialiser Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = admin.firestore()
+const db = admin.firestore();
+
+// Fonction de verification des tokens de Firebase
 const verifyToken = async (request) => {
   if (process.env.NODE_ENV === "production") {
     return new Promise((resolve, reject) => {
-      let token
-      let uid
+      let token;
+      let uid;
       if (request.method === "GET") {
-        token = request.headers.token
-        uid = request.headers.id
+        token = request.headers.token;
+        uid = request.headers.id;
       } else {
-        token = request.body.token
-        uid = request.body.id
+        token = request.body.token;
+        uid = request.body.id;
       }
-      admin.auth().verifyIdToken(token).then((decodedToken) => {
-        const uid_firebase = decodedToken.uid;
-        if (uid_firebase === uid) {
-          resolve(10)
-        } else {
-          throw new Error('Requete refusée')
-        }
-      }).catch((error) => {
-        reject(new Error('Requete refusée'))
-      });
-    })
+      admin
+        .auth()
+        .verifyIdToken(token)
+        .then((decodedToken) => {
+          const uid_firebase = decodedToken.uid;
+          if (uid_firebase === uid) {
+            resolve(10);
+          } else {
+            throw new Error("Requete refusée");
+          }
+        })
+        .catch((error) => {
+          reject(new Error("Requete refusée"));
+        });
+    });
   }
-}
+};
 
-//Envoyer une notification pour un locataire
-const sendNotification = async (title,body,request,response) => {
-  const user = await db.collection('DeviceToken').doc(request.body.id).get();
+// Fonction d'envois de notification avec cloud messaging
+const sendNotification = async (title, body, request, response) => {
+  const user = await db.collection("DeviceToken").doc(request.body.id).get();
   if (user.exists) {
     const registrationToken = user.data()["device_token"];
-    const message = {
-      token: registrationToken,
-      notification: {
-        title: title,
-        body: body,
-    }
-    }
-    getMessaging().send(message)
+    console.log(registrationToken);
+    await admin
+      .messaging()
+      .sendMulticast({
+        tokens: [registrationToken],
+        notification: {
+          title: "Weather Warning!",
+          body: "A new weather warning has been issued for your location.",
+          imageUrl: "https://my-cdn.com/extreme-weather.png",
+        },
+      })
       .then((response) => {
-        console.log('Successfully sent message:', response);
+        console.log("Successfully sent message:", response);
       })
       .catch((error) => {
-        console.log('Error sending message:', error);
+        console.log("Error sending message:", error);
       });
   }
-}
+};
 
-// Exporter la fonction de verification du token
-module.exports =
-{
+module.exports = {
   verifyToken,
-  sendNotification
-}
+  sendNotification,
+};

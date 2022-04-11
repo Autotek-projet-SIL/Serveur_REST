@@ -1,60 +1,72 @@
-const serviceMobileAuthentification = require('../Services/ServiceMobileAuthentification.js')
-const firebaseVerifyToken = require("../config/firebase.js")
+// Declaration de variables
+const serviceMobileAuthentification = require("../Services/ServiceMobileAuthentification.js");
+const firebaseVerifyToken = require("../config/firebase.js");
+const log = require("../config/Logger");
 
-// Inscription d'un locataire
+// Fonctions du controlleur d'authentification mobile
+
 const inscriptionLocataire = async (request, response) => {
-    firebaseVerifyToken.verifyToken(request)
-        .then(async (res) => {
-            await serviceMobileAuthentification.inscriptionLocataire(request, response)
-            response.status(200).send("Inscription successful")
-        })
-        .catch((err) => {
-            console.log(err)
-            response.status(403).send("Forbidden")
-        });
-}
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceMobileAuthentification.inscriptionLocataire(
+        request,
+        response
+      );
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
-// Connexion d'un locataire
 const connexionLocataire = async (request, response) => {
-    firebaseVerifyToken.verifyToken(request)
+  firebaseVerifyToken
+    .verifyToken(request)
     .then(async (res) => {
-        await serviceMobileAuthentification.connexionLocataire(request, response)
+      await serviceMobileAuthentification.connexionLocataire(request, response);
     })
-    .catch((err) => {
-        console.log(err)
-        response.status(403).send("Forbidden")
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
     });
-}
+};
 
-// Connexion d'un agence de maitenance
 const connexionAM = async (request, response) => {
-    firebaseVerifyToken.verifyToken(request)
+  firebaseVerifyToken
+    .verifyToken(request)
     .then(async (res) => {
-        await serviceMobileAuthentification.connexionAM(request, response)
+      await serviceMobileAuthentification.connexionAM(request, response);
     })
-    .catch((err) => {
-        console.log(err)
-        response.status(403).send("Forbidden")
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
     });
-}
+};
 
-//Envoyer une nouvelle demande d'inscription
 const envoyerDemandeInscription = async (request, response) => {
-    firebaseVerifyToken.verifyToken(request)
+  firebaseVerifyToken
+    .verifyToken(request)
     .then(async (res) => {
-        await serviceMobileAuthentification.envoyerDemandeInscription(request, response)
-        response.status(200).send("Nouvelle demande enregistrée avec succés")
+      await serviceMobileAuthentification.envoyerDemandeInscription(
+        request,
+        response
+      );
     })
-    .catch((err) => {
-        console.log(err)
-        response.status(403).send("Forbidden")
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
     });
-}
-//Exporter les fonctions  
-module.exports =
-{
-    inscriptionLocataire,
-    connexionLocataire,
-    connexionAM,
-    envoyerDemandeInscription
-}
+};
+
+// Exporter les fonctions du controlleur d'authentification mobile
+module.exports = {
+  inscriptionLocataire,
+  connexionLocataire,
+  connexionAM,
+  envoyerDemandeInscription,
+};

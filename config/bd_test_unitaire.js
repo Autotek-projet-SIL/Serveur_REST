@@ -1,10 +1,10 @@
-const pg_mem = require('pg-mem');
+const pg_mem = require("pg-mem");
 
 const pg = pg_mem.newDb().adapters.createPg();
 
-const pool = new pg.Pool()
+const pool = new pg.Pool();
 pool.query(
-    `
+  `
 CREATE TABLE public.am (
     id_am character varying(28) NOT NULL,
     nom character varying(50) NOT NULL,
@@ -15,9 +15,9 @@ CREATE TABLE public.am (
     photo_am character varying(255) NOT NULL
 );
     `
-)
+);
 pool.query(
-    `
+  `
 CREATE TABLE public.atc (
     id_atc character varying(28) NOT NULL,
     nom character varying(50) NOT NULL,
@@ -29,10 +29,10 @@ CREATE TABLE public.atc (
     photo_atc character varying(255) NOT NULL
 );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.cartepaiement (
         numero_carte_paiement character varying(16) NOT NULL,
         solde real NOT NULL,
@@ -42,10 +42,10 @@ pool.query(
         CONSTRAINT cartepaiement_solde_check CHECK ((solde >= (0)::double precision))
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
 CREATE TABLE public.decideur (
     id_decideur character varying(28) NOT NULL,
     nom character varying(50) NOT NULL,
@@ -56,10 +56,10 @@ CREATE TABLE public.decideur (
     photo_decideur character varying(255) NOT NULL
 );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.demandeinscription (
         id_demande_inscription serial,
         statut character varying(50) NOT NULL,
@@ -68,10 +68,10 @@ pool.query(
         email character varying(50)
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.demandesupport (
         id_demande_support serial,
         objet character varying(50) NOT NULL,
@@ -80,10 +80,10 @@ pool.query(
         id_locataire character varying(28) NOT NULL
     );    
 `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.facture (
         id_facture serial,
         date_facture date NOT NULL,
@@ -94,10 +94,10 @@ pool.query(
         CONSTRAINT facture_tva_check CHECK ((tva > (0)::double precision))
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
 CREATE TABLE public.justificatif (
     id_justificatif serial,
     objet character varying(50) NOT NULL,
@@ -105,10 +105,10 @@ CREATE TABLE public.justificatif (
     id_demande_inscription integer NOT NULL
 );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.locataire (
         id_locataire character varying(28) NOT NULL,
         nom character varying(50) NOT NULL,
@@ -122,10 +122,10 @@ pool.query(
         photo_identite_verso character varying(255) NOT NULL
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.louer (
         date_debut date NOT NULL,
         date_fin date NOT NULL,
@@ -139,10 +139,10 @@ pool.query(
         id_trajet serial
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.panne (
         id_panne integer NOT NULL,
         objet character varying(50) NOT NULL,
@@ -151,10 +151,10 @@ pool.query(
         id_tache integer NOT NULL
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.payer (
         numero_carte_paiement character varying(16) NOT NULL,
         id_locataire character varying(28) NOT NULL,
@@ -166,19 +166,19 @@ pool.query(
         CONSTRAINT payer_montant_paiement_check CHECK ((montant_paiement >= (0)::double precision))
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.region (
         id_region integer NOT NULL,
         libelle character varying(50) NOT NULL
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.tache (
         id_tache serial,
         objet character varying(50) NOT NULL,
@@ -189,20 +189,20 @@ pool.query(
         id_am character varying(28) NOT NULL
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.trajet (
         id_trajet integer NOT NULL,
         point_depart character varying(50) NOT NULL,
         point_arrive character varying(50) NOT NULL
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.typevehicule (
         id_type_vehicule integer NOT NULL,
         libelle character varying(50) NOT NULL,
@@ -210,10 +210,10 @@ pool.query(
         CONSTRAINT typevehicule_tarification_check CHECK ((tarification >= (0)::double precision))
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     CREATE TABLE public.vehicule (
         numero_chassis character varying(10) NOT NULL,
         marque character varying(50) NOT NULL,
@@ -224,40 +224,40 @@ pool.query(
         image_vehicule character varying(255) NOT NULL
     );
     `
-)
+);
 
 pool.query(
-    `
+  `
     INSERT INTO public.locataire(
         id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
         VALUES ('test_locataire','test_locataire', 'test_locataire', '0541251311', 'test_locataire@gmail.com', 'test_locataire', 'false', 'test_locataire', 'test_locataire', 'test_locataire');
     `
-)
+);
 
 pool.query(
-    `
+  `
         INSERT INTO public.am(id_am, nom, prenom, numero_telephone, email, mot_de_passe, photo_am)
         VALUES ('test_am','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am');
     `
-)
+);
 pool.query(
-    `
+  `
         INSERT INTO public.decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe, photo_decideur)
         VALUES ('test_decideur','test_decideur', 'test_decideur', '0541251311', 'test_decideur@gmail.com', 'test_decideur','test_decideur');
     `
-)
+);
 pool.query(
-    `
+  `
         INSERT INTO public.atc(id_atc, nom, prenom, numero_telephone, email, mot_de_passe,est_root, photo_atc)
         VALUES ('test_atc','test_atc', 'test_atc', '0541251311', 'test_atc@gmail.com', 'test_atc','false','test_atc');
     `
-)
+);
 pool.query(
-    `
+  `
     INSERT INTO public.demandeinscription(
     statut, date_inscription, id_locataire, email)
     VALUES ('en attente','2022-03-30','test_locataire','test_locataire@gmail.com');
    `
-)
+);
 
-module.exports = pool
+module.exports = pool;

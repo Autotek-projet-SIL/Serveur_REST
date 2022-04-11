@@ -1,60 +1,97 @@
-const pool=require("../config/config_pool")
+// Declaration de variables
+const pool = require("../config/config_pool");
+const log = require("../config/Logger");
 
-// Recuperer la liste des demandeinscriptions
+// Recuperer la liste des demandes d'inscriptions
 const getDemandesInscription = async (request, response) => {
-  pool.query('SELECT * FROM demandeinscription order by date_inscription', (error, results) => {
-    if (error) {
-      throw error
+  pool.query(
+    "SELECT * FROM demandeinscription order by date_inscription",
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
     }
-    response.status(200).json(results.rows)
-  })
-}
-// Recuperer un demandeinscription avec un id
-const getDemandeInscriptionById = async (request, response) => {
-  let id_demande_inscription = request.params.id_demande_inscription
-  pool.query('SELECT * FROM demandeinscription WHERE id_demande_inscription=$1', [id_demande_inscription], (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
-}
+  );
+};
 
-// Ajouter un demandeinscription dans la BDD
+// Recuperer une demande d'inscription avec son identifiant
+const getDemandeInscriptionById = async (request, response) => {
+  let id_demande_inscription = request.params.id_demande_inscription;
+  pool.query(
+    "SELECT * FROM demandeinscription WHERE id_demande_inscription=$1",
+    [id_demande_inscription],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
+// Ajouter une demande d'inscription dans
 const addDemandeInscription = async (request, response) => {
-  let body = request.body
-  pool.query('INSERT INTO demandeinscription(statut, date_inscription,id_locataire,email) VALUES ($1, $2, $3, $4)',
-    [body.statut, body.date_inscription, body.id,body.email], (error, results) => {
+  let body = request.body;
+  await pool.query(
+    "INSERT INTO demandeinscription(statut, date_inscription,id_locataire,email) VALUES ($1, $2, $3, $4)",
+    [body.statut, body.date_inscription, body.id, body.email],
+    (error, results) => {
       if (error) {
-        throw error
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.statusCode = 500;
       }
-    })
-}
-// Mettre a jour les informations d'un demandeinscription
-const updateDemandeInscription = async (request, response , status) => {
-  let email = request.params.email
-  pool.query('UPDATE demandeinscription SET statut=$2 WHERE email=$1',
-    [email, status], (error, results) => {
+      response.sendStatus(response.statusCode);
+    }
+  );
+};
+
+// Mettre a jour les informations d'une demande d'inscription
+const updateDemandeInscription = async (request, response, status) => {
+  let email = request.params.email;
+  pool.query(
+    "UPDATE demandeinscription SET statut=$2 WHERE email=$1",
+    [email, status],
+    (error, results) => {
       if (error) {
-        throw error
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.statusCode = 500;
       }
-    })
-}
-// Supprimer un demandeinscription
+    }
+  );
+};
+
+// Supprimer une demande d'inscription
 const deleteDemandeInscription = async (request, response) => {
-  let id_demande_inscription=request.params.id_demande_inscription
-  pool.query('DELETE FROM demandeinscription WHERE id_demande_inscription=$1',
-    [id_demande_inscription], (error, results) => {
+  let id_demande_inscription = request.params.id_demande_inscription;
+  await pool.query(
+    "DELETE FROM demandeinscription WHERE id_demande_inscription=$1",
+    [id_demande_inscription],
+    (error, results) => {
       if (error) {
-        throw error
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
       }
-    })
-}
-//Exporter les fonctions du modele
+    }
+  );
+};
+
+//Exporter les fonctions CRUD de la demande d'inscription
 module.exports = {
   getDemandeInscriptionById,
   getDemandesInscription,
   addDemandeInscription,
   updateDemandeInscription,
-  deleteDemandeInscription
-}
+  deleteDemandeInscription,
+};
