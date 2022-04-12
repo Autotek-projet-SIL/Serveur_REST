@@ -123,7 +123,7 @@ const deleteAM = async (request, response) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
-      rresponse.sendStatus(500);
+      response.sendStatus(500);
     } else {
       response.sendStatus(200);
     }

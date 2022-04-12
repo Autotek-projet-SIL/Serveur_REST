@@ -260,4 +260,20 @@ pool.query(
    `
 );
 
+pool.query(
+  `
+    INSERT INTO public.typevehicule(
+      id_type_vehicule, libelle, tarification)
+        VALUES ('1','test_libelle1', '3500'), ('2','test_libelle2', '4100');
+  `
+);
+
+pool.query(
+  `
+    INSERT INTO public.vehicule(
+      numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule)
+        VALUES ('test_v1','test_marque1', 'test_modele1', 'test_couleur1', '1', 'test_am','test_img1'), ('test_v2','test_marque2', 'test_modele2', 'test_couleur2', '2', 'test_am','test_img2');
+  `
+);
+
 module.exports = pool;
