@@ -9,7 +9,7 @@ const addTrajet = async (request, response) =>{
       (error, results) => { if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
-        response.statusCode = 500;
+        respo+nse.statusCode == 500;
     }
     response.sendStatus(response.statusCode);
   })

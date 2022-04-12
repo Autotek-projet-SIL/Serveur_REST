@@ -2,10 +2,10 @@
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la des locations acceptes
-const getLocationsAcceptes = async (request, response) => {
+// Recuperer la des locations en cours
+const getLocationsEnCours = async (request, response) => {
   pool.query(
-    "SELECT * FROM louer where statut_demande_location = accepte",
+    "SELECT * FROM louer where en_cours = true",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -18,10 +18,10 @@ const getLocationsAcceptes = async (request, response) => {
   );
 };
 
-// Recuperer la des locations rejetes
-const getLocationsRejetes = async (request, response) => {
+// Recuperer la des locations terminees
+const getLocationsTermines = async (request, response) => {
     pool.query(
-      "SELECT * FROM louer where statut_demande_location = rejete",
+      "SELECT * FROM louer where en_cours = false",
       (error, results) => {
         if (error) {
           log.loggerConsole.error(error);
@@ -34,6 +34,22 @@ const getLocationsRejetes = async (request, response) => {
     );
   };
 
+
+
+  //End location
+  const endLocation = async(request,response) =>
+  let  = request.params.id;
+  pool.query(
+    "UPDATE louer SET en_cours=false WHERE id_location=$1",
+    [id],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.statusCode = 500;
+      }
+    }
+  );
 
 //Ajouter une location
 const addLocation = async (request, response) =>{
@@ -53,7 +69,8 @@ const addLocation = async (request, response) =>{
 
 //Exporter les fonctions CRUD de la demande d'inscription
 module.exports = {
-  getLocationsRejetes,
-  getLocationsAcceptes,
+ getLocationsEnCours,
+ getLocationsTermines,
   addLocation,
+  endLocation,
 };
