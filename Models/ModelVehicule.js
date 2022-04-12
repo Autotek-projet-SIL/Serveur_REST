@@ -133,7 +133,7 @@ const updateVehicle= async (request, response) => {
     let num_chassis = request.params.num;
     let body = request.body;
     pool.query(
-      "UPDATE vehicule SET marque=$2, modele=$3, couleur=$4, id_type_vehicule=$5, id_am=$6, image_vehicule=$7 WHERE numero_chassis=$1;",
+      "UPDATE vehicule SET numero_chassis=$8, marque=$2, modele=$3, couleur=$4, id_type_vehicule=$5, id_am=$6, image_vehicule=$7 WHERE numero_chassis=$1;",
       [
         num_chassis,
         body.marque,
@@ -142,6 +142,7 @@ const updateVehicle= async (request, response) => {
         body.id_type_vehicule,
         body.id_am,
         body.image_vehicule,
+        body.num_chassis,
       ],
       (error, results) => {
         if (error) {
