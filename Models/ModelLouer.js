@@ -51,7 +51,6 @@ const addLocation = async (request, response) =>{
 
 
 
-
 //Exporter les fonctions CRUD de la demande d'inscription
 module.exports = {
   getLocationsRejetes,
