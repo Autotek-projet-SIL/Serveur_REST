@@ -16,6 +16,19 @@ const getVehicles = async (request, response) => {
       });
 };
 
+const getVehiclesByAmID = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceFlotte.getVehiclesByAmID(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 const getVehicleDetail = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -123,6 +136,7 @@ const getVehicleDetail = async (request, response) => {
 //Exporter les fonctions du controlleur flotte
 module.exports = {
     getVehicles,
+    getVehiclesByAmID,
     getVehicleDetail,
     getVehiclesTypes,
     addVehicle,

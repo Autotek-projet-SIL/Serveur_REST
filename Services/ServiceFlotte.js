@@ -13,6 +13,16 @@ const getVehicles = async (request, response) => {
   }
 };
 
+const getVehiclesByAmID = async (request, response) => {
+  try {
+    await ModelVehicle.getVehiclesByAmID(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 const getVehicleDetail = async (request, response) => {
     try {
       await ModelVehicle.getVehicleByChassisNum(request, response);
@@ -97,6 +107,7 @@ const getVehicleDetail = async (request, response) => {
 //Exporter les fonctions du service flotte
 module.exports = {
     getVehicles,
+    getVehiclesByAmID,
     getVehicleDetail,
     getVehiclesTypes,
     addVehicle,

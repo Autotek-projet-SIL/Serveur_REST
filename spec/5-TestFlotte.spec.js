@@ -11,6 +11,13 @@ describe("Tester le service Flotte", () => {
           });
         });
     });
+    it("Recuperer la liste des vehicules d'un am", async () => {
+      await axios.get(url + "flotte/vehicule_am/test_am").then((res) => {
+        res.data.forEach((element) => {
+            expect(element.id_am).toEqual("test_am");
+        });
+      });
+  });
     it("Recuperer un véhicule avec son numéro de chassis", async () => {
         await axios.get(url + "flotte/detail_vehicule/test_v1").then((res) => {
           res.data.forEach((element) => {

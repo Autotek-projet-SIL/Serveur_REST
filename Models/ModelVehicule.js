@@ -21,6 +21,27 @@ const getVehicles = async (request, response) => {
   );
 };
 
+// Recuperer la liste des véhicules affectés à un AM
+const getVehiclesByAmID = async (request, response) => {
+  let id_am = request.params.id;
+  pool.query(
+    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
+      v.id_am,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
+      v.id_type_vehicule,tv.libelle,tv.tarification
+      FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+      WHERE v.id_am = $1;`,[id_am],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
 // Recuperer un véhicule avec son numéro de chassis
 const getVehicleByChassisNum = async (request, response) => {
     let num_chassis = request.params.num_chassis;
@@ -188,6 +209,7 @@ const deleteVehicule = async (request, response) => {
 //Exporter les fonctions CRUD de l'agent de maintenance
 module.exports = {
   getVehicles,
+  getVehiclesByAmID,
   getVehicleByChassisNum,
   getVehiclesTypes,
   addVehicle,

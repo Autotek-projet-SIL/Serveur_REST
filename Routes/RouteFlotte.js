@@ -8,6 +8,10 @@ routerFlotte.get(
     controllerFlotte.getVehicles
 );
 routerFlotte.get(
+    "/flotte/vehicule_am/:id",
+    controllerFlotte.getVehiclesByAmID
+);
+routerFlotte.get(
     "/flotte/detail_vehicule/:num_chassis",
     controllerFlotte.getVehicleDetail
 );
