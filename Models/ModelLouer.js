@@ -57,13 +57,16 @@ const getLocationsTermines = async (request, response) => {
   const endLocation = async(request,response) =>{
   let id = request.params.id
   pool.query(
-    "UPDATE louer SET en_cours=true id_louer=$1",
+    "UPDATE louer SET en_cours=false WHERE id_louer=$1",
     [id],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
-        response.statusCode = 500;
+        response.sendStatus(500);
+      }
+      else{
+        response.sendStatus(200);
       }
     }
   );

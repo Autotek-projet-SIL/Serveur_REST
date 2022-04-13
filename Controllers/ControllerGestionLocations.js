@@ -8,7 +8,7 @@ const endLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceReservation.getLocationsEnCours(
+      await serviceReservation.endLocation(
         request,
         response
       );
