@@ -37,5 +37,10 @@ routerGestionLocations.get(
         controllerGestionLocations.getLocationById
         );
 
+        routerGestionLocations.get(
+          "/gestionlocations/getLocationsByLocataire/:id",
+          controllerGestionLocations.getLocationsLocataire
+          );
+
 
 module.exports =routerGestionLocations;

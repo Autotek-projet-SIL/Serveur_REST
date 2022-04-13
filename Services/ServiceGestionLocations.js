@@ -19,6 +19,16 @@ const endLocation  =async (request, response) => {
 };
 
 
+const getLocationsLocataire  =async (request, response) => {
+  try {
+    await modelLouer.getLocationsLocataire(request, response);
+   
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
 
   const getLocationsEnCours  =async (request, response) => {
     try {
@@ -78,5 +88,6 @@ module.exports = {
     getLocationsTermines ,
     endLocation ,
     addLocation ,
-    getLocationById
+    getLocationById,
+    getLocationsLocataire
 }

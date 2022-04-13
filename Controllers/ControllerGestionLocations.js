@@ -39,7 +39,21 @@ const getLocationsEnCours = async (request, response) => {
   
 
 
- 
+  const getLocationsLocataire = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await serviceReservation.getLocationsLocataire(
+          request,
+          response
+        );
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
   const getLocationsTermines = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -96,5 +110,6 @@ module.exports = {
   getLocationsTermines,
   endLocation,
   addLocation,
-  getLocationById  
+  getLocationById,
+  getLocationsLocataire
 };

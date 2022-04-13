@@ -18,6 +18,23 @@ const getLocationsEnCours = async (request, response) => {
   );
 };
 
+// Recuperer la des locations en cours
+const getLocationsLocataire = async (request, response) => {
+  let id = request.params.id;
+  pool.query(
+    "SELECT * FROM louer where en_cours = true and id_locataire =$1",
+    [id],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
 // Recuperer la des locations terminees
 const getLocationsTermines = async (request, response) => {
     pool.query(
@@ -93,5 +110,6 @@ module.exports = {
   addLocation,
   endLocation,
   getLocationById,
-  addLocation
+  addLocation,
+  getLocationsLocataire
 };
