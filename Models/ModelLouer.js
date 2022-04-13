@@ -57,7 +57,7 @@ const getLocationsTermines = async (request, response) => {
   const endLocation = async(request,response) =>{
   let id = request.params.id
   pool.query(
-    "UPDATE louer SET en_cours=false WHERE id_location=$1",
+    "UPDATE louer SET en_cours=true id_louer=$1",
     [id],
     (error, results) => {
       if (error) {

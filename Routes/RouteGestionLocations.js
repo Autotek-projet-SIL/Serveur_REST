@@ -20,12 +20,12 @@ routerGestionLocations.get(
   //récupérer toutes les locations en cours
   routerGestionLocations.get(
     "/gestionlocations/locations_encours",
-    controllerGestionLocations.getLocationsTermines
+    controllerGestionLocations.getLocationsEnCours
     );
 
     //Terminer une location
     routerGestionLocations.put(
-      "/gestionlocations/end_location/",
+      "/gestionlocations/end_location/:id",
       controllerGestionLocations.endLocation
     );
    /* routerGestionLocations.put(
