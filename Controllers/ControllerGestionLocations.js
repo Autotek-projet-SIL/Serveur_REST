@@ -1,5 +1,5 @@
 // Declaration de variables
-const serviceReservation = require("../Services/ServiceReservation.js");
+const serviceReservation = require("../Services/ServiceGestionLocations.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
