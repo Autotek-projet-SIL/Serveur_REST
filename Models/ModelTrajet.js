@@ -5,13 +5,16 @@ const log = require("../config/Logger");
 //Ajouter une location
 const addTrajet = async (request, response) =>{
   let body = request.body 
-  pool.query('INSERT INTO trajet(id_trajet, point_depart, point_arrive)VALUES ($1, $2, $3)',[body.id_trajet, body. point_depart, body.point_arrive ] ,
+  pool.query('INSERT INTO trajet( point_depart, point_arrive)VALUES ( $1,$2)',[ body.point_depart, body.point_arrive ] ,
       (error, results) => { if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
-        respo+nse.statusCode == 500;
+       response.statusCode == 500;
     }
-    response.sendStatus(response.statusCode);
+  
+   
+  
+   // response.sendStatus(response.statusCode);
   })
 }
 

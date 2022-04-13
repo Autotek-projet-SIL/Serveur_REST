@@ -10,6 +10,7 @@ const routeMobileAuthentification = require("../Routes/RouteMobileAuthentificati
 const routeWebAuthentification = require("../Routes/RouteWebAuthentification.js");
 const routeGestionProfils = require("../Routes/RouteGestionProfils.js");
 const routeGestionComptes = require("../Routes/RouteGestionComptes.js");
+const routerGestionLocations = require("../Routes/RouteGestionLocations");
 
 // Configurer le serveur pour utiliser toutes les routes
 app.use(bodyParser.json());
@@ -26,6 +27,7 @@ app.use("/", routeMobileAuthentification);
 app.use("/", routeWebAuthentification);
 app.use("/", routeGestionProfils);
 app.use("/", routeGestionComptes);
+app.use("/", routerGestionLocations);
 app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });

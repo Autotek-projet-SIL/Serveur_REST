@@ -23,4 +23,19 @@ routerGestionLocations.get(
       "/gestionlocations/end_location/",
       controllerGestionLocations.endLocation
     );
+   /* routerGestionLocations.put(
+        "/gestionlocations/modifier_location/:id",
+        controllerGestionLocations.updateLocataire
+      );
+*/
+      routerGestionLocations.post(
+        "/gestionlocations/ajouter_location/",
+        controllerGestionLocations.addLocation
+      );
+      routerGestionLocations.get(
+        "/gestionlocations/location/:id",
+        controllerGestionLocations.getLocationById
+        );
+
+
 module.exports =routerGestionLocations;

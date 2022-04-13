@@ -1,5 +1,5 @@
 // Declaration de variables
-const serviceReservation = require("../Services/ServiceGestionLocations.js");
+const serviceReservation = require("../Services/ServiceReservation.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
@@ -55,9 +55,46 @@ const getLocationsEnCours = async (request, response) => {
         response.sendStatus(403);
       });
   };
+
+  const addLocation = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await serviceReservation.addLocation(
+          request,
+          response
+        );
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+
+
+  const getLocationById = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await serviceReservation.getLocationById(
+          request,
+          response
+        );
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+
+
 // Exporter les fonctions du controlleur Reservations
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,
-  endLocation
+  endLocation,
+  addLocation,
+  getLocationById  
 };
