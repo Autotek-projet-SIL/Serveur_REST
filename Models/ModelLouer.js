@@ -87,9 +87,10 @@ const addLocation = async (request, response) =>{
 
 // Recuperer une location avec un identifiant
 const getLocationById = async (request, response) => {
+  
   let id_louer = request.params.id_louer;
   pool.query(
-    "SELECT * FROM  WHERE id_louer=$1",
+    "SELECT * FROM louer WHERE id_louer=$1",
     [id_louer],
     (error, results) => {
       if (error) {

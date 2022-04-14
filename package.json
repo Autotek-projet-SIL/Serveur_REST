@@ -33,7 +33,7 @@
     "winston": "^3.7.2"
   },
   "devDependencies": {
-    "jasmine": "^4.0.2",
+    "jasmine": "^4.1.0",
     "jasmine-spec-reporter": "^7.0.0"
   }
 }

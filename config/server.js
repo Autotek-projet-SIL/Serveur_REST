@@ -10,7 +10,7 @@ const routeMobileAuthentification = require("../Routes/RouteMobileAuthentificati
 const routeWebAuthentification = require("../Routes/RouteWebAuthentification.js");
 const routeGestionProfils = require("../Routes/RouteGestionProfils.js");
 const routeGestionComptes = require("../Routes/RouteGestionComptes.js");
-const routerGestionLocations = require("../Routes/RouteGestionLocations");
+const routerGestionLocations = require("../Routes/RouteGestionLocations.js");
 
 // Configurer le serveur pour utiliser toutes les routes
 app.use(bodyParser.json());
