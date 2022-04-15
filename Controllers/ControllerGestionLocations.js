@@ -3,7 +3,9 @@ const serviceReservation = require("../Services/ServiceGestionLocations.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur de reservations
+// Fonctions du controlleur de gestion de locations
+
+//terminer une location
 const endLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -21,6 +23,7 @@ const endLocation = async (request, response) => {
 };
 
 
+//Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -38,7 +41,7 @@ const getLocationsEnCours = async (request, response) => {
   };
   
 
-
+//récupérer la liste des locations en cours d'un locataire 
   const getLocationsLocataire = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -54,6 +57,9 @@ const getLocationsEnCours = async (request, response) => {
         response.sendStatus(403);
       });
   };
+
+  
+//Recuperer la liste des locations termines
   const getLocationsTermines = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -70,6 +76,8 @@ const getLocationsEnCours = async (request, response) => {
       });
   };
 
+
+  //ajouter une location
   const addLocation = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
