@@ -1,6 +1,4 @@
 // Declaration de variables
-const { initializeApp } = require("firebase/app");
-const { getAuth } = require("firebase/auth");
 let admin = require("firebase-admin");
 let serviceAccount = require("./autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
 const log = require("../config/Logger");
@@ -14,35 +12,33 @@ const messaging = admin.messaging();
 const auth = admin.auth();
 // Fonction de verification des tokens de Firebase
 const verifyToken = async (request) => {
-  /*if (process.env.NODE_ENV === "production") {
-    return new Promise((resolve, reject) => {
-      let token;
-      let uid;
-      if (request.method === "GET") {
-        token = request.headers.token;
-        uid = request.headers.id;
-      } else {
-        token = request.body.token;
-        uid = request.body.id;
-      }
-      admin
-        .auth()
-        .verifyIdToken(token)
-        .then((decodedToken) => {
-          const uid_firebase = decodedToken.uid;
-          if (uid_firebase === uid) {
-            resolve(10);
-          } else {
-            throw new Error("Requete refusée");
-          }
-        })
-        .catch((error) => {
-          log.loggerConsole.error(error);
-          log.loggerFile.error(error);
-          reject(new Error("Requete refusée"));
-        });
-    });
-  }*/
+  /*return new Promise((resolve, reject) => {
+    let token;
+    let uid;
+    if (request.method === "GET") {
+      token = request.headers.token;
+      uid = request.headers.id;
+    } else {
+      token = request.body.token;
+      uid = request.body.id;
+    }
+    admin
+      .auth()
+      .verifyIdToken(token)
+      .then((decodedToken) => {
+        const uid_firebase = decodedToken.uid;
+        if (uid_firebase === uid) {
+          resolve(10);
+        } else {
+          throw new Error("Requete refusée");
+        }
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        reject(new Error("Requete refusée"));
+      });
+  });*/
 };
 
 // Fonction d'envois de notification avec cloud messaging
@@ -54,7 +50,6 @@ const sendNotification = async (title, body, request, response) => {
     .then((userRecord) => {
       // See the UserRecord reference doc for the contents of userRecord.
       uid = userRecord.toJSON()["uid"];
-      console.log(uid);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
