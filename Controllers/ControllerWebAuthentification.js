@@ -13,7 +13,7 @@ const validerDemandeInscription = async (request, response) => {
         request,
         response
       );
-      //await firebaseVerifyToken.sendNotification("Demande d'inscription validée", "Votre demande d'inscription a été validée", request, response)
+      await firebaseVerifyToken.sendNotification("Demande validée", "Votre demande d'inscription a été validée", request, response)
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -30,7 +30,7 @@ const refuserDemandeInscription = async (request, response) => {
         request,
         response
       );
-      //firebaseVerifyToken.sendNotification("Demande d'inscription refusée", "Votre demande d'inscription a été refusée", request, response)
+      firebaseVerifyToken.sendNotification("Demande refusée", "Votre demande d'inscription a été refusée", request, response)
     })
     .catch((error) => {
       log.loggerConsole.error(error);

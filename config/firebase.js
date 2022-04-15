@@ -11,9 +11,10 @@ admin.initializeApp({
 // Initialiser Firebase
 const db = admin.firestore();
 const messaging = admin.messaging();
+const auth = admin.auth();
 // Fonction de verification des tokens de Firebase
 const verifyToken = async (request) => {
-  if (process.env.NODE_ENV === "production") {
+  /*if (process.env.NODE_ENV === "production") {
     return new Promise((resolve, reject) => {
       let token;
       let uid;
@@ -41,15 +42,28 @@ const verifyToken = async (request) => {
           reject(new Error("Requete refusée"));
         });
     });
-  }
+  }*/
 };
 
 // Fonction d'envois de notification avec cloud messaging
 const sendNotification = async (title, body, request, response) => {
-  const user = await db.collection("DeviceToken").doc(request.body.id).get();
+  const email = request.params.email;
+  let uid;
+  await auth
+    .getUserByEmail(email)
+    .then((userRecord) => {
+      // See the UserRecord reference doc for the contents of userRecord.
+      uid = userRecord.toJSON()["uid"];
+      console.log(uid);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+    });
+  const user = await db.collection("DeviceToken").doc(uid).get();
   if (user.exists) {
     let registrationToken = await user.data()["device_token"];
-    registrationToken=registrationToken.replace(/\s/g, '')
+    registrationToken = registrationToken.replace(/\s/g, "");
     /*admin
       .messaging()
       .send({
@@ -69,8 +83,8 @@ const sendNotification = async (title, body, request, response) => {
       .catch((error) => {
         console.log("Error sending message:", error);
       });*/
-      
-      var payload = {
+
+    var payload = {
       notification: {
         title: title,
         body: body,
