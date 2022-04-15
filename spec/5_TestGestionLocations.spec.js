@@ -4,6 +4,45 @@ const url = "http://localhost:4000/";
 
 describe("Tester le service Gestion des Locations", () => {
 
+  it("Ajouter une location", async () => {
+    let data = {
+      token: "avPraesPu0hkkvlsRaHhcGx3VSph2",
+      date_debut:'2022-03-29',
+      date_fin: '2022-03-30',
+      heure_debut:"03:00",
+      heure_fin:"05:00", 
+      status_demande_location:"accepte", 
+      id_locataire:"cvbsnbwllvxnnadj1xj",
+      id_region:"1",
+      numero_chassis:"1111",
+      id_facture:'1',
+      id_trajet:'1',
+      en_cours:true,
+      point_depart:"alger",
+      point_arrive:"oran",
+      date_facture:'2022-03-30',
+      montant:1400.0,
+      heure:"04:00",
+      tva:"1450.0"
+    };
+   
+      await axios
+        .post(url + "gestionlocations/ajouter_location/", data)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+   
+   
+      await axios
+        .get(
+          url + 'gestionlocations/get_locations_by_locataire/cvbsnbwllvxnnadj1xj' )
+        .then((res) => {
+          
+        expect(res.data[0].en_cours).toEqual(true);
+          
+        });
+  
+  });
 it("Recuperer la liste des locations en cours", async () => {
   await axios.get(url + "gestionlocations/locations_encours").then((res) => {
     res.data.forEach((element) => {

@@ -127,8 +127,8 @@ pool.query(
 pool.query(
   `
     CREATE TABLE public.louer (
-        date_debut date NOT NULL,
-        date_fin date NOT NULL,
+        date_debut date ,
+        date_fin date ,
         heure_debut time without time zone NOT NULL,
         heure_fin time without time zone NOT NULL,
         status_demande_location character varying(50) NOT NULL,
@@ -139,7 +139,6 @@ pool.query(
         id_trajet serial,
         id_louer serial,
         en_cours boolean
-
     );
     `
 );
@@ -197,7 +196,7 @@ pool.query(
 pool.query(
   `
     CREATE TABLE public.trajet (
-        id_trajet integer NOT NULL,
+        id_trajet serial,
         point_depart character varying(50) NOT NULL,
         point_arrive character varying(50) NOT NULL
     );
@@ -275,7 +274,6 @@ pool.query(
   INSERT INTO public.region(
     id_region, libelle)
     VALUES (1,'alger');
-
   `
 );
 
@@ -284,7 +282,6 @@ pool.query(
   INSERT INTO public.region(
     id_region, libelle)
     VALUES (1,'alger');
-
   `
 );
 
