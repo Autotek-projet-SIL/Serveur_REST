@@ -4,7 +4,7 @@ const poolTestIntegration = new Pool({
   user: "postgres",
   host: "localhost",
   database: "autotek",
-  password: "AdministrateurAutotek2022*",
+  password:"mkdir400",
   port: 5432,
 });
 

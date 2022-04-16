@@ -63,7 +63,7 @@ const updateDemandeInscription = async (request, response, status) => {
       if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
-        response.statusCode = 500;
+          response.sendStatus(500);
       }
     }
   );

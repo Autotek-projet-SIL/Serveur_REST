@@ -127,8 +127,8 @@ pool.query(
 pool.query(
   `
     CREATE TABLE public.louer (
-        date_debut date NOT NULL,
-        date_fin date NOT NULL,
+        date_debut date ,
+        date_fin date ,
         heure_debut time without time zone NOT NULL,
         heure_fin time without time zone NOT NULL,
         status_demande_location character varying(50) NOT NULL,
@@ -136,7 +136,9 @@ pool.query(
         id_region serial,
         numero_chassis character varying(10) NOT NULL,
         id_facture serial,
-        id_trajet serial
+        id_trajet serial,
+        id_louer serial,
+        en_cours boolean
     );
     `
 );
@@ -194,7 +196,7 @@ pool.query(
 pool.query(
   `
     CREATE TABLE public.trajet (
-        id_trajet integer NOT NULL,
+        id_trajet serial,
         point_depart character varying(50) NOT NULL,
         point_arrive character varying(50) NOT NULL
     );
@@ -240,6 +242,13 @@ pool.query(
         VALUES ('test_am','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am');
     `
 );
+
+pool.query(
+  `
+        INSERT INTO public.am(id_am, nom, prenom, numero_telephone, email, mot_de_passe, photo_am)
+        VALUES ('123456','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am');
+    `
+);
 pool.query(
   `
         INSERT INTO public.decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe, photo_decideur)
@@ -264,7 +273,13 @@ pool.query(
   `
     INSERT INTO public.typevehicule(
       id_type_vehicule, libelle, tarification)
-        VALUES ('1','test_libelle1', '3500'), ('2','test_libelle2', '4100');
+        VALUES ('1','test_libelle1', '3500'), ('2','test_libelle2', '4100');`
+);
+pool.query(
+  `
+  INSERT INTO public.region(
+    id_region, libelle)
+    VALUES (1,'alger');
   `
 );
 
@@ -273,6 +288,75 @@ pool.query(
     INSERT INTO public.vehicule(
       numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule)
         VALUES ('test_v1','test_marque1', 'test_modele1', 'test_couleur1', '1', 'test_am','test_img1'), ('test_v2','test_marque2', 'test_modele2', 'test_couleur2', '2', 'test_am','test_img2');
+  `
+);
+
+pool.query(
+  `
+  INSERT INTO public.region(
+    id_region, libelle)
+    VALUES (1,'alger');
+  `
+);
+
+pool.query(
+  ` INSERT INTO public.facture(
+    id_facture, date_facture, montant, heure, tva)
+    VALUES (1, '2022-03-30', 14000, '08:00', 500);
+    `
+);
+
+pool.query(
+  `
+  INSERT INTO public.typevehicule(
+    id_type_vehicule, libelle, tarification)
+    VALUES (1, 'crossovers', 4000);
+  `
+);
+pool.query(
+  `
+INSERT INTO public.vehicule(
+	numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule)
+	VALUES ('1111', 'Dacia', 'standard', 'noir',1 , '123456', 'image');
+  `
+);
+
+pool.query(
+  `
+INSERT INTO public.trajet(
+	id_trajet, point_depart, point_arrive)
+	VALUES (1, 'alger', 'oran');
+  `
+);
+
+pool.query(
+  `
+   INSERT INTO public.facture(
+    id_facture, date_facture, montant, heure, tva)
+    VALUES (1, '2022-03-30', 4000, '03:00', 5000);
+   `
+);
+
+pool.query(
+  `
+   INSERT INTO public.louer(
+    date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
+    VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 1);
+   `
+);
+
+pool.query(
+  `
+  INSERT INTO public.louer(
+   date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
+   VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 2);
+  `
+);
+pool.query(
+  `
+  INSERT INTO public.louer(
+   date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
+   VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 3);
   `
 );
 
