@@ -24,7 +24,7 @@ const loggerFile = winston.createLogger({
   ),
   transports: [
     new winston.transports.File({
-      filename: "LogFiles/logErrors.log",
+      filename: "../LogFiles/logErrors.log",
       level: "error",
     }),
   ],
