@@ -17,11 +17,37 @@ const getLocataires = async (request, response) => {
     });
 };
 
+const getLocataireById = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.getLocataireById(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 const updateLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionProfils.updateLocataire(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const getATCById = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.getATCById(request, response);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -56,6 +82,19 @@ const updateATC = async (request, response) => {
     });
 };
 
+const getDecideurById = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.getDecideurById(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 const getDecideurs = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -74,6 +113,19 @@ const updateDecideur = async (request, response) => {
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionProfils.updateDecideur(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const getAMById = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.getAMById(request, response);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -118,4 +170,8 @@ module.exports = {
   updateDecideur,
   getAMs,
   updateAM,
+  getAMById,
+  getATCById,
+  getLocataireById,
+  getDecideurById
 };

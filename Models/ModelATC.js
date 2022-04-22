@@ -4,7 +4,7 @@ const log = require("../config/Logger");
 
 // Recuperer la liste des locataires
 const getATCs = async (request, response) => {
-  pool.query("SELECT * FROM atc", (error, results) => {
+  pool.query("SELECT id_atc, nom, prenom, numero_telephone, email, est_root, photo_atc FROM atc", (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -18,7 +18,7 @@ const getATCs = async (request, response) => {
 // Recuperer un ATC avec un identifiant
 const getATCById = async (request, response) => {
   let id = request.params.id;
-  pool.query("SELECT * FROM atc WHERE id_atc=$1", [id], (error, results) => {
+  pool.query("SELECT id_atc, nom, prenom, numero_telephone, email, est_root, photo_atc FROM atc WHERE id_atc=$1", [id], (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -32,7 +32,7 @@ const getATCById = async (request, response) => {
 // Recuperer un ATC avec son email
 const getATCByEmail = async (request, response) => {
   let email = request.params.email;
-  pool.query("SELECT * FROM atc WHERE email=$1", [email], (error, results) => {
+  pool.query("SELECT id_atc, nom, prenom, numero_telephone, email, est_root, photo_atc FROM atc WHERE email=$1", [email], (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);

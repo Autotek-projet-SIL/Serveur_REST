@@ -17,10 +17,10 @@ const verifyToken = async (request) => {
     let uid;
     if (request.method === "GET") {
       token = request.headers.token;
-      uid = request.headers.id;
+      uid = request.headers.id_sender;
     } else {
       token = request.body.token;
-      uid = request.body.id;
+      uid = request.body.id_sender;
     }
     admin
       .auth()

@@ -4,7 +4,7 @@ const log = require("../config/Logger");
 
 // Recuperer la liste des décideurs
 const getDecideurs = async (request, response) => {
-  pool.query("SELECT * FROM decideur", (error, results) => {
+  pool.query("SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur", (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -19,7 +19,7 @@ const getDecideurs = async (request, response) => {
 const getDecideurById = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    "SELECT * FROM decideur WHERE id_decideur=$1",
+    "SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur WHERE id_decideur=$1",
     [id],
     (error, results) => {
       if (error) {
@@ -37,7 +37,7 @@ const getDecideurById = async (request, response) => {
 const getDecideurByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
-    "SELECT * FROM decideur WHERE email=$1",
+    "SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur WHERE email=$1",
     [email],
     (error, results) => {
       if (error) {

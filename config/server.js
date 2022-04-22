@@ -49,7 +49,6 @@ app.use("/", routeGestionComptes);
 app.use("/", routeFlotte);
 app.use("/", routerGestionLocations);
 app.get("/", (req, res) => {
-  console.log(path.join(__dirname, "../LogFiles/logTrafic.log"));
   res.send("Autotek Web server");
 });
 
