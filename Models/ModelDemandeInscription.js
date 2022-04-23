@@ -55,9 +55,9 @@ const addDemandeInscription = async (request, response) => {
 
 // Mettre a jour les informations d'une demande d'inscription
 const updateDemandeInscription = async (request, response, status) => {
-  let email = request.params.email;
+  let email = request.params.id_demande_inscription;
   pool.query(
-    "UPDATE demandeinscription SET statut=$2 WHERE email=$1",
+    "UPDATE demandeinscription SET statut=$2 WHERE id_demande_inscription=$1",
     [email, status],
     (error, results) => {
       if (error) {

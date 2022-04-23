@@ -47,58 +47,58 @@ const sendNotification = async (title, body, request, response) => {
   let uid;
   await auth
     .getUserByEmail(email)
-    .then((userRecord) => {
+    .then(async(userRecord) => {
       // See the UserRecord reference doc for the contents of userRecord.
       uid = userRecord.toJSON()["uid"];
+      const user = await db.collection("DeviceToken").doc(uid).get();
+      if (user.exists) {
+        let registrationToken = await user.data()["device_token"];
+        registrationToken = registrationToken.replace(/\s/g, "");
+        /*admin
+          .messaging()
+          .send({
+            token: registrationToken,
+            data: {
+              hello: "world",
+            },
+            // Set Android priority to "high"
+            android: {
+              priority: "high",
+            },
+            // Add APNS (Apple) config
+          })
+          .then((response) => {
+            console.log("Successfully sent message:", response);
+          })
+          .catch((error) => {
+            console.log("Error sending message:", error);
+          });*/
+    
+        var payload = {
+          notification: {
+            title: title,
+            body: body,
+          },
+        };
+        var options = {
+          priority: "high",
+          timeToLive: 60 * 60 * 24,
+        };
+        await messaging
+          .sendToDevice(registrationToken, payload, options)
+          .then(function (response) {
+            console.log("Successfully sent message:", response);
+          })
+          .catch(function (error) {
+            log.loggerConsole.error(error);
+            log.loggerFile.error(error);
+          });
+      }
     })
     .catch((error) => {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
     });
-  const user = await db.collection("DeviceToken").doc(uid).get();
-  if (user.exists) {
-    let registrationToken = await user.data()["device_token"];
-    registrationToken = registrationToken.replace(/\s/g, "");
-    /*admin
-      .messaging()
-      .send({
-        token: registrationToken,
-        data: {
-          hello: "world",
-        },
-        // Set Android priority to "high"
-        android: {
-          priority: "high",
-        },
-        // Add APNS (Apple) config
-      })
-      .then((response) => {
-        console.log("Successfully sent message:", response);
-      })
-      .catch((error) => {
-        console.log("Error sending message:", error);
-      });*/
-
-    var payload = {
-      notification: {
-        title: title,
-        body: body,
-      },
-    };
-    var options = {
-      priority: "high",
-      timeToLive: 60 * 60 * 24,
-    };
-    await messaging
-      .sendToDevice(registrationToken, payload, options)
-      .then(function (response) {
-        console.log("Successfully sent message:", response);
-      })
-      .catch(function (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-      });
-  }
 };
 
 module.exports = {

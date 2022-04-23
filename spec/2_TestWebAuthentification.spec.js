@@ -3,7 +3,6 @@ const url = "http://localhost:4000/";
 describe("Tester le service WebAuthentification", () => {
   describe("Tester la validation de la demande d'inscription d'un locataire", () => {
     let data_insert = {
-      token: "bvPraesPu0hkkvlsRaHhcGx3VSph2",
       id: "zWPhaKsPu0hkkhsRaHhcGx3VSph2",
       nom: "Naoumi",
       prenom: "Islend",

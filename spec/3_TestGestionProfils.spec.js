@@ -98,7 +98,6 @@ describe("Tester le service Gestion des Profils", () => {
           expect(res.data[0].prenom).toEqual("Lilya");
           expect(res.data[0].numero_telephone).toEqual("0541251311");
           expect(res.data[0].email).toEqual("test_decideur@gmail.com");
-          expect(res.data[0].mot_de_passe).toEqual("abcd");
           expect(res.data[0].photo_decideur).toEqual("1243");
         });
     });
@@ -126,7 +125,6 @@ describe("Tester le service Gestion des Profils", () => {
           expect(res.data[0].prenom).toEqual("Hamid");
           expect(res.data[0].numero_telephone).toEqual("0549103699");
           expect(res.data[0].email).toEqual("test_atc@gmail.com");
-          expect(res.data[0].mot_de_passe).toEqual("test_atc");
           expect(res.data[0].photo_atc).toEqual("123");
         });
     });
@@ -155,7 +153,6 @@ describe("Tester le service Gestion des Profils", () => {
           expect(res.data[0].prenom).toEqual("Rachid");
           expect(res.data[0].numero_telephone).toEqual("0549103699");
           expect(res.data[0].email).toEqual("yefsahrachid@gmail.com");
-          expect(res.data[0].mot_de_passe).toEqual("test_am");
           expect(res.data[0].photo_am).toEqual("123");
         });
     });
