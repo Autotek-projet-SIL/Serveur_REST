@@ -1,4 +1,5 @@
-// Declaration de variables
+
+//// Declaration de variables
 const express = require("express");
 const routerGestionLocations = express.Router();
 const controllerGestionLocations = require("../Controllers/ControllerGestionLocations.js");
