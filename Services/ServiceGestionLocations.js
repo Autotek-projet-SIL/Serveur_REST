@@ -26,6 +26,18 @@ const getLocationsLocataire = async (request, response) => {
   }
 };
 
+
+//Recuperer toutes le locations
+const getAllLocations = async (request, response) => {
+  try {
+    await modelLouer.getAllLocations(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 //Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
   try {
@@ -81,4 +93,5 @@ module.exports = {
   addLocation,
   getLocationById,
   getLocationsLocataire,
+  getAllLocations
 };

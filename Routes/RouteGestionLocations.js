@@ -1,5 +1,4 @@
-
-//// Declaration de variables
+// Declaration de variables
 const express = require("express");
 const routerGestionLocations = express.Router();
 const controllerGestionLocations = require("../Controllers/ControllerGestionLocations.js");
@@ -26,11 +25,13 @@ routerGestionLocations.put(
   "/gestionlocations/end_location/:id",
   controllerGestionLocations.endLocation
 );
-/* routerGestionLocations.put(
-        "/gestionlocations/modifier_location/:id",
-        controllerGestionLocations.updateLocataire
-      );
-*/
+
+//recuperer toutes les locations
+routerGestionLocations.get(
+  "/gestionlocations/locations",
+  controllerGestionLocations.getAllLocations
+);
+
 
 //ajouter une location
 routerGestionLocations.post(

@@ -23,6 +23,23 @@ const endLocation = async (request, response) => {
 };
 
 
+//Recuperer la liste de toutes les locations 
+const getAllLocations = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceReservation.getAllLocations(
+        request,
+        response
+      );
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 //Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
@@ -119,5 +136,6 @@ module.exports = {
   endLocation,
   addLocation,
   getLocationById,
-  getLocationsLocataire
+  getLocationsLocataire,
+  getAllLocations
 };

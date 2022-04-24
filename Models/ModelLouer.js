@@ -2,6 +2,19 @@
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
+
+// Recuperer toutes les locations
+const getAllLocations = async (request, response) => {
+  pool.query("SELECT * FROM louer ", (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
 // Recuperer la des locations en cours
 const getLocationsEnCours = async (request, response) => {
   pool.query("SELECT * FROM louer where en_cours = true", (error, results) => {
@@ -118,4 +131,5 @@ module.exports = {
   getLocationById,
   addLocation,
   getLocationsLocataire,
+  getAllLocations
 };
