@@ -8,7 +8,7 @@ describe("Tester le service Gestion des Locations", () => {
       date_debut: "2022-03-29",
       date_fin: "2022-03-30",
       heure_debut: "03:00",
-      heure_fin: "05:00",
+      heure_fin: "06:00",
       status_demande_location: "accepte",
       id_locataire: "cvbsnbwllvxnnadj1xj",
       id_region: "1",

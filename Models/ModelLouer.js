@@ -3,6 +3,19 @@ const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
 
+//récupérer la liste des locations pour le service statistiques
+const getLocationStatistics = async (request, response) => {
+  pool.query("SELECT id_louer, date_debut , status_demande_location, en_cours ,region  FROM louer ", (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
+
 // Recuperer toutes les locations
 const getAllLocations = async (request, response) => {
   pool.query("SELECT * FROM louer ", (error, results) => {
@@ -131,5 +144,6 @@ module.exports = {
   getLocationById,
   addLocation,
   getLocationsLocataire,
-  getAllLocations
+  getAllLocations,
+  getLocationStatistics
 };
