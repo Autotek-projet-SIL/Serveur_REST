@@ -4,6 +4,20 @@ const modelLouer = require("../Models/ModelLouer");
 const modelTrajet = require("../Models/ModelTrajet");
 const modelFacture = require("../Models/ModelFacture");
 
+
+
+//
+//terminer une location
+const updateLocationHeureDebut = async (request, response) => {
+  try {
+    await modelLouer.updateLocationHeureDebut(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 //terminer une location
 const endLocation = async (request, response) => {
   try {
@@ -64,7 +78,7 @@ const getLocationsTermines = async (request, response) => {
 
 const addLocation = async (request, response) => {
   try {
-    await modelFacture.addFacture(request, response);
+  
     await modelTrajet.addTrajet(request, response);
     await modelLouer.addLocation(request, response);
   } catch (error) {
@@ -93,5 +107,6 @@ module.exports = {
   addLocation,
   getLocationById,
   getLocationsLocataire,
-  getAllLocations
+  getAllLocations,
+  updateLocationHeureDebut
 };

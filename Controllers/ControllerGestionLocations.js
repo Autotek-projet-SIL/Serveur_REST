@@ -1,16 +1,32 @@
 // Declaration de variables
-const serviceReservation = require("../Services/ServiceGestionLocations.js");
+const serviceGestionLocations = require("../Services/ServiceGestionLocations.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
 // Fonctions du controlleur de gestion de locations
 
+//mettre a jour la date de debut
+const updateLocationHeureDebut = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.updateLocationHeureDebut(
+        request,
+        response
+      );
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 //terminer une location
 const endLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceReservation.endLocation(
+      await serviceGestionLocations.endLocation(
         request,
         response
       );
@@ -28,7 +44,7 @@ const getAllLocations = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceReservation.getAllLocations(
+      await serviceGestionLocations.getAllLocations(
         request,
         response
       );
@@ -45,7 +61,7 @@ const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await serviceReservation.getLocationsEnCours(
+        await serviceGestionLocations.getLocationsEnCours(
           request,
           response
         );
@@ -63,7 +79,7 @@ const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await serviceReservation.getLocationsLocataire(
+        await serviceGestionLocations.getLocationsLocataire(
           request,
           response
         );
@@ -81,7 +97,7 @@ const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await serviceReservation.getLocationsTermines(
+        await serviceGestionLocations.getLocationsTermines(
           request,
           response
         );
@@ -99,7 +115,7 @@ const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await serviceReservation.addLocation(
+        await serviceGestionLocations.addLocation(
           request,
           response
         );
@@ -116,7 +132,7 @@ const getLocationsEnCours = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await serviceReservation.getLocationById(
+        await serviceGestionLocations.getLocationById(
           request,
           response
         );
@@ -137,5 +153,6 @@ module.exports = {
   addLocation,
   getLocationById,
   getLocationsLocataire,
-  getAllLocations
+  getAllLocations,
+  updateLocationHeureDebut
 };

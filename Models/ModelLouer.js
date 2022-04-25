@@ -28,6 +28,7 @@ const getAllLocations = async (request, response) => {
     }
   });
 };
+
 // Recuperer la des locations en cours
 const getLocationsEnCours = async (request, response) => {
   pool.query("SELECT * FROM louer where en_cours = true", (error, results) => {
@@ -71,6 +72,27 @@ const getLocationsTermines = async (request, response) => {
   });
 };
 
+
+
+
+const updateLocationHeureDebut = async (request, response) => {
+  let id = request.params.id;
+  let date = request.params.date;
+  pool.query(
+    "UPDATE louer SET heure_debut=$2 WHERE id_louer=$1",
+    [id,date],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    }
+  );
+};
+
 //End location
 const endLocation = async (request, response) => {
   let id = request.params.id;
@@ -92,19 +114,16 @@ const endLocation = async (request, response) => {
 const addLocation = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO louer(date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire,id_region,numero_chassis,id_facture,id_trajet,en_cours)VALUES ($1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11)",
+    "INSERT INTO louer(date_debut,status_demande_location, id_locataire,region,numero_chassis,id_trajet,en_cours)VALUES ($1, $2, $3, $4, $5, $6,$7)",
     [
       body.date_debut,
-      body.date_fin,
-      body.heure_debut,
-      body.heure_fin,
       body.status_demande_location,
       body.id_locataire,
-      body.id_region,
+      body.region,
       body.numero_chassis,
-      body.id_facture,
       body.id_trajet,
       body.en_cours,
+    
     ],
     (error, results) => {
       if (error) {
@@ -145,5 +164,9 @@ module.exports = {
   addLocation,
   getLocationsLocataire,
   getAllLocations,
+
+  updateLocationHeureDebut,
+
   getLocationStatistics
+
 };
