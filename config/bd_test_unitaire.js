@@ -90,6 +90,7 @@ pool.query(
         montant real NOT NULL,
         heure time without time zone NOT NULL,
         tva real NOT NULL,
+        id_louer serial,
         CONSTRAINT facture_montant_check CHECK ((montant > (0)::double precision)),
         CONSTRAINT facture_tva_check CHECK ((tva > (0)::double precision))
     );
@@ -301,8 +302,9 @@ pool.query(
 
 pool.query(
   ` INSERT INTO public.facture(
-    id_facture, date_facture, montant, heure, tva)
-    VALUES (1, '2022-03-30', 14000, '08:00', 500);
+    id_facture, date_facture, montant, heure, tva, id_louer)
+    VALUES (1, '2022-03-30', 14000, '08:00', 500, 1),
+    (2, '2021-02-22', 15600, '15:00', 200, 1);
     `
 );
 
@@ -329,13 +331,13 @@ INSERT INTO public.trajet(
   `
 );
 
-pool.query(
+/*pool.query(
   `
    INSERT INTO public.facture(
     id_facture, date_facture, montant, heure, tva)
     VALUES (1, '2022-03-30', 4000, '03:00', 5000);
    `
-);
+);*/
 
 pool.query(
   `
