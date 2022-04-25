@@ -27,11 +27,11 @@ describe("Tester le service Statististiques", () => {
       });
 
       
-    it("Recuperer la liste des demandes d'inscription", async () => {
+    it("Recuperer la liste des locations", async () => {
         await axios.get(url + "statistiques/get_locations").then((res) => {       
             res.data.forEach((element) => {
-              console.log(element);
-          });
+              expect(element.status_demande_location).toEqual('accepte');
+          })
         });
       });
     

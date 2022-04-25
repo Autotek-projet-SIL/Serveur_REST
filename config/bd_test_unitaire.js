@@ -128,14 +128,12 @@ pool.query(
   `
     CREATE TABLE public.louer (
         date_debut date ,
-        date_fin date ,
-        heure_debut time without time zone NOT NULL,
-        heure_fin time without time zone NOT NULL,
+        heure_debut time without time zone ,
+        heure_fin time without time zone ,
         status_demande_location character varying(50) NOT NULL,
         id_locataire character varying(28) NOT NULL,
-        id_region serial,
+        region character varying(28),
         numero_chassis character varying(10) NOT NULL,
-        id_facture serial,
         id_trajet serial,
         id_louer serial,
         en_cours boolean
@@ -340,12 +338,12 @@ pool.query(
 pool.query(
   `
    INSERT INTO public.louer(
-    date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
-    VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 1);
+    date_debut, status_demande_location, id_locataire, region, numero_chassis, id_trajet, en_cours, id_louer)
+    VALUES ('2022-03-29', 'accepte', 'test_locataire', 'alger', '1111', 1, true, 1);
    `
 );
 
-pool.query(
+/*pool.query(
   `
   INSERT INTO public.louer(
    date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
@@ -359,5 +357,5 @@ pool.query(
    VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 3);
   `
 );
-
+*/
 module.exports = pool;

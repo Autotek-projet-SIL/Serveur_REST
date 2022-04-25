@@ -77,7 +77,7 @@ const getLocationsTermines = async (request, response) => {
 
 const updateLocationHeureDebut = async (request, response) => {
   let id = request.params.id;
-  let date = request.params.date;
+  let date = request.params.heure;
   pool.query(
     "UPDATE louer SET heure_debut=$2 WHERE id_louer=$1",
     [id,date],
