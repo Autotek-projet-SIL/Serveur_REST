@@ -13,7 +13,7 @@ const addFacture = async (request, response) => {
       })
       .catch((error) => {
         log.loggerConsole.error(error);
-        
+        log.loggerFile.error(error);
         response.sendStatus(403);
       });
   };
@@ -26,6 +26,7 @@ const getFactures = async (request, response) => {
       })
       .catch((error) => {
         log.loggerConsole.error(error);
+        log.loggerFile.error(error);
         response.sendStatus(403);
       });
   };
@@ -38,6 +39,7 @@ const getFactureById = async (request, response) => {
       })
       .catch((error) => {
         log.loggerConsole.error(error);
+        log.loggerFile.error(error);
         response.sendStatus(403);
       });
   };

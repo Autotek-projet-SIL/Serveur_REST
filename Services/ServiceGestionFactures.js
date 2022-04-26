@@ -8,6 +8,7 @@ const addFacture = async (request, response) => {
     await ModelFacture.addFacture(request, response);
   } catch (error) {
     log.loggerConsole.error(error);
+    log.loggerFile.error(error);
     response.sendStatus(500);
   }
 };
@@ -17,6 +18,7 @@ const getFactures = async (request, response) => {
       await ModelFacture.getFactures(request, response);
     } catch (error) {
       log.loggerConsole.error(error);
+      log.loggerFile.error(error);
       response.sendStatus(500);
     }
 };
@@ -26,6 +28,7 @@ const getFactureById = async (request, response) => {
       await ModelFacture.getFactureById(request, response);
     } catch (error) {
       log.loggerConsole.error(error);
+      log.loggerFile.error(error);
       response.sendStatus(500);
     }
 };

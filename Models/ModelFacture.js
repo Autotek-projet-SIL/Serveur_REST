@@ -12,6 +12,7 @@ const addFacture = async (request, response) => {
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
+        log.loggerFile.error(error);
         response.statusCode = 500;
       }
       else
@@ -31,6 +32,7 @@ const getFactures = async (request, response) => {
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
+        log.loggerFile.error(error);
         response.sendStatus(500);
       } else { 
         response.status(200).json(results.rows);
@@ -50,6 +52,7 @@ const getFactureById = async (request, response) => {
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
+        log.loggerFile.error(error);
         response.sendStatus(500);
       } else {
         response.status(200).json(results.rows);
@@ -76,7 +79,7 @@ const updateFacture = async (request, response) => {
   );
 };*/
 
-//Exporter les fonctions CRUD de la demande d'inscription
+//Exporter les fonctions de facture
 module.exports = {
   addFacture,
   getFactures,
