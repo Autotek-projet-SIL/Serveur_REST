@@ -7,7 +7,7 @@ const modelFacture = require("../Models/ModelFacture");
 
 
 //
-//terminer une location
+//mettre a jour l'heure de debut de location lors du deveroillage
 const updateLocationHeureDebut = async (request, response) => {
   try {
     await modelLouer.updateLocationHeureDebut(request, response);
@@ -22,6 +22,8 @@ const updateLocationHeureDebut = async (request, response) => {
 const endLocation = async (request, response) => {
   try {
     await modelLouer.endLocation(request, response);
+    await modelLouer.updateVehicleDisponible(request, response,true);
+
   } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);

@@ -18,7 +18,7 @@ const getLocationStatistics = async (request, response) => {
 
 // Recuperer toutes les locations
 const getAllLocations = async (request, response) => {
-  pool.query("SELECT * FROM louer ", (error, results) => {
+  pool.query("SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,point_depart, point_arrive FROM louer l inner join trajet t ON l.id_trajet= t.id_trajet inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule", (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -31,7 +31,7 @@ const getAllLocations = async (request, response) => {
 
 // Recuperer la des locations en cours
 const getLocationsEnCours = async (request, response) => {
-  pool.query("SELECT * FROM louer where en_cours = true", (error, results) => {
+  pool.query("SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,point_depart, point_arrive FROM louer l inner join trajet t ON l.id_trajet= t.id_trajet inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true", (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -61,7 +61,7 @@ const getLocationsLocataire = async (request, response) => {
 };
 // Recuperer la des locations terminees
 const getLocationsTermines = async (request, response) => {
-  pool.query("SELECT * FROM louer where en_cours = false", (error, results) => {
+  pool.query("SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,point_depart, point_arrive FROM louer l inner join trajet t ON l.id_trajet= t.id_trajet inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false", (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -136,6 +136,25 @@ const addLocation = async (request, response) => {
   );
 };
 
+
+// Mettre a jour la disponibilité du véhicule
+const updateVehicleDisponible = async (request, response, disponible) => {
+  let id_louer = request.params.id;
+ 
+  pool.query(
+    "UPDATE vehicule SET disponible=$2 FROM vehicule v inner JOIN louer l ON l.numero_chassis =v.numero_chassis  WHERE id_louer=$1;",
+    [id_louer,disponible],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    }
+  );
+};
 // Recuperer une location avec un identifiant
 const getLocationById = async (request, response) => {
   let id_louer = request.params.id_louer;

@@ -169,6 +169,8 @@ const updateVehicleType = async (request, response) => {
   );
 };
 
+
+
 // Supprimer un véhicule
 const deleteVehicule = async (request, response) => {
   let num_chassis = request.params.num;
@@ -217,4 +219,5 @@ module.exports = {
   updateVehicleType,
   deleteVehicule,
   deleteVehiculeType,
+  updateVehicleDisponible
 };
