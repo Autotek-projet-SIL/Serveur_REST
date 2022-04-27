@@ -219,5 +219,5 @@ module.exports = {
   updateVehicleType,
   deleteVehicule,
   deleteVehiculeType,
-  updateVehicleDisponible
+ 
 };
