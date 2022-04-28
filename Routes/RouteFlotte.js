@@ -19,6 +19,14 @@ routerFlotte.get(
     "/flotte/typevehicule/",
     controllerFlotte.getVehiclesTypes
 );
+routerFlotte.get(
+    "/flotte/marquevehicule/",
+    controllerFlotte.getVehiclesMarques
+);
+routerFlotte.get(
+    "/flotte/modelevehicule/:marque",
+    controllerFlotte.getVehiclesModelsByMarque
+);
 routerFlotte.post(
     "/flotte/ajouter_vehicule/",
     controllerFlotte.addVehicle
@@ -30,6 +38,18 @@ routerFlotte.post(
 routerFlotte.put(
     "/flotte/modifier_vehicule/:num",
     controllerFlotte.updateVehicle
+);
+routerFlotte.put(
+    "/flotte/modifier_dispo_vehicule/:num",
+    controllerFlotte.updateVehicleAvaible
+);
+routerFlotte.put(
+    "/flotte/modifier_am_vehicule/:num",
+    controllerFlotte.updateVehicleAM
+);
+routerFlotte.put(
+    "/flotte/modifier_image_vehicule/:num",
+    controllerFlotte.updateVehicleImage
 );
 routerFlotte.put(
     "/flotte/modifier_typevehicule/:id",

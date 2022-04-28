@@ -33,7 +33,9 @@ const getVehicleDetail = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await ServiceFlotte.getVehicleDetail(request, response);
+        result = {};
+        await firebaseVerifyToken.getVehicule(request,response,result);
+        await ServiceFlotte.getVehicleDetail(request, response,result);
       })
       .catch((error) => {
         log.loggerConsole.error(error);
@@ -54,12 +56,37 @@ const getVehicleDetail = async (request, response) => {
         response.sendStatus(403);
       });
   };
+  const getVehiclesMarques = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.getVehiclesMarques(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const getVehiclesModelsByMarque = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.getVehiclesModelsByMarque(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
   const addVehicle = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
         await ServiceFlotte.addVehicle(request, response);
+        await firebaseVerifyToken.addVehicle(request,response);
       })
       .catch((error) => {
         log.loggerConsole.error(error);
@@ -86,6 +113,7 @@ const getVehicleDetail = async (request, response) => {
       .verifyToken(request)
       .then(async (res) => {
         await ServiceFlotte.updateVehicle(request, response);
+        await firebaseVerifyToken.updateVehicule(request,response);
       })
       .catch((error) => {
         log.loggerConsole.error(error);
@@ -94,6 +122,42 @@ const getVehicleDetail = async (request, response) => {
       });
   };
 
+  const updateVehicleAvaible = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleAvaible(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const updateVehicleAM = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleAM(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const updateVehicleImage = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleImage(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
   const updateVehicleType = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -111,6 +175,7 @@ const getVehicleDetail = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
+        await firebaseVerifyToken.deleteVehicule(request,response);
         await ServiceFlotte.deleteVehicule(request, response);
       })
       .catch((error) => {
@@ -139,9 +204,14 @@ module.exports = {
     getVehiclesByAmID,
     getVehicleDetail,
     getVehiclesTypes,
+    getVehiclesMarques,
+    getVehiclesModelsByMarque,
     addVehicle,
     addVehicleType,
     updateVehicle,
+    updateVehicleAvaible,
+    updateVehicleImage,
+    updateVehicleAM,
     updateVehicleType,
     deleteVehicule,
     deleteVehiculeType
