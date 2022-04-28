@@ -5,7 +5,7 @@ const log = require("../config/Logger");
 // Recuperer la liste des véhicules de la flotte
 const getVehicles = async (request, response) => {
   pool.query(
-    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
+    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,v.disponible,
         v.id_am,am.nom,am.prenom,am.email,am.numero_telephone,
         v.id_type_vehicule,tv.libelle,tv.tarification
         FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule;`,
@@ -25,7 +25,7 @@ const getVehicles = async (request, response) => {
 const getVehiclesByAmID = async (request, response) => {
   let id_am = request.params.id;
   pool.query(
-    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
+    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,v.disponible,
       v.id_am,am.nom,am.prenom,am.email,am.numero_telephone,
       v.id_type_vehicule,tv.libelle,tv.tarification
       FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
@@ -47,7 +47,7 @@ const getVehicleByChassisNum = async (request, response,result) => {
   vehicule = {}
   let num_chassis = request.params.num_chassis;
   pool.query(
-    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
+    `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,v.disponible,
       v.id_am,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
       v.id_type_vehicule,tv.libelle,tv.tarification
   FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
@@ -125,7 +125,7 @@ const getVehiclesMarques = async (request, response) => {
 const addVehicle= async (request, response) => {
     let body = request.body;
     pool.query(
-      "INSERT INTO vehicule(numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+      "INSERT INTO vehicule(numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule,disponible) VALUES ($1, $2, $3, $4, $5, $6, $7,$8);",
       [
         body.num_chassis,
         body.marque,
@@ -134,6 +134,7 @@ const addVehicle= async (request, response) => {
         body.id_type_vehicule,
         body.id_am,
         body.image_vehicule,
+        body.disponible,
       ],
       (error, results) => {
         if (error) {
@@ -174,7 +175,7 @@ const updateVehicle= async (request, response) => {
     let num_chassis = request.params.num;
     let body = request.body;
     pool.query(
-      "UPDATE vehicule SET numero_chassis=$8, marque=$2, modele=$3, couleur=$4, id_type_vehicule=$5, id_am=$6, image_vehicule=$7 WHERE numero_chassis=$1;",
+      "UPDATE vehicule SET numero_chassis=$8, marque=$2, modele=$3, couleur=$4, id_type_vehicule=$5, id_am=$6, image_vehicule=$7,disponible=$9 WHERE numero_chassis=$1;",
       [
         num_chassis,
         body.marque,
@@ -184,6 +185,7 @@ const updateVehicle= async (request, response) => {
         body.id_am,
         body.image_vehicule,
         body.num_chassis,
+        body.disponible
       ],
       (error, results) => {
         if (error) {

@@ -62,7 +62,8 @@ it("Recuperer la liste des modèles vehicules d'une marque", async () => {
             couleur:"couleur3",
             id_type_vehicule:"2",
             id_am:"test_am",
-            image_vehicule:"test_img3"
+            image_vehicule:"test_img3",
+            disponible: true
         };
   
         await axios
@@ -105,7 +106,8 @@ it("Recuperer la liste des modèles vehicules d'une marque", async () => {
             couleur:"couleur3",
             id_type_vehicule:"2",
             id_am:"test_am",
-            image_vehicule:"test_img 3"
+            image_vehicule:"test_img 3",
+            disponible: true
         };
         await axios.put(
           url + "flotte/modifier_vehicule/test_v3",
@@ -123,6 +125,51 @@ it("Recuperer la liste des modèles vehicules d'une marque", async () => {
             expect(res.data[0].id_type_vehicule).toEqual(2);
             expect(res.data[0].id_am).toEqual("test_am");
             expect(res.data[0].image_vehicule).toEqual("test_img 3");
+          });
+      });
+      it("Modifier disponibilité d'un véhivule", async () => {
+        await axios.put(
+          url + "flotte/modifier_dispo_vehicule/test_v3"
+        );
+        await axios
+          .get(
+            url +
+              "flotte/detail_vehicule/test_v3"
+          )
+          .then((res) => {
+            expect(res.data[0].disponible).toEqual(false);
+          });
+      });
+      it("Affecter am à un véhivule", async () => {
+        let data = {
+          id_am:'test_am2',
+      };
+        await axios.put(
+          url + "flotte/modifier_am_vehicule/test_v3",
+          data
+        );
+        await axios
+          .get(
+            url + "flotte/detail_vehicule/test_v3"
+          )
+          .then((res) => {
+            expect(res.data[0].id_am).toEqual(data.id_am);
+          });
+      });
+      it("Modifier l'image d'un véhivule", async () => {
+        let data = {
+          image_vehicule:'img3',
+      };
+        await axios.put(
+          url + "flotte/modifier_image_vehicule/test_v3",
+          data
+        );
+        await axios
+          .get(
+            url + "flotte/detail_vehicule/test_v3"
+          )
+          .then((res) => {
+            expect(res.data[0].image_vehicule).toEqual(data.image_vehicule);
           });
       });
       it("Modifier un type de véhivule", async () => {

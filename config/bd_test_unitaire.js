@@ -220,8 +220,9 @@ pool.query(
         modele character varying(50) NOT NULL,
         couleur character varying(50) NOT NULL,
         id_type_vehicule integer NOT NULL,
-        id_am character varying(28) NOT NULL,
-        image_vehicule character varying(255) NOT NULL
+        id_am character varying(28),
+        image_vehicule character varying(255) NOT NULL,
+        disponible boolean
     );
     `
 );
@@ -237,7 +238,7 @@ pool.query(
 pool.query(
   `
         INSERT INTO public.am(id_am, nom, prenom, numero_telephone, email, mot_de_passe, photo_am)
-        VALUES ('test_am','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am');
+        VALUES ('test_am','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am'),('test_am2','test_am', 'test_am', '0541251311', 'test_am@gmail.com', 'test_am','test_am');
     `
 );
 pool.query(
@@ -271,8 +272,8 @@ pool.query(
 pool.query(
   `
     INSERT INTO public.vehicule(
-      numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule)
-        VALUES ('test_v1','test_marque1', 'test_modele1', 'test_couleur1', '1', 'test_am','test_img1'), ('test_v2','test_marque2', 'test_modele2', 'test_couleur2', '2', 'test_am','test_img2');
+      numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule,disponible)
+        VALUES ('test_v1','test_marque1', 'test_modele1', 'test_couleur1', '1', 'test_am','test_img1',true), ('test_v2','test_marque2', 'test_modele2', 'test_couleur2', '2', 'test_am','test_img2',false);
   `
 );
 
