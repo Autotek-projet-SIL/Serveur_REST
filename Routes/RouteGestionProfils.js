@@ -8,9 +8,17 @@ routerGestionProfils.get(
   "/gestionprofils/locataire/",
   controllerGestionProfils.getLocataires
 );
+routerGestionProfils.get(
+  "/gestionprofils/locataire/:id",
+  controllerGestionProfils.getLocataireById
+);
 routerGestionProfils.put(
   "/gestionprofils/modifier_locataire/:id",
   controllerGestionProfils.updateLocataire
+);
+routerGestionProfils.get(
+  "/gestionprofils/atc/:id",
+  controllerGestionProfils.getATCById
 );
 routerGestionProfils.get(
   "/gestionprofils/atc/",
@@ -21,12 +29,20 @@ routerGestionProfils.put(
   controllerGestionProfils.updateATC
 );
 routerGestionProfils.get(
+  "/gestionprofils/decideur/:id",
+  controllerGestionProfils.getDecideurById
+);
+routerGestionProfils.get(
   "/gestionprofils/decideur/",
   controllerGestionProfils.getDecideurs
 );
 routerGestionProfils.put(
   "/gestionprofils/modifier_decideur/:id",
   controllerGestionProfils.updateDecideur
+);
+routerGestionProfils.get(
+  "/gestionprofils/am/:id",
+  controllerGestionProfils.getAMById
 );
 routerGestionProfils.get(
   "/gestionprofils/am/",

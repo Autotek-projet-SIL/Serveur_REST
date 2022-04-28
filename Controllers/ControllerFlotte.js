@@ -4,16 +4,16 @@ const log = require("../config/Logger");
 
 // Fonctions du controlleur flotte
 const getVehicles = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await ServiceFlotte.getVehicles(request, response);
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceFlotte.getVehicles(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
 };
 
 const getVehiclesByAmID = async (request, response) => {
@@ -95,18 +95,18 @@ const getVehicleDetail = async (request, response) => {
       });
   };
 
-  const addVehicleType = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await ServiceFlotte.addVehicleType(request, response);
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
+const addVehicleType = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceFlotte.addVehicleType(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
   const updateVehicle = async (request, response) => {
     firebaseVerifyToken
@@ -185,18 +185,18 @@ const getVehicleDetail = async (request, response) => {
       });
   };
 
-  const deleteVehiculeType = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await ServiceFlotte.deleteVehiculeType(request, response);
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
+const deleteVehiculeType = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceFlotte.deleteVehiculeType(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
 //Exporter les fonctions du controlleur flotte
 module.exports = {
