@@ -54,7 +54,7 @@ routerGestionLocations.get(
 
 //Mettre a jour l'heure de debut lors de deverouillage par l'id de location
 routerGestionLocations.put(
-  "/gestionlocations/heure_debut/:id/heure/:heure",
+  "/gestionlocations/update_location_heure_debut/:id",
   controllerGestionLocations.updateLocationHeureDebut
 );
 

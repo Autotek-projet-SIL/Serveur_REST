@@ -22,8 +22,10 @@ const updateLocationHeureDebut = async (request, response) => {
 const endLocation = async (request, response) => {
   try {
     await modelLouer.endLocation(request, response);
-    await modelLouer.updateVehicleDisponible(request, response,true);
-
+    
+    await modelLouer.updateLocationHeureFin(request, response);
+    await modelLouer.updateVehicleDisponible(num_chassis=null, response,request.params.id,true);
+ 
   } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);
@@ -43,7 +45,7 @@ const getLocationsLocataire = async (request, response) => {
 };
 
 
-//Recuperer toutes le locations
+//Recuperer toutes les locations
 const getAllLocations = async (request, response) => {
   try {
     await modelLouer.getAllLocations(request, response);
@@ -83,7 +85,18 @@ const addLocation = async (request, response) => {
   
     await modelTrajet.addTrajet(request, response);
     await modelLouer.addLocation(request, response);
-  } catch (error) {
+    
+    if(request.body.status_demande_location == "accepte")
+    {
+      
+      await modelLouer.updateVehicleDisponible(num_chassis=request.body.numero_chassis,response,id_louer=null,false);
+
+  }
+  else
+  {
+    response.sendStatus(response.statusCode);
+  }
+ } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);
     response.sendStatus(500);
