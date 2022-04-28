@@ -6,6 +6,30 @@ const modelFacture = require("../Models/ModelFacture");
 const modelDemandeInscription = require("../Models/ModelDemandeInscription");
 
 
+//récupérer la liste des locations acceptes pour le service stattistique
+const getLocationsAcceptes = async (request, response) => {
+  try {
+    await modelLouer.getLocationsAcceptes(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
+
+//récupérer la liste des locations rejetes pour le service stattistique
+const  getLocationsRejetes = async (request, response) => {
+  try {
+    await modelLouer.getLocationsRejetes(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
+
 //récupérer la liste des locations pour le service stattistiques 
 
 const  getLocationStatistics = async (request, response) => {
@@ -48,5 +72,7 @@ const  getFactureStatistics = async (request, response) => {
 module.exports = {
     getLocationStatistics,
     getDemandeInscriptionStatistics,
-    getFactureStatistics
+    getFactureStatistics,
+    getLocationsRejetes,
+    getLocationsAcceptes
 };

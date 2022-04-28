@@ -73,7 +73,32 @@ const getLocationsTermines = async (request, response) => {
 };
 
 
+// Recuperer la des locations acceptés pour le service statistiques
+const getLocationsAcceptes = async (request, response) => {
+  pool.query("SELECT id_louer, date_debut , status_demande_location, en_cours ,region from louer where status_demande_location='accepte' ", (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
 
+
+// Recuperer la des locations rejetés pour le service statistiques
+const getLocationsRejetes = async (request, response) => {
+  pool.query("SELECT id_louer, date_debut , status_demande_location, en_cours ,region from louer where status_demande_location='rejete' ", (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
 
 const updateLocationHeureDebut = async (request, response) => {
   let id = request.params.id;
@@ -216,6 +241,8 @@ module.exports = {
   updateLocationHeureDebut,
   getLocationStatistics,
   updateVehicleDisponible,
-  updateLocationHeureFin
+  updateLocationHeureFin,
+  getLocationsAcceptes,
+  getLocationsRejetes
 
 };

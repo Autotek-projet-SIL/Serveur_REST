@@ -34,6 +34,19 @@ describe("Tester le service Gestion des Locations", () => {
         expect(res.data[0].date_debut).toEqual("2022-03-29T00:00:00.000Z");
       });
   });
+
+  it("Recuperer la liste des locations ", async () => {
+    await axios.get(url + "gestionlocations/locations").then((res) => {
+     
+        res.data.forEach((element) => {
+          if(element.id_louer==='1')
+          expect(element.status_demande_location).toEqual('accepte');
+      })
+  
+    });
+  });
+
+
   it("Recuperer la liste des locations en cours", async () => {
     await axios.get(url + "gestionlocations/locations_encours").then((res) => {
       res.data.forEach((element) => {

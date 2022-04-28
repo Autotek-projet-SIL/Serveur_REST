@@ -23,4 +23,17 @@ routerStatistiques.get(
     ControllerStatistiques.getFactureStatistics
   );
 
+
+  //récupérer la liste des factures acceptes pour le service statistiques
+  routerStatistiques.get(
+    "/statistiques/getLocationsAcceptes",
+    ControllerStatistiques.getLocationsAcceptes
+  );
+
+   //récupérer la liste des factures acceptes pour le service statistiques
+   routerStatistiques.get(
+    "/statistiques/getLocationsRejetes",
+    ControllerStatistiques.getLocationsRejetes
+  );
+
 module.exports = routerStatistiques ;
