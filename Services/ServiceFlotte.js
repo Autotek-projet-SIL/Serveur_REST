@@ -23,15 +23,15 @@ const getVehiclesByAmID = async (request, response) => {
   }
 };
 
-const getVehicleDetail = async (request, response) => {
-  try {
-    await ModelVehicle.getVehicleByChassisNum(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
-};
+const getVehicleDetail = async (request, response,result) => {
+    try {
+      await ModelVehicle.getVehicleByChassisNum(request, response,result);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
 
 const getVehiclesTypes = async (request, response) => {
   try {
@@ -42,6 +42,25 @@ const getVehiclesTypes = async (request, response) => {
     response.sendStatus(500);
   }
 };
+
+  const getVehiclesMarques = async (request, response) => {
+    try {
+      await ModelVehicle.getVehiclesMarques(request, response);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
+  const getVehiclesModelsByMarque = async (request, response) => {
+    try {
+      await ModelVehicle.getVehiclesModelsByMarque(request, response);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
 
 const addVehicle = async (request, response) => {
   try {
@@ -73,16 +92,46 @@ const updateVehicle = async (request, response) => {
   }
 };
 
-const updateVehicleType = async (request, response) => {
-  try {
-    await ModelVehicle.updateVehicleType(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
-};
 
+  const updateVehicleAvaible = async (request, response) => {
+    try {
+      await ModelVehicle.updateVehicleAvaible(request, response);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
+
+  const updateVehicleAM = async (request, response) => {
+    try {
+      await ModelVehicle.updateVehicleAM(request, response);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
+
+  const updateVehicleImage = async (request, response) => {
+    try {
+      await ModelVehicle.updateVehicleImage(request, response);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
+
+  const updateVehicleType = async (request, response) => {
+    try {
+      await ModelVehicle.updateVehicleType(request, response);
+    } catch (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    }
+  };
 const deleteVehicule = async (request, response) => {
   try {
     await ModelVehicle.deleteVehicule(request, response);
@@ -105,14 +154,20 @@ const deleteVehiculeType = async (request, response) => {
 
 //Exporter les fonctions du service flotte
 module.exports = {
-  getVehicles,
-  getVehiclesByAmID,
-  getVehicleDetail,
-  getVehiclesTypes,
-  addVehicle,
-  addVehicleType,
-  updateVehicle,
-  updateVehicleType,
-  deleteVehicule,
-  deleteVehiculeType,
-};
+    getVehicles,
+    getVehiclesByAmID,
+    getVehicleDetail,
+    getVehiclesTypes,
+    getVehiclesMarques,
+    getVehiclesModelsByMarque,
+    addVehicle,
+    addVehicleType,
+    updateVehicle,
+    updateVehicleImage,
+    updateVehicleAvaible,
+    updateVehicleAM,
+    updateVehicleType,
+    deleteVehicule,
+    deleteVehiculeType
+  };
+  

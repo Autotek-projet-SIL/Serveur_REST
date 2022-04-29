@@ -6,7 +6,6 @@ const log = require("../config/Logger");
 const getVehicles = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
-
     .then(async (res) => {
       await ServiceFlotte.getVehicles(request, response);
     })
@@ -31,43 +30,68 @@ const getVehiclesByAmID = async (request, response) => {
 };
 
 const getVehicleDetail = async (request, response) => {
-  firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await ServiceFlotte.getVehicleDetail(request, response);
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(403);
-    });
-};
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        result = {};
+        await ServiceFlotte.getVehicleDetail(request, response,result);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
-const getVehiclesTypes = async (request, response) => {
-  firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await ServiceFlotte.getVehiclesTypes(request, response);
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(403);
-    });
-};
+  const getVehiclesTypes = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.getVehiclesTypes(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const getVehiclesMarques = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.getVehiclesMarques(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const getVehiclesModelsByMarque = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.getVehiclesModelsByMarque(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
-const addVehicle = async (request, response) => {
-  firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await ServiceFlotte.addVehicle(request, response);
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(403);
-    });
-};
+  const addVehicle = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.addVehicle(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
 const addVehicleType = async (request, response) => {
   firebaseVerifyToken
@@ -82,44 +106,80 @@ const addVehicleType = async (request, response) => {
     });
 };
 
-const updateVehicle = async (request, response) => {
-  firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await ServiceFlotte.updateVehicle(request, response);
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(403);
-    });
-};
+  const updateVehicle = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicle(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
-const updateVehicleType = async (request, response) => {
-  firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await ServiceFlotte.updateVehicleType(request, response);
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(403);
-    });
-};
+  const updateVehicleAvaible = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleAvaible(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const updateVehicleAM = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleAM(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const updateVehicleImage = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleImage(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+  const updateVehicleType = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.updateVehicleType(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
-const deleteVehicule = async (request, response) => {
-  firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await ServiceFlotte.deleteVehicule(request, response);
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(403);
-    });
-};
+  const deleteVehicule = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceFlotte.deleteVehicule(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
 const deleteVehiculeType = async (request, response) => {
   firebaseVerifyToken
@@ -136,14 +196,19 @@ const deleteVehiculeType = async (request, response) => {
 
 //Exporter les fonctions du controlleur flotte
 module.exports = {
-  getVehicles,
-  getVehiclesByAmID,
-  getVehicleDetail,
-  getVehiclesTypes,
-  addVehicle,
-  addVehicleType,
-  updateVehicle,
-  updateVehicleType,
-  deleteVehicule,
-  deleteVehiculeType,
+    getVehicles,
+    getVehiclesByAmID,
+    getVehicleDetail,
+    getVehiclesTypes,
+    getVehiclesMarques,
+    getVehiclesModelsByMarque,
+    addVehicle,
+    addVehicleType,
+    updateVehicle,
+    updateVehicleAvaible,
+    updateVehicleImage,
+    updateVehicleAM,
+    updateVehicleType,
+    deleteVehicule,
+    deleteVehiculeType
 };
