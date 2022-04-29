@@ -6,9 +6,9 @@ const log = require("../config/Logger");
 const getVehicles = async (request, response) => {
   pool.query(
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
-        v.id_am,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
-        v.id_type_vehicule,tv.libelle,tv.tarification
-        FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule;`,
+    v.id_am,ty.id_type_vehicule,ty.libelle,ty.tarification,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
+    v.id_type_vehicule,tv.libelle,tv.tarification
+    FROM vehicule v join typevehicule ty on v.id_type_vehicule=ty.id_type_vehicule inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule;`,
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -26,9 +26,9 @@ const getVehiclesByAmID = async (request, response) => {
   let id_am = request.params.id;
   pool.query(
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
-      v.id_am,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
-      v.id_type_vehicule,tv.libelle,tv.tarification
-      FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+    v.id_am,ty.id_type_vehicule,ty.libelle,ty.tarification,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
+    v.id_type_vehicule,tv.libelle,tv.tarification
+    FROM vehicule v join typevehicule ty on v.id_type_vehicule=ty.id_type_vehicule inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
       WHERE v.id_am = $1;`,
     [id_am],
     (error, results) => {
@@ -48,10 +48,10 @@ const getVehicleByChassisNum = async (request, response) => {
   let num_chassis = request.params.num_chassis;
   pool.query(
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
-      v.id_am,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
-      v.id_type_vehicule,tv.libelle,tv.tarification
-  FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
-  WHERE v.numero_chassis=$1;`,
+    v.id_am,ty.id_type_vehicule,ty.libelle,ty.tarification,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
+    v.id_type_vehicule,tv.libelle,tv.tarification
+    FROM vehicule v join typevehicule ty on v.id_type_vehicule=ty.id_type_vehicule inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+    WHERE v.numero_chassis=$1;`,
     [num_chassis],
     (error, results) => {
       if (error) {

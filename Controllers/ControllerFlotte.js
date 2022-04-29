@@ -6,6 +6,7 @@ const log = require("../config/Logger");
 const getVehicles = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
+
     .then(async (res) => {
       await ServiceFlotte.getVehicles(request, response);
     })

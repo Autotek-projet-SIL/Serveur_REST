@@ -39,6 +39,44 @@ describe("Tester le service Gestion des Profils", () => {
       });
     });
   });
+  describe("Recuperer un utilisateur par son id", () => {
+    it("Recuperer un locataire par son id", async () => {
+      await axios.get(url + "gestionprofils/locataire/test_locataire").then((res) => {
+        res.data.forEach((element) => {
+          if (element.email === "test_locataire@gmail.com") {
+            expect(element.id_locataire).toEqual("test_locataire");
+          }
+        });
+      });
+    });
+    it("Recuperer un atc par son id", async () => {
+      await axios.get(url + "gestionprofils/atc/test_atc").then((res) => {
+        res.data.forEach((element) => {
+          if (element.email === "test_atc@gmail.com") {
+            expect(element.id_atc).toEqual("test_atc");
+          }
+        });
+      });
+    });
+    it("Recuperer un decideur par son id", async () => {
+      await axios.get(url + "gestionprofils/decideur/test_decideur").then((res) => {
+        res.data.forEach((element) => {
+          if (element.email === "test_decideur@gmail.com") {
+            expect(element.id_decideur).toEqual("test_decideur");
+          }
+        });
+      });
+    });
+    it("Recuperer un am par son id", async () => {
+      await axios.get(url + "gestionprofils/am/test_am").then((res) => {
+        res.data.forEach((element) => {
+          if (element.email === "test_am@gmail.com") {
+            expect(element.id_am).toEqual("test_am");
+          }
+        });
+      });
+    });
+  });
   describe("Modifier un utilisateur", () => {
     it("Modifier un locataire", async () => {
       let locataire = {
@@ -79,8 +117,6 @@ describe("Tester le service Gestion des Profils", () => {
         prenom: "Lilya",
         numero_telephone: "0541251311",
         email: "test_decideur@gmail.com",
-        mot_de_passe: "abcd",
-        photo_decideur: "1243",
       };
       await axios
         .put(url + "gestionprofils/modifier_decideur/test_decideur", decideur)
@@ -98,7 +134,42 @@ describe("Tester le service Gestion des Profils", () => {
           expect(res.data[0].prenom).toEqual("Lilya");
           expect(res.data[0].numero_telephone).toEqual("0541251311");
           expect(res.data[0].email).toEqual("test_decideur@gmail.com");
-          expect(res.data[0].photo_decideur).toEqual("1243");
+        });
+    });
+    it("Modifier le mot de passe d'un decideur", async () => {
+      let decideur = {
+        mot_de_passe:"password"
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_decideur/modifier_mot_de_passe/test_decideur", decideur)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(
+          url +
+            "authentification_web/decideur_connexion/test_decideur@gmail.com"
+        )
+        .then((res) => {
+          expect(res.data[0].mot_de_passe).toEqual("password");
+        });
+    });
+    it("Modifier la photo d'un decideur", async () => {
+      let decideur = {
+        photo_decideur:"firebase_photo"
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_decideur/modifier_photo/test_decideur", decideur)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(
+          url +
+            "authentification_web/decideur_connexion/test_decideur@gmail.com"
+        )
+        .then((res) => {
+          expect(res.data[0].photo_decideur).toEqual("firebase_photo");
         });
     });
     it("Modifier un atc", async () => {
@@ -108,9 +179,6 @@ describe("Tester le service Gestion des Profils", () => {
         prenom: "Hamid",
         numero_telephone: "0549103699",
         email: "test_atc@gmail.com",
-        mot_de_passe: "test_atc",
-        est_root: true,
-        photo_atc: "123",
       };
       await axios
         .put(url + "gestionprofils/modifier_atc/test_atc", atc)
@@ -125,7 +193,54 @@ describe("Tester le service Gestion des Profils", () => {
           expect(res.data[0].prenom).toEqual("Hamid");
           expect(res.data[0].numero_telephone).toEqual("0549103699");
           expect(res.data[0].email).toEqual("test_atc@gmail.com");
-          expect(res.data[0].photo_atc).toEqual("123");
+        });
+    });
+    it("Modifier la photo d'un atc", async () => {
+      let atc = {
+        id: "test_atc",
+        photo_atc:'firebase_image'
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_atc/modifier_photo/test_atc", atc)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(url + "authentification_web/atc_connexion/test_atc@gmail.com")
+        .then((res) => {
+          expect(res.data[0].photo_atc).toEqual("firebase_image");
+        });
+    });
+    it("Modifier le statut d'un atc", async () => {
+      let atc = {
+        id: "test_atc",
+        est_root:'f'
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_atc/modifier_statut/test_atc", atc)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(url + "authentification_web/atc_connexion/test_atc@gmail.com")
+        .then((res) => {
+          expect(res.data[0].est_root).toEqual(false);
+        });
+    });
+    it("Modifier le mot de passe d'un atc", async () => {
+      let atc = {
+        id: "test_atc",
+        mot_de_passe:'mot_de_passe'
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_atc/modifier_mot_de_passe/test_atc", atc)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(url + "authentification_web/atc_connexion/test_atc@gmail.com")
+        .then((res) => {
+          expect(res.data[0].mot_de_passe).toEqual("mot_de_passe");
         });
     });
     it("Modifier un am", async () => {
@@ -153,7 +268,42 @@ describe("Tester le service Gestion des Profils", () => {
           expect(res.data[0].prenom).toEqual("Rachid");
           expect(res.data[0].numero_telephone).toEqual("0549103699");
           expect(res.data[0].email).toEqual("yefsahrachid@gmail.com");
-          expect(res.data[0].photo_am).toEqual("123");
+        });
+    });
+    it("Modifier la photo d'un am", async () => {
+      let am = {
+        id: "test_am",
+        photo_am: "firebase_photo",
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_am/modifier_photo/test_am", am)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(
+          url + "authentification_mobile/am_connexion/yefsahrachid@gmail.com"
+        )
+        .then((res) => {
+          expect(res.data[0].photo_am).toEqual("firebase_photo");
+        });
+    });
+    it("Modifier le mot de passe d'un am", async () => {
+      let am = {
+        id: "test_am",
+        mot_de_passe: "password",
+      };
+      await axios
+        .put(url + "gestionprofils/modifier_am/modifier_mot_de_passe/test_am", am)
+        .then((res) => {
+          expect(res.status).toEqual(200);
+        });
+      await axios
+        .get(
+          url + "authentification_mobile/am_connexion/yefsahrachid@gmail.com"
+        )
+        .then((res) => {
+          expect(res.data[0].mot_de_passe).toEqual("password");
         });
     });
   });

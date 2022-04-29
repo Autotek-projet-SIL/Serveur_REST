@@ -72,7 +72,7 @@ describe("Tester le service Flotte", () => {
       });
     });
   });
-  it("Modifier un véhivule", async () => {
+  it("Modifier un véhicule", async () => {
     let vehicule = {
       num_chassis: "test_v3",
       marque: "marque3",
@@ -92,7 +92,7 @@ describe("Tester le service Flotte", () => {
       expect(res.data[0].image_vehicule).toEqual("test_img 3");
     });
   });
-  it("Modifier un type de véhivule", async () => {
+  it("Modifier un type de véhicule", async () => {
     let typevehicule = {
       id_type_vehicule: "3",
       libelle: "test_libelle3",
