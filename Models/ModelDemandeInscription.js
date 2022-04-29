@@ -2,10 +2,26 @@
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la liste des demandes d'inscriptions
+//récupérer la liste des locations pour le service statistiques
 const getDemandesInscription = async (request, response) => {
   pool.query(
     "SELECT * FROM demandeinscription order by date_inscription",
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
+// Recuperer la liste des demandes d'inscriptions
+const getDemandeInscriptionStatistics = async (request, response) => {
+  pool.query(
+    "SELECT id_demande_inscription ,statut ,date_inscription FROM demandeinscription ",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -94,4 +110,5 @@ module.exports = {
   addDemandeInscription,
   updateDemandeInscription,
   deleteDemandeInscription,
+  getDemandeInscriptionStatistics
 };

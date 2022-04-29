@@ -20,6 +20,18 @@ const addFacture = async (request, response) => {
   );
 };
 
+const getFactureStatistics = async (request, response) => {
+  pool.query("SELECT id_facture, date_facture , montant FROM facture ", (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
+
 // Mettre a jour les informations d'un facture
 const updateFacture = async (request, response) => {
   let id_facture = request.params.id_facture;
@@ -42,4 +54,5 @@ const updateFacture = async (request, response) => {
 module.exports = {
   addFacture,
   updateFacture,
+  getFactureStatistics
 };
