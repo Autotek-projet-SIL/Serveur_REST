@@ -61,6 +61,26 @@ const getFactureById = async (request, response) => {
   );
 };
 
+// Recuperer une facture par id
+const getFactureByIdLouer = async (request, response) => {
+  let id = request.params.id_louer;
+  pool.query(
+    `SELECT id_facture, date_facture, montant, heure, tva, id_louer
+      FROM facture 
+      WHERE id_louer = $1;`,
+    [id],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
 /*// Mettre a jour les informations d'un facture
 const updateFacture = async (request, response) => {
   let id_facture = request.params.id_facture;
@@ -84,4 +104,5 @@ module.exports = {
   addFacture,
   getFactures,
   getFactureById,
+  getFactureByIdLouer,
 };

@@ -33,9 +33,20 @@ const getFactureById = async (request, response) => {
     }
 };
 
+const getFactureByIdLouer = async (request, response) => {
+  try {
+    await ModelFacture.getFactureByIdLouer(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 //Exporter les fonctions du service de gestion des factures
 module.exports = {
   addFacture,
   getFactures,
   getFactureById,
+  getFactureByIdLouer,
 };

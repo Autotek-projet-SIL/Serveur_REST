@@ -44,9 +44,23 @@ const getFactureById = async (request, response) => {
       });
   };
 
+  const getFactureByIdLouer = async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await ServiceGestionFactures.getFactureByIdLouer(request, response);
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
+
 //Exporter les fonctions du controlleur de gestion des factures
 module.exports = {
     addFacture,
     getFactures,
     getFactureById,
+    getFactureByIdLouer,
 };

@@ -29,6 +29,16 @@ describe ("Tester le service Facture", ()=> {
         });
       });
 
+      it("Recuperer une facture par id louer", async () => {
+        await axios.get(url + "gestionfacture/facture_by_louer/1")
+        .then
+        ( (res) => {
+          res.data.forEach((element) => {
+            expect(element.id_louer).toEqual(1)
+          });
+        });
+      });
+
     it("Ajouter un facture", async () => {
         let data = {
           id_facture: 3,

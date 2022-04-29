@@ -17,5 +17,9 @@ routerGestionFactures.get(
     "/gestionfacture/facture/:id",
     controllerGestionFactures.getFactureById
 );
+routerGestionFactures.get(
+    "/gestionfacture/facture_by_louer/:id_louer",
+    controllerGestionFactures.getFactureByIdLouer
+);
 
 module.exports = routerGestionFactures;
