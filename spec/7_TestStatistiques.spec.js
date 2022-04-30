@@ -6,9 +6,7 @@ const url = "http://localhost:4000/";
 describe("Tester le service Statististiques", () => {
   it("Recuperer la liste des factures", async () => {
     await axios.get(url + "statistiques/getFactures").then((res) => {
-      res.data.forEach((element) => {
-        expect(element.id_facture).toEqual(1);
-      });
+      expect(res.data.length).toEqual(2);
     });
   });
 
