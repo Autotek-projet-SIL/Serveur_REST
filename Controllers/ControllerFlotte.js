@@ -181,6 +181,31 @@ const addVehicleType = async (request, response) => {
       });
   };
 
+const getMarques = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceFlotte.getMarques(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const getModelsByIdMarque = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceFlotte.getModelsByIdMarque(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 const deleteVehiculeType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -210,5 +235,7 @@ module.exports = {
     updateVehicleAM,
     updateVehicleType,
     deleteVehicule,
-    deleteVehiculeType
+    deleteVehiculeType,
+    getMarques,
+    getModelsByIdMarque
 };

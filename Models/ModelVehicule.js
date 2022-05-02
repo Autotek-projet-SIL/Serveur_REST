@@ -311,7 +311,43 @@ const deleteVehicule = async (request, response) => {
       }
     });
   };
+
+//Recuperer la liste des marques de vehicules
+const getMarques = async (request, response) => {
+  pool.query(
+    `SELECT * from marque;`,
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
   
+//Recuperer la liste des modeles d'une marque par id de marque
+const getModelsByIdMarque = async (request, response) => {
+  let id = request.params.id;
+  pool.query(
+    `SELECT * from modele where id_marque=$1;`,
+    [
+      id,
+    ],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
 //Exporter les fonctions CRUD de l'agent de maintenance
 module.exports = {
   getVehicles,
@@ -328,5 +364,7 @@ module.exports = {
   updateVehicleImage,
   updateVehicleType,
   deleteVehicule,
-  deleteVehiculeType
+  deleteVehiculeType,
+  getModelsByIdMarque,
+  getMarques
 };
