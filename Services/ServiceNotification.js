@@ -7,32 +7,11 @@ const sendNotification = async (title, body, request, response) => {
   await firebase.auth
     .getUserByEmail(email)
     .then(async (userRecord) => {
-      // See the UserRecord reference doc for the contents of userRecord.
       uid = userRecord.toJSON()["uid"];
       const user = await firebase.db.collection("DeviceToken").doc(uid).get();
       if (user.exists) {
         let registrationToken = await user.data()["device_token"];
         registrationToken = registrationToken.replace(/\s/g, "");
-        /*admin
-            .messaging()
-            .send({
-              token: registrationToken,
-              data: {
-                hello: "world",
-              },
-              // Set Android priority to "high"
-              android: {
-                priority: "high",
-              },
-              // Add APNS (Apple) config
-            })
-            .then((response) => {
-              console.log("Successfully sent message:", response);
-            })
-            .catch((error) => {
-              console.log("Error sending message:", error);
-            });*/
-
         var payload = {
           notification: {
             title: title,

@@ -16,7 +16,7 @@ imap = imaplib.IMAP4_SSL("imap.gmail.com")
 imap.login(username, password)
 status, messages = imap.select("INBOX")
 # number of top emails to fetch
-N = 3
+N = 5
 # total number of emails
 messages = int(messages[0])
 

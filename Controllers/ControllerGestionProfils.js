@@ -2,7 +2,6 @@
 const ServiceGestionProfils = require("../Services/ServiceGestionProfils");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
-const servicePaiement = require("../Services/Paiement");
 // Fonctions du controlleur de gestion des profils
 const getLocataires = async (request, response) => {
   firebaseVerifyToken

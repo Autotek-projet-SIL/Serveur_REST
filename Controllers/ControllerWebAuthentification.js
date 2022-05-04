@@ -2,7 +2,7 @@
 const serviceWebAuthentification = require("../Services/ServiceWebAuthentification.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
-const notification = require("../Services/Notification");
+const notification = require("../Services/ServiceNotification");
 
 // Fonctions du controlleur d'authentification web
 const validerDemandeInscription = async (request, response) => {
