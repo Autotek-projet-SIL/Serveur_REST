@@ -71,7 +71,7 @@ const getLocationsLocataire = async (request, response) => {
 // Recuperer la des locations terminees
 const getLocationsTermines = async (request, response) => {
   pool.query(
-    "SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,point_depart, point_arrive,en_cours FROM louer l inner join trajet t ON l.id_trajet= t.id_trajet inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false",
+    "SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,point_depart, point_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -87,7 +87,7 @@ const getLocationsTermines = async (request, response) => {
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    "SELECT * FROM louer l inner join facture f on f.id_louer=l.id_louer inner join trajet t ON l.id_trajet= t.id_trajet inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true and id_locataire=$1",
+    "SELECT * FROM louer l inner join facture f on f.id_louer=l.id_louer inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true and id_locataire=$1",
     [id],
     (error, results) => {
       if (error) {

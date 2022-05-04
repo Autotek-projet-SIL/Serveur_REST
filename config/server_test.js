@@ -14,6 +14,8 @@ const routeGestionFactures = require("../Routes/RouteGestionFactures.js");
 const routePaiement=require("../Routes/RoutePaiement.js")
 
 // Configurer le serveur pour utiliser toutes les routes
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routeMobileAuthentification);
 app.use("/", routeWebAuthentification);
 app.use("/", routeGestionProfils);
