@@ -1,15 +1,14 @@
 const axios = require("axios");
-const { enableStatementLocationTracking } = require("pg-mem");
-const { Console } = require("winston/lib/winston/transports");
 const url = "http://localhost:4000/";
-
+//-----
 describe("Tester le service Statististiques", () => {
+  //-----
   it("Recuperer la liste des factures", async () => {
     await axios.get(url + "statistiques/getFactures").then((res) => {
-      expect(res.data.length).toEqual(2);
+      expect(res.data.length).toEqual(1);
     });
   });
-
+//-----
   it("Recuperer la liste des demandes d'inscription", async () => {
     await axios.get(url + "statistiques/getDemandeInscription").then((res) => {
       res.data.forEach((element) => {
@@ -18,7 +17,7 @@ describe("Tester le service Statististiques", () => {
       });
     });
   });
-
+//-----
   it("Recuperer la liste des locations", async () => {
     await axios.get(url + "statistiques/get_locations").then((res) => {
       res.data.forEach((element) => {
@@ -27,7 +26,7 @@ describe("Tester le service Statististiques", () => {
       });
     });
   });
-
+//-----
   it("Recuperer la liste des locations rejetees", async () => {
     await axios.get(url + "statistiques/getLocationsRejetes").then((res) => {
       res.data.forEach((element) => {

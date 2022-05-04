@@ -71,7 +71,19 @@ const getLocationsTermines = async (request, response) => {
     }
   });
 };
-
+// Recuperer la des locations terminees d'un locataire
+const getLocationsTerminesByIdLocataire = async (request, response) => {
+  let id=request.params.id;
+  pool.query("SELECT * FROM louer l inner join facture f on f.id_louer=l.id_louer inner join trajet t ON l.id_trajet= t.id_trajet inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true and id_locataire=$1",[id], (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
+    }
+  });
+};
 // Recuperer la des locations acceptés pour le service statistiques
 const getLocationsAcceptes = async (request, response) => {
   pool.query("SELECT id_louer, date_debut , status_demande_location, en_cours ,region from louer where status_demande_location='accepte' ", (error, results) => {
@@ -241,6 +253,7 @@ module.exports = {
   updateVehicleDisponible,
   updateLocationHeureFin,
   getLocationsAcceptes,
-  getLocationsRejetes
+  getLocationsRejetes,
+  getLocationsTerminesByIdLocataire
 
 };

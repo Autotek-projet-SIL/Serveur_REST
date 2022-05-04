@@ -6,16 +6,14 @@ const log = require("../config/Logger");
 const addFacture = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO facture (id_facture, date_facture, montant, heure, tva, id_louer )VALUES ($1, $2, $3, $4, $5, $6)",
-    [body.id_facture, body.date_facture, body.montant, body.heure, body.tva, body.id_louer ],
+    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer )VALUES ($1, $2, $3, $4, $5)",
+    [body.date_facture, body.montant, body.heure, body.tva, body.id_louer],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
         response.statusCode = 500;
-      }
-      else
-      {
+      } else {
         response.sendStatus(200);
       }
       //  response.sendStatus(response.statusCode);
@@ -24,15 +22,18 @@ const addFacture = async (request, response) => {
 };
 
 const getFactureStatistics = async (request, response) => {
-  pool.query("SELECT id_facture, date_facture , montant FROM facture ", (error, results) => {
-    if (error) {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(500);
-    } else {
-      response.status(200).json(results.rows);
+  pool.query(
+    "SELECT id_facture, date_facture , montant FROM facture ",
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
     }
-  });
+  );
 };
 
 // Recuperer la liste de tous les factures
@@ -45,7 +46,7 @@ const getFactures = async (request, response) => {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
         response.sendStatus(500);
-      } else { 
+      } else {
         response.status(200).json(results.rows);
       }
     }

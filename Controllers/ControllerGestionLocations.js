@@ -143,7 +143,21 @@ const getLocationsEnCours = async (request, response) => {
         response.sendStatus(403);
       });
   };
-
+  const getLocationsTerminesByIdLocataire= async (request, response) => {
+    firebaseVerifyToken
+      .verifyToken(request)
+      .then(async (res) => {
+        await serviceGestionLocations.getLocationsTerminesByIdLocataire(
+          request,
+          response
+        );
+      })
+      .catch((error) => {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(403);
+      });
+  };
 
 // Exporter les fonctions du controlleur Reservations
 module.exports = {
@@ -154,5 +168,6 @@ module.exports = {
   getLocationById,
   getLocationsLocataire,
   getAllLocations,
-  updateLocationHeureDebut
+  updateLocationHeureDebut,
+  getLocationsTerminesByIdLocataire
 };
