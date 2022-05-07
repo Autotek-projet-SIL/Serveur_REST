@@ -378,4 +378,11 @@ pool.query(
     VALUES ('2022-03-30', '14000', '08:00', '500', '1');
     `
 );
+pool.query(
+  `INSERT INTO public.demandesupport(
+    objet, descriptif, reponse, id_locataire )
+    VALUES ('demandeSupport', 'ceci est un exemple de demande de support', 'Ceci est une reponse', 'test_locataire1' );  
+`
+);
+ 
 module.exports = pool;
