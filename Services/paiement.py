@@ -54,7 +54,7 @@ for i in range(messages, messages-N, -1):
                         # print text/plain emails and skip attachments
                         res = body.split()
                         try:
-                            if sys.argv[1]==res[3] and sys.argv[2]==res[7] and sys.argv[3]==res[10]:
+                            if sys.argv[1]==res[3] and sys.argv[2]==res[10]:
                                 print(True)
                         except IndexError:
                             pass
