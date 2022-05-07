@@ -1,10 +1,10 @@
 const Pool = require("pg").Pool;
 
 const poolTestIntegration = new Pool({
-  user: "utilisateur_autotek",
+  user: "postgres",
   host: "localhost",
   database: "autotek",
-  password: "UtilisateurAutotek2022*",
+  password: "mkdir400",
   port: 5432,
 });
 

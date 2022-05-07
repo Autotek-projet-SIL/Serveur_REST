@@ -215,6 +215,11 @@ pool.query(
       id_trajet serial NOT NULL ,
       id_louer serial NOT NULL,
       en_cours boolean,
+      longitude_depart real,
+      latitude_depart real,
+      longitude_arrive real,
+      latitude_arrive real,
+      suivi_location character varying(50) NOT NULL,
       heure_debut time without time zone,
       heure_fin time without time zone,
       region character varying(50) NOT NULL,
@@ -302,7 +307,8 @@ pool.query(
     INSERT INTO public.locataire(
         id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
         VALUES ('test_locataire1','test_locataire1', 'test_locataire1', '0541251311', 'test_locataire1@gmail.com', 'test_locataire1', 'f', 'test_locataire1', 'test_locataire1', 'test_locataire1');
-    `
+        VALUES ('test_locataire2','test_locataire1', 'test_locataire1', '0541251311', 'test_locataire1@gmail.com', 'test_locataire1', 'f', 'test_locataire1', 'test_locataire1', 'test_locataire1');
+        `
 );
 pool.query(
   `
@@ -367,15 +373,15 @@ INSERT INTO public.trajet(
 pool.query(
   `
   INSERT INTO public.louer(
-   date_debut,   status_demande_location, id_locataire, region, numero_chassis,id_trajet, en_cours)
-   VALUES ('2022-03-29','accepte', 'test_locataire1', 'alger', 'test_v1', '1', 'true'),
-   ('2022-03-02','accepte', 'test_locataire1', 'alger', 'test_v2', '1', 'false');
+   id_louer,date_debut,   status_demande_location, id_locataire, region, numero_chassis,id_trajet, en_cours,longitude_depart,latitude_depart,longitude_arrive,latitude_arrive,suivi_location)
+   VALUES (2,'2022-03-29','accepte', 'test_locataire1', 'alger', 'test_v1', '1', 'true',5,5,5,5,'bloque'),
+   (3,'2022-03-02','accepte', 'test_locataire1', 'alger', 'test_v2', '1', 'false',5,5,5,5,'bloque');
   `
 );
 pool.query(
   ` INSERT INTO public.facture(
     date_facture, montant, heure, tva, id_louer)
-    VALUES ('2022-03-30', '14000', '08:00', '500', '1');
+    VALUES ('2022-03-30', '14000', '08:00', '500', 2);
     `
 );
 module.exports = pool;

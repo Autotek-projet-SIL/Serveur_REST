@@ -28,11 +28,7 @@ routerGestionLocations.get(
   "/gestionlocations/locations",
   controllerGestionLocations.getAllLocations
 );
-//ajouter une location
-routerGestionLocations.post(
-  "/gestionlocations/ajouter_location/",
-  controllerGestionLocations.addLocation
-);
+
 //get location by id
 routerGestionLocations.get(
   "/gestionlocations/location/:id",
@@ -48,7 +44,13 @@ routerGestionLocations.put(
   "/gestionlocations/update_location_heure_debut/:id",
   controllerGestionLocations.updateLocationHeureDebut
 );
-//Mettre a jour l'heure de debut lors de deverouillage par l'id de location
+
+//Mettre a jour le suivi de location
+routerGestionLocations.put(
+  "/gestionlocations/update_suivi_location/:id",
+  controllerGestionLocations.updateLocationSuiviLocation
+);
+//recuperer toutes les  locations termines d'un locataire
 routerGestionLocations.get(
   "/gestionlocations/get_locations_termines_by_locataire/:id",
   controllerGestionLocations.getLocationsTerminesByIdLocataire
