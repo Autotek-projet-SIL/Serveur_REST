@@ -39,6 +39,23 @@ const endLocation = async (request, response) => {
 };
 
 
+
+//mettre a jour une location
+const  updateLocationSuiviLocation = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations. updateLocationSuiviLocation(
+        request,
+        response
+      );
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 //Recuperer la liste de toutes les locations 
 const getAllLocations = async (request, response) => {
   firebaseVerifyToken
@@ -169,5 +186,6 @@ module.exports = {
   getLocationsLocataire,
   getAllLocations,
   updateLocationHeureDebut,
-  getLocationsTerminesByIdLocataire
+  getLocationsTerminesByIdLocataire,
+  updateLocationSuiviLocation
 };

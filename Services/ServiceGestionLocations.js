@@ -19,13 +19,18 @@ const updateLocationHeureDebut = async (request, response) => {
 const endLocation = async (request, response) => {
   try {
     await modelLouer.endLocation(request, response);
-    await modelLouer.updateLocationHeureFin(request, response);
-    await modelLouer.updateVehicleDisponible(
-      (num_chassis = null),
-      response,
-      request.params.id,
-      true
-    );
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
+
+//mettre a jour l'etat de la location
+const updateLocationSuiviLocation = async (request, response) => {
+  try {
+    await modelLouer.updateLocationSuiviLocation(request, response);
   } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);
@@ -80,10 +85,10 @@ const getLocationsTermines = async (request, response) => {
 //Ajouter une location
 const addLocation = async (request, response) => {
   try {
-    await modelTrajet.addTrajet(request, response);
+   // await modelTrajet.addTrajet(request, response);
     await modelLouer.addLocation(request, response);
-    if (request.body.status_demande_location == "accepte") {
-      await modelLouer.updateVehicleDisponible(
+  /*  if (request.body.status_demande_location == "accepte") {
+    await modelLouer.updateVehicleDisponible(
         (num_chassis = request.body.numero_chassis),
         response,
         (id_louer = null),
@@ -91,7 +96,7 @@ const addLocation = async (request, response) => {
       );
     } else {
       response.sendStatus(response.statusCode);
-    }
+    }*/
   } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);
@@ -129,5 +134,6 @@ module.exports = {
   getLocationsLocataire,
   getAllLocations,
   updateLocationHeureDebut,
-  getLocationsTerminesByIdLocataire
+  getLocationsTerminesByIdLocataire,
+  updateLocationSuiviLocation
 };
