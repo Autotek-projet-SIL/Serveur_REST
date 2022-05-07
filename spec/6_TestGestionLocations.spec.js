@@ -6,12 +6,11 @@ describe("Tester le service Gestion des Locations", () => {
     let data = {
       token: "avPraesPu0hkkvlsRaHhcGx3VSph2",
       date_debut: "2022-03-29",
-      date_fin: "2022-03-30",
       heure_debut: "03:00",
       heure_fin: "05:00",
       status_demande_location: "accepte",
       id_locataire: "cvbsnbwllvxnnadj1xj",
-      id_region: "1",
+      region: "Alger",
       numero_chassis: "1111",
       id_facture: "1",
       id_trajet: "1",

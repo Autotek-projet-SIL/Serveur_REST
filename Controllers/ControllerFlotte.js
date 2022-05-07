@@ -33,8 +33,6 @@ const getVehicleDetail = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        result = {};
-        await firebaseVerifyToken.getVehicule(request,response,result);
         await ServiceFlotte.getVehicleDetail(request, response,result);
       })
       .catch((error) => {
@@ -113,7 +111,6 @@ const addVehicleType = async (request, response) => {
       .verifyToken(request)
       .then(async (res) => {
         await ServiceFlotte.updateVehicle(request, response);
-        await firebaseVerifyToken.updateVehicule(request,response);
       })
       .catch((error) => {
         log.loggerConsole.error(error);
@@ -126,7 +123,8 @@ const addVehicleType = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await ServiceFlotte.updateVehicleAvaible(request, response);
+        await firebaseVerifyToken.updateVehiculeAvaible(request,response)
+        await response.sendStatus(200);
       })
       .catch((error) => {
         log.loggerConsole.error(error);

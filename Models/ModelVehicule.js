@@ -43,7 +43,7 @@ const getVehiclesByAmID = async (request, response) => {
 };
 
 // Recuperer un véhicule avec son numéro de chassis
-const getVehicleByChassisNum = async (request, response,result) => {
+const getVehicleByChassisNum = async (request, response) => {
   vehicule = {}
   let num_chassis = request.params.num_chassis;
   pool.query(
@@ -59,16 +59,7 @@ const getVehicleByChassisNum = async (request, response,result) => {
         log.loggerFile.error(error);
         response.sendStatus(500);
       } else {
-        vehicule = results.rows
-        if(result !== undefined){
-          vehicule[0].batterie=result.batterie
-          vehicule[0].destination=result.destination
-          vehicule[0].kilometrage=result.kilometrage
-          vehicule[0].latitude=result.latitude
-          vehicule[0].longitude=result.longitude
-          vehicule[0].temperature=result.temperature
-        }
-        response.status(200).json(vehicule);
+        response.status(200).json(results.rows);
       }
     }
   );
@@ -175,17 +166,14 @@ const updateVehicle= async (request, response) => {
     let num_chassis = request.params.num;
     let body = request.body;
     pool.query(
-      "UPDATE vehicule SET numero_chassis=$8, marque=$2, modele=$3, couleur=$4, id_type_vehicule=$5, id_am=$6, image_vehicule=$7,disponible=$9 WHERE numero_chassis=$1;",
+      "UPDATE vehicule SET numero_chassis=$6, marque=$2, modele=$3, couleur=$4, id_type_vehicule=$5 WHERE numero_chassis=$1;",
       [
         num_chassis,
         body.marque,
         body.modele,
         body.couleur,
         body.id_type_vehicule,
-        body.id_am,
-        body.image_vehicule,
-        body.num_chassis,
-        body.disponible
+        body.num_chassis
       ],
       (error, results) => {
         if (error) {
@@ -199,26 +187,6 @@ const updateVehicle= async (request, response) => {
     );
   };
 
-    // Mettre a jour la disponibilte d'un véhicule
-const updateVehicleAvaible= async (request, response) => {
-  let num_chassis = request.params.num;
-  
-  pool.query(
-    "UPDATE vehicule	SET disponible=not(disponible) WHERE numero_chassis=$1;",
-    [
-      num_chassis,
-    ],
-    (error, results) => {
-      if (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-      } else {
-        response.sendStatus(200);
-      }
-    }
-  );
-};
 
  // Affecter am à un véhicule
  const updateVehicleAM= async (request, response) => {
@@ -324,7 +292,6 @@ module.exports = {
   addVehicle,
   addVehicleType,
   updateVehicle,
-  updateVehicleAvaible,
   updateVehicleAM,
   updateVehicleImage,
   updateVehicleType,

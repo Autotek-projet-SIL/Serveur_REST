@@ -93,16 +93,6 @@ const updateVehicle = async (request, response) => {
 };
 
 
-  const updateVehicleAvaible = async (request, response) => {
-    try {
-      await ModelVehicle.updateVehicleAvaible(request, response);
-    } catch (error) {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(500);
-    }
-  };
-
   const updateVehicleAM = async (request, response) => {
     try {
       await ModelVehicle.updateVehicleAM(request, response);
@@ -164,7 +154,6 @@ module.exports = {
     addVehicleType,
     updateVehicle,
     updateVehicleImage,
-    updateVehicleAvaible,
     updateVehicleAM,
     updateVehicleType,
     deleteVehicule,

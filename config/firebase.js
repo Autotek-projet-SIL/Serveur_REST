@@ -125,29 +125,15 @@ const addVehicle = async(request,response)=>{
   });
 };
 
-//Fonction pour récupérer les données d'un véhicule sur Firestore
-const getVehicule = async(request,response,result)=>{
-  const vehicule = await db.collection('CarLocation').doc(request.params.num_chassis).get();
-  if(vehicule.exists){
-    result.batterie = vehicule.data().batterie
-    result.destination = vehicule.data().destination
-    result.kilometrage = vehicule.data().kilometrage 
-    result.latitude = vehicule.data().latitude
-    result.longitude = vehicule.data().longitude
-    result.marque = vehicule.data().marque
-    result.modele = vehicule.data().modele
-    result.temperature = vehicule.data().temperature 
-  }
-}
-
-//Fonction de modification d'un véhicule sur FireStore
-const updateVehicule = async(request,response)=>{
+// Mettre a jour la disponibilte d'un véhicule
+const updateVehiculeAvaible = async(request,response)=>{
+  const vehicule = await db.collection('CarLocation').doc(request.params.num).get();
+  let temp = !(vehicule.data().disponible)
   const liam = await db.collection('CarLocation').doc(request.params.num).update({
-   marque:request.body.marque,
-   modele:request.body.modele
+    disponible:temp
   })
   .then((response) => {
-    console.log("Vehicle updated successfully:",response );
+    console.log("Vehicle updated successfully" );
   })
   .catch((error) => {
     console.log("Error sending message:", error);
@@ -169,7 +155,6 @@ module.exports = {
   verifyToken,
   sendNotification,
   addVehicle,
-  getVehicule,
-  updateVehicule,
+  updateVehiculeAvaible,
   deleteVehicule
 };

@@ -90,6 +90,7 @@ pool.query(
         montant real NOT NULL,
         heure time without time zone NOT NULL,
         tva real NOT NULL,
+        id_louer serial NOT NULL,
         CONSTRAINT facture_montant_check CHECK ((montant > (0)::double precision)),
         CONSTRAINT facture_tva_check CHECK ((tva > (0)::double precision))
     );
@@ -128,14 +129,12 @@ pool.query(
   `
     CREATE TABLE public.louer (
         date_debut date ,
-        date_fin date ,
         heure_debut time without time zone NOT NULL,
         heure_fin time without time zone NOT NULL,
         status_demande_location character varying(50) NOT NULL,
         id_locataire character varying(28) NOT NULL,
-        id_region serial,
+        region character varying(50) NOT NULL,
         numero_chassis character varying(10) NOT NULL,
-        id_facture serial,
         id_trajet serial,
         id_louer serial,
         en_cours boolean
@@ -333,31 +332,31 @@ INSERT INTO public.trajet(
 pool.query(
   `
    INSERT INTO public.facture(
-    id_facture, date_facture, montant, heure, tva)
-    VALUES (1, '2022-03-30', 4000, '03:00', 5000);
+    id_facture, date_facture, montant, heure, tva,id_louer)
+    VALUES (1, '2022-03-30', 4000, '03:00', 5000,1);
    `
 );
 
 pool.query(
   `
    INSERT INTO public.louer(
-    date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
-    VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 1);
+    date_debut, heure_debut, heure_fin, status_demande_location, id_locataire, region, numero_chassis, id_trajet, en_cours, id_louer)
+    VALUES ('2022-03-29', '04:00','05:00', 'accepte', 'test_locataire', 'Alger', '1111',1, true, 1);
    `
 );
 
 pool.query(
   `
   INSERT INTO public.louer(
-   date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
-   VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 2);
+   date_debut, heure_debut, heure_fin, status_demande_location, id_locataire, region, numero_chassis,id_trajet, en_cours, id_louer)
+   VALUES ('2022-03-29', '04:00','05:00', 'accepte', 'test_locataire', 'Alger', '1111', 1, true, 2);
   `
 );
 pool.query(
   `
   INSERT INTO public.louer(
-   date_debut, date_fin, heure_debut, heure_fin, status_demande_location, id_locataire, id_region, numero_chassis, id_facture, id_trajet, en_cours, id_louer)
-   VALUES ('2022-03-29','2022-03-30', '04:00','05:00', 'accepte', 'test_locataire', 1, '1111', 1, 1, true, 3);
+   date_debut, heure_debut, heure_fin, status_demande_location, id_locataire, region, numero_chassis, id_trajet, en_cours, id_louer)
+   VALUES ('2022-03-29', '04:00','05:00', 'accepte', 'test_locataire', 'Alger', '1111', 1, true, 3);
   `
 );
 

@@ -104,10 +104,7 @@ it("Recuperer la liste des modèles vehicules d'une marque", async () => {
             marque:"marque3",
             modele:"modele3",
             couleur:"couleur3",
-            id_type_vehicule:"2",
-            id_am:"test_am",
-            image_vehicule:"test_img 3",
-            disponible: true
+            id_type_vehicule:"2"
         };
         await axios.put(
           url + "flotte/modifier_vehicule/test_v3",
