@@ -116,7 +116,8 @@ const addVehicle = async(request,response)=>{
     latitude:0.0,
     longitude:0.0,
     marque:request.body.marque,
-    modele:request.body.modele
+    modele:request.body.modele,
+    disponible:request.body.disponible
   })
   .then((response) => {
     console.log("Vehicle added successfully:",response );
@@ -129,16 +130,19 @@ const addVehicle = async(request,response)=>{
 // Mettre a jour la disponibilte d'un véhicule
 const updateVehiculeAvaible = async(request,response)=>{
   const vehicule = await db.collection('CarLocation').doc(request.params.num).get();
-  let temp = !(vehicule.data().disponible)
-  const liam = await db.collection('CarLocation').doc(request.params.num).update({
-    disponible:temp
-  })
-  .then((response) => {
-    console.log("Vehicle updated successfully" );
-  })
-  .catch((error) => {
-    console.log("Error sending message:", error);
-  });
+  if(vehicule.exists){
+    let temp = !(vehicule.data().disponible)
+    const liam = await db.collection('CarLocation').doc(request.params.num).update({
+      disponible:temp
+    })
+    .then((response) => {
+      console.log("Vehicle updated successfully" );
+    })
+    .catch((error) => {
+      console.log("Error sending message:", error);
+    });
+  }
+  
 }
 
 //Fonction de suppression d'un véhicule sur FireStore

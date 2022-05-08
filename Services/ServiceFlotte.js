@@ -23,9 +23,9 @@ const getVehiclesByAmID = async (request, response) => {
   }
 };
 
-const getVehicleDetail = async (request, response,result) => {
+const getVehicleDetail = async (request, response) => {
     try {
-      await ModelVehicle.getVehicleByChassisNum(request, response,result);
+      await ModelVehicle.getVehicleByChassisNum(request, response);
     } catch (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);

@@ -27,10 +27,8 @@ async function getFactureDetailByID(request, response){
   try{     
          let Results= await pool.query(`SELECT f.id_facture,to_char(f.date_facture, 'DD-MM-YYYY') as date_facture,f.montant,f.heure,f.tva,
          to_char(l.date_debut, 'DD-MM-YYYY') as date_debut,l.heure_debut,l.heure_fin,l.region,l.numero_chassis,v.modele,v.marque,
-         lo.nom,lo.prenom,lo.email,
-         tr.point_depart,tr.point_arrive
-         FROM facture f LEFT JOIN louer l ON  f.id_louer = l.id_louer LEFT JOIN locataire lo ON l.id_locataire = lo.id_locataire LEFT JOIN trajet tr ON l.id_trajet=tr.id_trajet
-		 LEFT JOIN vehicule v ON l.numero_chassis = v.numero_chassis
+         lo.nom,lo.prenom,lo.email
+         FROM facture f LEFT JOIN louer l ON  f.id_louer = l.id_louer LEFT JOIN locataire lo ON l.id_locataire = lo.id_locataire LEFT JOIN vehicule v ON l.numero_chassis = v.numero_chassis
          WHERE f.id_facture=$1`, [id_facture]);
           response.status(200).json(Results.rows)
          return Results.rows[0];

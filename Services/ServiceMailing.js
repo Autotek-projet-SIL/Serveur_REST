@@ -31,7 +31,6 @@ const getFactureDetailByID = async (request, response) => {
         <br/><div style="text-align: center; color:#000;">
         <h3 style="color:#000; width:260px ; font-size: 25px; background-color: #9AD4E2; margin:0 auto; border-radius: 0.25em;">Prix total: ${prix} DA</h3>
         <h3 style="color:#000;">Informations trajet</h3>
-        <p style="color:#000;">De: ${facture_detail.point_depart}</p><p style="color:#000;">À: ${facture_detail.point_arrive}</p>
         <p style="color:#000;">Date: ${facture_detail.date_debut}</p>
         <p style="color:#000;">Heure: ${facture_detail.heure_debut} - ${facture_detail.heure_fin}</p>
         <h3 style="color:#000;">Informations vehicule</h3>

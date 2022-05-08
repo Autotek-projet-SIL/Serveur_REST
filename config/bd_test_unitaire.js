@@ -145,7 +145,6 @@ pool.query(
       id_type_vehicule serial NOT NULL ,
       id_am character varying(28),
       image_vehicule character varying(255) NOT NULL,
-      disponible boolean NOT NULL,
       CONSTRAINT vehicule_pkey PRIMARY KEY (numero_chassis),
       CONSTRAINT vehicule_id_am_fkey FOREIGN KEY (id_am)
           REFERENCES public.am (id_am) MATCH SIMPLE
@@ -155,16 +154,6 @@ pool.query(
           REFERENCES public.typevehicule (id_type_vehicule) MATCH SIMPLE
           ON UPDATE NO ACTION
           ON DELETE NO ACTION
-    );
-    `
-);
-pool.query(
-  `
-    CREATE TABLE public.trajet (
-      id_trajet serial NOT NULL ,
-      point_depart character varying(50)  NOT NULL,
-      point_arrive character varying(50)  NOT NULL,
-      CONSTRAINT trajet_pkey PRIMARY KEY (id_trajet)
     );
     `
 );
@@ -212,20 +201,20 @@ pool.query(
       status_demande_location character varying(50) NOT NULL,
       id_locataire character varying(28) NOT NULL,
       numero_chassis character varying(10) NOT NULL,
-      id_trajet serial NOT NULL ,
       id_louer serial NOT NULL,
       en_cours boolean,
       heure_debut time without time zone,
       heure_fin time without time zone,
       region character varying(50) NOT NULL,
       date_debut date NOT NULL,
+      latitude_depart real NOT NULL,
+      longitude_depart real NOT NULL,
+      latitude_arrive real NOT NULL,
+      longitude_arrive real NOT NULL,
+      suivi_location character varying(50),
       CONSTRAINT louer_pkey PRIMARY KEY (id_louer),
       CONSTRAINT louer_id_locataire_fkey FOREIGN KEY (id_locataire)
           REFERENCES public.locataire (id_locataire) MATCH SIMPLE
-          ON UPDATE NO ACTION
-          ON DELETE NO ACTION,
-      CONSTRAINT louer_id_trajet_fkey FOREIGN KEY (id_trajet)
-          REFERENCES public.trajet (id_trajet) MATCH SIMPLE
           ON UPDATE NO ACTION
           ON DELETE NO ACTION,
       CONSTRAINT louer_numero_chassis_fkey FOREIGN KEY (numero_chassis)
@@ -346,8 +335,8 @@ pool.query(
 pool.query(
   `
     INSERT INTO public.vehicule(
-      numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule,disponible)
-        VALUES ('test_v1','test_marque1', 'test_modele1', 'test_couleur1', '1', 'test_am1','test_img1','t'), ('test_v2','test_marque2', 'test_modele2', 'test_couleur2', '2', 'test_am2','test_img2','t');
+      numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule)
+        VALUES ('test_v1','test_marque1', 'test_modele1', 'test_couleur1', '1', 'test_am1','test_img1'), ('test_v2','test_marque2', 'test_modele2', 'test_couleur2', '2', 'test_am2','test_img2');
   `
 );
 pool.query(
@@ -359,23 +348,16 @@ pool.query(
 );
 pool.query(
   `
-INSERT INTO public.trajet(
-	point_depart, point_arrive)
-	VALUES ('alger', 'oran');
-  `
-);
-pool.query(
-  `
   INSERT INTO public.louer(
-   date_debut,   status_demande_location, id_locataire, region, numero_chassis,id_trajet, en_cours)
-   VALUES ('2022-03-29','accepte', 'test_locataire1', 'alger', 'test_v1', '1', 'true'),
-   ('2022-03-02','accepte', 'test_locataire1', 'alger', 'test_v2', '1', 'false');
+   id_louer,date_debut,   status_demande_location, id_locataire, region, numero_chassis, en_cours,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive)
+   VALUES (1,'2022-03-29','accepte', 'test_locataire1', 'alger', 'test_v1','true',0,0,1,1),
+   (2,'2022-03-02','accepte', 'test_locataire1', 'alger', 'test_v2','false',0,0,1,1);
   `
 );
 pool.query(
   ` INSERT INTO public.facture(
-    date_facture, montant, heure, tva, id_louer)
-    VALUES ('2022-03-30', '14000', '08:00', '500', '1');
+    id_facture,date_facture, montant, heure, tva, id_louer)
+    VALUES (1,'2022-03-30', '14000', '08:00', '500', 1);
     `
 );
 module.exports = pool;
