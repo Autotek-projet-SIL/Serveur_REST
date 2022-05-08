@@ -30,7 +30,10 @@ const routeGestionProfils = require("../Routes/RouteGestionProfils.js");
 const routeGestionComptes = require("../Routes/RouteGestionComptes.js");
 const routeFlotte = require("../Routes/RouteFlotte.js");
 const routeMailing = require("../Routes/RouteMailing");
-const routerGestionLocations = require("../Routes/RouteGestionLocations.js");
+const routeGestionLocations = require("../Routes/RouteGestionLocations.js");
+const routeStatistiques = require("../Routes/RouteStatistiques.js");
+const routeGestionFactures = require("../Routes/RouteGestionFactures.js");
+const routePaiement=require("../Routes/RoutePaiement.js")
 
 // Configurer le serveur pour utiliser toutes les routes
 app.use(bodyParser.json());
@@ -49,7 +52,10 @@ app.use("/", routeGestionProfils);
 app.use("/", routeGestionComptes);
 app.use("/", routeFlotte);
 app.use("/", routeMailing);
-app.use("/", routerGestionLocations);
+app.use("/", routeGestionLocations);
+app.use("/",routeStatistiques);
+app.use("/", routeGestionFactures);
+app.use("/",routePaiement)
 app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });

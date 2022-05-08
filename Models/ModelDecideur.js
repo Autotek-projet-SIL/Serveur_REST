@@ -4,22 +4,25 @@ const log = require("../config/Logger");
 
 // Recuperer la liste des décideurs
 const getDecideurs = async (request, response) => {
-  pool.query("SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur", (error, results) => {
-    if (error) {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(500);
-    } else {
-      response.status(200).json(results.rows);
+  pool.query(
+    "SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur",
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
     }
-  });
+  );
 };
 
 // Recuperer un décideur avec un identifiant
 const getDecideurById = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    "SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur WHERE id_decideur=$1",
+    "SELECT id_decideur, nom, prenom, numero_telephone, email,mot_de_passe, photo_decideur FROM decideur WHERE id_decideur=$1",
     [id],
     (error, results) => {
       if (error) {
@@ -37,7 +40,7 @@ const getDecideurById = async (request, response) => {
 const getDecideurByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
-    "SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur WHERE email=$1",
+    "SELECT id_decideur, nom, prenom, numero_telephone, email,mot_de_passe, photo_decideur FROM decideur WHERE email=$1",
     [email],
     (error, results) => {
       if (error) {
@@ -55,7 +58,7 @@ const getDecideurByEmail = async (request, response) => {
 const addDecideur = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe, photo_decideur)VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    "INSERT INTO decideur(id_decideur, nom, prenom, numero_telephone, email, mot_de_passe, photo_decideur) VALUES ($1, $2, $3, $4, $5, $6, $7)",
     [
       body.id,
       body.nom,
@@ -82,16 +85,46 @@ const updateDecideur = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
   pool.query(
-    "UPDATE decideur SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6, photo_decideur=$7 WHERE id_decideur=$1",
-    [
-      id,
-      body.nom,
-      body.prenom,
-      body.numero_telephone,
-      body.email,
-      body.mot_de_passe,
-      body.photo_decideur,
-    ],
+    "UPDATE decideur SET nom=$2, prenom=$3, numero_telephone=$4, email=$5 WHERE id_decideur=$1",
+    [id, body.nom, body.prenom, body.numero_telephone, body.email],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    }
+  );
+};
+
+// Mettre a jour la photo d'un decideur
+const updateDecideurPhoto = async (request, response) => {
+  let id = request.params.id;
+  let body = request.body;
+  pool.query(
+    "UPDATE decideur SET photo_decideur=$2 WHERE id_decideur=$1",
+    [id, body.photo_decideur],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    }
+  );
+};
+
+// Mettre a jour le mot de passe d'un decideur
+const updateDecideurPassword = async (request, response) => {
+  let id = request.params.id;
+  let body = request.body;
+  pool.query(
+    "UPDATE decideur SET mot_de_passe=$2 WHERE id_decideur=$1",
+    [id, body.mot_de_passe],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -129,5 +162,7 @@ module.exports = {
   getDecideurs,
   addDecideur,
   updateDecideur,
+  updateDecideurPhoto,
+  updateDecideurPassword,
   deleteDecideur,
 };

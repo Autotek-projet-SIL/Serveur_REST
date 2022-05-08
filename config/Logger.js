@@ -20,11 +20,12 @@ const loggerFile = winston.createLogger({
   format: combine(
     format.timestamp({ format: "MMM-DD-YYYY HH:mm:ss" }),
     format.align(),
+    format.errors({ stack: true }),
     format.json()
   ),
   transports: [
     new winston.transports.File({
-      filename: "../LogFiles/logErrors.log",
+      filename: "LogFiles/logErrors.log",
       level: "error",
     }),
   ],

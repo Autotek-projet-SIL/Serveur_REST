@@ -10,6 +10,7 @@ admin.initializeApp({
 const db = admin.firestore();
 const messaging = admin.messaging();
 const auth = admin.auth();
+
 // Fonction de verification des tokens de Firebase
 const verifyToken = async (request) => {
   /*return new Promise((resolve, reject) => {
@@ -156,5 +157,8 @@ module.exports = {
   sendNotification,
   addVehicle,
   updateVehiculeAvaible,
-  deleteVehicule
+  deleteVehicule,
+  auth,
+  db,
+  messaging,
 };

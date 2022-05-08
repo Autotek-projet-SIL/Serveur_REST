@@ -94,15 +94,57 @@ const updateAM = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
   pool.query(
-    "UPDATE am SET nom=$2, prenom=$3, numero_telephone=$4, email=$5, mot_de_passe=$6, photo_am=$7 WHERE id_am=$1",
+    "UPDATE am SET nom=$2, prenom=$3, numero_telephone=$4, email=$5 WHERE id_am=$1",
     [
       id,
       body.nom,
       body.prenom,
       body.numero_telephone,
       body.email,
-      body.mot_de_passe,
-      body.photo_am,
+    ],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    }
+  );
+};
+
+// Mettre a jour la photo d'un am
+const updateAMPhoto = async (request, response) => {
+  let id = request.params.id;
+  let body = request.body;
+  pool.query(
+    "UPDATE am SET photo_am=$2 WHERE id_am=$1",
+    [
+      id,
+      body.photo_am
+    ],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+    }
+  );
+};
+
+// Mettre a jour la photo d'un am
+const updateAMPassword = async (request, response) => {
+  let id = request.params.id;
+  let body = request.body;
+  pool.query(
+    "UPDATE am SET mot_de_passe=$2 WHERE id_am=$1",
+    [
+      id,
+      body.mot_de_passe
     ],
     (error, results) => {
       if (error) {
@@ -137,5 +179,7 @@ module.exports = {
   getAMByEmail,
   addAM,
   updateAM,
+  updateAMPhoto,
+  updateAMPassword,
   deleteAM,
 };

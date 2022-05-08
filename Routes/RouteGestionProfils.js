@@ -28,6 +28,18 @@ routerGestionProfils.put(
   "/gestionprofils/modifier_atc/:id",
   controllerGestionProfils.updateATC
 );
+routerGestionProfils.put(
+  "/gestionprofils/modifier_atc/modifier_photo/:id",
+  controllerGestionProfils.updateATCPhoto
+);
+routerGestionProfils.put(
+  "/gestionprofils/modifier_atc/modifier_mot_de_passe/:id",
+  controllerGestionProfils.updateATCPassword
+);
+routerGestionProfils.put(
+  "/gestionprofils/modifier_atc/modifier_statut/:id",
+  controllerGestionProfils.updateATCStatut
+);
 routerGestionProfils.get(
   "/gestionprofils/decideur/:id",
   controllerGestionProfils.getDecideurById
@@ -40,6 +52,14 @@ routerGestionProfils.put(
   "/gestionprofils/modifier_decideur/:id",
   controllerGestionProfils.updateDecideur
 );
+routerGestionProfils.put(
+  "/gestionprofils/modifier_decideur/modifier_mot_de_passe/:id",
+  controllerGestionProfils.updateDecideurPassword
+);
+routerGestionProfils.put(
+  "/gestionprofils/modifier_decideur/modifier_photo/:id",
+  controllerGestionProfils.updateDecideurPhoto
+);
 routerGestionProfils.get(
   "/gestionprofils/am/:id",
   controllerGestionProfils.getAMById
@@ -51,6 +71,14 @@ routerGestionProfils.get(
 routerGestionProfils.put(
   "/gestionprofils/modifier_am/:id",
   controllerGestionProfils.updateAM
+);
+routerGestionProfils.put(
+  "/gestionprofils/modifier_am/modifier_photo/:id",
+  controllerGestionProfils.updateAMPhoto
+);
+routerGestionProfils.put(
+  "/gestionprofils/modifier_am/modifier_mot_de_passe/:id",
+  controllerGestionProfils.updateAMPassword
 );
 
 module.exports = routerGestionProfils;

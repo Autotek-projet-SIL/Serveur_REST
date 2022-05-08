@@ -142,6 +142,26 @@ const deleteVehiculeType = async (request, response) => {
   }
 };
 
+const getMarques = async (request, response) => {
+  try {
+    await ModelVehicle.getMarques(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
+const getModelsByIdMarque= async (request, response) => {
+  try {
+    await ModelVehicle.getModelsByIdMarque(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 //Exporter les fonctions du service flotte
 module.exports = {
     getVehicles,
@@ -157,6 +177,8 @@ module.exports = {
     updateVehicleAM,
     updateVehicleType,
     deleteVehicule,
-    deleteVehiculeType
+    deleteVehiculeType,
+    getMarques,
+    getModelsByIdMarque
   };
   

@@ -2,7 +2,6 @@
 const ServiceGestionProfils = require("../Services/ServiceGestionProfils");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
-
 // Fonctions du controlleur de gestion des profils
 const getLocataires = async (request, response) => {
   firebaseVerifyToken
@@ -82,6 +81,45 @@ const updateATC = async (request, response) => {
     });
 };
 
+const updateATCPhoto = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateATCPhoto(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const updateATCPassword = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateATCPassword(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const updateATCStatut = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateATCStatut(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 const getDecideurById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -113,6 +151,32 @@ const updateDecideur = async (request, response) => {
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionProfils.updateDecideur(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const updateDecideurPhoto = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateDecideurPhoto(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+const updateDecideurPassword = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateDecideurPassword(request, response);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -160,18 +224,53 @@ const updateAM = async (request, response) => {
     });
 };
 
+const updateAMPhoto = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateAMPhoto(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+
+const updateAMPassword = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionProfils.updateAMPassword(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+
 //Exporter les fonctions du controlleur de gestion des profils
 module.exports = {
   getLocataires,
   updateLocataire,
   getATCs,
   updateATC,
+  updateATCPhoto,
+  updateATCPassword,
   getDecideurs,
   updateDecideur,
+  updateDecideurPassword,
+  updateDecideurPhoto,
+  updateATCStatut,
   getAMs,
   updateAM,
+  updateAMPhoto,
+  updateAMPassword,
   getAMById,
   getATCById,
   getLocataireById,
-  getDecideurById
+  getDecideurById,
 };

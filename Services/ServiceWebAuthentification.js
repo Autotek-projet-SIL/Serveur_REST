@@ -7,7 +7,6 @@ const ModelDecideur = require("../Models/ModelDecideur");
 const log = require("../config/Logger");
 
 // Fonctions du service d'authentification web
-
 const validerDemandeInscription = async (request, response) => {
   try {
     await ModelDemandeInscription.updateDemandeInscription(

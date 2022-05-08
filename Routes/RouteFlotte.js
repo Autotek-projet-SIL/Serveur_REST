@@ -62,6 +62,15 @@ routerFlotte.delete(
 routerFlotte.delete(
     "/flotte/supprimer_typevehicule/:id",
     controllerFlotte.deleteVehiculeType
-  );
+);
+routerFlotte.get(
+    "/flotte/marque/",
+    controllerFlotte.getMarques
+);
+
+routerFlotte.get(
+    "/flotte/modele_marque/:id",
+    controllerFlotte.getModelsByIdMarque
+);
 
 module.exports = routerFlotte;

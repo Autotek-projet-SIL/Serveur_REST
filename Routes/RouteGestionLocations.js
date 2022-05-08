@@ -8,7 +8,6 @@ routerGestionLocations.post(
   "/gestionlocations/ajouter_location/",
   controllerGestionLocations.addLocation
 );
-
 //récupérer toutes les locations termines
 routerGestionLocations.get(
   "/gestionlocations/locations_termines",
@@ -19,34 +18,39 @@ routerGestionLocations.get(
   "/gestionlocations/locations_encours",
   controllerGestionLocations.getLocationsEnCours
 );
-
 //Terminer une location
 routerGestionLocations.put(
   "/gestionlocations/end_location/:id",
   controllerGestionLocations.endLocation
 );
-/* routerGestionLocations.put(
-        "/gestionlocations/modifier_location/:id",
-        controllerGestionLocations.updateLocataire
-      );
-*/
-
+//recuperer toutes les locations
+routerGestionLocations.get(
+  "/gestionlocations/locations",
+  controllerGestionLocations.getAllLocations
+);
 //ajouter une location
 routerGestionLocations.post(
   "/gestionlocations/ajouter_location/",
   controllerGestionLocations.addLocation
 );
-
 //get location by id
 routerGestionLocations.get(
   "/gestionlocations/location/:id",
   controllerGestionLocations.getLocationById
 );
-
 // récuperer les locations en cours d'un locataire
 routerGestionLocations.get(
   "/gestionlocations/get_locations_by_locataire/:id",
   controllerGestionLocations.getLocationsLocataire
 );
-
+//Mettre a jour l'heure de debut lors de deverouillage par l'id de location
+routerGestionLocations.put(
+  "/gestionlocations/update_location_heure_debut/:id",
+  controllerGestionLocations.updateLocationHeureDebut
+);
+//Mettre a jour l'heure de debut lors de deverouillage par l'id de location
+routerGestionLocations.get(
+  "/gestionlocations/get_locations_termines_by_locataire/:id",
+  controllerGestionLocations.getLocationsTerminesByIdLocataire
+);
 module.exports = routerGestionLocations;
