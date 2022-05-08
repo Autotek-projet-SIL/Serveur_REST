@@ -72,7 +72,7 @@ describe("Tester le service Flotte", () => {
       id_type_vehicule: "2",
       id_am: "test_am2",
       image_vehicule: "test_img3",
-      disponible: "t",
+      disponible: "true",
     };
     //-----
     await axios.post(url + "flotte/ajouter_vehicule/", data).then((res) => {
@@ -110,9 +110,6 @@ describe("Tester le service Flotte", () => {
       modele: "modele3",
       couleur: "couleur3",
       id_type_vehicule: "2",
-      id_am: "test_am1",
-      image_vehicule: "test_img 3",
-      disponible: "t",
     };
     //-----
     await axios.put(url + "flotte/modifier_vehicule/test_v3", vehicule);
@@ -122,16 +119,6 @@ describe("Tester le service Flotte", () => {
       expect(res.data[0].modele).toEqual("modele3");
       expect(res.data[0].couleur).toEqual("couleur3");
       expect(res.data[0].id_type_vehicule).toEqual(2);
-      expect(res.data[0].id_am).toEqual("test_am1");
-      expect(res.data[0].image_vehicule).toEqual("test_img 3");
-    });
-  });
-  //-----
-  it("Modifier la disponibilite d'un vehicule", async () => {
-    await axios.put(url + "flotte/modifier_dispo_vehicule/test_v3");
-    //-----
-    await axios.get(url + "flotte/detail_vehicule/test_v3").then((res) => {
-      expect(res.data[0].disponible).toEqual(false);
     });
   });
   //-----

@@ -10,10 +10,7 @@ const updateLocationHeureDebut = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceGestionLocations.updateLocationHeureDebut(
-        request,
-        response
-      );
+      await serviceGestionLocations.updateLocationHeureDebut(request, response);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -27,10 +24,10 @@ const endLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceGestionLocations.endLocation(
-        request,
-        response
-      );
+      await serviceGestionLocations.endLocation(request, response);
+      if (process.env.NODE_ENV === "production") {
+        await firebaseVerifyToken.updateVehiculeAvaible(request, response);
+      }
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -40,11 +37,11 @@ const endLocation = async (request, response) => {
 };
 
 //mettre a jour une location
-const  updateLocationSuiviLocation = async (request, response) => {
+const updateLocationSuiviLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceGestionLocations. updateLocationSuiviLocation(
+      await serviceGestionLocations.updateLocationSuiviLocation(
         request,
         response
       );
@@ -56,15 +53,12 @@ const  updateLocationSuiviLocation = async (request, response) => {
     });
 };
 
-//Recuperer la liste de toutes les locations 
+//Recuperer la liste de toutes les locations
 const getAllLocations = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await serviceGestionLocations.getAllLocations(
-        request,
-        response
-      );
+      await serviceGestionLocations.getAllLocations(request, response);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -75,102 +69,90 @@ const getAllLocations = async (request, response) => {
 
 //Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await serviceGestionLocations.getLocationsEnCours(
-          request,
-          response
-        );
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
-  
-//récupérer la liste des locations en cours d'un locataire 
-  const getLocationsLocataire = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await serviceGestionLocations.getLocationsLocataire(
-          request,
-          response
-        );
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getLocationsEnCours(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
+//récupérer la liste des locations en cours d'un locataire
+const getLocationsLocataire = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getLocationsLocataire(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
 //Recuperer la liste des locations termines
-  const getLocationsTermines = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await serviceGestionLocations.getLocationsTermines(
-          request,
-          response
-        );
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
+const getLocationsTermines = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getLocationsTermines(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
-  //Ajouter une location
-  const addLocation = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await serviceGestionLocations.addLocation(
-          request,
-          response
-        );
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
+//Ajouter une location
+const addLocation = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.addLocation(request, response);
+      if (process.env.NODE_ENV === "production" && request.body.status_demande_location==="accepte") {
+        await firebaseVerifyToken.updateVehiculeAvaible(request, response);
+      }
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
-  const getLocationById = async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await serviceGestionLocations.getLocationById(
-          request,
-          response
-        );
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
-  const getLocationsTerminesByIdLocataire= async (request, response) => {
-    firebaseVerifyToken
-      .verifyToken(request)
-      .then(async (res) => {
-        await serviceGestionLocations.getLocationsTerminesByIdLocataire(
-          request,
-          response
-        );
-      })
-      .catch((error) => {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(403);
-      });
-  };
+const getLocationById = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getLocationById(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+const getLocationsTerminesByIdLocataire = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getLocationsTerminesByIdLocataire(
+        request,
+        response
+      );
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 
 // Exporter les fonctions du controlleur Reservations
 module.exports = {
@@ -183,5 +165,5 @@ module.exports = {
   getAllLocations,
   updateLocationHeureDebut,
   getLocationsTerminesByIdLocataire,
-  updateLocationSuiviLocation
+  updateLocationSuiviLocation,
 };
