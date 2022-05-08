@@ -87,7 +87,7 @@ const getLocationsTermines = async (request, response) => {
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    "SELECT * FROM louer l inner join facture f on f.id_louer=l.id_louer inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true and id_locataire=$1",
+    "SELECT * FROM louer l inner join facture f on f.id_louer=l.id_louer inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false and id_locataire=$1",
     [id],
     (error, results) => {
       if (error) {
@@ -132,7 +132,7 @@ const getLocationsRejetes = async (request, response) => {
   );
 };
 
-
+//Fonction pour modifier le champs suivi_location d'une location
 const updateLocationSuiviLocation = async (request, response) => {
   let id = request.params.id;
   let date = request.body.suivi_location;
@@ -151,6 +151,7 @@ const updateLocationSuiviLocation = async (request, response) => {
   );
 };
 
+//Fonction pour modifier le champs heure_debut d'une location
 const updateLocationHeureDebut = async (request, response) => {
   let id = request.params.id;
   let date = request.body.heure;
@@ -169,7 +170,7 @@ const updateLocationHeureDebut = async (request, response) => {
   );
 };
 
-//mettre a jour l'heure de fin
+//Fonction pour modifier le champs heure_fin d'une location
 const updateLocationHeureFin = async (request, response) => {
   let id = request.params.id;
   let date = request.body.heure;
@@ -186,7 +187,7 @@ const updateLocationHeureFin = async (request, response) => {
   );
 };
 
-//End location
+//Fonction pour terminer un location (en_cours => false)
 const endLocation = async (request, response) => {
   let id = request.params.id;
   let heure = request.body.heure;
@@ -204,7 +205,7 @@ const endLocation = async (request, response) => {
   );
 };
 
-//Ajouter une location
+//Fonction pour ajouter une locationù
 const addLocation = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -233,43 +234,6 @@ const addLocation = async (request, response) => {
     }
   );
 };
-
-// Mettre a jour la disponibilité du véhicule
-const updateVehicleDisponible = async (
-  num_chassis = null,
-  response,
-  id_louer = null,
-  disponible
-) => {
-  if (num_chassis == null) {
-    //
-    pool.query(
-      "UPDATE vehicule SET disponible=$2 WHERE numero_chassis =(select numero_chassis from louer where id_louer=$1);",
-      [id_louer, disponible],
-      (error, results) => {
-        if (error) {
-          log.loggerConsole.error(error);
-          log.loggerFile.error(error);
-          response.statusCode = 500;
-        }
-        response.sendStatus(response.statusCode);
-      }
-    );
-  } else {
-    pool.query(
-      "UPDATE vehicule SET disponible=$2 WHERE numero_chassis=$1;",
-      [num_chassis, disponible],
-      (error, results) => {
-        if (error) {
-          log.loggerConsole.error(error);
-          log.loggerFile.error(error);
-          response.statusCode = 500;
-        }
-        response.sendStatus(response.statusCode);
-      }
-    );
-  }
-}; 
 
 // Recuperer une location avec un identifiant
 const getLocationById = async (request, response) => {
@@ -300,7 +264,6 @@ module.exports = {
   getAllLocations,
   updateLocationHeureDebut,
   getLocationStatistics,
-  updateVehicleDisponible,
   updateLocationHeureFin,
   getLocationsAcceptes,
   getLocationsRejetes,

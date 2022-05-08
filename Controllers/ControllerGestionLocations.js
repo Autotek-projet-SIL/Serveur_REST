@@ -21,6 +21,7 @@ const updateLocationHeureDebut = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 //terminer une location
 const endLocation = async (request, response) => {
   firebaseVerifyToken
@@ -38,8 +39,6 @@ const endLocation = async (request, response) => {
     });
 };
 
-
-
 //mettre a jour une location
 const  updateLocationSuiviLocation = async (request, response) => {
   firebaseVerifyToken
@@ -56,6 +55,7 @@ const  updateLocationSuiviLocation = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 //Recuperer la liste de toutes les locations 
 const getAllLocations = async (request, response) => {
   firebaseVerifyToken
@@ -90,7 +90,6 @@ const getLocationsEnCours = async (request, response) => {
       });
   };
   
-
 //récupérer la liste des locations en cours d'un locataire 
   const getLocationsLocataire = async (request, response) => {
     firebaseVerifyToken
@@ -108,7 +107,6 @@ const getLocationsEnCours = async (request, response) => {
       });
   };
 
-  
 //Recuperer la liste des locations termines
   const getLocationsTermines = async (request, response) => {
     firebaseVerifyToken
@@ -126,8 +124,7 @@ const getLocationsEnCours = async (request, response) => {
       });
   };
 
-
-  //ajouter une location
+  //Ajouter une location
   const addLocation = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
@@ -143,7 +140,6 @@ const getLocationsEnCours = async (request, response) => {
         response.sendStatus(403);
       });
   };
-
 
   const getLocationById = async (request, response) => {
     firebaseVerifyToken

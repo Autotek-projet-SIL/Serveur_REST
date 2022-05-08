@@ -26,7 +26,6 @@ const endLocation = async (request, response) => {
   }
 };
 
-
 //mettre a jour l'etat de la location
 const updateLocationSuiviLocation = async (request, response) => {
   try {
@@ -85,7 +84,6 @@ const getLocationsTermines = async (request, response) => {
 //Ajouter une location
 const addLocation = async (request, response) => {
   try {
-   // await modelTrajet.addTrajet(request, response);
     await modelLouer.addLocation(request, response);
   /*  if (request.body.status_demande_location == "accepte") {
     await modelLouer.updateVehicleDisponible(
@@ -114,6 +112,7 @@ const getLocationById = async (request, response) => {
     response.sendStatus(500);
   }
 };
+
 //recuperer la liste des locations terminés d'un locataire
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   try {
@@ -124,6 +123,7 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
     response.sendStatus(500);
   }
 };
+
 //Exporter les fonctions du service gestion locations
 module.exports = {
   getLocationsEnCours,
