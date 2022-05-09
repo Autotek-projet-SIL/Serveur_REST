@@ -5,7 +5,7 @@ const log = require("../config/Logger");
 //récupérer la liste des locations pour le service statistiques
 const getLocationStatistics = async (request, response) => {
   pool.query(
-    "SELECT id_louer, date_debut , status_demande_location, en_cours ,region  FROM louer ",
+    "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region  FROM louer",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -21,7 +21,7 @@ const getLocationStatistics = async (request, response) => {
 // Recuperer toutes les locations
 const getAllLocations = async (request, response) => {
   pool.query(
-    "SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule",
+    "SELECT id_louer, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -37,7 +37,7 @@ const getAllLocations = async (request, response) => {
 // Recuperer la des locations en cours
 const getLocationsEnCours = async (request, response) => {
   pool.query(
-    "SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true",
+    "SELECT id_louer, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -71,7 +71,7 @@ const getLocationsLocataire = async (request, response) => {
 // Recuperer la des locations terminees
 const getLocationsTermines = async (request, response) => {
   pool.query(
-    "SELECT id_louer, heure_debut, heure_fin,tv.id_type_vehicule, libelle, tarification ,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false",
+    "SELECT id_louer, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification ,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -103,7 +103,7 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
 // Recuperer la des locations acceptés pour le service statistiques
 const getLocationsAcceptes = async (request, response) => {
   pool.query(
-    "SELECT id_louer, date_debut , status_demande_location, en_cours ,region from louer where status_demande_location='accepte' ",
+    "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region from louer where status_demande_location='accepte' ",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -119,7 +119,7 @@ const getLocationsAcceptes = async (request, response) => {
 // Recuperer la des locations rejetés pour le service statistiques
 const getLocationsRejetes = async (request, response) => {
   pool.query(
-    "SELECT id_louer, date_debut , status_demande_location, en_cours ,region from louer where status_demande_location='rejete' ",
+    "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_lovation,region from louer where status_demande_location='rejete' ",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
