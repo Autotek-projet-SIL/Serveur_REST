@@ -3,7 +3,7 @@ const express = require("express");
 const routerGestionLocations = express.Router();
 const controllerGestionLocations = require("../Controllers/ControllerGestionLocations.js");
 
-//Declaration des routes du service authentification web
+//Declaration des routes du service gestion des locations
 routerGestionLocations.post(
   "/gestionlocations/ajouter_location/",
   controllerGestionLocations.addLocation
@@ -55,4 +55,6 @@ routerGestionLocations.get(
   "/gestionlocations/get_locations_termines_by_locataire/:id",
   controllerGestionLocations.getLocationsTerminesByIdLocataire
 );
+
+// Exporter le router gestion des locations
 module.exports = routerGestionLocations;

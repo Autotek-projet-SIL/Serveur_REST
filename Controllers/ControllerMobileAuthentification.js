@@ -4,7 +4,6 @@ const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
 // Fonctions du controlleur d'authentification mobile
-
 const inscriptionLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)

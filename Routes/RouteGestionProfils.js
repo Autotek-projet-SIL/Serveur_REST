@@ -81,4 +81,5 @@ routerGestionProfils.put(
   controllerGestionProfils.updateAMPassword
 );
 
+// Exporter le router gestion des profils
 module.exports = routerGestionProfils;

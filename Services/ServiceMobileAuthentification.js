@@ -5,7 +5,6 @@ const modelDemandeInscription = require("../Models/ModelDemandeInscription");
 const log = require("../config/Logger");
 
 // Fonctions du service d'authentification mobile
-
 const inscriptionLocataire = async (request, response) => {
   try {
     await modelLocataire.addLocataire(request, response);

@@ -24,4 +24,6 @@ routerWebAuthentification.get(
   "/authentification_web/decideur_connexion/:email",
   controllerWebAuthentification.getDecideurByEmail
 );
+
+// Exporter le router web authentification
 module.exports = routerWebAuthentification;

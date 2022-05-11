@@ -2,7 +2,6 @@ const ModelVehicle = require("../Models/ModelVehicule");
 const log = require("../config/Logger");
 
 // Fonctions du service flotte
-
 const getVehicles = async (request, response) => {
   try {
     await ModelVehicle.getVehicles(request, response);

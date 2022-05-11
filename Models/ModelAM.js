@@ -63,7 +63,7 @@ const getAMByEmail = async (request, response) => {
   );
 };
 
-// Ajouter un agent de maintenancedécideur
+// Ajouter un agent de maintenance
 const addAM = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -136,7 +136,7 @@ const updateAMPhoto = async (request, response) => {
   );
 };
 
-// Mettre a jour la photo d'un am
+// Mettre a jour le mot de passe d'un am
 const updateAMPassword = async (request, response) => {
   let id = request.params.id;
   let body = request.body;

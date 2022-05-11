@@ -13,12 +13,14 @@ const validerDemandeInscription = async (request, response) => {
         request,
         response
       );
-      await notification.sendNotification(
-        "Demande validée",
-        "Votre demande d'inscription a été validée",
-        request,
-        response
-      );
+      if (process.env.NODE_ENV === "production") {
+        await notification.sendNotification(
+          "Demande validée",
+          "Votre demande d'inscription a été validée",
+          request,
+          response
+        );
+      }
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -35,12 +37,14 @@ const refuserDemandeInscription = async (request, response) => {
         request,
         response
       );
-      await notification.sendNotification(
-        "Demande refusée",
-        "Votre demande d'inscription a été refusée",
-        request,
-        response
-      );
+      if (process.env.NODE_ENV === "production") {
+        await notification.sendNotification(
+          "Demande refusée",
+          "Votre demande d'inscription a été refusée",
+          request,
+          response
+        );
+      }
     })
     .catch((error) => {
       log.loggerConsole.error(error);

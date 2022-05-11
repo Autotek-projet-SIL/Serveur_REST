@@ -2,7 +2,7 @@
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la liste des locataires
+// Recuperer la liste des atcs
 const getATCs = async (request, response) => {
   pool.query(
     "SELECT id_atc, nom, prenom, numero_telephone, email, est_root, photo_atc FROM atc",

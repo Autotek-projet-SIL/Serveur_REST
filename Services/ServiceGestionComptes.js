@@ -6,7 +6,6 @@ const ModelAM = require("../Models/ModelAM.js");
 const log = require("../config/Logger");
 
 // Fonctions du service de gestion des comptes
-
 const deleteLocataire = async (request, response) => {
   try {
     await ModelLocataire.deleteLocataire(request, response);

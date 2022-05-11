@@ -8,4 +8,5 @@ routerMailing.get(
   controllerMailing.getFactureDetailByID
 );
 
+// Exporter le router mailing
 module.exports = routerMailing;

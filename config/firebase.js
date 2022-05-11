@@ -2,10 +2,12 @@
 let admin = require("firebase-admin");
 let serviceAccount = require("./autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
 const log = require("../config/Logger");
+
 // Initisaliser l'admin SDK de FireBase
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
 // Initialiser Firebase
 const db = admin.firestore();
 const messaging = admin.messaging();
@@ -13,7 +15,7 @@ const auth = admin.auth();
 
 // Fonction de verification des tokens de Firebase
 const verifyToken = async (request) => {
-  /*return new Promise((resolve, reject) => {
+  /* return new Promise((resolve, reject) => {
     let token;
     let uid;
     if (request.method === "GET") {
@@ -25,7 +27,7 @@ const verifyToken = async (request) => {
     }
     admin
       .auth()
-      .verifyIdToken(token)
+      .verifyIdToken(String(token))
       .then((decodedToken) => {
         const uid_firebase = decodedToken.uid;
         if (uid_firebase === uid) {
@@ -42,47 +44,8 @@ const verifyToken = async (request) => {
   });*/
 };
 
-// Fonction d'envois de notification avec cloud messaging
-const sendNotification = async (title, body, request, response) => {
-  const email = request.params.email;
-  let uid;
-  await auth
-    .getUserByEmail(email)
-    .then(async (userRecord) => {
-      // See the UserRecord reference doc for the contents of userRecord.
-      uid = userRecord.toJSON()["uid"];
-      const user = await db.collection("DeviceToken").doc(uid).get();
-      if (user.exists) {
-        let registrationToken = await user.data()["device_token"];
-        registrationToken = registrationToken.replace(/\s/g, "");
-        var payload = {
-          notification: {
-            title: title,
-            body: body,
-          },
-        };
-        var options = {
-          priority: "high",
-          timeToLive: 60 * 60 * 24,
-        };
-        await messaging
-          .sendToDevice(registrationToken, payload, options)
-          .then(function (response) {
-            console.log("Successfully sent message:", response);
-          })
-          .catch(function (error) {
-            log.loggerConsole.error(error);
-            log.loggerFile.error(error);
-          });
-      }
-    })
-    .catch((error) => {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-    });
-};
-
 /*************    Fonctions CRUD sur Firestore pour véhicule    *******************/
+
 // Fonctipn d'ajout d'un véhicule sur FireStore
 const addVehicle = async (request, response) => {
   const vehicule = await db
@@ -106,9 +69,11 @@ const addVehicle = async (request, response) => {
         destination: data.location,
         latitude: 0.0,
         longitude: 0.0,
-        marque: request.body.marque,
-        modele: request.body.modele,
         disponible: request.body.disponible,
+        locataire_uid: "",
+        vitesse: 0.0,
+        deverrouiller: false,
+        etat: "en attente",
       })
       .then((response) => {
         console.log("Vehicle added successfully:", response);
@@ -120,7 +85,7 @@ const addVehicle = async (request, response) => {
   }
 };
 
-// Mettre a jour la disponibilte d'un véhicule
+// Mettre a jour la disponibilte d'un véhicule dans firestore
 const updateVehiculeAvaible = async (request, response) => {
   const vehicule = await db
     .collection("CarLocation")
@@ -159,9 +124,9 @@ const deleteVehicule = async (request, response) => {
     });
 };
 
+// Exporter les fonctions concernat firebase
 module.exports = {
   verifyToken,
-  sendNotification,
   addVehicle,
   updateVehiculeAvaible,
   deleteVehicule,

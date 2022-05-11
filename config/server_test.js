@@ -31,9 +31,10 @@ app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });
 
-// Demarrer le serveur
-app.listen(port, () => console.log("Server running on port 3000 ..."));
+// Demarrer le serveur dans le port 4000
+app.listen(port, () => console.log("Server running on port 4000 ..."));
 
+// Exporter l'instance de l'application créé
 module.exports = {
   app,
 };

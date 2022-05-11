@@ -29,7 +29,9 @@ const getPaiementsByIdLocataire = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
+// Exporter les fonctions du controlleur de paiement
 module.exports = {
-    verifierPaiement,
-    getPaiementsByIdLocataire
+  verifierPaiement,
+  getPaiementsByIdLocataire,
 };

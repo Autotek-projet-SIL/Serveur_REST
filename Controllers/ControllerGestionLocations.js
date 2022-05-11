@@ -4,8 +4,6 @@ const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
 // Fonctions du controlleur de gestion de locations
-
-//mettre a jour la date de debut
 const updateLocationHeureDebut = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -19,7 +17,6 @@ const updateLocationHeureDebut = async (request, response) => {
     });
 };
 
-//terminer une location
 const endLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -36,7 +33,6 @@ const endLocation = async (request, response) => {
     });
 };
 
-//mettre a jour une location
 const updateLocationSuiviLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -53,7 +49,6 @@ const updateLocationSuiviLocation = async (request, response) => {
     });
 };
 
-//Recuperer la liste de toutes les locations
 const getAllLocations = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -67,7 +62,6 @@ const getAllLocations = async (request, response) => {
     });
 };
 
-//Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -81,7 +75,6 @@ const getLocationsEnCours = async (request, response) => {
     });
 };
 
-//récupérer la liste des locations en cours d'un locataire
 const getLocationsLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -95,7 +88,6 @@ const getLocationsLocataire = async (request, response) => {
     });
 };
 
-//Recuperer la liste des locations termines
 const getLocationsTermines = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -109,13 +101,15 @@ const getLocationsTermines = async (request, response) => {
     });
 };
 
-//Ajouter une location
 const addLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       await serviceGestionLocations.addLocation(request, response);
-      if (process.env.NODE_ENV === "production" && request.body.status_demande_location==="accepte") {
+      if (
+        process.env.NODE_ENV === "production" &&
+        request.body.status_demande_location === "accepte"
+      ) {
         await firebaseVerifyToken.updateVehiculeAvaible(request, response);
       }
     })
@@ -138,6 +132,7 @@ const getLocationById = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -154,7 +149,7 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
     });
 };
 
-// Exporter les fonctions du controlleur Reservations
+// Exporter les fonctions du controlleur gestion des locations
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,

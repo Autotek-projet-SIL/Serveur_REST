@@ -4,6 +4,7 @@ const modelPayer = require("../Models/ModelPayer");
 const stripe = require("stripe")(
   "sk_test_51KtJjXD9GU8MlLbuWhkRfcxgL14ibLuHaGIpsv668b4l5lfsclV1FZiyOctezrUjYOJJWrHvMJbu7M8j8CgroAK000Kv10JXg0"
 );
+
 // Fonction de verification de validite du paiement
 const VerifierPaiement = async (request, response) => {
   let type_paiement = request.body.type_paiement;
@@ -42,6 +43,7 @@ const VerifierPaiement = async (request, response) => {
     response.sendStatus(406);
   }
 };
+
 // Recuperer la liste des paiement effectuées par un locataire
 const getPaiementsByIdLocataire = async (request, response) => {
   try {
@@ -53,6 +55,7 @@ const getPaiementsByIdLocataire = async (request, response) => {
   }
 };
 
+// Exporter les fonctions du service paiement
 module.exports = {
   VerifierPaiement,
   getPaiementsByIdLocataire,

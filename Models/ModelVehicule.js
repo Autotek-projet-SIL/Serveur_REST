@@ -93,6 +93,7 @@ const getVehiclesMarques = async (request, response) => {
     }
   );
 };
+
 // Recuperer les modeles des véhicules pour une marque
 const getVehiclesModelsByMarque = async (request, response) => {
   pool.query(
@@ -216,6 +217,7 @@ const updateVehicleImage = async (request, response) => {
     }
   );
 };
+
 // Mettre a jour les informations d'un type de véhicule
 const updateVehicleType = async (request, response) => {
   let id_type_vehicule = request.params.id;
@@ -302,7 +304,7 @@ const getModelsByIdMarque = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD de l'agent de maintenance
+//Exporter les fonctions CRUD de vehicule
 module.exports = {
   getVehicles,
   getVehiclesByAmID,

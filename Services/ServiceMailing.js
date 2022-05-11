@@ -12,6 +12,7 @@ let transporter = nodemailer.createTransport({
   },
 });
 
+// Fonctions du service mailing
 const getFactureDetailByID = async (request, response) => {
   try {
     let facture_detail = await ModelFacture.getFactureDetailByID(
@@ -43,7 +44,6 @@ const getFactureDetailByID = async (request, response) => {
         <h3 style="color:#000; text-align: center; border: none;width:80%; border-width: 1.5px; border-color: #999; border-top-style: solid; margin:0 auto">Mereci d'utiliser notre servie Autotek</h3>
         <br/></body>`,
     };
-
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
@@ -58,7 +58,7 @@ const getFactureDetailByID = async (request, response) => {
   }
 };
 
-//Exporter les fonctions du service flotte
+//Exporter les fonctions du service mailing
 module.exports = {
   getFactureDetailByID,
 };

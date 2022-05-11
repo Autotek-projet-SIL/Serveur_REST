@@ -3,8 +3,8 @@ const log = require("../config/Logger");
 const modelLouer = require("../Models/ModelLouer");
 const modelTrajet = require("../Models/ModelTrajet");
 const modelFacture = require("../Models/ModelFacture");
+// Fonctions du service gestion des locations
 
-//mettre a jour l'heure de debut de location lors du deveroillage
 const updateLocationHeureDebut = async (request, response) => {
   try {
     await modelLouer.updateLocationHeureDebut(request, response);
@@ -15,7 +15,6 @@ const updateLocationHeureDebut = async (request, response) => {
   }
 };
 
-//terminer une location
 const endLocation = async (request, response) => {
   try {
     await modelLouer.endLocation(request, response);
@@ -26,7 +25,6 @@ const endLocation = async (request, response) => {
   }
 };
 
-//mettre a jour l'etat de la location
 const updateLocationSuiviLocation = async (request, response) => {
   try {
     await modelLouer.updateLocationSuiviLocation(request, response);
@@ -37,7 +35,6 @@ const updateLocationSuiviLocation = async (request, response) => {
   }
 };
 
-//récupérer la liste des locations en cours d'un locataire
 const getLocationsLocataire = async (request, response) => {
   try {
     await modelLouer.getLocationsLocataire(request, response);
@@ -48,7 +45,6 @@ const getLocationsLocataire = async (request, response) => {
   }
 };
 
-//Recuperer toutes les locations
 const getAllLocations = async (request, response) => {
   try {
     await modelLouer.getAllLocations(request, response);
@@ -59,7 +55,6 @@ const getAllLocations = async (request, response) => {
   }
 };
 
-//Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
   try {
     await modelLouer.getLocationsEnCours(request, response);
@@ -70,7 +65,6 @@ const getLocationsEnCours = async (request, response) => {
   }
 };
 
-//Recuperer la liste des locations termines
 const getLocationsTermines = async (request, response) => {
   try {
     await modelLouer.getLocationsTermines(request, response);
@@ -81,20 +75,9 @@ const getLocationsTermines = async (request, response) => {
   }
 };
 
-//Ajouter une location
 const addLocation = async (request, response) => {
   try {
     await modelLouer.addLocation(request, response);
-  /*  if (request.body.status_demande_location == "accepte") {
-    await modelLouer.updateVehicleDisponible(
-        (num_chassis = request.body.numero_chassis),
-        response,
-        (id_louer = null),
-        false
-      );
-    } else {
-      response.sendStatus(response.statusCode);
-    }*/
   } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);
@@ -102,7 +85,6 @@ const addLocation = async (request, response) => {
   }
 };
 
-//recuperer une location par son id
 const getLocationById = async (request, response) => {
   try {
     await modelLouer.getLocationById(request, response);
@@ -113,7 +95,6 @@ const getLocationById = async (request, response) => {
   }
 };
 
-//recuperer la liste des locations terminés d'un locataire
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   try {
     await modelLouer.getLocationsTerminesByIdLocataire(request, response);
@@ -124,7 +105,7 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
   }
 };
 
-//Exporter les fonctions du service gestion locations
+//Exporter les fonctions du service gestion des locations
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,
@@ -135,5 +116,5 @@ module.exports = {
   getAllLocations,
   updateLocationHeureDebut,
   getLocationsTerminesByIdLocataire,
-  updateLocationSuiviLocation
+  updateLocationSuiviLocation,
 };

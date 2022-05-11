@@ -7,7 +7,13 @@ const addPaiement = async (request, response) => {
   let body = request.body;
   pool.query(
     "INSERT INTO Payer (id_locataire, id_facture, type_paiement,heure_paiement,date_paiement) VALUES ($1, $2, $3, $4, $5)",
-    [body.id, body.id_facture, body.type_paiement,body.heure_paiement,body.date_paiement],
+    [
+      body.id,
+      body.id_facture,
+      body.type_paiement,
+      body.heure_paiement,
+      body.date_paiement,
+    ],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -19,7 +25,8 @@ const addPaiement = async (request, response) => {
     }
   );
 };
-// Recuperer la liste des paiement effectués par un locataire
+
+// Recuperer la liste des paiements effectués par un locataire
 const getPaiementsByIdLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -38,7 +45,7 @@ const getPaiementsByIdLocataire = async (request, response) => {
   );
 };
 
-//Exporter les fonctions de facture
+//Exporter les fonctions CRUD de paiement
 module.exports = {
   addPaiement,
   getPaiementsByIdLocataire,

@@ -1,6 +1,7 @@
 const firebase = require("../config/firebase");
 const log = require("../config/Logger");
-// Fonction d'envois de notification avec cloud messaging
+
+// Fonction du service de notifications*
 const sendNotification = async (title, body, request, response) => {
   const email = request.params.email;
   let uid;
@@ -38,6 +39,7 @@ const sendNotification = async (title, body, request, response) => {
     });
 };
 
+// Exporter les fonctions du service de notifications
 module.exports = {
   sendNotification,
 };

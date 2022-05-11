@@ -54,6 +54,7 @@ const getVehiclesTypes = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 const getVehiclesMarques = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -66,6 +67,7 @@ const getVehiclesMarques = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 const getVehiclesModelsByMarque = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -134,6 +136,7 @@ const updateVehicleAvaible = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 const updateVehicleAM = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -158,6 +161,7 @@ const updateVehicleImage = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 const updateVehicleType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -212,6 +216,7 @@ const getModelsByIdMarque = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
 const deleteVehiculeType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)

@@ -1,11 +1,10 @@
 // Declaration de variables
 const log = require("../config/Logger");
 const modelLouer = require("../Models/ModelLouer");
-const modelTrajet = require("../Models/ModelTrajet");
 const modelFacture = require("../Models/ModelFacture");
 const modelDemandeInscription = require("../Models/ModelDemandeInscription");
 
-//récupérer la liste des locations acceptes pour le service stattistique
+// Fonctions du service statistiques
 const getLocationsAcceptes = async (request, response) => {
   try {
     await modelLouer.getLocationsAcceptes(request, response);
@@ -16,8 +15,7 @@ const getLocationsAcceptes = async (request, response) => {
   }
 };
 
-//récupérer la liste des locations rejetes pour le service stattistique
-const  getLocationsRejetes = async (request, response) => {
+const getLocationsRejetes = async (request, response) => {
   try {
     await modelLouer.getLocationsRejetes(request, response);
   } catch (error) {
@@ -27,8 +25,7 @@ const  getLocationsRejetes = async (request, response) => {
   }
 };
 
-//récupérer la liste des locations pour le service stattistiques 
-const  getLocationStatistics = async (request, response) => {
+const getLocationStatistics = async (request, response) => {
   try {
     await modelLouer.getLocationStatistics(request, response);
   } catch (error) {
@@ -38,10 +35,12 @@ const  getLocationStatistics = async (request, response) => {
   }
 };
 
-//récupérer la liste des demandes d'inscriptions pour le service statistiques
-const  getDemandeInscriptionStatistics = async (request, response) => {
+const getDemandeInscriptionStatistics = async (request, response) => {
   try {
-    await modelDemandeInscription.getDemandeInscriptionStatistics(request, response);
+    await modelDemandeInscription.getDemandeInscriptionStatistics(
+      request,
+      response
+    );
   } catch (error) {
     log.loggerConsole.error(error);
     log.loggerFile.error(error);
@@ -49,8 +48,7 @@ const  getDemandeInscriptionStatistics = async (request, response) => {
   }
 };
 
-//récupérer la liste des demandes d'inscriptions pour le service statistiques
-const  getFactureStatistics = async (request, response) => {
+const getFactureStatistics = async (request, response) => {
   try {
     await modelFacture.getFactureStatistics(request, response);
   } catch (error) {
@@ -60,11 +58,11 @@ const  getFactureStatistics = async (request, response) => {
   }
 };
 
-//Exporter les fonctions du service gestion locations
+//Exporter les fonctions du service statistiques
 module.exports = {
-    getLocationStatistics,
-    getDemandeInscriptionStatistics,
-    getFactureStatistics,
-    getLocationsRejetes,
-    getLocationsAcceptes
+  getLocationStatistics,
+  getDemandeInscriptionStatistics,
+  getFactureStatistics,
+  getLocationsRejetes,
+  getLocationsAcceptes,
 };

@@ -41,7 +41,7 @@ async function getFactureDetailByID(request, response) {
   }
 }
 
-// Mettre a jour les informations d'un facture
+// Mettre a jour les informations d'une facture
 const updateFacture = async (request, response) => {
   let id_facture = request.params.id_facture;
   let body = request.body;
@@ -58,6 +58,8 @@ const updateFacture = async (request, response) => {
     }
   );
 };
+
+//Recuperer la liste des factures pour le service statistiques
 const getFactureStatistics = async (request, response) => {
   pool.query(
     "SELECT id_facture, date_facture , montant FROM facture ",
@@ -73,7 +75,7 @@ const getFactureStatistics = async (request, response) => {
   );
 };
 
-// Recuperer la liste de tous les factures
+// Recuperer la liste de toutes les factures
 const getFactures = async (request, response) => {
   pool.query(
     `SELECT id_facture, date_facture, montant, heure, tva, id_louer
@@ -90,7 +92,7 @@ const getFactures = async (request, response) => {
   );
 };
 
-// Recuperer une facture par id
+// Recuperer une facture par son identifiant
 const getFactureById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -110,7 +112,7 @@ const getFactureById = async (request, response) => {
   );
 };
 
-// Recuperer une facture par id
+// Recuperer une facture par id de location
 const getFactureByIdLouer = async (request, response) => {
   let id = request.params.id_louer;
   pool.query(

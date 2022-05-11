@@ -1,5 +1,6 @@
 const pg_mem = require("pg-mem");
 
+// Base de données en memoire pour les test unitaires
 const pg = pg_mem.newDb().adapters.createPg();
 
 const pool = new pg.Pool();
