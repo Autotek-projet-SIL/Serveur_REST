@@ -7,7 +7,7 @@ describe("Tester le service Facture", () => {
     await axios.get(url + "gestionfacture/facture/").then((res) => {
       expect(res.data.length).toEqual(1);
       res.data.forEach((element) => {
-        if (element.id === "1") {
+        if (element.id === 1) {
           expect(element.tva).toEqual("500");
         }
       });

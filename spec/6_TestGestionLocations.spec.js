@@ -45,7 +45,7 @@ describe("Tester le service Gestion des Locations", () => {
   it("Recuperer la liste des locations ", async () => {
     await axios.get(url + "gestionlocations/locations").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_louer === "1")
+        if (element.id_louer === 1)
           expect(element.status_demande_location).toEqual("accepte");
       });
     });

@@ -56,7 +56,7 @@ describe("Tester le service Flotte", () => {
     //-----
     await axios.get(url + "flotte/typevehicule/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_type_vehicule === "1") {
+        if (element.id_type_vehicule === 1) {
           expect(element.libelle).toEqual("test_libelle1");
         }
       });
@@ -96,8 +96,8 @@ describe("Tester le service Flotte", () => {
     });
     await axios.get(url + "flotte/typevehicule/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_type_vehicule === "3") {
-          expect(element.tarification).toEqual("4400");
+        if (element.id_type_vehicule === 3) {
+          expect(element.tarification).toEqual(4400);
         }
       });
     });
@@ -153,9 +153,9 @@ describe("Tester le service Flotte", () => {
     //-----
     await axios.get(url + "flotte/typevehicule/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_type_vehicule === "3") {
+        if (element.id_type_vehicule === 3) {
           expect(element.libelle).toEqual("test_libelle3");
-          expect(element.tarification).toEqual("4600");
+          expect(element.tarification).toEqual(4600);
         }
       });
     });

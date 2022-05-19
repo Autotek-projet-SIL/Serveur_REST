@@ -21,7 +21,7 @@ describe("Tester le service Statististiques", () => {
   it("Recuperer la liste des locations", async () => {
     await axios.get(url + "statistiques/get_locations").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_louer === "1")
+        if (element.id_louer === 1)
           expect(element.status_demande_location).toEqual("accepte");
       });
     });
@@ -30,7 +30,7 @@ describe("Tester le service Statististiques", () => {
   it("Recuperer la liste des locations rejetees", async () => {
     await axios.get(url + "statistiques/getLocationsRejetes").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_louer == "2") {
+        if (element.id_louer == 2) {
           console.log(element);
           expect(element.status_demande_location).toEqual("rejete");
         }
@@ -41,7 +41,7 @@ describe("Tester le service Statististiques", () => {
   it("Recuperer la liste des locations acceptees", async () => {
     await axios.get(url + "statistiques/getLocationsAcceptes").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_louer === "1") {
+        if (element.id_louer === 1) {
           expect(element.status_demande_location).toEqual("accepte");
         }
       });

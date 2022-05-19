@@ -1,8 +1,8 @@
 const ModelFacture = require("../Models/ModelFacture");
 const log = require("../config/Logger");
 
-let sender = "mounircherif2001@gmail.com";
-let app_pass = "sotjmrtwzvevhxri";
+let sender = "autotek078@gmail.com";
+let app_pass = "tbxmdgftetkjgbof";
 let nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -20,7 +20,7 @@ const getFactureDetailByID = async (request, response) => {
       response
     );
     let receiver = facture_detail.email;
-    let prix = facture_detail.montant + facture_detail.tva;
+    let prix = facture_detail.montant + ((facture_detail.tva*facture_detail.montant)/100);
 
     var mailOptions = {
       from: sender,
@@ -44,6 +44,7 @@ const getFactureDetailByID = async (request, response) => {
         <h3 style="color:#000; text-align: center; border: none;width:80%; border-width: 1.5px; border-color: #999; border-top-style: solid; margin:0 auto">Mereci d'utiliser notre servie Autotek</h3>
         <br/></body>`,
     };
+    console.log(mailOptions)
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);

@@ -54,10 +54,11 @@ for i in range(messages, messages-N, -1):
                         # print text/plain emails and skip attachments
                         res = body.split()
                         try:
-                            if sys.argv[1]==res[3] and sys.argv[2]==res[10] and From=="baridimob@poste.dz":
+                            if sys.argv[1]==res[3] and sys.argv[2]==res[10] :
                                 print(True)
                         except IndexError:
                             pass
 # close the connection and logout
 imap.close()
 imap.logout()
+##and From=="baridimob@poste.dz"
