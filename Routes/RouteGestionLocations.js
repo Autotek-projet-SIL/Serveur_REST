@@ -28,6 +28,11 @@ routerGestionLocations.get(
   "/gestionlocations/locations",
   controllerGestionLocations.getAllLocations
 );
+//recuperer toutes les regions
+routerGestionLocations.get(
+  "/gestionlocations/regions",
+  controllerGestionLocations.getAllRegions
+);
 
 //get location by id
 routerGestionLocations.get(
@@ -54,6 +59,11 @@ routerGestionLocations.put(
 routerGestionLocations.get(
   "/gestionlocations/get_locations_termines_by_locataire/:id",
   controllerGestionLocations.getLocationsTerminesByIdLocataire
+);
+//recuperer le locataire d'une location par numero de chassis
+routerGestionLocations.get(
+  "/gestionlocations/get_locataire_numero_chassis/:num",
+  controllerGestionLocations.getLocataireByNumeroChassis
 );
 
 // Exporter le router gestion des locations

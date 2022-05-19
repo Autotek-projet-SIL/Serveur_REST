@@ -62,6 +62,19 @@ const getAllLocations = async (request, response) => {
     });
 };
 
+const getAllRegions = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getAllRegions(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 const getLocationsEnCours = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -149,6 +162,21 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
     });
 };
 
+const getLocataireByNumeroChassis = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await serviceGestionLocations.getLocataireByNumeroChassis(
+        request,
+        response
+      );
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
 // Exporter les fonctions du controlleur gestion des locations
 module.exports = {
   getLocationsEnCours,
@@ -161,4 +189,6 @@ module.exports = {
   updateLocationHeureDebut,
   getLocationsTerminesByIdLocataire,
   updateLocationSuiviLocation,
+  getAllRegions,
+  getLocataireByNumeroChassis
 };

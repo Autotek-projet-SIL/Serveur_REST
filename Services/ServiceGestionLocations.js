@@ -55,6 +55,16 @@ const getAllLocations = async (request, response) => {
   }
 };
 
+const getAllRegions = async (request, response) => {
+  try {
+    await modelLouer.getAllRegions(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 const getLocationsEnCours = async (request, response) => {
   try {
     await modelLouer.getLocationsEnCours(request, response);
@@ -105,6 +115,16 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
   }
 };
 
+const getLocataireByNumeroChassis = async (request, response) => {
+  try {
+    await modelLouer.getLocataireByNumeroChassis(request, response);
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
+};
+
 //Exporter les fonctions du service gestion des locations
 module.exports = {
   getLocationsEnCours,
@@ -117,4 +137,6 @@ module.exports = {
   updateLocationHeureDebut,
   getLocationsTerminesByIdLocataire,
   updateLocationSuiviLocation,
+  getAllRegions,
+  getLocataireByNumeroChassis
 };

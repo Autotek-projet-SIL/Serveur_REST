@@ -34,6 +34,22 @@ const getAllLocations = async (request, response) => {
   );
 };
 
+// Recuperer  la liste de toutes les locations
+const getAllRegions = async (request, response) => {
+  pool.query(
+    "select distinct region from louer; ",
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
 // Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
   pool.query(
@@ -90,6 +106,24 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
   pool.query(
     "SELECT * FROM louer l inner join facture f on f.id_louer=l.id_louer inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false and id_locataire=$1",
     [id],
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
+// Recuperer le locations terminees d'un locataire
+const getLocataireByNumeroChassis = async (request, response) => {
+  let numero_chassis = request.params.num;
+  pool.query(
+    "SELECT id_locataire from louer where numero_chassis=$1 order by heure_debut,date_debut asc limit 1;",
+    [numero_chassis],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -270,4 +304,6 @@ module.exports = {
   getLocationsRejetes,
   getLocationsTerminesByIdLocataire,
   updateLocationSuiviLocation,
+  getAllRegions,
+  getLocataireByNumeroChassis
 };

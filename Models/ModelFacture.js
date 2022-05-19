@@ -62,7 +62,7 @@ const updateFacture = async (request, response) => {
 //Recuperer la liste des factures pour le service statistiques
 const getFactureStatistics = async (request, response) => {
   pool.query(
-    "SELECT id_facture, date_facture , montant FROM facture ",
+    "SELECT f.id_facture, f.date_facture , f.montant,l.region FROM facture f join louer l on f.id_louer=l.id_louer; ",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
