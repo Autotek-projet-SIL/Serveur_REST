@@ -47,7 +47,7 @@ describe("Tester le service Demande de support", () => {
           expect(res.status).toEqual(200);
         });
    //-----
-      await axios.get(url + "demande_support/demande_support_louer/2").then((res) => {
+      await axios.get(url + "demande_support/demande_support/2").then((res) => {
         expect(res.data[0].objet).toEqual(data.objet);
         expect(res.data[0].descriptif).toEqual(data.descriptif);
         expect(res.data[0].email).toEqual(data.email);

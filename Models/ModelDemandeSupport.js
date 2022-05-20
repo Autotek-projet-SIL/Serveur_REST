@@ -7,7 +7,7 @@ const log = require("../config/Logger");
 //Recuperer la liste de toutes les demandes de support
 const getDemandeSupport = async (request, response) => {
     pool.query(
-        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire ;",
+        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire ;",
         (error, results) => {
           if (error) {
             log.loggerConsole.error(error);
@@ -24,7 +24,7 @@ const getDemandeSupport = async (request, response) => {
 const getDemandeSupportById = async (request, response) => {
     let id = request.params.id;
     pool.query(
-        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire where id_demande_support =$1",
+        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire where id_demande_support =$1",
         [id],
         (error, results) => {
           if (error) {
