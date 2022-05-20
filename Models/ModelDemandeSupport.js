@@ -91,9 +91,8 @@ const responseDemandeSupport = async (request, response) => {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
         response.statusCode = 500;
-      }else {
-        response.sendStatus(200);
-      } 
+      }
+      else {  response.sendStatus(200); } 
     }
   );
   };

@@ -60,7 +60,7 @@ describe("Tester le service Demande de support", () => {
         response: "Ceci est une réponce de demande de support 2 ",
       };
       await axios
-        .put(url + "demande_support/repondre_demande_support/2", data)
+        .put(url + "demande_support/repondre_demande_support/email/demande/2", data)
         .then((res) => {
           expect(res.status).toEqual(200);
         });

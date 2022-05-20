@@ -1,6 +1,7 @@
 // Declaration de variables
 const serviceDemandeSupport = require("../Services/ServiceDemandeSupport");
 const firebaseVerifyToken = require("../config/firebase.js");
+const serviceNotification = require("../Services/ServiceNotification");
 const log = require("../config/Logger");
 
 // Fonctions du controlleur de gestion des demandes de support
@@ -67,6 +68,14 @@ const responseDemandeSupport = async (request, response) => {
       .verifyToken(request)
       .then(async (res) => {
         await serviceDemandeSupport.responseDemandeSupport( request, response);
+        if (process.env.NODE_ENV === "production") {
+          await notification.sendNotification(
+            "Reponse de demande de support",
+            request.body.response,
+            request,
+            response
+          );
+        }
       })
       .catch((error) => {
         log.loggerConsole.error(error);

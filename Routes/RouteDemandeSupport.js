@@ -26,7 +26,7 @@ routerDemandeSupport.post(
 );
 //Mettre a jour le champs reponse d'un demande de support
 routerDemandeSupport.put(
-    "/demande_support/repondre_demande_support/:id",
+    "/demande_support/repondre_demande_support/:email/demande/:id",
     controllerDemandeSupport.responseDemandeSupport
 );
 
