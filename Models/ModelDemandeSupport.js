@@ -7,7 +7,7 @@ const log = require("../config/Logger");
 //Recuperer la liste de toutes les demandes de support
 const getDemandeSupport = async (request, response) => {
     pool.query(
-        "SELECT id_demande_support, objet, descriptif, reponse, id_locataire FROM demandesupport ",
+        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire ;",
         (error, results) => {
           if (error) {
             log.loggerConsole.error(error);
@@ -24,7 +24,7 @@ const getDemandeSupport = async (request, response) => {
 const getDemandeSupportById = async (request, response) => {
     let id = request.params.id;
     pool.query(
-        "SELECT id_demande_support, objet, descriptif, reponse, id_locataire FROM demandesupport where id_demande_support =$1",
+        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire where id_demande_support =$1",
         [id],
         (error, results) => {
           if (error) {
@@ -38,12 +38,12 @@ const getDemandeSupportById = async (request, response) => {
       );
   };
 
-//récupérer la liste des demandes de support d'un locataire 
-const getDemandeSupportLocataire = async (request, response) => {
-    let id_locataire = request.params.id_locataire;
+//récupérer la liste des demandes de support d'un location
+const getDemandeSupportLouer = async (request, response) => {
+    let id_louer = request.params.id_louer;
     pool.query(
-        "SELECT id_demande_support, objet, descriptif, reponse, id_locataire FROM demandesupport where id_locataire =$1",
-        [id_locataire],
+        "SELECT id_demande_support, objet, descriptif, reponse, email, id_louer FROM demandesupport where id_louer =$1",
+        [id_louer],
         (error, results) => {
           if (error) {
             log.loggerConsole.error(error);
@@ -60,11 +60,12 @@ const getDemandeSupportLocataire = async (request, response) => {
 const addDemandeSupport = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO demandesupport (objet, descriptif, id_locataire) VALUES ($1, $2, $3 )",
+    "INSERT INTO demandesupport (objet, descriptif, email, id_louer) VALUES ($1, $2, $3, $4 )",
     [
       body.objet,
       body.descriptif,
-      body.id_locataire,
+      body.email,
+      body.id_louer,
     ],
     (error, results) => {
       if (error) {
@@ -100,7 +101,7 @@ const responseDemandeSupport = async (request, response) => {
   module.exports = {
     getDemandeSupport,
     getDemandeSupportById,
-    getDemandeSupportLocataire,
+    getDemandeSupportLouer,
     addDemandeSupport,
     responseDemandeSupport,
   };

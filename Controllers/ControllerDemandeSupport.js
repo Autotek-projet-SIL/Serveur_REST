@@ -33,12 +33,12 @@ const getDemandeSupportById = async (request, response) => {
       });
   };
 
-//récupérer la liste des demandes de support d'un locataire 
-const getDemandeSupportLocataire = async (request, response) => {
+//récupérer la liste des demandes de support d'un location 
+const getDemandeSupportLouer = async (request, response) => {
     firebaseVerifyToken
       .verifyToken(request)
       .then(async (res) => {
-        await serviceDemandeSupport.getDemandeSupportLocataire( request, response);
+        await serviceDemandeSupport.getDemandeSupportLouer( request, response);
       })
       .catch((error) => {
         log.loggerConsole.error(error);
@@ -78,7 +78,7 @@ const responseDemandeSupport = async (request, response) => {
   module.exports = {
     getDemandeSupport,
     getDemandeSupportById,
-    getDemandeSupportLocataire,
+    getDemandeSupportLouer,
     addDemandeSupport,
     responseDemandeSupport,
   };

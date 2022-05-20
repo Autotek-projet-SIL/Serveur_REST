@@ -27,10 +27,10 @@ const getDemandeSupportById = async (request, response) => {
     }
   };
 
-//récupérer la liste des demandes de support d'un locataire 
-const getDemandeSupportLocataire = async (request, response) => {
+//récupérer la liste des demandes de support d'un location
+const getDemandeSupportLouer = async (request, response) => {
     try {
-        await modelDemandeSupport.getDemandeSupportLocataire(request, response);
+        await modelDemandeSupport.getDemandeSupportLouer(request, response);
     } catch (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
@@ -63,7 +63,7 @@ const responseDemandeSupport = async (request, response) => {
   module.exports = {
     getDemandeSupport,
     getDemandeSupportById,
-    getDemandeSupportLocataire,
+    getDemandeSupportLouer,
     addDemandeSupport,
     responseDemandeSupport,
   };

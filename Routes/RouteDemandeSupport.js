@@ -14,10 +14,10 @@ routerDemandeSupport.get(
     "/demande_support/demande_support/:id",
     controllerDemandeSupport.getDemandeSupportById
 );
-//récupérer toutes les demandes de support d'un locataire
+//récupérer toutes les demandes de support d'un location
 routerDemandeSupport.get(
-    "/demande_support/demande_support_locataire/:id_locataire",
-    controllerDemandeSupport.getDemandeSupportLocataire
+    "/demande_support/demande_support_louer/:id_louer",
+    controllerDemandeSupport.getDemandeSupportLouer
 );
 //Ajouter un demande de support
 routerDemandeSupport.post(

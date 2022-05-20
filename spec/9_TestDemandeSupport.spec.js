@@ -6,6 +6,7 @@ describe("Tester le service Demande de support", () => {
     it("Recuperer la liste des Demande de support", async () => {
       await axios.get(url + "demande_support/demande_support").then((res) => {
         expect(res.data.length).toEqual(1);
+        //console.log(res.data);
         res.data.forEach((element) => {
           if (element.id === "1") {
             expect(element.objet).toEqual("demandeSupport");
@@ -16,16 +17,18 @@ describe("Tester le service Demande de support", () => {
     //-----
     it("Recuperer une demande de support par id", async () => {
       await axios.get(url + "demande_support/demande_support/1").then((res) => {
+        //console.log(res.data);
         res.data.forEach((element) => {
           expect(element.id_demande_support).toEqual(1);
         });
       });
     });
     //-----
-    it("Recuperer la liste des Demandes de support par id locataire", async () => {
-      await axios.get(url + "demande_support/demande_support_locataire/test_locataire1").then((res) => {
+    it("Recuperer la liste des Demandes de support par id louer", async () => {
+      await axios.get(url + "demande_support/demande_support_louer/1").then((res) => {
+        //console.log(res.data);
         res.data.forEach((element) => {
-          expect(element.id_locataire).toEqual('test_locataire1');
+          expect(element.id_louer).toEqual(1);
         });
       });
     });
@@ -34,7 +37,8 @@ describe("Tester le service Demande de support", () => {
       let data = {
         objet: "demandeSupport2",
         descriptif: "ceci est un autre exemple de demande de support",
-        id_locataire: "test_locataire1",
+        email:"email2@gmail.com",
+        id_louer: 2,
       };
       //-----
       await axios
@@ -43,10 +47,11 @@ describe("Tester le service Demande de support", () => {
           expect(res.status).toEqual(200);
         });
    //-----
-      await axios.get(url + "demande_support/demande_support/2").then((res) => {
+      await axios.get(url + "demande_support/demande_support_louer/2").then((res) => {
         expect(res.data[0].objet).toEqual(data.objet);
         expect(res.data[0].descriptif).toEqual(data.descriptif);
-        expect(res.data[0].id_locataire).toEqual(data.id_locataire);
+        expect(res.data[0].email).toEqual(data.email);
+        expect(res.data[0].id_louer).toEqual(data.id_louer);
       });
     });
 
