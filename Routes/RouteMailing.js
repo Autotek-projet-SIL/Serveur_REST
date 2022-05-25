@@ -4,7 +4,7 @@ const controllerMailing = require("../Controllers/ControllerMailing");
 
 //Declaration des routes du service Mailing
 routerMailing.get(
-  "/mailing/envoyer_facture/:id_facture",
+  "/mailing/envoyer_facture/:id_louer",
   controllerMailing.getFactureDetailByID
 );
 

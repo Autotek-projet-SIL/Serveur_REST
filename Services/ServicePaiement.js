@@ -46,15 +46,8 @@ const VerifierPaiement = async (request, response) => {
 
 // Recuperer la liste des paiement effectuées par un locataire
 const getPaiementsByIdLocataire = async (request, response) => {
-  try {
-    await modelPayer.getPaiementsByIdLocataire(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelPayer.getPaiementsByIdLocataire(request, response);
 };
-
 // Exporter les fonctions du service paiement
 module.exports = {
   VerifierPaiement,

@@ -85,9 +85,11 @@ const addVehicle = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await ServiceFlotte.addVehicle(request, response);
       if (process.env.NODE_ENV === "production") {
-        await firebaseVerifyToken.addVehicle(request, response);
+        await ServiceFlotte.addVehicleFB(request, response);
+      }
+      if (response.statusCode != 500) {
+        await ServiceFlotte.addVehicle(request, response);
       }
     })
     .catch((error) => {
@@ -127,8 +129,7 @@ const updateVehicleAvaible = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
-      await firebaseVerifyToken.updateVehiculeAvaible(request, response);
-      await response.sendStatus(200);
+      await ServiceFlotte.updateVehiculeAvaibleFB(request, response);
     })
     .catch((error) => {
       log.loggerConsole.error(error);
@@ -180,9 +181,11 @@ const deleteVehicule = async (request, response) => {
     .verifyToken(request)
     .then(async (res) => {
       if (process.env.NODE_ENV === "production") {
-        await firebaseVerifyToken.deleteVehicule(request, response);
+        await ServiceFlotte.deleteVehiculeFB(request, response);
       }
-      await ServiceFlotte.deleteVehicule(request, response);
+      if (response.statusCode != 500) {
+        await ServiceFlotte.deleteVehicule(request, response);
+      }
     })
     .catch((error) => {
       log.loggerConsole.error(error);

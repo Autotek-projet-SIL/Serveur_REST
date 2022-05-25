@@ -5,7 +5,7 @@ describe("Tester le service Statististiques", () => {
   //-----
   it("Recuperer la liste des factures", async () => {
     await axios.get(url + "statistiques/getFactures").then((res) => {
-      expect(res.data.length).toEqual(1);
+      expect(res.data.length).toEqual(2);
     });
   });
 //-----

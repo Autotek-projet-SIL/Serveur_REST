@@ -1,5 +1,8 @@
 // Declaration de variables
 const serviceGestionLocations = require("../Services/ServiceGestionLocations.js");
+const serviceFlotte = require("../Services/ServiceFlotte");
+const serviceFacture = require("../Services/ServiceGestionFactures");
+const serviceMailing = require("../Services/ServiceMailing");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
@@ -22,8 +25,17 @@ const endLocation = async (request, response) => {
     .verifyToken(request)
     .then(async (res) => {
       await serviceGestionLocations.endLocation(request, response);
-      if (process.env.NODE_ENV === "production") {
-        await firebaseVerifyToken.updateVehiculeAvaible(request, response);
+      if (response.statusCode != 500) {
+        await serviceFacture.addFacture(request, response);
+        if (
+          process.env.NODE_ENV === "production" &&
+          response.statusCode != 500
+        ) {
+          await serviceFlotte.updateVehiculeAvaibleFB(request, response);
+          if (response.statusCode != 500) {
+            await serviceMailing.getFactureDetailByID(request, response);
+          }
+        }
       }
     })
     .catch((error) => {
@@ -121,9 +133,10 @@ const addLocation = async (request, response) => {
       await serviceGestionLocations.addLocation(request, response);
       if (
         process.env.NODE_ENV === "production" &&
-        request.body.status_demande_location === "accepte"
+        request.body.status_demande_location === "accepte" &&
+        response.statusCode != 500
       ) {
-        await firebaseVerifyToken.updateVehiculeAvaible(request, response);
+        await serviceFlotte.updateVehiculeAvaibleFB(request, response);
       }
     })
     .catch((error) => {
@@ -190,5 +203,5 @@ module.exports = {
   getLocationsTerminesByIdLocataire,
   updateLocationSuiviLocation,
   getAllRegions,
-  getLocataireByNumeroChassis
+  getLocataireByNumeroChassis,
 };

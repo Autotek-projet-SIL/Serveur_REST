@@ -236,7 +236,7 @@ const endLocation = async (request, response) => {
         log.loggerFile.error(error);
         response.statusCode = 500;
       }
-      response.sendStatus(response.statusCode);
+      response.statusCode=200
     }
   );
 };
@@ -245,7 +245,7 @@ const endLocation = async (request, response) => {
 const addLocation = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO louer(date_debut,status_demande_location, id_locataire,region,numero_chassis,suivi_location,en_cours,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive)VALUES ($1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11)",
+    "INSERT INTO louer(date_debut,status_demande_location, id_locataire,region,numero_chassis,suivi_location,en_cours,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive)VALUES ($1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11) RETURNING id_louer",
     [
       body.date_debut,
       body.status_demande_location,
@@ -265,7 +265,7 @@ const addLocation = async (request, response) => {
         log.loggerFile.error(error);
         response.statusCode = 500;
       }
-      response.sendStatus(response.statusCode);
+      response.status(200).json(results.rows);
     }
   );
 };

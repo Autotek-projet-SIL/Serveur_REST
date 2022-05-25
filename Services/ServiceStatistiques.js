@@ -6,56 +6,26 @@ const modelDemandeInscription = require("../Models/ModelDemandeInscription");
 
 // Fonctions du service statistiques
 const getLocationsAcceptes = async (request, response) => {
-  try {
-    await modelLouer.getLocationsAcceptes(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationsAcceptes(request, response);
 };
 
 const getLocationsRejetes = async (request, response) => {
-  try {
-    await modelLouer.getLocationsRejetes(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationsRejetes(request, response);
 };
 
 const getLocationStatistics = async (request, response) => {
-  try {
-    await modelLouer.getLocationStatistics(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationStatistics(request, response);
 };
 
 const getDemandeInscriptionStatistics = async (request, response) => {
-  try {
-    await modelDemandeInscription.getDemandeInscriptionStatistics(
-      request,
-      response
-    );
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelDemandeInscription.getDemandeInscriptionStatistics(
+    request,
+    response
+  );
 };
 
 const getFactureStatistics = async (request, response) => {
-  try {
-    await modelFacture.getFactureStatistics(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelFacture.getFactureStatistics(request, response);
 };
 
 //Exporter les fonctions du service statistiques

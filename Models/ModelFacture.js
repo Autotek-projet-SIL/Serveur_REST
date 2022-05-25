@@ -14,7 +14,11 @@ const addFacture = async (request, response) => {
         log.loggerFile.error(error);
         response.statusCode = 500;
       } else {
-        response.sendStatus(200);
+        if(process.env.NODE_ENV === "test_unitaire"){
+          response.sendStatus(200)
+        }else{
+          response.statusCode=200
+        }
       }
     }
   );
@@ -22,17 +26,16 @@ const addFacture = async (request, response) => {
 
 // Recuperer le détail d'une facture
 async function getFactureDetailByID(request, response) {
-  let id_facture = request.params.id_facture;
+  let id_louer = request.body.id_louer;
   try {
     let Results = await pool.query(
       `SELECT f.id_facture,to_char(f.date_facture, 'DD-MM-YYYY') as date_facture,f.montant,f.heure,f.tva,
          to_char(l.date_debut, 'DD-MM-YYYY') as date_debut,l.heure_debut,l.heure_fin,l.region,l.numero_chassis,v.modele,v.marque,
          lo.nom,lo.prenom,lo.email
          FROM facture f LEFT JOIN louer l ON  f.id_louer = l.id_louer LEFT JOIN locataire lo ON l.id_locataire = lo.id_locataire LEFT JOIN vehicule v ON l.numero_chassis = v.numero_chassis
-         WHERE f.id_facture=$1`,
-      [id_facture]
+         WHERE f.id_louer=$1`,
+      [id_louer]
     );
-    response.status(200).json(Results.rows);
     return Results.rows[0];
   } catch (error) {
     log.loggerConsole.error(error);

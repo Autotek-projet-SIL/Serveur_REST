@@ -62,6 +62,11 @@ describe("Tester le service Gestion des Locations", () => {
   it("Terminer une location", async () => {
     let data = {
       heure: "15:00",
+      "numero_chassis":"0123456788",
+      "date_facture": "2021-09-29",
+      "montant": 5555,
+      "tva": 17,
+      "id_louer":2
     };
     await axios
       .put(url + "gestionlocations/end_location/2", data)

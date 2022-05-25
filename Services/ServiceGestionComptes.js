@@ -7,83 +7,35 @@ const log = require("../config/Logger");
 
 // Fonctions du service de gestion des comptes
 const deleteLocataire = async (request, response) => {
-  try {
-    await ModelLocataire.deleteLocataire(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelLocataire.deleteLocataire(request, response);
 };
 
 const deleteATC = async (request, response) => {
-  try {
-    await ModelATC.deleteATC(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.deleteATC(request, response);
 };
 
 const deleteDecideur = async (request, response) => {
-  try {
-    await ModelDecideur.deleteDecideur(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.deleteDecideur(request, response);
 };
 
 const deleteAM = async (request, response) => {
-  try {
-    await ModelAM.deleteAM(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.deleteAM(request, response);
 };
 
 const addLocataire = async (request, response) => {
-  try {
-    await ModelLocataire.addLocataire(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelLocataire.addLocataire(request, response);
 };
 
 const addATC = async (request, response) => {
-  try {
-    await ModelATC.addATC(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.addATC(request, response);
 };
 
 const addDecideur = async (request, response) => {
-  try {
-    await ModelDecideur.addDecideur(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.addDecideur(request, response);
 };
 
 const addAM = async (request, response) => {
-  try {
-    await ModelAM.addAM(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.addAM(request, response);
 };
 
 //Exporter les fonctions du service de gestion des comptes

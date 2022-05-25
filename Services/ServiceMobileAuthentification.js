@@ -6,44 +6,20 @@ const log = require("../config/Logger");
 
 // Fonctions du service d'authentification mobile
 const inscriptionLocataire = async (request, response) => {
-  try {
-    await modelLocataire.addLocataire(request, response);
-    await modelDemandeInscription.addDemandeInscription(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLocataire.addLocataire(request, response);
+  await modelDemandeInscription.addDemandeInscription(request, response);
 };
 
 const connexionLocataire = async (request, response) => {
-  try {
-    await modelLocataire.getLocataireByEmail(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLocataire.getLocataireByEmail(request, response);
 };
 
 const connexionAM = async (request, response) => {
-  try {
-    await modelAM.getAMByEmail(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelAM.getAMByEmail(request, response);
 };
 
 const envoyerDemandeInscription = async (request, response) => {
-  try {
-    await modelDemandeInscription.addDemandeInscription(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelDemandeInscription.addDemandeInscription(request, response);
 };
 
 // Exporter les fonctions du service d'authentification mobile

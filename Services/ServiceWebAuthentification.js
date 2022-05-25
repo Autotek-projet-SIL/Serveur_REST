@@ -8,63 +8,33 @@ const log = require("../config/Logger");
 
 // Fonctions du service d'authentification web
 const validerDemandeInscription = async (request, response) => {
-  try {
-    await ModelDemandeInscription.updateDemandeInscription(
-      request,
-      response,
-      "validee"
-    );
-    await ModelLocataire.updateLocataireStatus(request, response, true);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDemandeInscription.updateDemandeInscription(
+    request,
+    response,
+    "validee"
+  );
+  await ModelLocataire.updateLocataireStatus(request, response, true);
 };
 
 const refuserDemandeInscription = async (request, response) => {
-  try {
-    await ModelDemandeInscription.updateDemandeInscription(
-      request,
-      response,
-      "refusee"
-    );
-    await ModelJustificatif.addJustificatif(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDemandeInscription.updateDemandeInscription(
+    request,
+    response,
+    "refusee"
+  );
+  await ModelJustificatif.addJustificatif(request, response);
 };
 
 const getDemandesInscription = async (request, response) => {
-  try {
-    await ModelDemandeInscription.getDemandesInscription(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDemandeInscription.getDemandesInscription(request, response);
 };
 
 const getDecideurByEmail = async (request, response) => {
-  try {
-    await ModelDecideur.getDecideurByEmail(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.getDecideurByEmail(request, response);
 };
 
 const getATCByEmail = async (request, response) => {
-  try {
-    await ModelATC.getATCByEmail(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.getATCByEmail(request, response);
 };
 
 //Exporter les fonctions du service d'authentification web
