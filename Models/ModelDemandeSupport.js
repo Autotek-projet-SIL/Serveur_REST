@@ -42,7 +42,7 @@ const getDemandeSupportById = async (request, response) => {
 const getDemandeSupportLouer = async (request, response) => {
     let id_louer = request.params.id_louer;
     pool.query(
-        "SELECT id_demande_support, objet, descriptif, reponse, email, id_louer FROM demandesupport where id_louer =$1",
+        "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire where l.id_louer =$1",
         [id_louer],
         (error, results) => {
           if (error) {
