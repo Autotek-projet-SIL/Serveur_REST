@@ -13,6 +13,7 @@ const routeStatistiques = require("../Routes/RouteStatistiques.js");
 const routeGestionFactures = require("../Routes/RouteGestionFactures.js");
 const routePaiement = require("../Routes/RoutePaiement.js");
 const routeMailing = require("../Routes/RouteMailing");
+const routeDemandeSupport =require("../Routes/RouteDemandeSupport.js")
 
 // Configurer le serveur pour utiliser toutes les routes
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.use("/", routeStatistiques);
 app.use("/", routeGestionFactures);
 app.use("/", routePaiement);
 app.use("/", routeMailing);
+app.use("/",routeDemandeSupport)
 app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });

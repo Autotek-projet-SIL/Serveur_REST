@@ -64,6 +64,11 @@ const VerifierPaiement = async (request, response) => {
       const card = await stripe.customers.createSource(customerId, {
         source: `${card_Token.id}`,
       });
+      await stripe.charges.create({
+        amount:amount,
+        currency:"eur",
+        customer:customerId
+      })
       if (amount > balance) {
         response.sendStatus(406);
       } else {

@@ -88,22 +88,6 @@ pool.query(
 
 pool.query(
   `
-  CREATE TABLE public.demandesupport(
-  id_demande_support serial NOT NULL,
-  objet character varying(50) NOT NULL,
-  descriptif character varying(255) NOT NULL,
-  reponse character varying(255),
-  id_locataire character varying(28) NOT NULL,
-  CONSTRAINT demandesupport_pkey PRIMARY KEY (id_demande_support),
-  CONSTRAINT demandesupport_id_locataire_fkey FOREIGN KEY (id_locataire)
-      REFERENCES public.locataire (id_locataire) MATCH SIMPLE
-      ON UPDATE CASCADE
-      ON DELETE CASCADE    
-  );
-`
-);
-pool.query(
-  `
 CREATE TABLE public.justificatif (
   id_justificatif serial NOT NULL,
   objet character varying(50) COLLATE pg_catalog."default" NOT NULL,
@@ -245,6 +229,25 @@ pool.query(
   )
     `
 );
+
+pool.query(
+  `
+  CREATE TABLE public.demandesupport(
+  id_demande_support serial NOT NULL,
+  objet character varying(50) NOT NULL,
+  descriptif character varying(255) NOT NULL,
+  reponse character varying(255),
+  email character varying(50) NOT NULL,
+  id_louer serial NOT NULL ,
+  CONSTRAINT demandesupport_pkey PRIMARY KEY (id_demande_support),
+  CONSTRAINT demandesupport_id_louer_fkey FOREIGN KEY (id_louer)
+      REFERENCES public.louer (id_louer) MATCH SIMPLE
+      ON UPDATE CASCADE
+      ON DELETE CASCADE    
+  );
+`
+);
+
 pool.query(
   `
     CREATE TABLE public.payer (
@@ -363,4 +366,11 @@ pool.query(
     VALUES ('2022-03-30', '14000', '08:00', '500', 1);
     `
 );
+pool.query(
+  `INSERT INTO public.demandesupport(
+    objet, descriptif, reponse, email, id_louer )
+    VALUES ('demandeSupport', 'ceci est un exemple de demande de support', 'Ceci est une reponse', 'email@gmail.com', 1 );  
+`
+);
+ 
 module.exports = pool;
