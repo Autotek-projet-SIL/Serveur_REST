@@ -70,7 +70,7 @@ const getLocationsEnCours = async (request, response) => {
 const getLocationsLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    "SELECT * FROM louer where en_cours = true and id_locataire =$1",
+    "SELECT * FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule where en_cours = true and id_locataire =$1",
     [id],
     (error, results) => {
       if (error) {

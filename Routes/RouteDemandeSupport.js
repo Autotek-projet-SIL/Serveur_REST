@@ -14,7 +14,7 @@ routerDemandeSupport.get(
     "/demande_support/demande_support/:id",
     controllerDemandeSupport.getDemandeSupportById
 );
-//récupérer toutes les demandes de support d'un location
+//récupérer toutes les demandes de support d'une location
 routerDemandeSupport.get(
     "/demande_support/demande_support_louer/:id_louer",
     controllerDemandeSupport.getDemandeSupportLouer

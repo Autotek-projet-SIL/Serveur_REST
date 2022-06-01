@@ -6,8 +6,8 @@ const log = require("../config/Logger");
 const addFacture = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer )VALUES ($1, $2, $3, $4, $5)",
-    [body.date_facture, body.montant, body.heure, body.tva, body.id_louer],
+    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer,id_payer )VALUES ($1, $2, $3, $4, $5,$6)",
+    [body.date_facture, body.montant, body.heure, body.tva, body.id_louer,body.id_payer],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);

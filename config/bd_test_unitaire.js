@@ -210,16 +210,39 @@ pool.query(
   )
     `
 );
+
+pool.query(
+  `
+  CREATE TABLE IF NOT EXISTS public.payer
+  (
+      id_locataire character varying(28) NOT NULL,
+      type_paiement character varying(50) NOT NULL,
+      heure_paiement time without time zone NOT NULL,
+      date_paiement date NOT NULL,
+      id_payer serial NOT NULL ,
+      CONSTRAINT payer_pkey PRIMARY KEY (id_payer),
+      CONSTRAINT payer_id_locataire_fkey FOREIGN KEY (id_locataire)
+          REFERENCES public.locataire (id_locataire) MATCH SIMPLE
+          ON UPDATE NO ACTION
+          ON DELETE NO ACTION
+  );
+    `
+);
 pool.query(
   `
   CREATE TABLE public.facture (
   id_facture serial NOT NULL ,
   date_facture date NOT NULL,
   montant real NOT NULL,
+  id_payer serial NOT NULL,
   heure time without time zone NOT NULL,
   tva real NOT NULL,
   id_louer serial NOT NULL ,
   CONSTRAINT facture_pkey PRIMARY KEY (id_facture),
+  CONSTRAINT payer_id_facture_fkey FOREIGN KEY (id_payer)
+  REFERENCES public.payer (id_payer) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION,
   CONSTRAINT id_louer FOREIGN KEY (id_louer)
       REFERENCES public.louer (id_louer) MATCH SIMPLE
       ON UPDATE CASCADE
@@ -246,24 +269,6 @@ pool.query(
       ON DELETE CASCADE    
   );
 `
-);
-
-pool.query(
-  `
-    CREATE TABLE public.payer (
-      id_locataire character varying(28) NOT NULL,
-      id_facture serial NOT NULL,
-      type_paiement character varying(50) NOT NULL,
-      CONSTRAINT payer_id_facture_fkey FOREIGN KEY (id_facture)
-          REFERENCES public.facture (id_facture) MATCH SIMPLE
-          ON UPDATE NO ACTION
-          ON DELETE NO ACTION,
-      CONSTRAINT payer_id_locataire_fkey FOREIGN KEY (id_locataire)
-          REFERENCES public.locataire (id_locataire) MATCH SIMPLE
-          ON UPDATE NO ACTION
-          ON DELETE NO ACTION
-    );
-    `
 );
 pool.query(
   `
@@ -361,9 +366,15 @@ pool.query(
   `
 );
 pool.query(
+  ` INSERT INTO public.payer(
+    id_locataire, type_paiement, heure_paiement, date_paiement,id_payer)
+    VALUES ('test_locataire1', 'stripe', '08:00:00', '2022-09-02',1);
+    `
+);
+pool.query(
   ` INSERT INTO public.facture(
-    date_facture, montant, heure, tva, id_louer)
-    VALUES ('2022-03-30', '14000', '08:00', '500', 1);
+    date_facture, montant, heure, tva, id_louer,id_payer)
+    VALUES ('2022-03-30', 14000, '08:00', '17', 1,1);
     `
 );
 pool.query(

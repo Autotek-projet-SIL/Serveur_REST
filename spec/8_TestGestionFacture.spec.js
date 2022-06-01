@@ -37,6 +37,7 @@ describe("Tester le service Facture", () => {
       heure: "15:25:00",
       tva: 17,
       id_louer: 3,
+      id_payer:1,
     };
     //-----
     await axios
