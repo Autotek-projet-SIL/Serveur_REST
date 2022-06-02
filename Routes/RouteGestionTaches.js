@@ -16,6 +16,11 @@ routerGestionTaches.get(
 );
 
 
+routerGestionTaches.get(
+    "/tache/get_tache_by_id/:id",
+    controllerGestionTaches.getTacheById
+);
+
 //récupérer la liste des taches par id Am
 routerGestionTaches.get(
     "/tache/get_tache_byidam/:id",

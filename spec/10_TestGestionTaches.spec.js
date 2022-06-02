@@ -28,7 +28,7 @@ describe("Tester le service Tache", () => {
         expect(res.status).toEqual(200);
       });
  //-----
-    await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
+    await axios.get(url + "tache/get_tache_by_id/2").then((res) => {
       expect(res.data[0].objet).toEqual(data.objet);
       expect(res.data[0].descriptif).toEqual(data.descriptif);
       expect(res.data[0].etat).toEqual(data.etat);
@@ -42,7 +42,7 @@ describe("Tester le service Tache", () => {
 
   it("Recuperer la liste des taches", async () => {
     await axios.get(url + "tache/get_taches/").then((res) => {
-      console.log(res.data)
+      
       res.data.forEach((element) => {
         if (element.id === 1) {
           expect(element.objet).toEqual('test_objet1');

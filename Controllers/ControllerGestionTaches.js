@@ -19,6 +19,21 @@ const addTache = async (request, response) => {
     });
 };
 
+
+//recuperer une tache par son id (utiliser seulement pour les tests)
+const getTacheById = async (request, response) => {
+  firebaseVerifyToken
+    .verifyToken(request)
+    .then(async (res) => {
+      await ServiceGestionTaches.getTacheById(request, response);
+    })
+    .catch((error) => {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(403);
+    });
+};
+
 //recuperer la liste des taches
 const getTaches = async (request, response) => {
   firebaseVerifyToken
@@ -84,6 +99,7 @@ module.exports = {
   getTaches,
   getTacheByIdAm,
     updateEtatTache,
-    updateEtatAvancementTache
+    updateEtatAvancementTache,
+    getTacheById
 
 };

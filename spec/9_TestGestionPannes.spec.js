@@ -33,7 +33,7 @@ describe("Tester le service Panne", () => {
 
   it("Recuperer la liste des pannes", async () => {
     await axios.get(url+"gestionpannes/get_pannes/").then((res) => {
-      console.log(res.data)
+   
       //expect(res.data.length).toEqual(1);
       res.data.forEach((element) => {
         if (element.id === 1) {
