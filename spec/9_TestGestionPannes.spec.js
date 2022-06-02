@@ -4,17 +4,6 @@ const url = "http://localhost:4000/";
 
 describe("Tester le service Panne", () => {
 
-  it("Recuperer la liste des pannes", async () => {
-    await axios.get(url+"gestionpannes/get_pannes/").then((res) => {
-      expect(res.data.length).toEqual(1);
-      res.data.forEach((element) => {
-        if (element.id === 1) {
-          expect(element.numero_chassis).toEqual('test_v1');
-          expect(element.id_tache).toEqual(1);
-        }
-      });
-    });
-  });
  
 
   it("Ajouter un panne", async () => {
@@ -42,5 +31,18 @@ describe("Tester le service Panne", () => {
     });
   });
 
+  it("Recuperer la liste des pannes", async () => {
+    await axios.get(url+"gestionpannes/get_pannes/").then((res) => {
+      console.log(res.data)
+      //expect(res.data.length).toEqual(1);
+      res.data.forEach((element) => {
+        if (element.id === 1) {
+          expect(element.numero_chassis).toEqual('test_v1');
+          expect(element.id_tache).toEqual(1);
+        }
+      });
+    });
+  });
+ 
 
 });

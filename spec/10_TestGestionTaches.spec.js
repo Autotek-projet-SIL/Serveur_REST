@@ -5,18 +5,7 @@ const url = "http://localhost:4000/";
 describe("Tester le service Tache", () => {
 
 
-it("Recuperer la liste des taches", async () => {
-    await axios.get(url + "tache/get_taches/").then((res) => {
-      
-      res.data.forEach((element) => {
-        if (element.id === 1) {
-          expect(element.objet).toEqual('test_objet1');
-          expect(element.descriptif).toEqual('descriptif1');
-          expect(element.etat).toEqual('etat1');
-        }
-      });
-    });
-  });
+
  
 
   
@@ -39,7 +28,7 @@ it("Recuperer la liste des taches", async () => {
         expect(res.status).toEqual(200);
       });
  //-----
-    await axios.get(url + "tache/get_tache_byidam/test_am2").then((res) => {
+    await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
       expect(res.data[0].objet).toEqual(data.objet);
       expect(res.data[0].descriptif).toEqual(data.descriptif);
       expect(res.data[0].etat).toEqual(data.etat);
@@ -51,7 +40,18 @@ it("Recuperer la liste des taches", async () => {
     });
   });
 
-
+  it("Recuperer la liste des taches", async () => {
+    await axios.get(url + "tache/get_taches/").then((res) => {
+      console.log(res.data)
+      res.data.forEach((element) => {
+        if (element.id === 1) {
+          expect(element.objet).toEqual('test_objet1');
+          expect(element.descriptif).toEqual('descriptif1');
+          expect(element.etat).toEqual('etat1');
+        }
+      });
+    });
+  });
   it("Recuperer la liste des taches d'un am", async () => {
     await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
       res.data.forEach((element) => {

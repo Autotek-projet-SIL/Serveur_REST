@@ -84,7 +84,10 @@ const updateEtatAvancementTache = async (request, response) => {
 const getTacheByIdAm = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    `SELECT * FROM tache WHERE id_am = $1;`,
+    `Select t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule
+    from tache t left join panne p ON t.id_tache = p.id_tache
+    inner join vehicule v ON v.numero_chassis = p.numero_chassis
+    WHERE t.id_am = $1`,
     [id],
     (error, results) => {
       if (error) {
