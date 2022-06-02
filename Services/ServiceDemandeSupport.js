@@ -7,63 +7,33 @@ const modelDemandeSupport = require("../Models/ModelDemandeSupport");
 
 //Recuperer la liste de toutes les demandes de support
 const getDemandeSupport = async (request, response) => {
-    try {
-        await modelDemandeSupport.getDemandeSupport(request, response);
-    } catch (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-    }
-  };
+  await modelDemandeSupport.getDemandeSupport(request, response);
+};
 
 //récupérer un demandes de support par id
 const getDemandeSupportById = async (request, response) => {
-    try {
-        await modelDemandeSupport.getDemandeSupportById(request, response);
-    } catch (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-    }
-  };
+  await modelDemandeSupport.getDemandeSupportById(request, response);
+};
 
 //récupérer la liste des demandes de support d'un location
 const getDemandeSupportLouer = async (request, response) => {
-    try {
-        await modelDemandeSupport.getDemandeSupportLouer(request, response);
-    } catch (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-    }
-  };
+  await modelDemandeSupport.getDemandeSupportLouer(request, response);
+};
 
 //Ajouter un demande de support
 const addDemandeSupport = async (request, response) => {
-    try {
-        await modelDemandeSupport.addDemandeSupport(request, response);
-    } catch (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-    }
-  };
+  await modelDemandeSupport.addDemandeSupport(request, response);
+};
 
 //Mettre a jour le champs reponse d'un demande de support
 const responseDemandeSupport = async (request, response) => {
-    try {
-        await modelDemandeSupport.responseDemandeSupport(request, response);
-    } catch (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-    }
-  };
-  
-  module.exports = {
-    getDemandeSupport,
-    getDemandeSupportById,
-    getDemandeSupportLouer,
-    addDemandeSupport,
-    responseDemandeSupport,
-  };
+  await modelDemandeSupport.responseDemandeSupport(request, response);
+};
+
+module.exports = {
+  getDemandeSupport,
+  getDemandeSupportById,
+  getDemandeSupportLouer,
+  addDemandeSupport,
+  responseDemandeSupport,
+};

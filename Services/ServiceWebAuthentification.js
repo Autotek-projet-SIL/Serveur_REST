@@ -15,7 +15,6 @@ const validerDemandeInscription = async (request, response) => {
   );
   await ModelLocataire.updateLocataireStatus(request, response, true);
 };
-
 const refuserDemandeInscription = async (request, response) => {
   await ModelDemandeInscription.updateDemandeInscription(
     request,

@@ -4,6 +4,9 @@ const log = require("../config/Logger");
 // Fonction du service de notifications*
 const sendNotification = async (title, body, request, response) => {
   const email = request.params.email;
+  if (email == undefined) {
+    email = request.body.email;
+  }
   let uid;
   await firebase.auth
     .getUserByEmail(email)
@@ -13,6 +16,7 @@ const sendNotification = async (title, body, request, response) => {
       if (user.exists) {
         let registrationToken = await user.data()["device_token"];
         registrationToken = registrationToken.replace(/\s/g, "");
+        console.log(registrationToken)
         var payload = {
           notification: {
             title: title,
@@ -29,12 +33,14 @@ const sendNotification = async (title, body, request, response) => {
             console.log("Successfully sent message:", response);
           })
           .catch(function (error) {
+            console.log(error);
             log.loggerConsole.error(error);
             log.loggerFile.error(error);
           });
       }
     })
     .catch((error) => {
+      console.log(error);
       log.loggerFile.error(error);
     });
 };

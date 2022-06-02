@@ -39,8 +39,10 @@ const routeMailing = require("../Routes/RouteMailing");
 const routeGestionLocations = require("../Routes/RouteGestionLocations.js");
 const routeStatistiques = require("../Routes/RouteStatistiques.js");
 const routeGestionFactures = require("../Routes/RouteGestionFactures.js");
+const routeGestionPannes = require("../Routes/RouteGestionPannes.js");
+const routeGestionTaches = require("../Routes/RouteGestionTaches.js");
 const routePaiement = require("../Routes/RoutePaiement.js");
-const routeDemandeSupport=require("../Routes/RouteDemandeSupport.js")
+const routeDemandeSupport = require("../Routes/RouteDemandeSupport.js");
 
 // Configurer le serveur pour utiliser morgan
 app.use(bodyParser.json());
@@ -64,8 +66,10 @@ app.use("/", routeMailing);
 app.use("/", routeGestionLocations);
 app.use("/", routeStatistiques);
 app.use("/", routeGestionFactures);
+app.use("/", routeGestionPannes);
 app.use("/", routePaiement);
-app.use("/",routeDemandeSupport)
+app.use("/", routeDemandeSupport);
+app.use("/", routeGestionTaches);
 app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });

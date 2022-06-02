@@ -152,6 +152,8 @@ pool.query(
       date_debut date NOT NULL,
       date_fin date NOT NULL,
       id_am character varying(28)  NOT NULL,
+      etat_avancement real NOT NULL,
+      type_tache character varying(28)  NOT NULL,
       CONSTRAINT tache_pkey PRIMARY KEY (id_tache),
       CONSTRAINT tache_id_am_fkey FOREIGN KEY (id_am)
           REFERENCES public.am (id_am) MATCH SIMPLE
@@ -164,8 +166,6 @@ pool.query(
   `
     CREATE TABLE public.panne (
       id_panne serial NOT NULL,
-      objet character varying(50) COLLATE pg_catalog."default" NOT NULL,
-      descriptif character varying(255) COLLATE pg_catalog."default" NOT NULL,
       numero_chassis character varying(10) COLLATE pg_catalog."default" NOT NULL,
       id_tache serial NOT NULL,
       CONSTRAINT panne_pkey PRIMARY KEY (id_panne),
@@ -383,5 +383,17 @@ pool.query(
     VALUES ('demandeSupport', 'ceci est un exemple de demande de support', 'Ceci est une reponse', 'email@gmail.com', 1 );  
 `
 );
- 
+pool.query(
+  ` INSERT INTO public.tache(
+     objet, descriptif, etat, date_debut, date_fin, id_am, etat_avancement, type_tache)
+    VALUES ( 'test_objet1', 'descriptif1', 'en cours' , '2022-03-30', '2021-03-30', 'test_am1', 40 , 'type_tache1');
+    `
+);
+
+pool.query(
+  ` INSERT INTO public.panne(
+    numero_chassis, id_tache)
+    VALUES ( 'test_v1', 1 );
+    `
+);
 module.exports = pool;
