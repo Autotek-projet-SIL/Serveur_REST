@@ -3,7 +3,7 @@ const log = require("../config/Logger");
 
 // Fonction du service de notifications*
 const sendNotification = async (title, body, request, response) => {
-  const email = request.params.email;
+  let email = request.params.email;
   if (email == undefined) {
     email = request.body.email;
   }

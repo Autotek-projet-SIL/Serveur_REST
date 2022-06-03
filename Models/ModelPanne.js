@@ -33,7 +33,7 @@ const addPanne = async (request, response, data) => {
               log.loggerFile.error(error);
               response.statusCode = 500;
             } else {
-              response.sendStatus(200);
+              response.statusCode = 200;
             }
           }
         );

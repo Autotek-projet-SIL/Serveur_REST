@@ -71,7 +71,7 @@ const responseDemandeSupport = async (request, response) => {
       if (response.statusCode == 200) {
         if (process.env.NODE_ENV === "production") {
           await serviceNotification.sendNotification(
-            "Reponse de demande de support",
+            "Reponse de votre demande de support",
             request.body.response,
             request,
             response

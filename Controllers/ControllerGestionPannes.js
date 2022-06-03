@@ -1,6 +1,7 @@
 // Declaration de variables
 const ServiceGestionPannes = require("../Services/ServiceGestionPannes.js");
 const firebaseVerifyToken = require("../config/firebase.js");
+let serviceNotification = require("../Services/ServiceNotification");
 const log = require("../config/Logger");
 
 // Fonctions du controlleur de gestion des pannes
@@ -14,12 +15,13 @@ const addPanne = async (request, response) => {
       if (response.statusCode == 200) {
         if (process.env.NODE_ENV === "production") {
           await serviceNotification.sendNotification(
-            "Nouvelle tache",
-            "Une nouvelle tache vous est attribuée",
+            "Nouvelle tache attribuée",
+            request.body.descriptif,
             request,
             response
           );
         }
+        response.sendStatus(200);
       } else {
         response.sendStatus(500);
       }

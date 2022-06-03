@@ -2,7 +2,7 @@
 const ServiceGestionTaches = require("../Services/ServiceGestionTaches.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
-
+let serviceNotification = require("../Services/ServiceNotification");
 // Fonctions du controlleur de gestion des taches
 
 //ajouter une tache
@@ -14,8 +14,8 @@ const addTache = async (request, response) => {
       if (response.statusCode == 200) {
         if (process.env.NODE_ENV === "production") {
           await serviceNotification.sendNotification(
-            "Nouvelle tache",
-            "Une nouvelle tache vous est attribuée",
+            "Nouvelle tache attribuée",
+            request.body.descriptif,
             request,
             response
           );
