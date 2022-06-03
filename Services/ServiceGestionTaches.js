@@ -15,6 +15,11 @@ const getTaches = async (request, response) => {
   await ModelTache.getTaches(request, response);
 };
 
+//recuperer la liste des taches
+const getTacheById = async (request, response) => {
+  await ModelTache.getTacheById(request, response);
+};
+
 //recuperer la liste des taches par am
 const getTacheByIdAm = async (request, response) => {
   await ModelTache.getTacheByIdAm(request, response);
@@ -36,5 +41,6 @@ module.exports = {
   getTaches,
   getTacheByIdAm,
   updateEtatTache,
+  getTacheById,
   updateEtatAvancementTache,
 };

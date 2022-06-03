@@ -16,7 +16,6 @@ const sendNotification = async (title, body, request, response) => {
       if (user.exists) {
         let registrationToken = await user.data()["device_token"];
         registrationToken = registrationToken.replace(/\s/g, "");
-        console.log(registrationToken)
         var payload = {
           notification: {
             title: title,

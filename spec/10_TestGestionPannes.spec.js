@@ -13,7 +13,6 @@ describe("Tester le service Panne", () => {
       });
     });
   });
-
   it("Ajouter un panne", async () => {
     let data = {
       objet: "test_objet1",
@@ -33,6 +32,17 @@ describe("Tester le service Panne", () => {
     //-----
     await axios.get(url + "gestionpannes/panne/2").then((res) => {
       expect(res.data[0].numero_chassis).toEqual(data.numero_chassis);
+    });
+  });
+  it("Recuperer la liste des pannes", async () => {
+    await axios.get(url + "gestionpannes/get_pannes/").then((res) => {
+      //expect(res.data.length).toEqual(1);
+      res.data.forEach((element) => {
+        if (element.id === 1) {
+          expect(element.numero_chassis).toEqual("test_v1");
+          expect(element.id_tache).toEqual(1);
+        }
+      });
     });
   });
 });

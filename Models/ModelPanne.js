@@ -45,7 +45,7 @@ const addPanne = async (request, response, data) => {
 // Recuperer la liste des pannes
 const getPannes = async (request, response) => {
   pool.query(
-    `Select id_panne, numero_chassis, id_tache from panne;`,
+    `Select t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule from panne p  inner join tache t  ON t.id_tache = p.id_tache inner join vehicule v ON v.numero_chassis = p.numero_chassis`,
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);

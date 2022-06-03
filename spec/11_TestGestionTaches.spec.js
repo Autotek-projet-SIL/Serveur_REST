@@ -5,10 +5,10 @@ describe("Tester le service Tache", () => {
   it("Recuperer la liste des taches", async () => {
     await axios.get(url + "tache/get_taches/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id === 1) {
+        if (element.id_tache === 1) {
           expect(element.objet).toEqual("test_objet1");
           expect(element.descriptif).toEqual("descriptif1");
-          expect(element.etat).toEqual("etat1");
+          expect(element.etat).toEqual('en cours');
         }
       });
     });
@@ -30,7 +30,7 @@ describe("Tester le service Tache", () => {
       expect(res.status).toEqual(200);
     });
     //-----
-    await axios.get(url + "tache/get_tache_byidam/test_am2").then((res) => {
+    await axios.get(url + "tache/get_tache_by_id/3").then((res) => {
       expect(res.data[0].objet).toEqual(data.objet);
       expect(res.data[0].descriptif).toEqual(data.descriptif);
       expect(res.data[0].etat).toEqual(data.etat);
@@ -46,6 +46,17 @@ describe("Tester le service Tache", () => {
     });
   });
 
+  it("Recuperer la liste des taches", async () => {
+    await axios.get(url + "tache/get_taches/").then((res) => {
+      res.data.forEach((element) => {
+        if (element.id === 1) {
+          expect(element.objet).toEqual("test_objet1");
+          expect(element.descriptif).toEqual("descriptif1");
+          expect(element.etat).toEqual("etat1");
+        }
+      });
+    });
+  });
   it("Recuperer la liste des taches d'un am", async () => {
     await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
       res.data.forEach((element) => {
@@ -58,7 +69,7 @@ describe("Tester le service Tache", () => {
     let tache = {
       etat: "finis",
     };
-    await axios.put(url + "tache/modifier_etat_tache/2", tache).then((res) => {
+    await axios.put(url + "tache/modifier_etat_tache/3", tache).then((res) => {
       expect(res.status).toEqual(200);
     });
     //-----
@@ -81,7 +92,9 @@ describe("Tester le service Tache", () => {
     //-----
     await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
       res.data.forEach((element) => {
-        expect(element.etat_avancement).toEqual(100);
+        if(element.id_tache === 1){
+          expect(element.etat_avancement).toEqual(100);
+        }
       });
     });
   });
