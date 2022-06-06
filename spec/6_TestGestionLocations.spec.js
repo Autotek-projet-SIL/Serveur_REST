@@ -5,16 +5,24 @@ describe("Tester le service Gestion des Locations", () => {
   //-----
   it("Ajouter une location", async () => {
     let data = {
-      date_debut: "2022-03-29",
-      status_demande_location: "accepte",
-      id_locataire: "test_locataire1",
-      region: "alger",
-      numero_chassis: "test_v2",
-      id_trajet: "2",
-      en_cours: "t",
-      point_depart: "alger",
-      point_arrive: "Tipaza",
-    };
+    
+       token: "token de firebase",
+       id_sender : "test",
+       date_debut:"2022-12-12", 
+        status_demande_location:"accepte", 
+         id_locataire:"test_locataire2",
+         region:"alger",
+         numero_chassis:"test_v1",
+         en_cours:true,
+         latitude_depart:5,
+         latitude_arrive:5,
+         longitude_depart:5,
+         longitude_arrive:10,
+         suivi_location:"bloque"
+
+        
+            
+   }
     //-----
     await axios
       .post(url + "gestionlocations/ajouter_location/", data)
@@ -25,19 +33,19 @@ describe("Tester le service Gestion des Locations", () => {
     await axios
       .get(
         url +
-          "gestionlocations/get_locations_by_locataire/test_locataire1"
+          "gestionlocations/get_locations_by_locataire/test_locataire2"
       )
       .then((res) => {
         expect(res.data[0].en_cours).toEqual(true);
         expect(res.data[0].region).toEqual("alger");
-        expect(res.data[0].date_debut).toEqual("2022-03-29T00:00:00.000Z");
+        expect(res.data[0].date_debut).toEqual("2022-12-12T00:00:00.000Z");
       });
   });
  //-----
   it("Recuperer la liste des locations ", async () => {
     await axios.get(url + "gestionlocations/locations").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_louer === "1")
+        if (element.id_louer === 1)
           expect(element.status_demande_location).toEqual("accepte");
       });
     });
@@ -54,6 +62,11 @@ describe("Tester le service Gestion des Locations", () => {
   it("Terminer une location", async () => {
     let data = {
       heure: "15:00",
+      "numero_chassis":"0123456788",
+      "date_facture": "2021-09-29",
+      "montant": 5555,
+      "tva": 17,
+      "id_louer":2
     };
     await axios
       .put(url + "gestionlocations/end_location/2", data)

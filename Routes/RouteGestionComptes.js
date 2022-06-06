@@ -37,4 +37,5 @@ routerGestionComptes.post(
   controllerGestionComptes.addAM
 );
 
+// Exporter le router gestion des comptes
 module.exports = routerGestionComptes;

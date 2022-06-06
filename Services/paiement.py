@@ -5,8 +5,8 @@ import webbrowser
 import os
 import sys
 # account credentials
-username = "autotek078@gmail.com"
-password = "tbxmdgftetkjgbof" 
+username = os.environ['autotek_mail']
+password = os.environ['autotek_password']
 def clean(text):
     # clean text for creating a foldercls
     return "".join(c if c.isalnum() else "_" for c in text)
@@ -54,10 +54,11 @@ for i in range(messages, messages-N, -1):
                         # print text/plain emails and skip attachments
                         res = body.split()
                         try:
-                            if sys.argv[1]==res[3] and sys.argv[2]==res[7] and sys.argv[3]==res[10]:
+                            if sys.argv[1]==res[3] and sys.argv[2]==res[10] :
                                 print(True)
                         except IndexError:
                             pass
 # close the connection and logout
 imap.close()
 imap.logout()
+##and From=="baridimob@poste.dz"

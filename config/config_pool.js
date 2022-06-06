@@ -1,5 +1,5 @@
-// Declaration de variables
-// Pool pour l'accés a la base de données
+// Choix d'un pool en fonction de la varibale d'environement
+
 let pool = null;
 if (process.env.NODE_ENV === "test_unitaire") {
   pool = require("../config/bd_test_unitaire");
@@ -8,4 +8,5 @@ if (process.env.NODE_ENV === "test_unitaire") {
 } else {
   pool = require("../config/bd_test_integration");
 }
+// Exporter le pool
 module.exports = pool;

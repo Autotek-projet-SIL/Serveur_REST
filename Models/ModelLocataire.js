@@ -137,6 +137,24 @@ const updateLocataireStatus = async (request, response, status) => {
   );
 };
 
+// Mettre a jour le stripe id d'un locataire
+const updateLocataireStripeId = async (email, stripe_id) => {
+  await pool.query("UPDATE locataire SET stripe_id=$2 WHERE email=$1", [
+    email,
+    stripe_id,
+  ]);
+  return;
+};
+
+// Recuperer le stripe id d'un locataire
+const getLocaireStripeIdByEmail = async (email) => {
+  let Results = await pool.query(
+    "Select stripe_id from locataire where email=$1",
+    [email]
+  );
+  return Results.rows[0];
+};
+
 // Supprimer un locataire
 const deleteLocataire = async (request, response) => {
   let id = request.params.id;
@@ -165,4 +183,6 @@ module.exports = {
   deleteLocataire,
   updateLocataireStatus,
   deleteLocataire,
+  getLocaireStripeIdByEmail,
+  updateLocataireStripeId,
 };

@@ -7,193 +7,79 @@ const log = require("../config/Logger");
 
 // Fonctions du service de gestion des profils
 const getLocataireById = async (request, response) => {
-  try {
-    await ModelLocataire.getLocataireById(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelLocataire.getLocataireById(request, response);
 };
 
 const getLocataires = async (request, response) => {
-  try {
-    await ModelLocataire.getLocataires(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelLocataire.getLocataires(request, response);
 };
 
 const updateLocataire = async (request, response) => {
-  try {
-    await ModelLocataire.updateLocataire(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelLocataire.updateLocataire(request, response);
 };
 
 const getATCById = async (request, response) => {
-  try {
-    await ModelATC.getATCById(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.getATCById(request, response);
 };
 
 const getATCs = async (request, response) => {
-  try {
-    await ModelATC.getATCs(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.getATCs(request, response);
 };
 
 const updateATC = async (request, response) => {
-  try {
-    await ModelATC.updateATC(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.updateATC(request, response);
 };
 
 const updateATCPhoto = async (request, response) => {
-  try {
-    await ModelATC.updateATCPhoto(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.updateATCPhoto(request, response);
 };
 
 const updateATCPassword = async (request, response) => {
-  try {
-    await ModelATC.updateATCPassword(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.updateATCPassword(request, response);
 };
 
 const updateATCStatut = async (request, response) => {
-  try {
-    await ModelATC.updateATCStatut(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelATC.updateATCStatut(request, response);
 };
 
 const getDecideurById = async (request, response) => {
-  try {
-    await ModelDecideur.getDecideurById(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.getDecideurById(request, response);
 };
 
 const getDecideurs = async (request, response) => {
-  try {
-    await ModelDecideur.getDecideurs(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.getDecideurs(request, response);
 };
 
 const updateDecideur = async (request, response) => {
-  try {
-    await ModelDecideur.updateDecideur(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.updateDecideur(request, response);
 };
 
 const updateDecideurPhoto = async (request, response) => {
-  try {
-    await ModelDecideur.updateDecideurPhoto(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.updateDecideurPhoto(request, response);
 };
 
 const updateDecideurPassword = async (request, response) => {
-  try {
-    await ModelDecideur.updateDecideurPassword(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelDecideur.updateDecideurPassword(request, response);
 };
 
 const getAMById = async (request, response) => {
-  try {
-    await ModelAM.getAMById(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.getAMById(request, response);
 };
 
 const getAMs = async (request, response) => {
-  try {
-    await ModelAM.getAMs(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.getAMs(request, response);
 };
 
 const updateAM = async (request, response) => {
-  try {
-    await ModelAM.updateAM(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.updateAM(request, response);
 };
 
 const updateAMPhoto = async (request, response) => {
-  try {
-    await ModelAM.updateAMPhoto(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.updateAMPhoto(request, response);
 };
 
 const updateAMPassword = async (request, response) => {
-  try {
-    await ModelAM.updateAMPassword(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelAM.updateAMPassword(request, response);
 };
 
 //Exporter les fonctions du service de gestion des profils

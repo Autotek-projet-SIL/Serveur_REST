@@ -29,4 +29,5 @@ routerStatistiques.get(
     ControllerStatistiques.getLocationsRejetes
 );
 
+// Exporter le router statistiques
 module.exports = routerStatistiques ;

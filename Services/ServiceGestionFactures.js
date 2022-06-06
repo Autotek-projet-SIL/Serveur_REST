@@ -4,43 +4,19 @@ const log = require("../config/Logger");
 
 // Fonctions du service de gestion des factures
 const addFacture = async (request, response) => {
-  try {
-    await ModelFacture.addFacture(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelFacture.addFacture(request, response);
 };
 
 const getFactures = async (request, response) => {
-    try {
-      await ModelFacture.getFactures(request, response);
-    } catch (error) {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(500);
-    }
+  await ModelFacture.getFactures(request, response);
 };
 
 const getFactureById = async (request, response) => {
-    try {
-      await ModelFacture.getFactureById(request, response);
-    } catch (error) {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(500);
-    }
+  await ModelFacture.getFactureById(request, response);
 };
 
 const getFactureByIdLouer = async (request, response) => {
-  try {
-    await ModelFacture.getFactureByIdLouer(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await ModelFacture.getFactureByIdLouer(request, response);
 };
 
 //Exporter les fonctions du service de gestion des factures

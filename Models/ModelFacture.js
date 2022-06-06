@@ -6,41 +6,45 @@ const log = require("../config/Logger");
 const addFacture = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer )VALUES ($1, $2, $3, $4, $5)",
-    [body.date_facture, body.montant, body.heure, body.tva, body.id_louer],
+    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer,id_payer )VALUES ($1, $2, $3, $4, $5,$6)",
+    [body.date_facture, body.montant, body.heure, body.tva, body.id_louer,body.id_payer],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
         response.statusCode = 500;
       } else {
-        response.sendStatus(200);
+        if(process.env.NODE_ENV === "test_unitaire"){
+          response.sendStatus(200)
+        }else{
+          response.statusCode=200
+        }
       }
-      //  response.sendStatus(response.statusCode);
     }
   );
 };
 
 // Recuperer le détail d'une facture
-async function getFactureDetailByID(request, response){
-  let id_facture = request.params.id_facture;
-  try{     
-         let Results= await pool.query(`SELECT f.id_facture,to_char(f.date_facture, 'DD-MM-YYYY') as date_facture,f.montant,f.heure,f.tva,
+async function getFactureDetailByID(request, response) {
+  let id_louer = request.body.id_louer;
+  try {
+    let Results = await pool.query(
+      `SELECT f.id_facture,to_char(f.date_facture, 'DD-MM-YYYY') as date_facture,f.montant,f.heure,f.tva,
          to_char(l.date_debut, 'DD-MM-YYYY') as date_debut,l.heure_debut,l.heure_fin,l.region,l.numero_chassis,v.modele,v.marque,
          lo.nom,lo.prenom,lo.email
          FROM facture f LEFT JOIN louer l ON  f.id_louer = l.id_louer LEFT JOIN locataire lo ON l.id_locataire = lo.id_locataire LEFT JOIN vehicule v ON l.numero_chassis = v.numero_chassis
-         WHERE f.id_facture=$1`, [id_facture]);
-          response.status(200).json(Results.rows)
-         return Results.rows[0];
-      }
-      catch(error){
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-        }
+         WHERE f.id_louer=$1`,
+      [id_louer]
+    );
+    return Results.rows[0];
+  } catch (error) {
+    log.loggerConsole.error(error);
+    log.loggerFile.error(error);
+    response.sendStatus(500);
+  }
 }
 
-// Mettre a jour les informations d'un facture
+// Mettre a jour les informations d'une facture
 const updateFacture = async (request, response) => {
   let id_facture = request.params.id_facture;
   let body = request.body;
@@ -57,9 +61,11 @@ const updateFacture = async (request, response) => {
     }
   );
 };
+
+//Recuperer la liste des factures pour le service statistiques
 const getFactureStatistics = async (request, response) => {
   pool.query(
-    "SELECT id_facture, date_facture , montant FROM facture ",
+    "SELECT f.id_facture, f.date_facture , f.montant,l.region FROM facture f join louer l on f.id_louer=l.id_louer; ",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -72,7 +78,7 @@ const getFactureStatistics = async (request, response) => {
   );
 };
 
-// Recuperer la liste de tous les factures
+// Recuperer la liste de toutes les factures
 const getFactures = async (request, response) => {
   pool.query(
     `SELECT id_facture, date_facture, montant, heure, tva, id_louer
@@ -89,7 +95,7 @@ const getFactures = async (request, response) => {
   );
 };
 
-// Recuperer une facture par id
+// Recuperer une facture par son identifiant
 const getFactureById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -109,7 +115,7 @@ const getFactureById = async (request, response) => {
   );
 };
 
-// Recuperer une facture par id
+// Recuperer une facture par id de location
 const getFactureByIdLouer = async (request, response) => {
   let id = request.params.id_louer;
   pool.query(

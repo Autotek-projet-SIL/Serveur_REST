@@ -1,5 +1,6 @@
 const pg_mem = require("pg-mem");
 
+// Base de données en memoire pour les test unitaires
 const pg = pg_mem.newDb().adapters.createPg();
 
 const pool = new pg.Pool();
@@ -87,22 +88,6 @@ pool.query(
 
 pool.query(
   `
-  CREATE TABLE public.demandesupport(
-  id_demande_support serial NOT NULL,
-  objet character varying(50) NOT NULL,
-  descriptif character varying(255) NOT NULL,
-  reponse character varying(255),
-  id_locataire character varying(28) NOT NULL,
-  CONSTRAINT demandesupport_pkey PRIMARY KEY (id_demande_support),
-  CONSTRAINT demandesupport_id_locataire_fkey FOREIGN KEY (id_locataire)
-      REFERENCES public.locataire (id_locataire) MATCH SIMPLE
-      ON UPDATE CASCADE
-      ON DELETE CASCADE    
-  );
-`
-);
-pool.query(
-  `
 CREATE TABLE public.justificatif (
   id_justificatif serial NOT NULL,
   objet character varying(50) COLLATE pg_catalog."default" NOT NULL,
@@ -167,6 +152,8 @@ pool.query(
       date_debut date NOT NULL,
       date_fin date NOT NULL,
       id_am character varying(28)  NOT NULL,
+      etat_avancement real NOT NULL,
+      type_tache character varying(28)  NOT NULL,
       CONSTRAINT tache_pkey PRIMARY KEY (id_tache),
       CONSTRAINT tache_id_am_fkey FOREIGN KEY (id_am)
           REFERENCES public.am (id_am) MATCH SIMPLE
@@ -179,8 +166,6 @@ pool.query(
   `
     CREATE TABLE public.panne (
       id_panne serial NOT NULL,
-      objet character varying(50) COLLATE pg_catalog."default" NOT NULL,
-      descriptif character varying(255) COLLATE pg_catalog."default" NOT NULL,
       numero_chassis character varying(10) COLLATE pg_catalog."default" NOT NULL,
       id_tache serial NOT NULL,
       CONSTRAINT panne_pkey PRIMARY KEY (id_panne),
@@ -197,11 +182,12 @@ pool.query(
 );
 pool.query(
   `
-    CREATE TABLE public.louer (
+  CREATE TABLE IF NOT EXISTS public.louer
+  (
       status_demande_location character varying(50) NOT NULL,
       id_locataire character varying(28) NOT NULL,
-      numero_chassis character varying(10) NOT NULL,
-      id_louer serial NOT NULL,
+      numero_chassis character varying(10),
+      id_louer serial NOT NULL ,
       en_cours boolean,
       heure_debut time without time zone,
       heure_fin time without time zone,
@@ -221,7 +207,25 @@ pool.query(
           REFERENCES public.vehicule (numero_chassis) MATCH SIMPLE
           ON UPDATE NO ACTION
           ON DELETE NO ACTION
-    );
+  )
+    `
+);
+
+pool.query(
+  `
+  CREATE TABLE IF NOT EXISTS public.payer
+  (
+      id_locataire character varying(28) NOT NULL,
+      type_paiement character varying(50) NOT NULL,
+      heure_paiement time without time zone NOT NULL,
+      date_paiement date NOT NULL,
+      id_payer serial NOT NULL ,
+      CONSTRAINT payer_pkey PRIMARY KEY (id_payer),
+      CONSTRAINT payer_id_locataire_fkey FOREIGN KEY (id_locataire)
+          REFERENCES public.locataire (id_locataire) MATCH SIMPLE
+          ON UPDATE NO ACTION
+          ON DELETE NO ACTION
+  );
     `
 );
 pool.query(
@@ -230,10 +234,15 @@ pool.query(
   id_facture serial NOT NULL ,
   date_facture date NOT NULL,
   montant real NOT NULL,
+  id_payer serial NOT NULL,
   heure time without time zone NOT NULL,
   tva real NOT NULL,
   id_louer serial NOT NULL ,
   CONSTRAINT facture_pkey PRIMARY KEY (id_facture),
+  CONSTRAINT payer_id_facture_fkey FOREIGN KEY (id_payer)
+  REFERENCES public.payer (id_payer) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION,
   CONSTRAINT id_louer FOREIGN KEY (id_louer)
       REFERENCES public.louer (id_louer) MATCH SIMPLE
       ON UPDATE CASCADE
@@ -243,22 +252,23 @@ pool.query(
   )
     `
 );
+
 pool.query(
   `
-    CREATE TABLE public.payer (
-      id_locataire character varying(28) NOT NULL,
-      id_facture serial NOT NULL,
-      type_paiement character varying(50) NOT NULL,
-      CONSTRAINT payer_id_facture_fkey FOREIGN KEY (id_facture)
-          REFERENCES public.facture (id_facture) MATCH SIMPLE
-          ON UPDATE NO ACTION
-          ON DELETE NO ACTION,
-      CONSTRAINT payer_id_locataire_fkey FOREIGN KEY (id_locataire)
-          REFERENCES public.locataire (id_locataire) MATCH SIMPLE
-          ON UPDATE NO ACTION
-          ON DELETE NO ACTION
-    );
-    `
+  CREATE TABLE public.demandesupport(
+  id_demande_support serial NOT NULL,
+  objet character varying(50) NOT NULL,
+  descriptif character varying(255) NOT NULL,
+  reponse character varying(255),
+  email character varying(50) NOT NULL,
+  id_louer serial NOT NULL ,
+  CONSTRAINT demandesupport_pkey PRIMARY KEY (id_demande_support),
+  CONSTRAINT demandesupport_id_louer_fkey FOREIGN KEY (id_louer)
+      REFERENCES public.louer (id_louer) MATCH SIMPLE
+      ON UPDATE CASCADE
+      ON DELETE CASCADE    
+  );
+`
 );
 pool.query(
   `
@@ -291,7 +301,8 @@ pool.query(
     INSERT INTO public.locataire(
         id_locataire, nom, prenom, numero_telephone, email, mot_de_passe, statut_compte, photo_identite_recto, photo_selfie, photo_identite_verso)
         VALUES ('test_locataire1','test_locataire1', 'test_locataire1', '0541251311', 'test_locataire1@gmail.com', 'test_locataire1', 'f', 'test_locataire1', 'test_locataire1', 'test_locataire1');
-    `
+        VALUES ('test_locataire2','test_locataire1', 'test_locataire1', '0541251311', 'test_locataire1@gmail.com', 'test_locataire1', 'f', 'test_locataire1', 'test_locataire1', 'test_locataire1');
+        `
 );
 pool.query(
   `
@@ -349,15 +360,40 @@ pool.query(
 pool.query(
   `
   INSERT INTO public.louer(
-   id_louer,date_debut,   status_demande_location, id_locataire, region, numero_chassis, en_cours,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive)
-   VALUES (1,'2022-03-29','accepte', 'test_locataire1', 'alger', 'test_v1','true',0,0,1,1),
-   (2,'2022-03-02','accepte', 'test_locataire1', 'alger', 'test_v2','false',0,0,1,1);
+   date_debut,   status_demande_location, id_locataire, region, numero_chassis, en_cours,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive)
+   VALUES ('2022-03-29','accepte', 'test_locataire1', 'alger', 'test_v1','true',0,0,1,1),
+   ('2022-03-02','accepte', 'test_locataire1', 'alger', 'test_v2','false',0,0,1,1);
   `
 );
 pool.query(
+  ` INSERT INTO public.payer(
+    id_locataire, type_paiement, heure_paiement, date_paiement,id_payer)
+    VALUES ('test_locataire1', 'stripe', '08:00:00', '2022-09-02',1);
+    `
+);
+pool.query(
   ` INSERT INTO public.facture(
-    id_facture,date_facture, montant, heure, tva, id_louer)
-    VALUES (1,'2022-03-30', '14000', '08:00', '500', 1);
+    date_facture, montant, heure, tva, id_louer,id_payer)
+    VALUES ('2022-03-30', 14000, '08:00', '17', 1,1);
+    `
+);
+pool.query(
+  `INSERT INTO public.demandesupport(
+    objet, descriptif, reponse, email, id_louer )
+    VALUES ('demandeSupport', 'ceci est un exemple de demande de support', 'Ceci est une reponse', 'email@gmail.com', 1 );  
+`
+);
+pool.query(
+  ` INSERT INTO public.tache(
+     objet, descriptif, etat, date_debut, date_fin, id_am, etat_avancement, type_tache)
+    VALUES ( 'test_objet1', 'descriptif1', 'en cours' , '2022-03-30', '2021-03-30', 'test_am1', 40 , 'type_tache1');
+    `
+);
+
+pool.query(
+  ` INSERT INTO public.panne(
+    numero_chassis, id_tache)
+    VALUES ( 'test_v1', 1 );
     `
 );
 module.exports = pool;

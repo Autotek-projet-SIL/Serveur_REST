@@ -2,6 +2,7 @@
 const ServiceGestionProfils = require("../Services/ServiceGestionProfils");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
+
 // Fonctions du controlleur de gestion des profils
 const getLocataires = async (request, response) => {
   firebaseVerifyToken
@@ -237,7 +238,6 @@ const updateAMPhoto = async (request, response) => {
     });
 };
 
-
 const updateAMPassword = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -250,7 +250,6 @@ const updateAMPassword = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //Exporter les fonctions du controlleur de gestion des profils
 module.exports = {

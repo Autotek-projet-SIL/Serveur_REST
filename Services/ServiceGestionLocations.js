@@ -4,122 +4,57 @@ const modelLouer = require("../Models/ModelLouer");
 const modelTrajet = require("../Models/ModelTrajet");
 const modelFacture = require("../Models/ModelFacture");
 
-//mettre a jour l'heure de debut de location lors du deveroillage
+// Fonctions du service gestion des locations
+
 const updateLocationHeureDebut = async (request, response) => {
-  try {
-    await modelLouer.updateLocationHeureDebut(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.updateLocationHeureDebut(request, response);
 };
 
-//terminer une location
 const endLocation = async (request, response) => {
-  try {
-    await modelLouer.endLocation(request, response);
-    await modelLouer.updateLocationHeureFin(request, response);
-    await modelLouer.updateVehicleDisponible(
-      (num_chassis = null),
-      response,
-      request.params.id,
-      true
-    );
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.endLocation(request, response);
 };
 
-//récupérer la liste des locations en cours d'un locataire
+const updateLocationSuiviLocation = async (request, response) => {
+  await modelLouer.updateLocationSuiviLocation(request, response);
+};
+
 const getLocationsLocataire = async (request, response) => {
-  try {
-    await modelLouer.getLocationsLocataire(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationsLocataire(request, response);
 };
 
-//Recuperer toutes les locations
 const getAllLocations = async (request, response) => {
-  try {
-    await modelLouer.getAllLocations(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getAllLocations(request, response);
 };
 
-//Recuperer la liste des locations en cours
+const getAllRegions = async (request, response) => {
+  await modelLouer.getAllRegions(request, response);
+};
+
 const getLocationsEnCours = async (request, response) => {
-  try {
-    await modelLouer.getLocationsEnCours(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationsEnCours(request, response);
 };
 
-//Recuperer la liste des locations termines
 const getLocationsTermines = async (request, response) => {
-  try {
-    await modelLouer.getLocationsTermines(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationsTermines(request, response);
 };
 
-//Ajouter une location
 const addLocation = async (request, response) => {
-  try {
-    await modelTrajet.addTrajet(request, response);
-    await modelLouer.addLocation(request, response);
-    if (request.body.status_demande_location == "accepte") {
-      await modelLouer.updateVehicleDisponible(
-        (num_chassis = request.body.numero_chassis),
-        response,
-        (id_louer = null),
-        false
-      );
-    } else {
-      response.sendStatus(response.statusCode);
-    }
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.addLocation(request, response);
 };
 
-//recuperer une location par son id
 const getLocationById = async (request, response) => {
-  try {
-    await modelLouer.getLocationById(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationById(request, response);
 };
-//recuperer la liste des locations terminés d'un locataire
+
 const getLocationsTerminesByIdLocataire = async (request, response) => {
-  try {
-    await modelLouer.getLocationsTerminesByIdLocataire(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
+  await modelLouer.getLocationsTerminesByIdLocataire(request, response);
 };
-//Exporter les fonctions du service gestion locations
+
+const getLocataireByNumeroChassis = async (request, response) => {
+  await modelLouer.getLocataireByNumeroChassis(request, response);
+};
+
+//Exporter les fonctions du service gestion des locations
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,
@@ -129,5 +64,8 @@ module.exports = {
   getLocationsLocataire,
   getAllLocations,
   updateLocationHeureDebut,
-  getLocationsTerminesByIdLocataire
+  getLocationsTerminesByIdLocataire,
+  updateLocationSuiviLocation,
+  getAllRegions,
+  getLocataireByNumeroChassis,
 };

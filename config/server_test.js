@@ -11,7 +11,11 @@ const routeFlotte = require("../Routes/RouteFlotte.js");
 const routeGestionLocations = require("../Routes/RouteGestionLocations.js");
 const routeStatistiques = require("../Routes/RouteStatistiques.js");
 const routeGestionFactures = require("../Routes/RouteGestionFactures.js");
-const routePaiement=require("../Routes/RoutePaiement.js")
+const routeGestionPannes = require("../Routes/RouteGestionPannes.js");
+const routeGestionTaches = require("../Routes/RouteGestionTaches.js");
+const routePaiement = require("../Routes/RoutePaiement.js");
+const routeMailing = require("../Routes/RouteMailing");
+const routeDemandeSupport = require("../Routes/RouteDemandeSupport.js");
 
 // Configurer le serveur pour utiliser toutes les routes
 app.use(bodyParser.json());
@@ -22,16 +26,21 @@ app.use("/", routeGestionProfils);
 app.use("/", routeGestionComptes);
 app.use("/", routeFlotte);
 app.use("/", routeGestionLocations);
-app.use("/",routeStatistiques);
+app.use("/", routeStatistiques);
 app.use("/", routeGestionFactures);
-app.use("/",routePaiement)
+app.use("/", routePaiement);
+app.use("/", routeMailing);
+app.use("/", routeDemandeSupport);
+app.use("/", routeGestionPannes);
+app.use("/", routeGestionTaches);
 app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });
 
-// Demarrer le serveur
-app.listen(port, () => console.log("Server running on port 3000 ..."));
+// Demarrer le serveur dans le port 4000
+app.listen(port, () => console.log("Server running on port 4000 ..."));
 
+// Exporter l'instance de l'application créé
 module.exports = {
   app,
 };

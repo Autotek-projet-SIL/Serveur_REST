@@ -5,9 +5,9 @@ describe("Tester le service Facture", () => {
   //-----
   it("Recuperer la liste des factures", async () => {
     await axios.get(url + "gestionfacture/facture/").then((res) => {
-      expect(res.data.length).toEqual(1);
+      expect(res.data.length).toEqual(2);
       res.data.forEach((element) => {
-        if (element.id === "1") {
+        if (element.id === 1) {
           expect(element.tva).toEqual("500");
         }
       });
@@ -35,8 +35,9 @@ describe("Tester le service Facture", () => {
       date_facture: "2011-11-11",
       montant: 20503,
       heure: "15:25:00",
-      tva: 200,
-      id_louer: 2,
+      tva: 17,
+      id_louer: 3,
+      id_payer:1,
     };
     //-----
     await axios
@@ -45,7 +46,7 @@ describe("Tester le service Facture", () => {
         expect(res.status).toEqual(200);
       });
  //-----
-    await axios.get(url + "gestionfacture/facture/2").then((res) => {
+    await axios.get(url + "gestionfacture/facture/3").then((res) => {
       expect(Date.parse(res.data[0].date_facture)).toEqual(
         Date.parse(data.date_facture)
       );

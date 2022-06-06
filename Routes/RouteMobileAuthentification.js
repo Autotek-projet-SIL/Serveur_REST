@@ -21,4 +21,5 @@ routerMobileAuthentification.post(
   controllerMobileAuthentification.envoyerDemandeInscription
 );
 
+// Exporter le router mobiel authentification
 module.exports = routerMobileAuthentification;

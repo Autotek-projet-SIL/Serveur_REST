@@ -3,7 +3,7 @@ const express = require("express");
 const routerGestionLocations = express.Router();
 const controllerGestionLocations = require("../Controllers/ControllerGestionLocations.js");
 
-//Declaration des routes du service authentification web
+//Declaration des routes du service gestion des locations
 routerGestionLocations.post(
   "/gestionlocations/ajouter_location/",
   controllerGestionLocations.addLocation
@@ -28,11 +28,12 @@ routerGestionLocations.get(
   "/gestionlocations/locations",
   controllerGestionLocations.getAllLocations
 );
-//ajouter une location
-routerGestionLocations.post(
-  "/gestionlocations/ajouter_location/",
-  controllerGestionLocations.addLocation
+//recuperer toutes les regions
+routerGestionLocations.get(
+  "/gestionlocations/regions",
+  controllerGestionLocations.getAllRegions
 );
+
 //get location by id
 routerGestionLocations.get(
   "/gestionlocations/location/:id",
@@ -48,9 +49,22 @@ routerGestionLocations.put(
   "/gestionlocations/update_location_heure_debut/:id",
   controllerGestionLocations.updateLocationHeureDebut
 );
-//Mettre a jour l'heure de debut lors de deverouillage par l'id de location
+
+//Mettre a jour le suivi de location
+routerGestionLocations.put(
+  "/gestionlocations/update_suivi_location/:id",
+  controllerGestionLocations.updateLocationSuiviLocation
+);
+//recuperer toutes les  locations termines d'un locataire
 routerGestionLocations.get(
   "/gestionlocations/get_locations_termines_by_locataire/:id",
   controllerGestionLocations.getLocationsTerminesByIdLocataire
 );
+//recuperer le locataire d'une location par numero de chassis
+routerGestionLocations.get(
+  "/gestionlocations/get_locataire_numero_chassis/:num",
+  controllerGestionLocations.getLocataireByNumeroChassis
+);
+
+// Exporter le router gestion des locations
 module.exports = routerGestionLocations;

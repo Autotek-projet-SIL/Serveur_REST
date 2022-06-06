@@ -2,7 +2,7 @@
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer un justificatif avec un identifiant
+// Recuperer un justificatif avec son identifiant
 const getJustificatifById = async (request, response) => {
   let id_justificatif = request.params.id_justificatif;
   pool.query(

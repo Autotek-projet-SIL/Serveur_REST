@@ -21,4 +21,5 @@ routerGestionFactures.get(
     controllerGestionFactures.getFactureByIdLouer
 );
 
+// Exporter le router gestion des factures
 module.exports = routerGestionFactures;

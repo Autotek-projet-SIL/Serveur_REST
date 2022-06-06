@@ -2,7 +2,7 @@
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-//récupérer la liste des locations pour le service statistiques
+//récupérer la liste des demandes d'inscription
 const getDemandesInscription = async (request, response) => {
   pool.query(
     "SELECT * FROM demandeinscription order by date_inscription",
@@ -18,7 +18,7 @@ const getDemandesInscription = async (request, response) => {
   );
 };
 
-// Recuperer la liste des demandes d'inscriptions
+// Recuperer la liste des demandes d'inscriptions pour le service statistique
 const getDemandeInscriptionStatistics = async (request, response) => {
   pool.query(
     "SELECT id_demande_inscription ,statut ,date_inscription FROM demandeinscription ",
@@ -52,7 +52,7 @@ const getDemandeInscriptionById = async (request, response) => {
   );
 };
 
-// Ajouter une demande d'inscription dans
+// Ajouter une demande d'inscription
 const addDemandeInscription = async (request, response) => {
   let body = request.body;
   await pool.query(
@@ -110,5 +110,5 @@ module.exports = {
   addDemandeInscription,
   updateDemandeInscription,
   deleteDemandeInscription,
-  getDemandeInscriptionStatistics
+  getDemandeInscriptionStatistics,
 };

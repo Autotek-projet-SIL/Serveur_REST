@@ -56,7 +56,7 @@ describe("Tester le service Flotte", () => {
     //-----
     await axios.get(url + "flotte/typevehicule/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_type_vehicule === "1") {
+        if (element.id_type_vehicule === 1) {
           expect(element.libelle).toEqual("test_libelle1");
         }
       });
@@ -96,8 +96,8 @@ describe("Tester le service Flotte", () => {
     });
     await axios.get(url + "flotte/typevehicule/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_type_vehicule === "3") {
-          expect(element.tarification).toEqual("4400");
+        if (element.id_type_vehicule === 3) {
+          expect(element.tarification).toEqual(4400);
         }
       });
     });
@@ -120,15 +120,6 @@ describe("Tester le service Flotte", () => {
       expect(res.data[0].couleur).toEqual("couleur3");
       expect(res.data[0].id_type_vehicule).toEqual(2);
     });
-  });
-  //-----
-  it("Modifier la disponibilite d'un vehicule", async () => {
-    await axios.put(url + "flotte/modifier_dispo_vehicule/test_v3");
-    //-----
-    // await axios.get(url + "flotte/detail_vehicule/test_v3").then((res) => {
-    //   expect(res.data[0].disponible).toEqual(false);
-    // });
-
   });
   //-----
   it("Affecter  un agent de maintenance a un vehicule", async () => {
@@ -162,9 +153,9 @@ describe("Tester le service Flotte", () => {
     //-----
     await axios.get(url + "flotte/typevehicule/").then((res) => {
       res.data.forEach((element) => {
-        if (element.id_type_vehicule === "3") {
+        if (element.id_type_vehicule === 3) {
           expect(element.libelle).toEqual("test_libelle3");
-          expect(element.tarification).toEqual("4600");
+          expect(element.tarification).toEqual(4600);
         }
       });
     });
