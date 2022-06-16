@@ -1,8 +1,7 @@
 const ModelFacture = require("../Models/ModelFacture");
 const log = require("../config/Logger");
-
-let sender = "autotek078@gmail.com";
-let app_pass = "tbxmdgftetkjgbof";
+let sender = process.env.autotek_mail;
+let app_pass = process.env.autotek_password;
 let nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   service: "gmail",

@@ -6,6 +6,7 @@ const log = require("../config/Logger");
 // Initisaliser l'admin SDK de FireBase
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'gs://autotek-8c725.appspot.com/'
 });
 
 // Initialiser Firebase
@@ -43,8 +44,6 @@ const verifyToken = async (request) => {
       });
   });*/
 };
-
-
 
 // Exporter les fonctions concernat firebase
 module.exports = {

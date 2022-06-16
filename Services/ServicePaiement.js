@@ -4,7 +4,7 @@ const modelPayer = require("../Models/ModelPayer");
 const modelLocataire = require("../Models/ModelLocataire");
 const { Convert } = require("easy-currencies");
 const stripe = require("stripe")(
-  "sk_test_51L3RzUAMbIvDVipZyYnCwUWg5M2yHCqzfOBzURCHhVkBjg5RdiVksQXQpyd35Nw0S6snKNo605yIyhwYSFUOWnH000utsLGxOa"
+  process.env.stripe_sk
 );
 
 // Fonction de verification de validite du paiement

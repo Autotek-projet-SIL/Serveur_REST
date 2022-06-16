@@ -29,6 +29,7 @@
     "firebase": "^9.6.10",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.21.0",
+    "form-data": "^4.0.0",
     "fs": "^0.0.1-security",
     "googleapis": "^39.2.0",
     "logform": "^2.4.0",
