@@ -2,11 +2,11 @@ const Pool = require("pg").Pool;
 
 // Ouverture de connexion avec la base de données en local
 const poolTestIntegration = new Pool({
-  user: "utilisateur_autotek",
-  host: "localhost",
-  database: "autotek",
-  password: "UtilisateurAutotek2022*",
-  port: 5432,
+  user: process.env.db_user,
+  host: process.env.db_host,
+  database: process.env.db_name,
+  password: process.env.db_password,
+  port: process.env.db_port,
 });
 
 module.exports = poolTestIntegration;

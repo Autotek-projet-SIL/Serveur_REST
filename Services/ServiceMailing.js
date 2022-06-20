@@ -1,6 +1,5 @@
 const ModelFacture = require("../Models/ModelFacture");
 const log = require("../config/Logger");
-
 let sender = process.env.autotek_mail;
 let app_pass = process.env.autotek_password;
 let nodemailer = require("nodemailer");

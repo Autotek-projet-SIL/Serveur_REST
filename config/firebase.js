@@ -45,8 +45,6 @@ const verifyToken = async (request) => {
   });*/
 };
 
-
-
 // Exporter les fonctions concernat firebase
 module.exports = {
   verifyToken,
