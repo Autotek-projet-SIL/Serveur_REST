@@ -120,6 +120,9 @@ const addVehicleFB = async (request, response) => {
         vitesse: 0.0,
         deverrouiller: false,
         etat: "en attente",
+        arrive:false,
+        loue:false,
+        nom_locataire:""
       })
       .then((response) => {
         console.log("Vehicle added successfully:", response);
