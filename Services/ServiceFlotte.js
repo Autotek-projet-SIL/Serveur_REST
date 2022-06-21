@@ -42,6 +42,9 @@ const addVehicle = async (request, response) => {
     );
     await deleteImage(request.body.location_image);
     request.body.image_vehicule = result;
+
+    let image_upload = request.body.location_image.replace(".", "_rmbg.");
+    request.body.location_image = image_upload;
   }
   await ModelVehicle.addVehicle(request, response);
 };
@@ -60,12 +63,21 @@ const updateVehicleAM = async (request, response) => {
 
 const updateVehicleImage = async (request, response) => {
   if (process.env.NODE_ENV === "production") {
+    let old_imagePath = await ModelVehicle.getVehicleImagePathByChassisNum(
+      request,
+      response
+    );
+    await deleteImage(old_imagePath);
+
     var result = await removeBgImage(
       request.body.image_vehicule,
       request.body.location_image
     );
+
     await deleteImage(request.body.location_image);
     request.body.image_vehicule = result;
+    let image_upload = request.body.location_image.replace(".", "_rmbg.");
+    request.body.location_image = image_upload;
   }
   await ModelVehicle.updateVehicleImage(request, response);
 };
@@ -74,6 +86,13 @@ const updateVehicleType = async (request, response) => {
   await ModelVehicle.updateVehicleType(request, response);
 };
 const deleteVehicule = async (request, response) => {
+  if (process.env.NODE_ENV === "production") {
+    let old_imagePath = await ModelVehicle.getVehicleImagePathByChassisNum(
+      request,
+      response
+    );
+    await deleteImage(old_imagePath);
+  }
   await ModelVehicle.deleteVehicule(request, response);
 };
 
@@ -120,9 +139,9 @@ const addVehicleFB = async (request, response) => {
         vitesse: 0.0,
         deverrouiller: false,
         etat: "en attente",
-        arrive:false,
-        loue:false,
-        nom_locataire:""
+        arrive: false,
+        loue: false,
+        nom_locataire: "",
       })
       .then((response) => {
         console.log("Vehicle added successfully:", response);

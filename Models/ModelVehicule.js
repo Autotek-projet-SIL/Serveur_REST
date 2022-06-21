@@ -65,6 +65,19 @@ const getVehicleByChassisNum = async (request, response) => {
   );
 };
 
+// Recuperer le chemin de l'image d'un véhicule avec son numéro de chassis
+async function getVehicleImagePathByChassisNum(request, response) {
+  try {
+    let Results = await pool.query(
+      `SELECT chemin_image_vehicule FROM vehicule WHERE numero_chassis = $1;`,[request.params.num],
+    );
+    response.codestatus = 200;
+    return Results.rows[0].chemin_image_vehicule;
+  } catch (error) {
+    response.sendStatus(500);
+  }
+};
+
 // Recuperer la liste des types des véhicules
 const getVehiclesTypes = async (request, response) => {
   pool.query(`SELECT * FROM typevehicule;`, (error, results) => {
@@ -115,7 +128,7 @@ const getVehiclesModelsByMarque = async (request, response) => {
 const addVehicle = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO vehicule(numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+    "INSERT INTO vehicule(numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule, chemin_image_vehicule) VALUES ($1, $2, $3, $4, $5, $6, $7,$8);",
     [
       body.num_chassis,
       body.marque,
@@ -124,6 +137,7 @@ const addVehicle = async (request, response) => {
       body.id_type_vehicule,
       body.id_am,
       body.image_vehicule,
+      body.location_image
     ],
     (error, results) => {
       if (error) {
@@ -204,8 +218,8 @@ const updateVehicleImage = async (request, response) => {
   let num_chassis = request.params.num;
 
   pool.query(
-    "UPDATE vehicule	SET image_vehicule=$2 WHERE numero_chassis=$1;",
-    [num_chassis, request.body.image_vehicule],
+    "UPDATE vehicule	SET image_vehicule=$2,chemin_image_vehicule=$3 WHERE numero_chassis=$1;",
+    [num_chassis, request.body.image_vehicule,request.body.location_image],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -322,4 +336,5 @@ module.exports = {
   deleteVehiculeType,
   getModelsByIdMarque,
   getMarques,
+  getVehicleImagePathByChassisNum
 };

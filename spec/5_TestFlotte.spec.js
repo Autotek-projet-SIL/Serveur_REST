@@ -72,6 +72,7 @@ describe("Tester le service Flotte", () => {
       id_type_vehicule: "2",
       id_am: "test_am2",
       image_vehicule: "test_img3",
+      chemin_image_vehicule: "test_pathImg3",
       disponible: "true",
     };
     //-----
