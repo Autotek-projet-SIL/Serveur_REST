@@ -30,7 +30,7 @@ const getVehiclesByAmID = async (request, response) => {
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
       v.id_am,am.nom,am.prenom,am.email,am.numero_telephone,
       v.id_type_vehicule,tv.libelle,tv.tarification
-      FROM vehicule v INNER JOINn am  ON am.id_am = v.id_am INNER JOIN typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+      FROM vehicule v INNER JOIN am  ON am.id_am = v.id_am INNER JOIN typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
       WHERE v.id_am = $1;`,
     [id_am],
     (error, results) => {
