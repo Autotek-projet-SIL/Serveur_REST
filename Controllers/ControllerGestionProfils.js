@@ -1,9 +1,12 @@
-// Declaration de variables
+// Declaration ofe variables
 const ServiceGestionProfils = require("../Services/ServiceGestionProfils");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur de gestion des profils
+// Functions of the profile management controller
+
+
+// get locataires
 const getLocataires = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -17,6 +20,8 @@ const getLocataires = async (request, response) => {
     });
 };
 
+
+//get Locataire ById
 const getLocataireById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -30,6 +35,7 @@ const getLocataireById = async (request, response) => {
     });
 };
 
+//update locataire
 const updateLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -43,6 +49,8 @@ const updateLocataire = async (request, response) => {
     });
 };
 
+
+//get atc by id
 const getATCById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -56,6 +64,7 @@ const getATCById = async (request, response) => {
     });
 };
 
+//get all atcs
 const getATCs = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -69,6 +78,8 @@ const getATCs = async (request, response) => {
     });
 };
 
+
+//update atc
 const updateATC = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -82,6 +93,7 @@ const updateATC = async (request, response) => {
     });
 };
 
+//update ATC Photo
 const updateATCPhoto = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -95,6 +107,8 @@ const updateATCPhoto = async (request, response) => {
     });
 };
 
+
+//update ATC Password
 const updateATCPassword = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -108,6 +122,7 @@ const updateATCPassword = async (request, response) => {
     });
 };
 
+//update atcs statut
 const updateATCStatut = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -121,6 +136,7 @@ const updateATCStatut = async (request, response) => {
     });
 };
 
+//get decideur by id
 const getDecideurById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -134,6 +150,8 @@ const getDecideurById = async (request, response) => {
     });
 };
 
+
+//get decideurs
 const getDecideurs = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -147,6 +165,7 @@ const getDecideurs = async (request, response) => {
     });
 };
 
+//update decideur
 const updateDecideur = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -160,6 +179,7 @@ const updateDecideur = async (request, response) => {
     });
 };
 
+//update decideur photo
 const updateDecideurPhoto = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -173,6 +193,8 @@ const updateDecideurPhoto = async (request, response) => {
     });
 };
 
+
+//update decideur password
 const updateDecideurPassword = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -186,6 +208,7 @@ const updateDecideurPassword = async (request, response) => {
     });
 };
 
+//get AM ById
 const getAMById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -199,6 +222,8 @@ const getAMById = async (request, response) => {
     });
 };
 
+
+//get all ams
 const getAMs = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -212,6 +237,8 @@ const getAMs = async (request, response) => {
     });
 };
 
+
+//update am
 const updateAM = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -225,6 +252,8 @@ const updateAM = async (request, response) => {
     });
 };
 
+
+//update am photo
 const updateAMPhoto = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -238,6 +267,8 @@ const updateAMPhoto = async (request, response) => {
     });
 };
 
+
+//update am password
 const updateAMPassword = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -251,7 +282,7 @@ const updateAMPassword = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur de gestion des profils
+//Export Profile Management Controller functions
 module.exports = {
   getLocataires,
   updateLocataire,

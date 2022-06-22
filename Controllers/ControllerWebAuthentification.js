@@ -1,10 +1,12 @@
-// Declaration de variables
+// Declaration of variables
 const serviceWebAuthentification = require("../Services/ServiceWebAuthentification.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 const notification = require("../Services/ServiceNotification");
 
-// Fonctions du controlleur d'authentification web
+// Functions of the web authentication controller
+
+//validate registration request
 const validerDemandeInscription = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -29,6 +31,8 @@ const validerDemandeInscription = async (request, response) => {
     });
 };
 
+
+//refuse registration request
 const refuserDemandeInscription = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -53,6 +57,8 @@ const refuserDemandeInscription = async (request, response) => {
     });
 };
 
+
+//get Requests Registration
 const getDemandesInscription = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -69,6 +75,8 @@ const getDemandesInscription = async (request, response) => {
     });
 };
 
+
+//get Decideur By Email
 const getDecideurByEmail = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -82,6 +90,7 @@ const getDecideurByEmail = async (request, response) => {
     });
 };
 
+//get ATC By Email
 const getATCByEmail = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -95,7 +104,7 @@ const getATCByEmail = async (request, response) => {
     });
 };
 
-// Exporter les fonctions du controlleur d'authentification web
+// Export web authentication controller functions
 module.exports = {
   validerDemandeInscription,
   refuserDemandeInscription,

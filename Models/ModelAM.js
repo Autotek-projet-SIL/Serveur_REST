@@ -1,8 +1,11 @@
-// Declaration de variables
+//variable declaration
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la liste des agents de maintenances
+// functons of am model
+
+
+//get all am
 const getAMs = async (request, response) => {
   pool.query(
     `
@@ -20,7 +23,7 @@ const getAMs = async (request, response) => {
   );
 };
 
-// Recuperer un agent de maintenance avec son identifiant
+// Retrieve a maintenance agent with its identifier
 const getAMById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -40,7 +43,7 @@ const getAMById = async (request, response) => {
   );
 };
 
-// Recuperer un agent de maintenance avec son email
+// Retrieve a maintenance agent with his email
 const getAMByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
@@ -60,7 +63,7 @@ const getAMByEmail = async (request, response) => {
   );
 };
 
-// Ajouter un agent de maintenance
+// Add a maintenance agent
 const addAM = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -86,7 +89,7 @@ const addAM = async (request, response) => {
   );
 };
 
-// Mettre a jour les informations d'un agent de maintenance
+// Update the information of a maintenance agent
 const updateAM = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -111,7 +114,7 @@ const updateAM = async (request, response) => {
   );
 };
 
-// Mettre a jour la photo d'un am
+// Update a am photo
 const updateAMPhoto = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -133,7 +136,7 @@ const updateAMPhoto = async (request, response) => {
   );
 };
 
-// Mettre a jour le mot de passe d'un am
+// Update an am's password
 const updateAMPassword = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -155,7 +158,7 @@ const updateAMPassword = async (request, response) => {
   );
 };
 
-// Supprimer un agent de maintenance
+// Delete a maintenance agent
 const deleteAM = async (request, response) => {
   let id = request.params.id;
   pool.query("DELETE FROM am WHERE id_am=$1", [id], (error, results) => {
@@ -169,7 +172,7 @@ const deleteAM = async (request, response) => {
   });
 };
 
-//Exporter les fonctions CRUD de l'agent de maintenance
+//export functions
 module.exports = {
   getAMs,
   getAMById,

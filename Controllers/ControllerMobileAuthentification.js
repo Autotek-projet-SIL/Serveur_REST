@@ -1,9 +1,11 @@
-// Declaration de variables
+// Declaration of variables
 const serviceMobileAuthentification = require("../Services/ServiceMobileAuthentification.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur d'authentification mobile
+//Functions of mobile authentication controller
+
+//locataire registaration
 const inscriptionLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -20,6 +22,8 @@ const inscriptionLocataire = async (request, response) => {
     });
 };
 
+
+//login locataire
 const connexionLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -33,6 +37,8 @@ const connexionLocataire = async (request, response) => {
     });
 };
 
+
+//login am
 const connexionAM = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -46,6 +52,8 @@ const connexionAM = async (request, response) => {
     });
 };
 
+
+//send registration request
 const envoyerDemandeInscription = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -62,7 +70,7 @@ const envoyerDemandeInscription = async (request, response) => {
     });
 };
 
-// Exporter les fonctions du controlleur d'authentification mobile
+// Export mobile authentication controller functions
 module.exports = {
   inscriptionLocataire,
   connexionLocataire,

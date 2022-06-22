@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer un justificatif avec son identifiant
+// Retrieve a proof with its identifier
 const getJustificatifById = async (request, response) => {
   let id_justificatif = request.params.id_justificatif;
   pool.query(
@@ -20,7 +20,7 @@ const getJustificatifById = async (request, response) => {
   );
 };
 
-// Ajouter un justificatif
+// Add proof 
 const addJustificatif = async (request, response) => {
   let body = request.body;
   let id_demande_inscription = request.params.id_demande_inscription;
@@ -38,7 +38,7 @@ const addJustificatif = async (request, response) => {
   );
 };
 
-// Mettre a jour les informations d'un justificatif
+// Update the information of a receipt
 const updateJustificatif = async (request, response) => {
   let id_justificatif = request.params.id_justificatif;
   let body = request.body;
@@ -57,7 +57,7 @@ const updateJustificatif = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD du justificatif
+//Export crud functions from the credential
 module.exports = {
   getJustificatifById,
   addJustificatif,

@@ -6,7 +6,9 @@ const ModelATC = require("../Models/ModelATC");
 const ModelDecideur = require("../Models/ModelDecideur");
 const log = require("../config/Logger");
 
-// Fonctions du service d'authentification web
+// functions of web authentification service
+
+//validate Request Registration
 const validerDemandeInscription = async (request, response) => {
   await ModelDemandeInscription.updateDemandeInscription(
     request,
@@ -15,6 +17,8 @@ const validerDemandeInscription = async (request, response) => {
   );
   await ModelLocataire.updateLocataireStatus(request, response, true);
 };
+
+//refuse Request Registration
 const refuserDemandeInscription = async (request, response) => {
   await ModelDemandeInscription.updateDemandeInscription(
     request,
@@ -24,19 +28,22 @@ const refuserDemandeInscription = async (request, response) => {
   await ModelJustificatif.addJustificatif(request, response);
 };
 
+//get Requests Registration
 const getDemandesInscription = async (request, response) => {
   await ModelDemandeInscription.getDemandesInscription(request, response);
 };
 
+//get Decideur By Email
 const getDecideurByEmail = async (request, response) => {
   await ModelDecideur.getDecideurByEmail(request, response);
 };
 
+//get atc by email
 const getATCByEmail = async (request, response) => {
   await ModelATC.getATCByEmail(request, response);
 };
 
-//Exporter les fonctions du service d'authentification web
+//Export functions
 module.exports = {
   validerDemandeInscription,
   refuserDemandeInscription,

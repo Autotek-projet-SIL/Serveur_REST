@@ -1,9 +1,9 @@
-// Declaration de variables
+// Declaration of variables
 const ServiceGestionComptes = require("../Services/ServiceGestionComptes");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur de gestion des comptes
+//Functions of the account management controller
 const deleteLocataire = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -17,6 +17,8 @@ const deleteLocataire = async (request, response) => {
     });
 };
 
+
+//delete atc
 const deleteATC = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -30,6 +32,8 @@ const deleteATC = async (request, response) => {
     });
 };
 
+
+//delete am
 const deleteAM = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -43,6 +47,7 @@ const deleteAM = async (request, response) => {
     });
 };
 
+//delete decideur
 const deleteDecideur = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -56,6 +61,7 @@ const deleteDecideur = async (request, response) => {
     });
 };
 
+//add locataire
 const addLocataire = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -67,6 +73,7 @@ const addLocataire = async (request, response) => {
     });
 };
 
+//add decideur
 const addDecideur = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -80,6 +87,7 @@ const addDecideur = async (request, response) => {
     });
 };
 
+//add atc
 const addATC = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -93,6 +101,8 @@ const addATC = async (request, response) => {
     });
 };
 
+
+//add am
 const addAM = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -106,7 +116,7 @@ const addAM = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur de gestion des comptes
+//Export Account Controller functions
 module.exports = {
   deleteDecideur,
   deleteAM,

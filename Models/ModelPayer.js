@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-//Ajouter un paiement
+//Add a payment
 const addPaiement = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -25,7 +25,7 @@ const addPaiement = async (request, response) => {
   );
 };
 
-// Recuperer la liste des paiements effectués par un locataire
+// Retrieve the list of payments made by a tenant
 const getPaiementsByIdLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -43,7 +43,7 @@ const getPaiementsByIdLocataire = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD de paiement
+//Export payment CRUD functions
 module.exports = {
   addPaiement,
   getPaiementsByIdLocataire,

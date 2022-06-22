@@ -1,7 +1,9 @@
 const firebase = require("../config/firebase");
 const log = require("../config/Logger");
 
-// Fonction du service de notifications*
+// Service notification functions
+
+//send notification
 const sendNotification = async (title, body, request, response) => {
   let email = request.params.email;
   if (email == undefined) {

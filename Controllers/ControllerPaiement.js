@@ -1,9 +1,11 @@
-// Declaration de variables
+// Declaration of variables
 const ServicePaiement = require("../Services/ServicePaiement");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur de paiement
+// Payment controller functions
+
+//verifyPayment
 const verifierPaiement = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -17,6 +19,7 @@ const verifierPaiement = async (request, response) => {
     });
 };
 
+//get Payments By Tenant Id
 const getPaiementsByIdLocataire = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -30,7 +33,7 @@ const getPaiementsByIdLocataire = async (request, response) => {
     });
 };
 
-// Exporter les fonctions du controlleur de paiement
+// Export payment controller functions
 module.exports = {
   verifierPaiement,
   getPaiementsByIdLocataire,

@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-//récupérer la liste des demandes d'inscription
+//retrieve the list of registration requests
 const getDemandesInscription = async (request, response) => {
   pool.query(
     "SELECT * FROM demandeinscription order by date_inscription",
@@ -18,7 +18,7 @@ const getDemandesInscription = async (request, response) => {
   );
 };
 
-// Recuperer la liste des demandes d'inscriptions pour le service statistique
+// Retrieve the list of registration requests for the statistical service
 const getDemandeInscriptionStatistics = async (request, response) => {
   pool.query(
     "SELECT id_demande_inscription ,statut ,date_inscription FROM demandeinscription ",
@@ -34,7 +34,7 @@ const getDemandeInscriptionStatistics = async (request, response) => {
   );
 };
 
-// Recuperer une demande d'inscription avec son identifiant
+// Retrieve a registration request with its identifier
 const getDemandeInscriptionById = async (request, response) => {
   let id_demande_inscription = request.params.id_demande_inscription;
   pool.query(
@@ -51,8 +51,7 @@ const getDemandeInscriptionById = async (request, response) => {
     }
   );
 };
-
-// Ajouter une demande d'inscription
+// Add a registration request
 const addDemandeInscription = async (request, response) => {
   let body = request.body;
   await pool.query(
@@ -69,7 +68,7 @@ const addDemandeInscription = async (request, response) => {
   );
 };
 
-// Mettre a jour les informations d'une demande d'inscription
+// Update the information of a registration request
 const updateDemandeInscription = async (request, response, status) => {
   let email = request.params.id_demande_inscription;
   pool.query(
@@ -85,7 +84,7 @@ const updateDemandeInscription = async (request, response, status) => {
   );
 };
 
-// Supprimer une demande d'inscription
+// Delete a registration request
 const deleteDemandeInscription = async (request, response) => {
   let id_demande_inscription = request.params.id_demande_inscription;
   await pool.query(
@@ -103,7 +102,7 @@ const deleteDemandeInscription = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD de la demande d'inscription
+//Export CRUD functions from the registration request
 module.exports = {
   getDemandeInscriptionById,
   getDemandesInscription,

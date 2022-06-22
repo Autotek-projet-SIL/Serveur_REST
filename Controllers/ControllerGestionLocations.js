@@ -1,4 +1,4 @@
-// Declaration de variables
+// Declaration of variables
 const serviceGestionLocations = require("../Services/ServiceGestionLocations.js");
 const serviceFlotte = require("../Services/ServiceFlotte");
 const serviceFacture = require("../Services/ServiceGestionFactures");
@@ -6,7 +6,7 @@ const serviceMailing = require("../Services/ServiceMailing");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur de gestion de locations
+// Rental management controller functions
 const updateLocationHeureDebut = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -20,6 +20,8 @@ const updateLocationHeureDebut = async (request, response) => {
     });
 };
 
+
+//end location
 const endLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -45,6 +47,8 @@ const endLocation = async (request, response) => {
     });
 };
 
+
+//update Location Tracking Location
 const updateLocationSuiviLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -61,6 +65,8 @@ const updateLocationSuiviLocation = async (request, response) => {
     });
 };
 
+
+//get all locations
 const getAllLocations = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -74,6 +80,8 @@ const getAllLocations = async (request, response) => {
     });
 };
 
+
+// get  all regions
 const getAllRegions = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -87,6 +95,8 @@ const getAllRegions = async (request, response) => {
     });
 };
 
+
+//get locations in progress
 const getLocationsEnCours = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -100,6 +110,7 @@ const getLocationsEnCours = async (request, response) => {
     });
 };
 
+//get locations by locataire
 const getLocationsLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -113,6 +124,7 @@ const getLocationsLocataire = async (request, response) => {
     });
 };
 
+//get ended locations 
 const getLocationsTermines = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -126,6 +138,8 @@ const getLocationsTermines = async (request, response) => {
     });
 };
 
+
+//add location
 const addLocation = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -146,6 +160,7 @@ const addLocation = async (request, response) => {
     });
 };
 
+//get location by id
 const getLocationById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -159,6 +174,8 @@ const getLocationById = async (request, response) => {
     });
 };
 
+
+//get locations ended by id locataire
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -190,7 +207,9 @@ const getLocataireByNumeroChassis = async (request, response) => {
       response.sendStatus(403);
     });
 };
-// Exporter les fonctions du controlleur gestion des locations
+
+
+// Export the functions of the rental management controller
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,
