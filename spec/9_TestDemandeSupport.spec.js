@@ -6,7 +6,6 @@ describe("Tester le service Demande de support", () => {
     it("Recuperer la liste des Demande de support", async () => {
       await axios.get(url + "demande_support/demande_support").then((res) => {
         expect(res.data.length).toEqual(1);
-        //console.log(res.data);
         res.data.forEach((element) => {
           if (element.id === "1") {
             expect(element.objet).toEqual("demandeSupport");
@@ -17,7 +16,6 @@ describe("Tester le service Demande de support", () => {
     //-----
     it("Recuperer une demande de support par id", async () => {
       await axios.get(url + "demande_support/demande_support/1").then((res) => {
-        //console.log(res.data);
         res.data.forEach((element) => {
           expect(element.id_demande_support).toEqual(1);
         });
@@ -26,7 +24,6 @@ describe("Tester le service Demande de support", () => {
     //-----
     it("Recuperer la liste des Demandes de support par id louer", async () => {
       await axios.get(url + "demande_support/demande_support_louer/1").then((res) => {
-        //console.log(res.data);
         res.data.forEach((element) => {
           expect(element.id_louer).toEqual(1);
         });

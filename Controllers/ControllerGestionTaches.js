@@ -1,18 +1,20 @@
-// Declaration de variables
-const ServiceGestionTaches = require("../Services/ServiceGestionTaches.js");
-const firebaseVerifyToken = require("../config/firebase.js");
-const log = require("../config/Logger");
-let serviceNotification = require("../Services/ServiceNotification");
-// Fonctions du controlleur de gestion des taches
+// Variables Declaration 
+const ServiceGestionTaches = require("../Services/ServiceGestionTaches.js");     // Service of this Controller : Tache
+const firebaseVerifyToken = require("../config/firebase.js");            // FireBase Configuration
+const log = require("../config/Logger");                                  // Display Configuration
+let serviceNotification = require("../Services/ServiceNotification");       // Service to send Notifications
 
-//ajouter une tache
+// Controller of service Tache Declaration
+
+//add a Tache
 const addTache = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionTaches.addTache(request, response);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200) {                         // if the tache added correctly
         if (process.env.NODE_ENV === "production") {
+          // send a notification
           await serviceNotification.sendNotification(
             "Nouvelle tache attribuée",
             request.body.descriptif,
@@ -32,7 +34,7 @@ const addTache = async (request, response) => {
     });
 };
 
-//recuperer une tache par son id (utiliser seulement pour les tests)
+// get a Tache By id (to use just for tests)
 const getTacheById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -46,7 +48,7 @@ const getTacheById = async (request, response) => {
     });
 };
 
-//recuperer la liste des taches
+// get all Taches
 const getTaches = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -60,7 +62,7 @@ const getTaches = async (request, response) => {
     });
 };
 
-//mettre à jour l'etat d'avancement d'une tache
+//Update etat avancement field in a Tache
 const updateEtatAvancementTache = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -74,7 +76,7 @@ const updateEtatAvancementTache = async (request, response) => {
     });
 };
 
-//mettre a jour l'etat d'une tache
+//Update etat field in a Tache 
 const updateEtatTache = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -88,7 +90,7 @@ const updateEtatTache = async (request, response) => {
     });
 };
 
-// recuperer un am par son id
+//recuperate the liste of all taches by id AM
 const getTacheByIdAm = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -102,7 +104,7 @@ const getTacheByIdAm = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur de gestion des factures
+// Export all the Controller of Taches Functions 
 module.exports = {
   addTache,
   getTaches,

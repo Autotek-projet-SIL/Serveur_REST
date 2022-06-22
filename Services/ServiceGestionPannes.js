@@ -1,41 +1,26 @@
-// Declaration de variables
-const ModelPanne = require("../Models/ModelPanne.js");
-const ModelTache = require("../Models/ModelTache.js");
-const log = require("../config/Logger");
+// Variables Declaration 
+const ModelPanne = require("../Models/ModelPanne.js");        // Model Panne
+const ModelTache = require("../Models/ModelTache.js");        // Model Tache
+const log = require("../config/Logger");                          // Display Configuration
 
-// Fonctions du service de gestion des pannes
+// Functions of service panne Service Declaration
 
-// ajouter une panne
+//add a panne 
 const addPanne = async (request, response) => {
-  try {
     await ModelPanne.addPanne(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
 };
-//recuperer la liste des pannes
+
+// get all pannes
 const getPannes = async (request, response) => {
-  try {
     await ModelPanne.getPannes(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
 };
-//recuperer une panne par son id
+
+// get a panne by id 
 const getPanneById = async (request, response) => {
-  try {
     await ModelPanne.getPanneById(request, response);
-  } catch (error) {
-    log.loggerConsole.error(error);
-    log.loggerFile.error(error);
-    response.sendStatus(500);
-  }
 };
-//Exporter les fonctions du service de gestion des pannes
+
+// Export all Service Panne functions
 module.exports = {
   addPanne,
   getPannes,

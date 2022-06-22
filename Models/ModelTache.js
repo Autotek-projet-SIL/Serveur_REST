@@ -1,12 +1,14 @@
-// Declaration de variables
-const pool = require("../config/config_pool");
-const log = require("../config/Logger");
+// Variables Declaration 
+const pool = require("../config/config_pool");   // DataBaseConfiguration
+const log = require("../config/Logger");            // Display Configuration 
 
-//Ajouter une tache
+// Model functions of service Tache 
+
+//add a Tache
 const addTache = async (request, response, data) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO public.tache(objet, descriptif, etat, date_debut, date_fin, id_am, etat_avancement, type_tache) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);",
+    "INSERT INTO public.tache (objet, descriptif, etat, date_debut, date_fin, id_am, etat_avancement, type_tache) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);",
     [
       body.objet,
       body.descriptif,
@@ -29,10 +31,10 @@ const addTache = async (request, response, data) => {
   );
 };
 
-// Recuperer la liste des taches
+// get all Taches 
 const getTaches = async (request, response) => {
   pool.query(
-    `Select t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule from tache t left join panne p ON p.id_tache = t.id_tache left join vehicule v ON v.numero_chassis = p.numero_chassis;`,
+    `SELECT t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule FROM tache t LEFT JOIN panne p ON p.id_tache = t.id_tache LEFT JOIN vehicule v ON v.numero_chassis = p.numero_chassis;`,
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -45,7 +47,7 @@ const getTaches = async (request, response) => {
   );
 };
 
-// Mettre a jour l'etat d'une tache
+//Update etat field in a Tache 
 const updateEtatTache = async (request, response) => {
   let id_tache = request.params.id;
   let body = request.body;
@@ -64,7 +66,7 @@ const updateEtatTache = async (request, response) => {
   );
 };
 
-// Mettre a jour l'etat d'avancement d'une tache
+//Update etat avancement field in a Tache
 const updateEtatAvancementTache = async (request, response) => {
   let id_tache = request.params.id;
   let body = request.body;
@@ -83,11 +85,11 @@ const updateEtatAvancementTache = async (request, response) => {
   );
 };
 
-// Recuperer une tache par l'id Am
+//recuperate the liste of all taches by id AM 
 const getTacheByIdAm = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    `Select t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule from tache t left join panne p ON p.id_tache = t.id_tache left join vehicule v ON v.numero_chassis = p.numero_chassis WHERE t.id_am = $1`,
+    `SELECT t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule FROM tache t LEFT JOIN panne p ON p.id_tache = t.id_tache LEFT JOIN vehicule v ON v.numero_chassis = p.numero_chassis WHERE t.id_am = $1`,
     [id],
     (error, results) => {
       if (error) {
@@ -101,11 +103,11 @@ const getTacheByIdAm = async (request, response) => {
   );
 };
 
-// recuperer une tache par son id
+// get a Tache By id
 const getTacheById = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    `Select * from tache WHERE id_tache = $1`,
+    `SELECT * FROM tache WHERE id_tache = $1`,
     [id],
     (error, results) => {
       if (error) {
@@ -118,7 +120,8 @@ const getTacheById = async (request, response) => {
     }
   );
 };
-//Exporter les fonctions de facture
+
+// Export all the Taches Functions
 module.exports = {
   addTache,
   getTaches,

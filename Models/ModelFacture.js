@@ -1,12 +1,14 @@
-// Declaration de variables
-const pool = require("../config/config_pool");
-const log = require("../config/Logger");
+// Variables Declaration 
+const pool = require("../config/config_pool");                        // DataBase Configuration
+const log = require("../config/Logger");                          // Display Configurations 
 
-//Ajouter une facture
+//Functions of Facture Management Model
+
+// add a Facture
 const addFacture = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer,id_payer )VALUES ($1, $2, $3, $4, $5,$6)",
+    "INSERT INTO facture (date_facture, montant, heure, tva, id_louer,id_payer ) VALUES ($1, $2, $3, $4, $5,$6)",
     [body.date_facture, body.montant, body.heure, body.tva, body.id_louer,body.id_payer],
     (error, results) => {
       if (error) {
@@ -24,14 +26,14 @@ const addFacture = async (request, response) => {
   );
 };
 
-// Recuperer le détail d'une facture
+// recuperate a facture Details by id 
 async function getFactureDetailByID(request, response) {
   let id_louer = request.body.id_louer;
   try {
     let Results = await pool.query(
-      `SELECT f.id_facture,to_char(f.date_facture, 'DD-MM-YYYY') as date_facture,f.montant,f.heure,f.tva,
-         to_char(l.date_debut, 'DD-MM-YYYY') as date_debut,l.heure_debut,l.heure_fin,l.region,l.numero_chassis,v.modele,v.marque,
-         lo.nom,lo.prenom,lo.email
+      `SELECT f.id_facture, to_char(f.date_facture, 'DD-MM-YYYY') as date_facture, f.montant, f.heure, f.tva,
+         to_char(l.date_debut, 'DD-MM-YYYY') as date_debut, l.heure_debut, l.heure_fin, l.region, l.numero_chassis, v.modele, v.marque,
+         lo.nom, lo.prenom, lo.email
          FROM facture f LEFT JOIN louer l ON  f.id_louer = l.id_louer LEFT JOIN locataire lo ON l.id_locataire = lo.id_locataire LEFT JOIN vehicule v ON l.numero_chassis = v.numero_chassis
          WHERE f.id_louer=$1`,
       [id_louer]
@@ -44,7 +46,7 @@ async function getFactureDetailByID(request, response) {
   }
 }
 
-// Mettre a jour les informations d'une facture
+// Update a facture details
 const updateFacture = async (request, response) => {
   let id_facture = request.params.id_facture;
   let body = request.body;
@@ -62,10 +64,10 @@ const updateFacture = async (request, response) => {
   );
 };
 
-//Recuperer la liste des factures pour le service statistiques
+//Recuperate the liste of Factures for service statistiques
 const getFactureStatistics = async (request, response) => {
   pool.query(
-    "SELECT f.id_facture, f.date_facture , f.montant,l.region FROM facture f join louer l on f.id_louer=l.id_louer; ",
+    "SELECT f.id_facture, f.date_facture , f.montant,l.region FROM facture f JOIN louer l ON f.id_louer = l.id_louer; ",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -78,7 +80,7 @@ const getFactureStatistics = async (request, response) => {
   );
 };
 
-// Recuperer la liste de toutes les factures
+// recuperate all factures
 const getFactures = async (request, response) => {
   pool.query(
     `SELECT id_facture, date_facture, montant, heure, tva, id_louer
@@ -95,7 +97,7 @@ const getFactures = async (request, response) => {
   );
 };
 
-// Recuperer une facture par son identifiant
+// recuperate a facture by id
 const getFactureById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -115,7 +117,7 @@ const getFactureById = async (request, response) => {
   );
 };
 
-// Recuperer une facture par id de location
+// Recuperate a facture by id_louer
 const getFactureByIdLouer = async (request, response) => {
   let id = request.params.id_louer;
   pool.query(
@@ -135,7 +137,7 @@ const getFactureByIdLouer = async (request, response) => {
   );
 };
 
-//Exporter les fonctions de facture
+//Export functions of Factures management
 module.exports = {
   addFacture,
   getFactureDetailByID,

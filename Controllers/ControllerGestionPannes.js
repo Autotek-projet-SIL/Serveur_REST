@@ -1,19 +1,20 @@
-// Declaration de variables
-const ServiceGestionPannes = require("../Services/ServiceGestionPannes.js");
-const firebaseVerifyToken = require("../config/firebase.js");
-let serviceNotification = require("../Services/ServiceNotification");
-const log = require("../config/Logger");
+// Variables Declaration 
+const ServiceGestionPannes = require("../Services/ServiceGestionPannes.js");   // Service of this controller Pannes
+const firebaseVerifyToken = require("../config/firebase.js");                     // FireBase Configuration
+let serviceNotification = require("../Services/ServiceNotification");                 // Service to send Notifications
+const log = require("../config/Logger");                                  // Display Configuration
 
-// Fonctions du controlleur de gestion des pannes
+// Controller of service panne Declaration
 
-//ajouter panne
+//add a panne 
 const addPanne = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionPannes.addPanne(request, response);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200) {                   // if panne added correctly
         if (process.env.NODE_ENV === "production") {
+          // send a notification to AM 
           await serviceNotification.sendNotification(
             "Nouvelle tache attribuée",
             request.body.descriptif,
@@ -33,7 +34,7 @@ const addPanne = async (request, response) => {
     });
 };
 
-//recuperer la liste des pannes
+// get all pannes
 const getPannes = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -47,7 +48,7 @@ const getPannes = async (request, response) => {
     });
 };
 
-//recuperer une panne par son id
+// get a panne by id 
 const getPanneById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -61,7 +62,7 @@ const getPanneById = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur de gestion des factures
+// Export all Controller Panne functions
 module.exports = {
   addPanne,
   getPannes,

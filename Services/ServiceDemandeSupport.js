@@ -1,35 +1,35 @@
-// Declaration de variables
-const log = require("../config/Logger");
-//const serviceNotification = require("../Services/ServiceNotification");
-const modelDemandeSupport = require("../Models/ModelDemandeSupport");
+// Variables Declaration 
+const log = require("../config/Logger");                                    // display configuration data and methods
+const modelDemandeSupport = require("../Models/ModelDemandeSupport");       // Model of this service : DemandeSupport
 
-// Fonctions du service de gestion des demandes de support
+// Functions of demandeSupport management Service
 
-//Recuperer la liste de toutes les demandes de support
+//recuperate all support requests
 const getDemandeSupport = async (request, response) => {
   await modelDemandeSupport.getDemandeSupport(request, response);
 };
 
-//récupérer un demandes de support par id
+//recuperate a support request by id
 const getDemandeSupportById = async (request, response) => {
   await modelDemandeSupport.getDemandeSupportById(request, response);
 };
 
-//récupérer la liste des demandes de support d'un location
+//recuperate all support requests for a location
 const getDemandeSupportLouer = async (request, response) => {
   await modelDemandeSupport.getDemandeSupportLouer(request, response);
 };
 
-//Ajouter un demande de support
+//add a support request
 const addDemandeSupport = async (request, response) => {
   await modelDemandeSupport.addDemandeSupport(request, response);
 };
 
-//Mettre a jour le champs reponse d'un demande de support
+//Response to a support request
 const responseDemandeSupport = async (request, response) => {
   await modelDemandeSupport.responseDemandeSupport(request, response);
 };
 
+//exports methods
 module.exports = {
   getDemandeSupport,
   getDemandeSupportById,

@@ -32,7 +32,7 @@ describe("Tester le service Flotte", () => {
   });
   //-----
   it("Recuperer la liste des modeles d'une marque", async () => {
-    //-----
+    //------
     await axios.get(url + "flotte/modelevehicule/test_marque1").then((res) => {
       res.data.forEach((element) => {
         if (element.modele === "TEST_MODELE1") {

@@ -1,41 +1,40 @@
-// Declaration de variables
+// Variables Declaration 
+const ModelTache = require("../Models/ModelTache.js");      // Model Tache
+const log = require("../config/Logger");                  // Display Configuration 
 
-const ModelTache = require("../Models/ModelTache.js");
-const log = require("../config/Logger");
+// Functions of service Tache Declaration
 
-// Fonctions du service de gestion des taches
-
-// ajouter une tache
+//add a Tache
 const addTache = async (request, response) => {
   await ModelTache.addTache(request, response);
 };
 
-//recuperer la liste des taches
+// get all Taches
 const getTaches = async (request, response) => {
   await ModelTache.getTaches(request, response);
 };
 
-//recuperer la liste des taches
+// get a Tache By id
 const getTacheById = async (request, response) => {
   await ModelTache.getTacheById(request, response);
 };
 
-//recuperer la liste des taches par am
+//recuperate the liste of all taches by id AM
 const getTacheByIdAm = async (request, response) => {
   await ModelTache.getTacheByIdAm(request, response);
 };
 
-//mettre a jour l'etat d'avancement d'une tache
+//Update etat avancement field in a Tache
 const updateEtatAvancementTache = async (request, response) => {
   await ModelTache.updateEtatAvancementTache(request, response);
 };
 
-//mettre a jour l'etat  d'une tache
+//Update etat field in a Tache 
 const updateEtatTache = async (request, response) => {
   await ModelTache.updateEtatTache(request, response);
 };
 
-//Exporter les fonctions du service de gestion des taches
+// Export all the Service of Taches Functions
 module.exports = {
   addTache,
   getTaches,

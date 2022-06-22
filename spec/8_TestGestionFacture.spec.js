@@ -13,7 +13,7 @@ describe("Tester le service Facture", () => {
       });
     });
   });
-  //-----
+  //----
   it("Recuperer une facture par id", async () => {
     await axios.get(url + "gestionfacture/facture/1").then((res) => {
       res.data.forEach((element) => {

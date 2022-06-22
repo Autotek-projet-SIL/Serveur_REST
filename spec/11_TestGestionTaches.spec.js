@@ -1,7 +1,8 @@
 const axios = require("axios");
 const url = "http://localhost:4000/";
-
+//------
 describe("Tester le service Tache", () => {
+  //-----
   it("Recuperer la liste des taches", async () => {
     await axios.get(url + "tache/get_taches/").then((res) => {
       res.data.forEach((element) => {
@@ -13,7 +14,7 @@ describe("Tester le service Tache", () => {
       });
     });
   });
-
+  //---------
   it("Ajouter un tache", async () => {
     let data = {
       objet: "nouvelle tache",
@@ -45,7 +46,7 @@ describe("Tester le service Tache", () => {
       expect(res.data[0].type_tache).toEqual(data.type_tache);
     });
   });
-
+  //------
   it("Recuperer la liste des taches", async () => {
     await axios.get(url + "tache/get_taches/").then((res) => {
       res.data.forEach((element) => {
@@ -57,6 +58,7 @@ describe("Tester le service Tache", () => {
       });
     });
   });
+  //-----
   it("Recuperer la liste des taches d'un am", async () => {
     await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
       res.data.forEach((element) => {
@@ -64,7 +66,7 @@ describe("Tester le service Tache", () => {
       });
     });
   });
-
+  //---------
   it("Modifier l'etat d'une tache", async () => {
     let tache = {
       etat: "finis",
@@ -79,7 +81,7 @@ describe("Tester le service Tache", () => {
       });
     });
   });
-
+  //-------
   it("Modifier l'etat d'vanacement d'une tache", async () => {
     let tache = {
       etat_avancement: 100,

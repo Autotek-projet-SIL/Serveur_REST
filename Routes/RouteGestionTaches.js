@@ -1,35 +1,45 @@
-// Declaration de variables
+// Variables Declaration 
 const express = require("express");
-const routerGestionTaches = express.Router();
-const controllerGestionTaches = require("../Controllers/ControllerGestionTaches.js");
+const routerGestionTaches = express.Router();               // this router : tache
+const controllerGestionTaches = require("../Controllers/ControllerGestionTaches.js");  // the controller of this router : tache
 
-//Declaration des routes du service Tache
+// Router of service Tache Declaration
+
+//add a Tache
 routerGestionTaches.post(
   "/tache/ajouter_tache/",
   controllerGestionTaches.addTache
 );
+
+// get all Taches
 routerGestionTaches.get(
   "/tache/get_taches/",
   controllerGestionTaches.getTaches
 );
+
+// get a Tache By id
 routerGestionTaches.get(
   "/tache/get_tache_by_id/:id",
   controllerGestionTaches.getTacheById
 );
-//récupérer la liste des taches par id Am
+
+//recuperate the liste of all taches by id AM
 routerGestionTaches.get(
   "/tache/get_tache_byidam/:id",
   controllerGestionTaches.getTacheByIdAm
 );
-//Update l'etat d'avancement d'une tache
+
+//Update etat avancement field in a Tache
 routerGestionTaches.put(
   "/tache/modifier_etatavancement_tache/:id",
   controllerGestionTaches.updateEtatAvancementTache
 );
-//Update l'etat d'une tache
+
+//Update etat field in a Tache
 routerGestionTaches.put(
   "/tache/modifier_etat_tache/:id",
   controllerGestionTaches.updateEtatTache
 );
-// Exporter le router gestion des Pannes
+
+// Export all the Router of Taches Functions
 module.exports = routerGestionTaches;
