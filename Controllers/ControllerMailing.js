@@ -2,7 +2,7 @@ const ServiceMailing = require("../Services/ServiceMailing");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur mailing
+// Mailing controller functions
 const getFactureDetailByID = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -16,5 +16,5 @@ const getFactureDetailByID = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur mailing
+//Export mailing controller functions
 module.exports = { getFactureDetailByID };

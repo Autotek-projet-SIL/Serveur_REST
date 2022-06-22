@@ -1,12 +1,14 @@
-// Declaration de variables
-const pool = require("../config/config_pool");
-const log = require("../config/Logger");
+// Variables Declaration
+const pool = require("../config/config_pool"); // DataBase Configuration
+const log = require("../config/Logger"); // Display Configuration
 
-//Ajouter une pannef
+// Model of service panne Declaration
+
+//add a panne
 const addPanne = async (request, response, data) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO public.tache(objet, descriptif, etat, date_debut, date_fin, id_am, etat_avancement, type_tache) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id_tache;",
+    "INSERT INTO public.tache (objet, descriptif, etat, date_debut, date_fin, id_am, etat_avancement, type_tache) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id_tache;",
     [
       body.objet,
       body.descriptif,
@@ -42,10 +44,10 @@ const addPanne = async (request, response, data) => {
   );
 };
 
-// Recuperer la liste des pannes
+// get all pannes
 const getPannes = async (request, response) => {
   pool.query(
-    `Select t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule from panne p  inner join tache t  ON t.id_tache = p.id_tache inner join vehicule v ON v.numero_chassis = p.numero_chassis`,
+    `SELECT t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule FROM panne p  INNER JOIN tache t  ON t.id_tache = p.id_tache INNER JOIN vehicule v ON v.numero_chassis = p.numero_chassis`,
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -58,6 +60,7 @@ const getPannes = async (request, response) => {
   );
 };
 
+// get a panne by id
 const getPanneById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -77,7 +80,7 @@ const getPanneById = async (request, response) => {
   );
 };
 
-//Exporter les fonctions de facture
+// Export all Panne functions
 module.exports = {
   addPanne,
   getPannes,

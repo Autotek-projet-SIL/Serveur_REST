@@ -1,10 +1,11 @@
-// Declaration de variables
+// Declaration of variables
 const serviceStatistiques = require("../Services/ServiceStatistiques.js");
 const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
-// Fonctions du controlleur de statistiques
+// Statistics controller functions
 
+//get accepted locations
 const getLocationsAcceptes = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -18,6 +19,7 @@ const getLocationsAcceptes = async (request, response) => {
     });
 };
 
+//get rejected locations
 const getLocationsRejetes = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -31,6 +33,8 @@ const getLocationsRejetes = async (request, response) => {
     });
 };
 
+
+//get Location Statistics
 const getLocationStatistics = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -44,6 +48,8 @@ const getLocationStatistics = async (request, response) => {
     });
 };
 
+
+//get Request Registration Statistics
 const getDemandeInscriptionStatistics = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -60,6 +66,8 @@ const getDemandeInscriptionStatistics = async (request, response) => {
     });
 };
 
+
+//get Facture Statistics
 const getFactureStatistics = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -73,7 +81,7 @@ const getFactureStatistics = async (request, response) => {
     });
 };
 
-// Exporter les fonctions du controlleur statistiques
+// Export the functions of the statistics controller
 module.exports = {
   getLocationStatistics,
   getDemandeInscriptionStatistics,

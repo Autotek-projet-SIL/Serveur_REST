@@ -1,9 +1,11 @@
-// Declaration de variables
-const ServiceGestionFactures = require("../Services/ServiceGestionFactures");
-const firebaseVerifyToken = require("../config/firebase.js");
-const log = require("../config/Logger");
+// Variables Declaration 
+const ServiceGestionFactures = require("../Services/ServiceGestionFactures");            // the Service of this Controller : Facture
+const firebaseVerifyToken = require("../config/firebase.js");                         // FireBase Configurations
+const log = require("../config/Logger");                                              // Display Configuration
 
-// Fonctions du controlleur de gestion des factures
+//Functions of Facture Management Controller  
+
+// add a Facture
 const addFacture = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
@@ -17,6 +19,7 @@ const addFacture = async (request, response) => {
     });
 };
 
+//recuperate all Factures
 const getFactures = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -30,6 +33,7 @@ const getFactures = async (request, response) => {
     });
 };
 
+// recuperate a facture by id
 const getFactureById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -43,6 +47,7 @@ const getFactureById = async (request, response) => {
     });
 };
 
+// recuperate a facture by id_louer
 const getFactureByIdLouer = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -56,7 +61,7 @@ const getFactureByIdLouer = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur de gestion des factures
+//Export Controller functions of Factures management
 module.exports = {
   addFacture,
   getFactures,

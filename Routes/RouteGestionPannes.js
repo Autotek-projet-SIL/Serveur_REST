@@ -1,20 +1,27 @@
-// Declaration de variables
+// Variables Declaration
 const express = require("express");
-const routerGestionPannes = express.Router();
-const controllerGestionPannes = require("../Controllers/ControllerGestionPannes");
+const routerGestionPannes = express.Router(); // this router : Pannes
+const controllerGestionPannes = require("../Controllers/ControllerGestionPannes"); // the controller of this router : Pannes
 
-//Declaration des routes du service panne
+// Router of service panne Declaration
+
+//add a panne
 routerGestionPannes.post(
   "/gestionpannes/ajouter_panne/",
   controllerGestionPannes.addPanne
 );
+
+// get all pannes
 routerGestionPannes.get(
   "/gestionpannes/get_pannes/",
   controllerGestionPannes.getPannes
 );
+
+// get a panne by id
 routerGestionPannes.get(
   "/gestionpannes/panne/:id",
   controllerGestionPannes.getPanneById
 );
-// Exporter le router gestion des Pannes
+
+// Export all router Panne functions
 module.exports = routerGestionPannes;

@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la liste des atcs
+// Retrieve the list of atcs
 const getATCs = async (request, response) => {
   pool.query(
     "SELECT id_atc, nom, prenom, numero_telephone, email, est_root, photo_atc FROM atc",
@@ -18,7 +18,7 @@ const getATCs = async (request, response) => {
   );
 };
 
-// Recuperer un ATC avec un identifiant
+// Retrieve an ATC with an identifier
 const getATCById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -36,7 +36,7 @@ const getATCById = async (request, response) => {
   );
 };
 
-// Recuperer un ATC avec son email
+// Retrieve an ATC with its email
 const getATCByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
@@ -54,7 +54,7 @@ const getATCByEmail = async (request, response) => {
   );
 };
 
-// Ajouter un ATC
+// add an atc
 const addATC = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -81,7 +81,7 @@ const addATC = async (request, response) => {
   );
 };
 
-// Mettre a jour les informations d'un ATC
+// Update the information of an ATC
 const updateATC = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -100,7 +100,7 @@ const updateATC = async (request, response) => {
   );
 };
 
-// Mettre a jour la photo d'un atc
+// Update the photo of an atc
 const updateATCPhoto = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -119,7 +119,7 @@ const updateATCPhoto = async (request, response) => {
   );
 };
 
-// Mettre a jour le mot de passe d'un atc
+// Update the password of an atc
 const updateATCPassword = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -138,7 +138,7 @@ const updateATCPassword = async (request, response) => {
   );
 };
 
-// Mettre a jour le statut d'un atc
+// Update the status of an atc
 const updateATCStatut = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -157,7 +157,7 @@ const updateATCStatut = async (request, response) => {
   );
 };
 
-// Supprimer un ATC
+// delete an atc
 const deleteATC = async (request, response) => {
   let id = request.params.id;
   pool.query("DELETE FROM atc WHERE id_atc=$1", [id], (error, results) => {
@@ -171,7 +171,7 @@ const deleteATC = async (request, response) => {
   });
 };
 
-//Exporter les fonctions CRUD de l'ATC
+//export functions
 module.exports = {
   getATCById,
   getATCByEmail,

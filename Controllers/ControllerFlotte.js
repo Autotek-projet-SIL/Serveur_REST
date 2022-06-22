@@ -1,8 +1,11 @@
-const ServiceFlotte = require("../Services/ServiceFlotte");
-const firebaseVerifyToken = require("../config/firebase.js");
-const log = require("../config/Logger");
+// Variables Declaration 
+const ServiceFlotte = require("../Services/ServiceFlotte");         // the service of this controller : Flotte
+const firebaseVerifyToken = require("../config/firebase.js");         // FireBase configuration
+const log = require("../config/Logger");                          // Display configuration
 
-// Fonctions du controlleur flotte
+//Controller of Flotte service Declaration 
+
+//recuperate all vehicules
 const getVehicles = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -16,6 +19,7 @@ const getVehicles = async (request, response) => {
     });
 };
 
+//recuperate all vehicules by id AM
 const getVehiclesByAmID = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -29,6 +33,7 @@ const getVehiclesByAmID = async (request, response) => {
     });
 };
 
+//recuperate a vehicule by num_chassis
 const getVehicleDetail = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -42,6 +47,7 @@ const getVehicleDetail = async (request, response) => {
     });
 };
 
+//recuperate all vehicules types
 const getVehiclesTypes = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -55,6 +61,7 @@ const getVehiclesTypes = async (request, response) => {
     });
 };
 
+//recuperate all vehicules marques
 const getVehiclesMarques = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -68,6 +75,7 @@ const getVehiclesMarques = async (request, response) => {
     });
 };
 
+//recuperate all vehicules models for a vehicule marque
 const getVehiclesModelsByMarque = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -81,6 +89,7 @@ const getVehiclesModelsByMarque = async (request, response) => {
     });
 };
 
+//add a vehicule
 const addVehicle = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -99,6 +108,7 @@ const addVehicle = async (request, response) => {
     });
 };
 
+//add a vehicule type
 const addVehicleType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -112,6 +122,7 @@ const addVehicleType = async (request, response) => {
     });
 };
 
+//update a vehicule
 const updateVehicle = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -125,6 +136,7 @@ const updateVehicle = async (request, response) => {
     });
 };
 
+//update a vehicule availability
 const updateVehicleAvaible = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -138,6 +150,7 @@ const updateVehicleAvaible = async (request, response) => {
     });
 };
 
+//update a vehicule AM
 const updateVehicleAM = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -150,6 +163,8 @@ const updateVehicleAM = async (request, response) => {
       response.sendStatus(403);
     });
 };
+
+//update a vehicule image
 const updateVehicleImage = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -163,6 +178,7 @@ const updateVehicleImage = async (request, response) => {
     });
 };
 
+//update a vehicule type
 const updateVehicleType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -176,15 +192,16 @@ const updateVehicleType = async (request, response) => {
     });
 };
 
+//delete a vehicule 
 const deleteVehicule = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       if (process.env.NODE_ENV === "production") {
-        await ServiceFlotte.deleteVehiculeFB(request, response);
+        await ServiceFlotte.deleteVehiculeFB(request, response);        //delete vehicule from firebase
       }
       if (response.statusCode != 500) {
-        await ServiceFlotte.deleteVehicule(request, response);
+        await ServiceFlotte.deleteVehicule(request, response);          // delete vehicule from database
       }
     })
     .catch((error) => {
@@ -194,6 +211,7 @@ const deleteVehicule = async (request, response) => {
     });
 };
 
+//recuperate all vehicules marques
 const getMarques = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -207,6 +225,7 @@ const getMarques = async (request, response) => {
     });
 };
 
+//recuperate all vehicules models by id marque
 const getModelsByIdMarque = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -220,6 +239,7 @@ const getModelsByIdMarque = async (request, response) => {
     });
 };
 
+//delete a vehicule type 
 const deleteVehiculeType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -233,7 +253,7 @@ const deleteVehiculeType = async (request, response) => {
     });
 };
 
-//Exporter les fonctions du controlleur flotte
+//Export controller Flotte functions 
 module.exports = {
   getVehicles,
   getVehiclesByAmID,

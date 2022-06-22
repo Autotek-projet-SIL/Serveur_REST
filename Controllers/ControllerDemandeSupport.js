@@ -1,75 +1,76 @@
-// Declaration de variables
-const serviceDemandeSupport = require("../Services/ServiceDemandeSupport");
-const firebaseVerifyToken = require("../config/firebase.js");
-const serviceNotification = require("../Services/ServiceNotification");
-const log = require("../config/Logger");
+// Variables Declaration 
+const serviceDemandeSupport = require("../Services/ServiceDemandeSupport");  // Service of this controller : DemandeSupport
+const firebaseVerifyToken = require("../config/firebase.js");                // Firebase configuration data and methods
+const serviceNotification = require("../Services/ServiceNotification");      // Service to send firebase notifications
+const log = require("../config/Logger");                                     // display configuration data and methods
 
-// Fonctions du controlleur de gestion des demandes de support
+// Functions of demandeSupport management Controller
 
-//Recuperer la liste de toutes les demandes de support
+//recuperate all support requests
 const getDemandeSupport = async (request, response) => {
   firebaseVerifyToken
-    .verifyToken(request)
-    .then(async (res) => {
-      await serviceDemandeSupport.getDemandeSupport(request, response);
+    .verifyToken(request)                                                     
+    .then(async (res) => {                                                    // if token correct
+      await serviceDemandeSupport.getDemandeSupport(request, response);    
     })
-    .catch((error) => {
+    .catch((error) => {                                                      // if wrong token 
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
       response.sendStatus(403);
     });
 };
 
-//récupérer un demandes de support par id
+//recuperate a support request by id
 const getDemandeSupportById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
-    .then(async (res) => {
+    .then(async (res) => {                                                  // if token correct
       await serviceDemandeSupport.getDemandeSupportById(request, response);
     })
-    .catch((error) => {
+    .catch((error) => {                                                     // if wrong token 
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
       response.sendStatus(403);
     });
 };
 
-//récupérer la liste des demandes de support d'un location
+//recuperate all support requests for a location
 const getDemandeSupportLouer = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
-    .then(async (res) => {
+    .then(async (res) => {                                                 // if token correct
       await serviceDemandeSupport.getDemandeSupportLouer(request, response);
     })
-    .catch((error) => {
+    .catch((error) => {                                                    // if wrong token 
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
       response.sendStatus(403);
     });
 };
 
-//Ajouter un demande de support
+//add a support request
 const addDemandeSupport = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
-    .then(async (res) => {
+    .then(async (res) => {                                                // if token correct
       await serviceDemandeSupport.addDemandeSupport(request, response);
     })
-    .catch((error) => {
+    .catch((error) => {                                                    // if wrong token 
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
       response.sendStatus(403);
     });
 };
 
-//Mettre a jour le champs reponse d'un demande de support
+//Response to a support request
 const responseDemandeSupport = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
-    .then(async (res) => {
-      await serviceDemandeSupport.responseDemandeSupport(request, response);
-      if (response.statusCode == 200) {
+    .then(async (res) => {                                                 // if token correct
+      await serviceDemandeSupport.responseDemandeSupport(request, response);    //Update the response field of a support request
+      if (response.statusCode == 200) {                                   // if the response field of a support request is updated correctly
         if (process.env.NODE_ENV === "production") {
+          // send a notification contains the response
           await serviceNotification.sendNotification(
             "Reponse de votre demande de support",
             request.body.response,
@@ -78,17 +79,18 @@ const responseDemandeSupport = async (request, response) => {
           );
         }
         response.sendStatus(200);
-      } else {
+      } else {                                                        // if the response field of a support request is not updated correctly
         response.sendStatus(500);
       }
     })
-    .catch((error) => {
+    .catch((error) => {                                                    // if wrong token
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
       response.sendStatus(403);
     });
 };
 
+//exports methods
 module.exports = {
   getDemandeSupport,
   getDemandeSupportById,

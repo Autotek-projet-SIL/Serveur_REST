@@ -1,13 +1,13 @@
-// Declaration de variables
-const pool = require("../config/config_pool");
-const log = require("../config/Logger");
+// Variables Declaration
+const pool = require("../config/config_pool"); // DataBase configuration
+const log = require("../config/Logger"); // display configuration
 
-// Fonctions du modèle de gestion des demandes de support
+// Functions of demandeSupport management Model
 
-//Recuperer la liste de toutes les demandes de support
+//recuperate all support requests
 const getDemandeSupport = async (request, response) => {
   pool.query(
-    "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom,loc.photo_selfie  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire ;",
+    "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom,loc.photo_selfie  FROM demandesupport d JOIN louer l ON d.id_louer = l.id_louer JOIN locataire loc ON l.id_locataire = loc.id_locataire ;",
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -20,11 +20,11 @@ const getDemandeSupport = async (request, response) => {
   );
 };
 
-//récupérer un demandes de support par id
+//recuperate a support request by id
 const getDemandeSupportById = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom,loc.photo_selfie  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire where id_demande_support =$1",
+    "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom,loc.photo_selfie  FROM demandesupport d JOIN louer l ON d.id_louer = l.id_louer JOIN locataire loc ON l.id_locataire = loc.id_locataire WHERE id_demande_support =$1",
     [id],
     (error, results) => {
       if (error) {
@@ -38,11 +38,11 @@ const getDemandeSupportById = async (request, response) => {
   );
 };
 
-//récupérer la liste des demandes de support d'un location
+//recuperate all support requests for a location
 const getDemandeSupportLouer = async (request, response) => {
   let id_louer = request.params.id_louer;
   pool.query(
-    "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom,loc.photo_selfie  FROM demandesupport d join louer l ON d.id_louer = l.id_louer join locataire loc on l.id_locataire = loc.id_locataire where l.id_louer =$1",
+    "SELECT d.id_demande_support, d.objet, d.descriptif, d.reponse,d.email, d.id_louer, l.id_locataire, l.numero_chassis, loc.nom, loc.prenom,loc.photo_selfie  FROM demandesupport d JOIN louer l ON d.id_louer = l.id_louer JOIN locataire loc ON l.id_locataire = loc.id_locataire WHERE l.id_louer =$1",
     [id_louer],
     (error, results) => {
       if (error) {
@@ -56,7 +56,7 @@ const getDemandeSupportLouer = async (request, response) => {
   );
 };
 
-//Ajouter un demande de support
+//add a support request
 const addDemandeSupport = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -74,7 +74,7 @@ const addDemandeSupport = async (request, response) => {
   );
 };
 
-//Mettre a jour le champs reponse d'un demande de support
+//Response to a support request
 const responseDemandeSupport = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -93,6 +93,7 @@ const responseDemandeSupport = async (request, response) => {
   );
 };
 
+//exports methods
 module.exports = {
   getDemandeSupport,
   getDemandeSupportById,

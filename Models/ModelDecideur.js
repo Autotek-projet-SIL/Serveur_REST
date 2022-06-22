@@ -1,8 +1,8 @@
-// Declaration de variables
+// variable declaration
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la liste des décideurs
+// Retrieve the list of decision makers
 const getDecideurs = async (request, response) => {
   pool.query(
     "SELECT id_decideur, nom, prenom, numero_telephone, email, photo_decideur FROM decideur",
@@ -18,7 +18,7 @@ const getDecideurs = async (request, response) => {
   );
 };
 
-// Recuperer un décideur avec un identifiant
+// Retrieve a decision maker with an identifier
 const getDecideurById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -36,7 +36,7 @@ const getDecideurById = async (request, response) => {
   );
 };
 
-// Recuperer un décideur avec son email
+// Retrieve a decision maker with his email
 const getDecideurByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
@@ -54,7 +54,7 @@ const getDecideurByEmail = async (request, response) => {
   );
 };
 
-// Ajouter un décideur
+// Add a decision maker
 const addDecideur = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -80,7 +80,7 @@ const addDecideur = async (request, response) => {
   );
 };
 
-// Mettre a jour les informations d'un decideur
+// Update decision maker information
 const updateDecideur = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -99,7 +99,7 @@ const updateDecideur = async (request, response) => {
   );
 };
 
-// Mettre a jour la photo d'un decideur
+// Update the photo of a decision maker
 const updateDecideurPhoto = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -118,7 +118,7 @@ const updateDecideurPhoto = async (request, response) => {
   );
 };
 
-// Mettre a jour le mot de passe d'un decideur
+// Update the password of a decider
 const updateDecideurPassword = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -137,7 +137,7 @@ const updateDecideurPassword = async (request, response) => {
   );
 };
 
-// Supprimer un decideur
+// Delete a decider
 const deleteDecideur = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -155,7 +155,7 @@ const deleteDecideur = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD d'un decideur
+//Export the CRUD functions of a decider
 module.exports = {
   getDecideurById,
   getDecideurByEmail,

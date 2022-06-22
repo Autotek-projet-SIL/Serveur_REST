@@ -1,9 +1,9 @@
-// Declaration de variables
+// Variable declaration
 const express = require("express");
 const routerWebAuthentification = express.Router();
 const controllerWebAuthentification = require("../Controllers/ControllerWebAuthentification.js");
 
-//Declaration des routes du service authentification web
+////Routers of WebAuthentification service Declaration
 routerWebAuthentification.put(
   "/authentification_web/valider_demande/:email/demande/:id_demande_inscription",
   controllerWebAuthentification.validerDemandeInscription

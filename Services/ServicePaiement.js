@@ -3,11 +3,9 @@ let { PythonShell } = require("python-shell");
 const modelPayer = require("../Models/ModelPayer");
 const modelLocataire = require("../Models/ModelLocataire");
 const { Convert } = require("easy-currencies");
-const stripe = require("stripe")(
-  process.env.stripe_sk
-);
+const stripe = require("stripe")(process.env.stripe_sk);
 
-// Fonction de verification de validite du paiement
+// Payment validity check function
 const VerifierPaiement = async (request, response) => {
   let type_paiement = request.body.type_paiement;
   let montant = request.body.montant;
@@ -65,10 +63,10 @@ const VerifierPaiement = async (request, response) => {
         source: `${card_Token.id}`,
       });
       await stripe.charges.create({
-        amount:amount,
-        currency:"eur",
-        customer:customerId
-      })
+        amount: amount,
+        currency: "eur",
+        customer: customerId,
+      });
       if (amount > balance) {
         response.sendStatus(406);
       } else {
@@ -90,11 +88,11 @@ const VerifierPaiement = async (request, response) => {
   }
 };
 
-// Recuperer la liste des paiement effectuées par un locataire
+// Retrieve the list of payments made by a locataire
 const getPaiementsByIdLocataire = async (request, response) => {
   await modelPayer.getPaiementsByIdLocataire(request, response);
 };
-// Exporter les fonctions du service paiement
+// exporrt functions
 module.exports = {
   VerifierPaiement,
   getPaiementsByIdLocataire,
