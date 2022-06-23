@@ -10,36 +10,51 @@ const fs = require("fs");
 const { newDb } = require("pg-mem");
 const bucket = admin.storage().bucket();
 
-// Fonctions du service flotte
+// Fleet service functions
+
+//Retrieve the list of fleet vehicles
 const getVehicles = async (request, response) => {
   await ModelVehicle.getVehicles(request, response);
 };
 
+
+// Retrieve the list of vehicles assigned to an AM
 const getVehiclesByAmID = async (request, response) => {
   await ModelVehicle.getVehiclesByAmID(request, response);
 };
 
+
+//get the vehicul detail
 const getVehicleDetail = async (request, response) => {
   await ModelVehicle.getVehicleByChassisNum(request, response);
 };
 
+
+// Retrieve the list of vehicle types
 const getVehiclesTypes = async (request, response) => {
   await ModelVehicle.getVehiclesTypes(request, response);
 };
 
+// Retrieve the list of vehicle brands
 const getVehiclesMarques = async (request, response) => {
   await ModelVehicle.getVehiclesMarques(request, response);
 };
+
+// Retrieve vehicle models for a brand
 const getVehiclesModelsByMarque = async (request, response) => {
   await ModelVehicle.getVehiclesModelsByMarque(request, response);
 };
 
+
+// add a vehicule
 const addVehicle = async (request, response) => {
   if (process.env.NODE_ENV === "production") {
     var result = await removeBgImage(
       request.body.image_vehicule,
       request.body.location_image
     );
+
+//delete image
     await deleteImage(request.body.location_image);
     request.body.image_vehicule = result;
 
@@ -49,18 +64,22 @@ const addVehicle = async (request, response) => {
   await ModelVehicle.addVehicle(request, response);
 };
 
+//add Vehicle Type
 const addVehicleType = async (request, response) => {
   await ModelVehicle.addVehicleType(request, response);
 };
 
+//update Vehicle infos
 const updateVehicle = async (request, response) => {
   await ModelVehicle.updateVehicle(request, response);
 };
 
+//// Assign am to a vehicle
 const updateVehicleAM = async (request, response) => {
   await ModelVehicle.updateVehicleAM(request, response);
 };
 
+//// Assign am to a vehicle
 const updateVehicleImage = async (request, response) => {
   if (process.env.NODE_ENV === "production") {
     let old_imagePath = await ModelVehicle.getVehicleImagePathByChassisNum(
@@ -82,9 +101,13 @@ const updateVehicleImage = async (request, response) => {
   await ModelVehicle.updateVehicleImage(request, response);
 };
 
+
+// Update vehicle type information
 const updateVehicleType = async (request, response) => {
   await ModelVehicle.updateVehicleType(request, response);
 };
+
+//delete vehicule
 const deleteVehicule = async (request, response) => {
   if (process.env.NODE_ENV === "production") {
     let old_imagePath = await ModelVehicle.getVehicleImagePathByChassisNum(
@@ -96,10 +119,14 @@ const deleteVehicule = async (request, response) => {
   await ModelVehicle.deleteVehicule(request, response);
 };
 
+
+// Delete a type of vehicle
 const deleteVehiculeType = async (request, response) => {
   await ModelVehicle.deleteVehiculeType(request, response);
 };
 
+
+//Retrieve the list of vehicle brands
 const getMarques = async (request, response) => {
   await ModelVehicle.getMarques(request, response);
 };
