@@ -9,7 +9,7 @@ describe("Tester le service Tache", () => {
         if (element.id_tache === 1) {
           expect(element.objet).toEqual("test_objet1");
           expect(element.descriptif).toEqual("descriptif1");
-          expect(element.etat).toEqual('en cours');
+          expect(element.etat).toEqual("en cours");
         }
       });
     });
@@ -94,7 +94,7 @@ describe("Tester le service Tache", () => {
     //-----
     await axios.get(url + "tache/get_tache_byidam/test_am1").then((res) => {
       res.data.forEach((element) => {
-        if(element.id_tache === 1){
+        if (element.id_tache === 1) {
           expect(element.etat_avancement).toEqual(100);
         }
       });

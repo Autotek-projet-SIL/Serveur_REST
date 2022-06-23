@@ -1,9 +1,10 @@
-// Declaration de variables
+//vaariable declaration
 const express = require("express");
 const routerPaiement = express.Router();
 const controllerPaiement = require("../Controllers/ControllerPaiement");
 
-//Declaration des routes du service paiement
+//Routers of Paiement service Declaration
+
 routerPaiement.post(
   "/paiement/verifier_paiement/",
   controllerPaiement.verifierPaiement
@@ -13,5 +14,5 @@ routerPaiement.get(
   controllerPaiement.getPaiementsByIdLocataire
 );
 
-// Exporter le router paiement
+// Export methods
 module.exports = routerPaiement;

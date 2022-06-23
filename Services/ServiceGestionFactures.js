@@ -1,6 +1,6 @@
-// Variables Declaration 
-const ModelFacture = require("../Models/ModelFacture.js");              // the Model of this Service : Facture
-const log = require("../config/Logger");                              // Display Configuration
+// Variables Declaration
+const ModelFacture = require("../Models/ModelFacture.js"); // the Model of this Service : Facture
+const log = require("../config/Logger"); // Display Configuration
 
 //Functions of Facture Management Service
 

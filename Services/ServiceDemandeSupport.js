@@ -1,6 +1,6 @@
-// Variables Declaration 
-const log = require("../config/Logger");                                    // display configuration data and methods
-const modelDemandeSupport = require("../Models/ModelDemandeSupport");       // Model of this service : DemandeSupport
+// Variables Declaration
+const log = require("../config/Logger"); // display configuration data and methods
+const modelDemandeSupport = require("../Models/ModelDemandeSupport"); // Model of this service : DemandeSupport
 
 // Functions of demandeSupport management Service
 

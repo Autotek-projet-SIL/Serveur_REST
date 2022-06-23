@@ -1,6 +1,6 @@
-// Variables Declaration 
-const ModelTache = require("../Models/ModelTache.js");      // Model Tache
-const log = require("../config/Logger");                  // Display Configuration 
+// Variables Declaration
+const ModelTache = require("../Models/ModelTache.js"); // Model Tache
+const log = require("../config/Logger"); // Display Configuration
 
 // Functions of service Tache Declaration
 
@@ -29,7 +29,7 @@ const updateEtatAvancementTache = async (request, response) => {
   await ModelTache.updateEtatAvancementTache(request, response);
 };
 
-//Update etat field in a Tache 
+//Update etat field in a Tache
 const updateEtatTache = async (request, response) => {
   await ModelTache.updateEtatTache(request, response);
 };

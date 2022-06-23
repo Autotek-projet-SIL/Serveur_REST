@@ -1,9 +1,10 @@
-// Declaration de variables
+// variable declaration
 const express = require("express");
 const routerGestionProfils = express.Router();
 const controllerGestionProfils = require("../Controllers/ControllerGestionProfils");
 
-//Declaration des routes du service Gestion des Profils
+//Routers of GestionProfils service Declaration
+
 routerGestionProfils.get(
   "/gestionprofils/locataire/",
   controllerGestionProfils.getLocataires

@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-//récupérer la liste des locations pour le service statistiques
+//retrieve the list of rentals for the statistics service
 const getLocationStatistics = async (request, response) => {
   pool.query(
     "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region  FROM louer",
@@ -18,7 +18,7 @@ const getLocationStatistics = async (request, response) => {
   );
 };
 
-// Recuperer  la liste de toutes les locations
+// Retrieve the list of all rentals
 const getAllLocations = async (request, response) => {
   pool.query(
     "SELECT l.id_louer,l.numero_chassis,l.id_locataire, l.heure_debut, l.heure_fin,l.status_demande_location,l.en_cours,l.suivi_location,tv.id_type_vehicule, libelle, tarification,l.latitude_depart,l.longitude_depart,l.latitude_arrive,l.longitude_arrive,loc.nom,loc.prenom FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule inner join locataire loc on l.id_locataire=loc.id_locataire",
@@ -34,23 +34,20 @@ const getAllLocations = async (request, response) => {
   );
 };
 
-// Recuperer  la liste de toutes les locations
+// Retrieve the list of all rentals
 const getAllRegions = async (request, response) => {
-  pool.query(
-    "select distinct region from louer; ",
-    (error, results) => {
-      if (error) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
-        response.sendStatus(500);
-      } else {
-        response.status(200).json(results.rows);
-      }
+  pool.query("select distinct region from louer; ", (error, results) => {
+    if (error) {
+      log.loggerConsole.error(error);
+      log.loggerFile.error(error);
+      response.sendStatus(500);
+    } else {
+      response.status(200).json(results.rows);
     }
-  );
+  });
 };
 
-// Recuperer la liste des locations en cours
+// Retrieve the list of current rentals
 const getLocationsEnCours = async (request, response) => {
   pool.query(
     "SELECT id_louer,l.numero_chassis, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours,loc.nom,loc.prenom FROM louer l inner join locataire loc on l.id_locataire=loc.id_locataire  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true",
@@ -66,7 +63,7 @@ const getLocationsEnCours = async (request, response) => {
   );
 };
 
-// Recuperer la liste  des locations en cours d'un locataire
+// Retrieve the list of current rentals
 const getLocationsLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -84,7 +81,7 @@ const getLocationsLocataire = async (request, response) => {
   );
 };
 
-// Recuperer la liste des locations terminees
+// Retrieve the list of completed rentals
 const getLocationsTermines = async (request, response) => {
   pool.query(
     "SELECT id_louer, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification ,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false",
@@ -100,7 +97,7 @@ const getLocationsTermines = async (request, response) => {
   );
 };
 
-// Recuperer la liste des locations terminees d'un locataire
+// Retrieve the list of terminated rentals for a tenant
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -118,7 +115,7 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
   );
 };
 
-// Recuperer le locations terminees d'un locataire
+// Retrieve the ended rentals of a tenant
 const getLocataireByNumeroChassis = async (request, response) => {
   let numero_chassis = request.params.num;
   pool.query(
@@ -136,7 +133,7 @@ const getLocataireByNumeroChassis = async (request, response) => {
   );
 };
 
-// Recuperer la liste des locations acceptées pour le service statistiques
+// Retrieve the list of rentals accepted for the statistics service
 const getLocationsAcceptes = async (request, response) => {
   pool.query(
     "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region from louer where status_demande_location='accepte' ",
@@ -152,7 +149,7 @@ const getLocationsAcceptes = async (request, response) => {
   );
 };
 
-// Recuperer la liste des locations rejetées pour le service statistiques
+// Retrieve the list of rejected rentals for the statistics service
 const getLocationsRejetes = async (request, response) => {
   pool.query(
     "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region from louer where status_demande_location='rejete' ",
@@ -168,7 +165,7 @@ const getLocationsRejetes = async (request, response) => {
   );
 };
 
-// Modifier le champs suivi_location d'une location
+// Modify the follow_location field of a location
 const updateLocationSuiviLocation = async (request, response) => {
   let id = request.params.id;
   let date = request.body.suivi_location;
@@ -187,7 +184,7 @@ const updateLocationSuiviLocation = async (request, response) => {
   );
 };
 
-// Mdifier le champs heure_debut d'une location
+// Modify the start time field of a rental
 const updateLocationHeureDebut = async (request, response) => {
   let id = request.params.id;
   let date = request.body.heure;
@@ -206,7 +203,7 @@ const updateLocationHeureDebut = async (request, response) => {
   );
 };
 
-// Modifier le champs heure_fin d'une location
+//// Modify the end_time field of a rental
 const updateLocationHeureFin = async (request, response) => {
   let id = request.params.id;
   let date = request.body.heure;
@@ -223,7 +220,7 @@ const updateLocationHeureFin = async (request, response) => {
   );
 };
 
-// Terminer une location (en_cours => false)
+// End a rental (in_progress => false)
 const endLocation = async (request, response) => {
   let id = request.params.id;
   let heure = request.body.heure;
@@ -236,12 +233,12 @@ const endLocation = async (request, response) => {
         log.loggerFile.error(error);
         response.statusCode = 500;
       }
-      response.statusCode=200
+      response.statusCode = 200;
     }
   );
 };
 
-// Ajouter une location
+// aadd location
 const addLocation = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -270,7 +267,7 @@ const addLocation = async (request, response) => {
   );
 };
 
-// Recuperer une location avec un identifiant
+/// Retrieve a location with an identifier
 const getLocationById = async (request, response) => {
   let id_louer = request.params.id;
   pool.query(
@@ -288,7 +285,7 @@ const getLocationById = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD de location
+//Export rental CRUD functions
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,
@@ -305,5 +302,5 @@ module.exports = {
   getLocationsTerminesByIdLocataire,
   updateLocationSuiviLocation,
   getAllRegions,
-  getLocataireByNumeroChassis
+  getLocataireByNumeroChassis,
 };

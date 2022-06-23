@@ -1,10 +1,10 @@
-// Variables Declaration 
-const pool = require("../config/config_pool");          // DataBase Configuration 
-const log = require("../config/Logger");                // Display Configuration
+// Variables Declaration
+const pool = require("../config/config_pool"); // DataBase Configuration
+const log = require("../config/Logger"); // Display Configuration
 
 // Model of service panne Declaration
 
-//add a panne 
+//add a panne
 const addPanne = async (request, response, data) => {
   let body = request.body;
   pool.query(
@@ -60,7 +60,7 @@ const getPannes = async (request, response) => {
   );
 };
 
-// get a panne by id 
+// get a panne by id
 const getPanneById = async (request, response) => {
   let id = request.params.id;
   pool.query(

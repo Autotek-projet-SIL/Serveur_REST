@@ -11,7 +11,9 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-// Fonctions du service mailing
+// Function of service mailing
+
+//get facture detail
 const getFactureDetailByID = async (request, response) => {
   let facture_detail = await ModelFacture.getFactureDetailByID(
     request,
@@ -48,10 +50,10 @@ const getFactureDetailByID = async (request, response) => {
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
-      response.sendStatus(500)
+      response.sendStatus(500);
     } else {
       console.log("Email sent: " + info.response);
-      response.sendStatus(200)
+      response.sendStatus(200);
     }
   });
 };

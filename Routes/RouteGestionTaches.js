@@ -1,7 +1,7 @@
-// Variables Declaration 
+// Variables Declaration
 const express = require("express");
-const routerGestionTaches = express.Router();               // this router : tache
-const controllerGestionTaches = require("../Controllers/ControllerGestionTaches.js");  // the controller of this router : tache
+const routerGestionTaches = express.Router(); // this router : tache
+const controllerGestionTaches = require("../Controllers/ControllerGestionTaches.js"); // the controller of this router : tache
 
 // Router of service Tache Declaration
 

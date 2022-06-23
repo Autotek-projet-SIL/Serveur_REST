@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-// Recuperer la liste des locataires
+// Retrieve the list of tenants
 const getLocataires = async (request, response) => {
   pool.query(
     `SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.email,l.statut_compte,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
@@ -20,7 +20,7 @@ const getLocataires = async (request, response) => {
   );
 };
 
-// Recuperer un locataire avec un identifiant
+// Retrieve a tenant with an identifier
 const getLocataireById = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -41,7 +41,7 @@ const getLocataireById = async (request, response) => {
   );
 };
 
-// Recuperer un locataire avec son email
+// Retrieve a tenant with his email
 const getLocataireByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
@@ -64,7 +64,7 @@ const getLocataireByEmail = async (request, response) => {
   );
 };
 
-// Ajouter un locataire
+// Add a tenant
 const addLocataire = async (request, response) => {
   let body = request.body;
   await pool.query(
@@ -91,7 +91,7 @@ const addLocataire = async (request, response) => {
   );
 };
 
-// Mettre a jour les informations d'un locataire
+// Update tenant information
 const updateLocataire = async (request, response) => {
   let id = request.params.id;
   let body = request.body;
@@ -120,7 +120,7 @@ const updateLocataire = async (request, response) => {
   );
 };
 
-// Mettre a jour le status du compte d'un locataire
+// Update the status of a tenant's account
 const updateLocataireStatus = async (request, response, status) => {
   let id = request.params.email;
   pool.query(
@@ -137,7 +137,7 @@ const updateLocataireStatus = async (request, response, status) => {
   );
 };
 
-// Mettre a jour le stripe id d'un locataire
+// Update the stripe id of a tenant
 const updateLocataireStripeId = async (email, stripe_id) => {
   await pool.query("UPDATE locataire SET stripe_id=$2 WHERE email=$1", [
     email,
@@ -146,7 +146,7 @@ const updateLocataireStripeId = async (email, stripe_id) => {
   return;
 };
 
-// Recuperer le stripe id d'un locataire
+// Retrieve the stripe id of a tenant
 const getLocaireStripeIdByEmail = async (email) => {
   let Results = await pool.query(
     "Select stripe_id from locataire where email=$1",
@@ -155,7 +155,7 @@ const getLocaireStripeIdByEmail = async (email) => {
   return Results.rows[0];
 };
 
-// Supprimer un locataire
+//delete locataire
 const deleteLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -173,7 +173,7 @@ const deleteLocataire = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD du locataire
+//Export tenant CRUD functions
 module.exports = {
   getLocataireById,
   getLocataireByEmail,

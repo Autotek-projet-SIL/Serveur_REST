@@ -1,8 +1,8 @@
-// Declaration de variables
+// Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-//Ajouter une location
+//Add a location
 const addTrajet = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -20,7 +20,7 @@ const addTrajet = async (request, response) => {
   );
 };
 
-//Exporter les fonctions CRUD du trajet
+//Export CRUD functions from the trip
 module.exports = {
   addTrajet,
 };

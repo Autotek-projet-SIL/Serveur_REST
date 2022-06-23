@@ -1,6 +1,6 @@
-// Variables Declaration 
-const pool = require("../config/config_pool");                        // DataBase Configuration
-const log = require("../config/Logger");                          // Display Configurations 
+// Variables Declaration
+const pool = require("../config/config_pool"); // DataBase Configuration
+const log = require("../config/Logger"); // Display Configurations
 
 //Functions of Facture Management Model
 
@@ -9,24 +9,31 @@ const addFacture = async (request, response) => {
   let body = request.body;
   pool.query(
     "INSERT INTO facture (date_facture, montant, heure, tva, id_louer,id_payer ) VALUES ($1, $2, $3, $4, $5,$6)",
-    [body.date_facture, body.montant, body.heure, body.tva, body.id_louer,body.id_payer],
+    [
+      body.date_facture,
+      body.montant,
+      body.heure,
+      body.tva,
+      body.id_louer,
+      body.id_payer,
+    ],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
         response.statusCode = 500;
       } else {
-        if(process.env.NODE_ENV === "test_unitaire"){
-          response.sendStatus(200)
-        }else{
-          response.statusCode=200
+        if (process.env.NODE_ENV === "test_unitaire") {
+          response.sendStatus(200);
+        } else {
+          response.statusCode = 200;
         }
       }
     }
   );
 };
 
-// recuperate a facture Details by id 
+// recuperate a facture Details by id
 async function getFactureDetailByID(request, response) {
   let id_louer = request.body.id_louer;
   try {

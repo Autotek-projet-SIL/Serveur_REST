@@ -1,6 +1,6 @@
 // Variables Declaration
-const pool = require("../config/config_pool");   // DataBase configuration
-const log = require("../config/Logger");          // display configuration
+const pool = require("../config/config_pool"); // DataBase configuration
+const log = require("../config/Logger"); // display configuration
 
 // Functions of demandeSupport management Model
 

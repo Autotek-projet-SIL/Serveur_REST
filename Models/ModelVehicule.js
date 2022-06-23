@@ -1,16 +1,14 @@
-// Variables Declaration 
-const pool = require("../config/config_pool");                // DataBase configuration
-const log = require("../config/Logger");                           // Display configuration 
+// Declaration de variables
+const pool = require("../config/config_pool");
+const log = require("../config/Logger");
 
-//Model of Flotte service Declaration 
-
-//recuperate all vehicules
+// Recuperer la liste des véhicules de la flotte
 const getVehicles = async (request, response) => {
   pool.query(
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
         v.id_am,am.nom,am.prenom,am.email,am.numero_telephone,
         v.id_type_vehicule,tv.libelle,tv.tarification
-        FROM vehicule v INNER JOIN am  ON am.id_am = v.id_am INNER JOIN typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule;`,
+        FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule;`,
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -23,14 +21,14 @@ const getVehicles = async (request, response) => {
   );
 };
 
-//recuperate all vehicules by id AM
+// Recuperer la liste des véhicules affectés à un AM
 const getVehiclesByAmID = async (request, response) => {
   let id_am = request.params.id;
   pool.query(
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
       v.id_am,am.nom,am.prenom,am.email,am.numero_telephone,
       v.id_type_vehicule,tv.libelle,tv.tarification
-      FROM vehicule v INNER JOIN am  ON am.id_am = v.id_am INNER JOIN typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+      FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
       WHERE v.id_am = $1;`,
     [id_am],
     (error, results) => {
@@ -45,14 +43,14 @@ const getVehiclesByAmID = async (request, response) => {
   );
 };
 
-//recuperate a vehicule by num_chassis
+// Recuperer un véhicule avec son numéro de chassis
 const getVehicleByChassisNum = async (request, response) => {
   let num_chassis = request.params.num_chassis;
   pool.query(
     `SELECT v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule,
       v.id_am,am.nom,am.prenom,am.email,am.mot_de_passe,am.numero_telephone,am.numero_telephone,
       v.id_type_vehicule,tv.libelle,tv.tarification
-  FROM vehicule v INNER JOIN am  ON am.id_am = v.id_am INNER JOIN typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+  FROM vehicule v inner join am  ON am.id_am = v.id_am inner join typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
   WHERE v.numero_chassis=$1;`,
     [num_chassis],
     (error, results) => {
@@ -67,7 +65,20 @@ const getVehicleByChassisNum = async (request, response) => {
   );
 };
 
-//recuperate all vehicules types
+// Recuperer le chemin de l'image d'un véhicule avec son numéro de chassis
+async function getVehicleImagePathByChassisNum(request, response) {
+  try {
+    let Results = await pool.query(
+      `SELECT chemin_image_vehicule FROM vehicule WHERE numero_chassis = $1;`,[request.params.num],
+    );
+    response.codestatus = 200;
+    return Results.rows[0].chemin_image_vehicule;
+  } catch (error) {
+    response.sendStatus(500);
+  }
+};
+
+// Recuperer la liste des types des véhicules
 const getVehiclesTypes = async (request, response) => {
   pool.query(`SELECT * FROM typevehicule;`, (error, results) => {
     if (error) {
@@ -80,7 +91,7 @@ const getVehiclesTypes = async (request, response) => {
   });
 };
 
-//recuperate all vehicules marques
+// Recuperer la liste des marques des véhicules
 const getVehiclesMarques = async (request, response) => {
   pool.query(
     `SELECT DISTINCT UPPER(marque) AS marque FROM vehicule;`,
@@ -96,7 +107,7 @@ const getVehiclesMarques = async (request, response) => {
   );
 };
 
-//recuperate all vehicules models for a vehicule marque
+// Recuperer les modeles des véhicules pour une marque
 const getVehiclesModelsByMarque = async (request, response) => {
   pool.query(
     `SELECT DISTINCT UPPER(modele) FROM vehicule where UPPER(marque)=UPPER($1);`,
@@ -113,11 +124,11 @@ const getVehiclesModelsByMarque = async (request, response) => {
   );
 };
 
-//add a vehicule
+// Ajouter un véhicule
 const addVehicle = async (request, response) => {
   let body = request.body;
   pool.query(
-    "INSERT INTO vehicule(numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+    "INSERT INTO vehicule(numero_chassis, marque, modele, couleur, id_type_vehicule, id_am, image_vehicule, chemin_image_vehicule) VALUES ($1, $2, $3, $4, $5, $6, $7,$8);",
     [
       body.num_chassis,
       body.marque,
@@ -126,6 +137,7 @@ const addVehicle = async (request, response) => {
       body.id_type_vehicule,
       body.id_am,
       body.image_vehicule,
+      body.location_image
     ],
     (error, results) => {
       if (error) {
@@ -139,7 +151,7 @@ const addVehicle = async (request, response) => {
   );
 };
 
-//add a vehicule type
+// Ajouter un type de véhicule
 const addVehicleType = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -157,7 +169,7 @@ const addVehicleType = async (request, response) => {
   );
 };
 
-//update a vehicule
+// Mettre a jour les informations d'un véhicule
 const updateVehicle = async (request, response) => {
   let num_chassis = request.params.num;
   let body = request.body;
@@ -183,7 +195,7 @@ const updateVehicle = async (request, response) => {
   );
 };
 
-//update a vehicule AM
+// Affecter am à un véhicule
 const updateVehicleAM = async (request, response) => {
   let num_chassis = request.params.num;
   pool.query(
@@ -201,12 +213,13 @@ const updateVehicleAM = async (request, response) => {
   );
 };
 
-//update a vehicule image
+// Modifier l'image d'un vehicule
 const updateVehicleImage = async (request, response) => {
   let num_chassis = request.params.num;
+
   pool.query(
-    "UPDATE vehicule	SET image_vehicule=$2 WHERE numero_chassis=$1;",
-    [num_chassis, request.body.image_vehicule],
+    "UPDATE vehicule	SET image_vehicule=$2,chemin_image_vehicule=$3 WHERE numero_chassis=$1;",
+    [num_chassis, request.body.image_vehicule,request.body.location_image],
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -219,7 +232,7 @@ const updateVehicleImage = async (request, response) => {
   );
 };
 
-//update a vehicule type information
+// Mettre a jour les informations d'un type de véhicule
 const updateVehicleType = async (request, response) => {
   let id_type_vehicule = request.params.id;
   let body = request.body;
@@ -238,7 +251,7 @@ const updateVehicleType = async (request, response) => {
   );
 };
 
-//delete a vehicule 
+// Supprimer un véhicule
 const deleteVehicule = async (request, response) => {
   let num_chassis = request.params.num;
   pool.query(
@@ -256,7 +269,7 @@ const deleteVehicule = async (request, response) => {
   );
 };
 
-//delete a vehicule type 
+// Supprimer un type de véhicule
 const deleteVehiculeType = async (request, response) => {
   let id_type_vehicule = request.params.id;
   pool.query(
@@ -274,9 +287,9 @@ const deleteVehiculeType = async (request, response) => {
   );
 };
 
-//recuperate all vehicules marques
+//Recuperer la liste des marques de vehicules
 const getMarques = async (request, response) => {
-  pool.query(`SELECT * FROM marque;`, (error, results) => {
+  pool.query(`SELECT * from marque;`, (error, results) => {
     if (error) {
       log.loggerConsole.error(error);
       log.loggerFile.error(error);
@@ -287,11 +300,11 @@ const getMarques = async (request, response) => {
   });
 };
 
-//recuperate all vehicules models by id marque
+//Recuperer la liste des modeles d'une marque par id de marque
 const getModelsByIdMarque = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    `SELECT * FROM modele WHERE id_marque=$1;`,
+    `SELECT * from modele where id_marque=$1;`,
     [id],
     (error, results) => {
       if (error) {
@@ -305,7 +318,7 @@ const getModelsByIdMarque = async (request, response) => {
   );
 };
 
-//Export CRUD functions of vehicule
+//Exporter les fonctions CRUD de vehicule
 module.exports = {
   getVehicles,
   getVehiclesByAmID,
@@ -323,4 +336,5 @@ module.exports = {
   deleteVehiculeType,
   getModelsByIdMarque,
   getMarques,
+  getVehicleImagePathByChassisNum
 };

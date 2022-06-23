@@ -1,11 +1,11 @@
-// Variables Declaration 
+// Variables Declaration
 const express = require("express");
-const routerGestionPannes = express.Router();        // this router : Pannes
-const controllerGestionPannes = require("../Controllers/ControllerGestionPannes");      // the controller of this router : Pannes
+const routerGestionPannes = express.Router(); // this router : Pannes
+const controllerGestionPannes = require("../Controllers/ControllerGestionPannes"); // the controller of this router : Pannes
 
 // Router of service panne Declaration
 
-//add a panne 
+//add a panne
 routerGestionPannes.post(
   "/gestionpannes/ajouter_panne/",
   controllerGestionPannes.addPanne
@@ -17,7 +17,7 @@ routerGestionPannes.get(
   controllerGestionPannes.getPannes
 );
 
-// get a panne by id 
+// get a panne by id
 routerGestionPannes.get(
   "/gestionpannes/panne/:id",
   controllerGestionPannes.getPanneById

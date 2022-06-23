@@ -3,7 +3,8 @@ const express = require("express");
 const routerMobileAuthentification = express.Router();
 const controllerMobileAuthentification = require("../Controllers/ControllerMobileAuthentification.js");
 
-//Declaration des routes du service authentification mobile
+////Routers of MobileAuthentification service Declaration
+
 routerMobileAuthentification.post(
   "/authentification_mobile/locataire_inscription/",
   controllerMobileAuthentification.inscriptionLocataire
@@ -21,5 +22,5 @@ routerMobileAuthentification.post(
   controllerMobileAuthentification.envoyerDemandeInscription
 );
 
-// Exporter le router mobiel authentification
+// Export all methods
 module.exports = routerMobileAuthentification;

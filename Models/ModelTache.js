@@ -1,8 +1,8 @@
-// Variables Declaration 
-const pool = require("../config/config_pool");   // DataBaseConfiguration
-const log = require("../config/Logger");            // Display Configuration 
+// Variables Declaration
+const pool = require("../config/config_pool"); // DataBaseConfiguration
+const log = require("../config/Logger"); // Display Configuration
 
-// Model functions of service Tache 
+// Model functions of service Tache
 
 //add a Tache
 const addTache = async (request, response, data) => {
@@ -31,7 +31,7 @@ const addTache = async (request, response, data) => {
   );
 };
 
-// get all Taches 
+// get all Taches
 const getTaches = async (request, response) => {
   pool.query(
     `SELECT t.id_tache, t.objet, t.descriptif, t.etat, t.date_debut, t.date_fin, t.id_am, t.etat_avancement, t.type_tache, p.id_panne, p.numero_chassis, v.numero_chassis,v.marque,v.modele,v.couleur,v.image_vehicule FROM tache t LEFT JOIN panne p ON p.id_tache = t.id_tache LEFT JOIN vehicule v ON v.numero_chassis = p.numero_chassis;`,
@@ -47,7 +47,7 @@ const getTaches = async (request, response) => {
   );
 };
 
-//Update etat field in a Tache 
+//Update etat field in a Tache
 const updateEtatTache = async (request, response) => {
   let id_tache = request.params.id;
   let body = request.body;
@@ -85,7 +85,7 @@ const updateEtatAvancementTache = async (request, response) => {
   );
 };
 
-//recuperate the liste of all taches by id AM 
+//recuperate the liste of all taches by id AM
 const getTacheByIdAm = async (request, response) => {
   let id = request.params.id;
   pool.query(
