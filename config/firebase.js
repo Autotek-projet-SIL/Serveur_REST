@@ -1,20 +1,20 @@
-// Declaration de variables
+// Variables Declarations
 let admin = require("firebase-admin");
 let serviceAccount = require("./autotek-8c725-firebase-adminsdk-7tu4s-24ed0288bc.json");
 const log = require("../config/Logger");
 
-// Initisaliser l'admin SDK de FireBase
+// FireBase admin SDK initialisation
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: 'gs://autotek-8c725.appspot.com/'
 });
 
-// Initialiser Firebase
+// Firebase initialisation
 const db = admin.firestore();
 const messaging = admin.messaging();
 const auth = admin.auth();
 
-// Fonction de verification des tokens de Firebase
+// Firebase tokens verification function  
 const verifyToken = async (request) => {
   /* return new Promise((resolve, reject) => {
     let token;
@@ -45,7 +45,7 @@ const verifyToken = async (request) => {
   });*/
 };
 
-// Exporter les fonctions concernat firebase
+// Export Firebase functions
 module.exports = {
   verifyToken,
   auth,

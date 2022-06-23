@@ -1,11 +1,12 @@
-// Declaration de variables
+// Variables Declarations
 const winston = require("winston");
 const { combine, timestamp, printf, label, colorize, align, json, errors } =
   winston.format;
 const { format } = require("logform");
 
-// Declaration de 2 types de loggers
-// Logger pour afficher les erreurs dans la console
+// The 2 types of loggers declaration
+
+// (1) Logger for display erreurs in console  
 const loggerConsole = winston.createLogger({
   format: format.combine(
     format.timestamp({ format: "MMM-DD-YYYY HH:mm:ss" }),
@@ -16,7 +17,7 @@ const loggerConsole = winston.createLogger({
   transports: [new winston.transports.Console({})],
 });
 
-// Logger pour rediriger les erreurs dans un fichier log
+// (2) Logger for redirect erreurs to a log file
 const loggerFile = winston.createLogger({
   level: "info",
   format: combine(
@@ -33,7 +34,7 @@ const loggerFile = winston.createLogger({
   ],
 });
 
-// Exporter les loggers
+// Export the loggers
 module.exports = {
   loggerConsole,
   loggerFile,
