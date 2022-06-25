@@ -46,7 +46,7 @@ const getLocataireByEmail = async (request, response) => {
   let email = request.params.email;
   pool.query(
     `
-  SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.email,l.statut_compte,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
+  SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.email,l.statut_compte,l.mot_de_passe,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
   FROM locataire l  inner join demandeinscription d ON d.id_locataire = l.id_locataire
   left join justificatif j ON j.id_demande_inscription = d.id_demande_inscription
   where l.email =$1;
