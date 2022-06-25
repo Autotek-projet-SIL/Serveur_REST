@@ -5,7 +5,7 @@ const log = require("../config/Logger");
 // Retrieve the list of tenants
 const getLocataires = async (request, response) => {
   pool.query(
-    `SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.email,l.statut_compte,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
+    `SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.mot_de_passe,l.email,l.statut_compte,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
   FROM locataire l  inner join demandeinscription d ON d.id_locataire = l.id_locataire
   left join justificatif j ON j.id_demande_inscription = d.id_demande_inscription;`,
     (error, results) => {
@@ -24,7 +24,7 @@ const getLocataires = async (request, response) => {
 const getLocataireById = async (request, response) => {
   let id = request.params.id;
   pool.query(
-    `SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.email,l.statut_compte,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
+    `SELECT l.id_locataire,l.nom,l.prenom,l.numero_telephone,l.email,l.mot_de_passe,l.statut_compte,l.photo_identite_recto,l.photo_identite_verso,l.photo_selfie,d.id_demande_inscription,d.statut,d.date_inscription,j.id_justificatif,j.objet,j.descriptif
   FROM locataire l  inner join demandeinscription d ON d.id_locataire = l.id_locataire
   left join justificatif j ON j.id_demande_inscription = d.id_demande_inscription
   WHERE l.id_locataire=$1;`,

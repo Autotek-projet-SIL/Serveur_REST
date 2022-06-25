@@ -5,8 +5,8 @@ import webbrowser
 import os
 import sys
 # account credentials
-username = os.environ['autotek_mail']
-password = os.environ['autotek_password']
+username = "autotek078@gmail.com"
+password = "tbxmdgftetkjgbof" 
 def clean(text):
     # clean text for creating a foldercls
     return "".join(c if c.isalnum() else "_" for c in text)

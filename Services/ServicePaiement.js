@@ -18,8 +18,8 @@ const VerifierPaiement = async (request, response) => {
     };
     PythonShell.run("Services/paiement.py", options, async (err, results) => {
       if (err) {
-        log.loggerConsole.error(error);
-        log.loggerFile.error(error);
+        log.loggerConsole.error(err);
+        log.loggerFile.error(err);
         response.sendStatus(406);
       } else {
         if (results != null && results[0] == "True") {
