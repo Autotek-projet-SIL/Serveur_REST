@@ -23,7 +23,6 @@ const VerifierPaiement = async (request, response) => {
         log.loggerFile.error(err);
         response.sendStatus(406);
       } else {
-        console.log("Result [0] :" + results[0])
         if (results != null && results[0] == "True") {
           await modelPayer.addPaiement(request, response);
         } else {
