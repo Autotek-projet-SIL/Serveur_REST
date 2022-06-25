@@ -18,13 +18,16 @@ const VerifierPaiement = async (request, response) => {
     };
     PythonShell.run("Services/paiement.py", options, async (err, results) => {
       if (err) {
+        console.log("Erreur d'execution")
         log.loggerConsole.error(err);
         log.loggerFile.error(err);
         response.sendStatus(406);
       } else {
+        console.log("Result [0] :" + results[0])
         if (results != null && results[0] == "True") {
           await modelPayer.addPaiement(request, response);
         } else {
+          console.log("Erreur de validite des credentials")
           response.sendStatus(406);
         }
       }
