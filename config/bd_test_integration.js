@@ -1,6 +1,7 @@
+// DataBase configuration when the environnement mode is integration ( local database )
 const Pool = require("pg").Pool;
 
-// Ouverture de connexion avec la base de données en local
+// Open a connection with the database en local mode
 const poolTestIntegration = new Pool({
   user: process.env.db_user,
   host: process.env.db_host,
@@ -9,4 +10,5 @@ const poolTestIntegration = new Pool({
   port: process.env.db_port,
 });
 
+// export the connection method
 module.exports = poolTestIntegration;

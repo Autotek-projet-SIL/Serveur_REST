@@ -1,6 +1,7 @@
+// DataBase configuration when the environnement mode is test ( in memory database )
 const pg_mem = require("pg-mem");
 
-// Base de données en memoire pour les test unitaires
+// In Memory DataBase for the units tests Creation
 const pg = pg_mem.newDb().adapters.createPg();
 
 const pool = new pg.Pool();
@@ -397,4 +398,6 @@ pool.query(
     VALUES ( 'test_v1', 1 );
     `
 );
+
+// export the dataBase
 module.exports = pool;

@@ -1,8 +1,9 @@
-// Declaration de variables
+// Variables Declarations
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 4000;
+// Routes Declarations
 const routeMobileAuthentification = require("../Routes/RouteMobileAuthentification.js");
 const routeWebAuthentification = require("../Routes/RouteWebAuthentification.js");
 const routeGestionProfils = require("../Routes/RouteGestionProfils.js");
@@ -17,7 +18,7 @@ const routePaiement = require("../Routes/RoutePaiement.js");
 const routeMailing = require("../Routes/RouteMailing");
 const routeDemandeSupport = require("../Routes/RouteDemandeSupport.js");
 
-// Configurer le serveur pour utiliser toutes les routes
+// Server Configuration to use all the routes
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routeMobileAuthentification);
@@ -37,10 +38,10 @@ app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });
 
-// Demarrer le serveur dans le port 4000
+// launch the server in the port 4000
 app.listen(port, () => console.log("Server running on port 4000 ..."));
 
-// Exporter l'instance de l'application créé
+// Export the created application instance
 module.exports = {
   app,
 };

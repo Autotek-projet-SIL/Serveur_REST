@@ -1,12 +1,15 @@
-// Choix d'un pool en fonction de la varibale d'environement
+// DataBase pool choice depending on the environement variable
 
 let pool = null;
-if (process.env.NODE_ENV === "test_unitaire") {
+if (process.env.NODE_ENV === "test_unitaire") {      // case of unit test mode
   pool = require("../config/bd_test_unitaire");
-} else if (process.env.NODE_ENV === "production") {
+} 
+else if (process.env.NODE_ENV === "production") {    // case of production mode
   pool = require("../config/bd_production");
-} else {
-  pool = require("../config/bd_test_integration");
+} 
+else {                                              // case of integration test mode
+  pool = require("../config/bd_test_integration");     
 }
-// Exporter le pool
+
+// Export the pool
 module.exports = pool;

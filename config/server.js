@@ -1,4 +1,4 @@
-// Declaration de variables
+// Variables Declarations
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
@@ -8,11 +8,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require("cors");
 
-// Configurer le serveur pour travailler avec JSON
+// Server Configuration to use JSON 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configurer la politique de securite pour l'acces au serveur
+// Configuration of the security policy for the server access 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", true);
@@ -29,7 +29,7 @@ app.use(
   })
 );
 
-// Declaration de toutes les routes
+// Routes Declaration 
 const routeMobileAuthentification = require("../Routes/RouteMobileAuthentification.js");
 const routeWebAuthentification = require("../Routes/RouteWebAuthentification.js");
 const routeGestionProfils = require("../Routes/RouteGestionProfils.js");
@@ -44,7 +44,7 @@ const routeGestionTaches = require("../Routes/RouteGestionTaches.js");
 const routePaiement = require("../Routes/RoutePaiement.js");
 const routeDemandeSupport = require("../Routes/RouteDemandeSupport.js");
 
-// Configurer le serveur pour utiliser morgan
+// Server Configuration to use morgan
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -56,7 +56,7 @@ app.use(
   })
 );
 
-// Configurer le serveur pour utiliser toutrs les routes
+// Server Configuration to use all the routes
 app.use("/", routeMobileAuthentification);
 app.use("/", routeWebAuthentification);
 app.use("/", routeGestionProfils);
@@ -74,10 +74,10 @@ app.get("/", (req, res) => {
   res.send("Autotek Web server");
 });
 
-// Demarrer le serveur sur le port 3000
+// launch the server in the port 3000
 app.listen(port, () => console.log("Server running on port 3000 ..."));
 
-// Exporter l'instance de l'application créé
+// Export the created application instance
 module.exports = {
   app,
 };
