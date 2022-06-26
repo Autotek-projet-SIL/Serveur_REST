@@ -1,8 +1,8 @@
-// Declaration of variables
+// Declaration de variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
-//retrieve the list of rentals for the statistics service
+//récupérer la liste des locations pour le service statistiques
 const getLocationStatistics = async (request, response) => {
   pool.query(
     "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region  FROM louer",
@@ -18,10 +18,14 @@ const getLocationStatistics = async (request, response) => {
   );
 };
 
-// Retrieve the list of all rentals
+// Recuperer  la liste de toutes les locations
 const getAllLocations = async (request, response) => {
   pool.query(
-    "SELECT l.id_louer,l.numero_chassis,l.id_locataire, l.heure_debut, l.heure_fin,l.status_demande_location,l.en_cours,l.suivi_location,tv.id_type_vehicule, libelle, tarification,l.latitude_depart,l.longitude_depart,l.latitude_arrive,l.longitude_arrive,loc.nom,loc.prenom FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule inner join locataire loc on l.id_locataire=loc.id_locataire",
+    `SELECT l.id_louer,l.numero_chassis,l.id_locataire, l.heure_debut, l.heure_fin,l.status_demande_location,l.en_cours,l.suivi_location,tv.id_type_vehicule, libelle, tarification,l.latitude_depart,l.longitude_depart,l.latitude_arrive,l.longitude_arrive,loc.nom,loc.prenom 
+    FROM louer l  left join vehicule v ON l.numero_chassis=v.numero_chassis 
+            left join locataire loc on l.id_locataire=loc.id_locataire
+            full join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule
+            where l.id_louer is not NULL`,
     (error, results) => {
       if (error) {
         log.loggerConsole.error(error);
@@ -34,20 +38,23 @@ const getAllLocations = async (request, response) => {
   );
 };
 
-// Retrieve the list of all rentals
+// Recuperer  la liste de toutes les locations
 const getAllRegions = async (request, response) => {
-  pool.query("select distinct region from louer; ", (error, results) => {
-    if (error) {
-      log.loggerConsole.error(error);
-      log.loggerFile.error(error);
-      response.sendStatus(500);
-    } else {
-      response.status(200).json(results.rows);
+  pool.query(
+    "select distinct region from louer; ",
+    (error, results) => {
+      if (error) {
+        log.loggerConsole.error(error);
+        log.loggerFile.error(error);
+        response.sendStatus(500);
+      } else {
+        response.status(200).json(results.rows);
+      }
     }
-  });
+  );
 };
 
-// Retrieve the list of current rentals
+// Recuperer la liste des locations en cours
 const getLocationsEnCours = async (request, response) => {
   pool.query(
     "SELECT id_louer,l.numero_chassis, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours,loc.nom,loc.prenom FROM louer l inner join locataire loc on l.id_locataire=loc.id_locataire  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=true",
@@ -63,7 +70,7 @@ const getLocationsEnCours = async (request, response) => {
   );
 };
 
-// Retrieve the list of current rentals
+// Recuperer la liste  des locations en cours d'un locataire
 const getLocationsLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -81,7 +88,7 @@ const getLocationsLocataire = async (request, response) => {
   );
 };
 
-// Retrieve the list of completed rentals
+// Recuperer la liste des locations terminees
 const getLocationsTermines = async (request, response) => {
   pool.query(
     "SELECT id_louer, heure_debut, heure_fin,status_demande_location,en_cours,suivi_location,tv.id_type_vehicule, libelle, tarification ,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive,en_cours FROM louer l  inner join vehicule v ON l.numero_chassis=v.numero_chassis inner join  typevehicule tv ON tv.id_type_vehicule = v.id_type_vehicule WHERE en_cours=false",
@@ -97,7 +104,7 @@ const getLocationsTermines = async (request, response) => {
   );
 };
 
-// Retrieve the list of terminated rentals for a tenant
+// Recuperer la liste des locations terminees d'un locataire
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   let id = request.params.id;
   pool.query(
@@ -115,7 +122,7 @@ const getLocationsTerminesByIdLocataire = async (request, response) => {
   );
 };
 
-// Retrieve the ended rentals of a tenant
+// Recuperer le locations terminees d'un locataire
 const getLocataireByNumeroChassis = async (request, response) => {
   let numero_chassis = request.params.num;
   pool.query(
@@ -133,7 +140,7 @@ const getLocataireByNumeroChassis = async (request, response) => {
   );
 };
 
-// Retrieve the list of rentals accepted for the statistics service
+// Recuperer la liste des locations acceptées pour le service statistiques
 const getLocationsAcceptes = async (request, response) => {
   pool.query(
     "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region from louer where status_demande_location='accepte' ",
@@ -149,7 +156,7 @@ const getLocationsAcceptes = async (request, response) => {
   );
 };
 
-// Retrieve the list of rejected rentals for the statistics service
+// Recuperer la liste des locations rejetées pour le service statistiques
 const getLocationsRejetes = async (request, response) => {
   pool.query(
     "SELECT id_louer, date_debut , status_demande_location, en_cours ,suivi_location,region from louer where status_demande_location='rejete' ",
@@ -165,7 +172,7 @@ const getLocationsRejetes = async (request, response) => {
   );
 };
 
-// Modify the follow_location field of a location
+// Modifier le champs suivi_location d'une location
 const updateLocationSuiviLocation = async (request, response) => {
   let id = request.params.id;
   let date = request.body.suivi_location;
@@ -184,7 +191,7 @@ const updateLocationSuiviLocation = async (request, response) => {
   );
 };
 
-// Modify the start time field of a rental
+// Mdifier le champs heure_debut d'une location
 const updateLocationHeureDebut = async (request, response) => {
   let id = request.params.id;
   let date = request.body.heure;
@@ -203,7 +210,7 @@ const updateLocationHeureDebut = async (request, response) => {
   );
 };
 
-//// Modify the end_time field of a rental
+// Modifier le champs heure_fin d'une location
 const updateLocationHeureFin = async (request, response) => {
   let id = request.params.id;
   let date = request.body.heure;
@@ -220,7 +227,7 @@ const updateLocationHeureFin = async (request, response) => {
   );
 };
 
-// End a rental (in_progress => false)
+// Terminer une location (en_cours => false)
 const endLocation = async (request, response) => {
   let id = request.params.id;
   let heure = request.body.heure;
@@ -233,12 +240,12 @@ const endLocation = async (request, response) => {
         log.loggerFile.error(error);
         response.statusCode = 500;
       }
-      response.statusCode = 200;
+      response.statusCode=200
     }
   );
 };
 
-// aadd location
+// Ajouter une location
 const addLocation = async (request, response) => {
   let body = request.body;
   pool.query(
@@ -262,12 +269,16 @@ const addLocation = async (request, response) => {
         log.loggerFile.error(error);
         response.statusCode = 500;
       }
-      response.status(200).json(results.rows);
+      if(results.rows==undefined){
+        response.statusCode = 500;
+      }else{
+        response.status(200).json(results.rows);
+      }
     }
   );
 };
 
-/// Retrieve a location with an identifier
+// Recuperer une location avec un identifiant
 const getLocationById = async (request, response) => {
   let id_louer = request.params.id;
   pool.query(
@@ -285,7 +296,7 @@ const getLocationById = async (request, response) => {
   );
 };
 
-//Export rental CRUD functions
+//Exporter les fonctions CRUD de location
 module.exports = {
   getLocationsEnCours,
   getLocationsTermines,
@@ -302,5 +313,5 @@ module.exports = {
   getLocationsTerminesByIdLocataire,
   updateLocationSuiviLocation,
   getAllRegions,
-  getLocataireByNumeroChassis,
+  getLocataireByNumeroChassis
 };
