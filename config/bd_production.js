@@ -2,7 +2,7 @@
 const Pool = require("pg").Pool;
 
 // Open a connection with the database en production mode
-const poolTestIntegration = new Pool({
+const poolProduction = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
