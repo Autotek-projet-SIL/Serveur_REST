@@ -17,7 +17,7 @@ const auth = admin.auth();
 // Firebase tokens verification function
 const verifyToken = async (request) => {
   if (process.env.NODE_ENV === "production") {
-    return new Promise((resolve, reject) => {
+    /*return new Promise((resolve, reject) => {
       let token;
       let uid;
       if (request.method === "GET") {
@@ -43,7 +43,7 @@ const verifyToken = async (request) => {
           log.loggerFile.error(error);
           reject(new Error("Requete refusée"));
         });
-    });
+    });*/
   }
 };
 
