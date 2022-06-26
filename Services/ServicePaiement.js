@@ -46,6 +46,7 @@ const VerifierPaiement = async (request, response) => {
       });
       await modelLocataire.updateLocataireStripeId(email, customer.id);
       customerId = customer.id;
+      balance=100
     } else {
       customerId = data["stripe_id"];
       customer = await stripe.customers.retrieve(customerId);
@@ -69,6 +70,8 @@ const VerifierPaiement = async (request, response) => {
         currency: "eur",
         customer: customerId,
       });
+      console.log("Amount : "+String(amount))
+      console.log("Balance : "+String(balance))
       if (amount > balance) {
         response.sendStatus(406);
       } else {
