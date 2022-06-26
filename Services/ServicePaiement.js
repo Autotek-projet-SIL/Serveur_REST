@@ -46,7 +46,7 @@ const VerifierPaiement = async (request, response) => {
       });
       await modelLocataire.updateLocataireStripeId(email, customer.id);
       customerId = customer.id;
-      balance=100
+      balance=10000
     } else {
       customerId = data["stripe_id"];
       customer = await stripe.customers.retrieve(customerId);
