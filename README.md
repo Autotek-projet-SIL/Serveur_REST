@@ -89,4 +89,6 @@ npm run test
 ```
 3. Consulter la couverture du code: Pour connaitre la couverture du code, il faut se rendre dans le repertoire /converage et ouvrir le fichier index.html avec votre navigateur par défaut.
 
-**Remarque:** Avant de lancer les tests unitaires, il faut s'assurer qu'aucune application occupe le port 4000, car le serveur de test demarre sur le port 4000. 
+**Remarque:** Avant de lancer les tests unitaires, il faut s'assurer qu'aucune application occupe le port 4000, car le serveur de test demarre sur le port 4000.
+
+**Remarque importante:** Attention, le package pg-mem (In memory database) utilisé pour réaliser les tests unitaires peut ne pas supporter un certain type de jointure trés avancées, tel que : full join. Donc certains tests unitaires peuveent echouer a cause de cela. Mais la logique des tests unitaires est juste et fonctionne en environnement de production.
