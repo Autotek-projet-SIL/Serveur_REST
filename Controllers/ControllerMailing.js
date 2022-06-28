@@ -15,6 +15,6 @@ const getFactureDetailByID = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
+ 
 //Export mailing controller functions
 module.exports = { getFactureDetailByID };

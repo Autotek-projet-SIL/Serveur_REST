@@ -36,7 +36,7 @@ describe("Tester le service Panne", () => {
       expect(res.data[0].numero_chassis).toEqual(data.numero_chassis);
     });
   });
-  //-----
+  //----- 
   it("Recuperer la liste des pannes", async () => {
     await axios.get(url + "gestionpannes/get_pannes/").then((res) => {
       res.data.forEach((element) => {

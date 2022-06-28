@@ -64,7 +64,7 @@ routerGestionProfils.put(
 routerGestionProfils.get(
   "/gestionprofils/am/:id",
   controllerGestionProfils.getAMById
-);
+); 
 routerGestionProfils.get(
   "/gestionprofils/am/",
   controllerGestionProfils.getAMs

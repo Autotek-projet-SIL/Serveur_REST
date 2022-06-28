@@ -19,7 +19,7 @@ const addTrajet = async (request, response) => {
     }
   );
 };
-
+ 
 //Export CRUD functions from the trip
 module.exports = {
   addTrajet,

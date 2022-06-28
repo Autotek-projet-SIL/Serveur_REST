@@ -11,3 +11,4 @@ const poolTestIntegration = new Pool({
 });
 // export the connection method
 module.exports = poolTestIntegration;
+ 

@@ -19,7 +19,7 @@ const getLocataires = async (request, response) => {
     }
   );
 };
-
+ 
 // Retrieve a tenant with an identifier
 const getLocataireById = async (request, response) => {
   let id = request.params.id;

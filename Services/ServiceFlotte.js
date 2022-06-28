@@ -180,7 +180,7 @@ const addVehicleFB = async (request, response) => {
       });
   }
 };
-
+ 
 // Mettre a jour la disponibilte d'un véhicule dans firestore
 const updateVehiculeAvaibleFB = async (request, response) => {
   const vehicule = await db

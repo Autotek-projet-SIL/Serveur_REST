@@ -299,7 +299,7 @@ const getMarques = async (request, response) => {
     }
   });
 };
-
+ 
 //Retrieve the list of models of a brand by brand id
 const getModelsByIdMarque = async (request, response) => {
   let id = request.params.id;

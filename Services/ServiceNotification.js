@@ -45,7 +45,7 @@ const sendNotification = async (title, body, request, response) => {
       log.loggerFile.error(error);
     });
 };
-
+ 
 // Export functions
 module.exports = {
   sendNotification,

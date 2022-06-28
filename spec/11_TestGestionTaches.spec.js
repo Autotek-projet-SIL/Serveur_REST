@@ -11,7 +11,7 @@ describe("Tester le service Tache", () => {
           expect(element.descriptif).toEqual("descriptif1");
           expect(element.etat).toEqual("en cours");
         }
-      });
+      }); 
     });
   });
   //---------

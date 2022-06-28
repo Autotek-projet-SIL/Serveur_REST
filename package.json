@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Autotek-projet-SIL/Services_REST/issues"
   },
-  "homepage": "https://github.com/Autotek-projet-SIL/Services_REST#readme",
+  "homepage": "https://github.com/Autotek-projet-SIL/Services_REST#readme", 
   "dependencies": {
     "@google-cloud/firestore": "^5.0.2",
     "axios": "^0.26.1",

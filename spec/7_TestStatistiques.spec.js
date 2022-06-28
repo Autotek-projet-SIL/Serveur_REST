@@ -8,7 +8,7 @@ describe("Tester le service Statististiques", () => {
       expect(res.data.length).toEqual(2);
     });
   });
-  //-----
+  //----- 
   it("Recuperer la liste des demandes d'inscription", async () => {
     await axios.get(url + "statistiques/getDemandeInscription").then((res) => {
       res.data.forEach((element) => {

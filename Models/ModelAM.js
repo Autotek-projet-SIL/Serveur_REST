@@ -3,7 +3,7 @@ const pool = require("../config/config_pool");
 const log = require("../config/Logger");
 
 // functons of am model
-
+ 
 //get all am
 const getAMs = async (request, response) => {
   pool.query(

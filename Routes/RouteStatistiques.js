@@ -27,5 +27,5 @@ routerStatistiques.get(
   "/statistiques/getLocationsRejetes",
   ControllerStatistiques.getLocationsRejetes
 );
-
+ 
 module.exports = routerStatistiques;

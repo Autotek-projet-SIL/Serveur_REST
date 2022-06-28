@@ -33,7 +33,6 @@ const getLocationsRejetes = async (request, response) => {
     });
 };
 
-
 //get Location Statistics
 const getLocationStatistics = async (request, response) => {
   firebaseVerifyToken
@@ -47,7 +46,6 @@ const getLocationStatistics = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //get Request Registration Statistics
 const getDemandeInscriptionStatistics = async (request, response) => {
@@ -65,7 +63,6 @@ const getDemandeInscriptionStatistics = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //get Facture Statistics
 const getFactureStatistics = async (request, response) => {

@@ -30,7 +30,7 @@ const VerifierPaiement = async (request, response) => {
           response.sendStatus(406);
         }
       }
-    });
+    }); 
   } else if (type_paiement === "stripe") {
     let customerId = null;
     let customer = null;

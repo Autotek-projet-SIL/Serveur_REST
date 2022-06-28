@@ -10,7 +10,7 @@ describe("Tester le service Demande de support", () => {
         if (element.id === "1") {
           expect(element.objet).toEqual("demandeSupport");
         }
-      });
+      }); 
     });
   });
   //-----

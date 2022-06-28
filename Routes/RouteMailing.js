@@ -8,6 +8,6 @@ routerMailing.get(
   "/mailing/envoyer_facture/:id_louer",
   controllerMailing.getFactureDetailByID
 );
-
+ 
 // Exporter le router mailing
 module.exports = routerMailing;

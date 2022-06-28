@@ -9,7 +9,7 @@ const inscriptionLocataire = async (request, response) => {
   await modelLocataire.addLocataire(request, response);
   await modelDemandeInscription.addDemandeInscription(request, response);
 };
-
+ 
 //locataire connexion
 const connexionLocataire = async (request, response) => {
   await modelLocataire.getLocataireByEmail(request, response);

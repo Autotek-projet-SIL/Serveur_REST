@@ -5,7 +5,6 @@ const log = require("../config/Logger");
 
 // Functions of the profile management controller
 
-
 // get locataires
 const getLocataires = async (request, response) => {
   firebaseVerifyToken
@@ -19,7 +18,6 @@ const getLocataires = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //get Locataire ById
 const getLocataireById = async (request, response) => {
@@ -49,7 +47,6 @@ const updateLocataire = async (request, response) => {
     });
 };
 
-
 //get atc by id
 const getATCById = async (request, response) => {
   firebaseVerifyToken
@@ -78,7 +75,6 @@ const getATCs = async (request, response) => {
     });
 };
 
-
 //update atc
 const updateATC = async (request, response) => {
   firebaseVerifyToken
@@ -106,7 +102,6 @@ const updateATCPhoto = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //update ATC Password
 const updateATCPassword = async (request, response) => {
@@ -150,7 +145,6 @@ const getDecideurById = async (request, response) => {
     });
 };
 
-
 //get decideurs
 const getDecideurs = async (request, response) => {
   firebaseVerifyToken
@@ -193,7 +187,6 @@ const updateDecideurPhoto = async (request, response) => {
     });
 };
 
-
 //update decideur password
 const updateDecideurPassword = async (request, response) => {
   firebaseVerifyToken
@@ -222,7 +215,6 @@ const getAMById = async (request, response) => {
     });
 };
 
-
 //get all ams
 const getAMs = async (request, response) => {
   firebaseVerifyToken
@@ -236,7 +228,6 @@ const getAMs = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //update am
 const updateAM = async (request, response) => {
@@ -252,7 +243,6 @@ const updateAM = async (request, response) => {
     });
 };
 
-
 //update am photo
 const updateAMPhoto = async (request, response) => {
   firebaseVerifyToken
@@ -266,7 +256,6 @@ const updateAMPhoto = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //update am password
 const updateAMPassword = async (request, response) => {

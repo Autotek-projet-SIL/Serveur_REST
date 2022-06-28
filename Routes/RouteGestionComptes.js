@@ -10,7 +10,7 @@ routerGestionComptes.delete(
   "/gestioncomptes/supprimer_locataire/:id",
   controllerGestionComptes.deleteLocataire
 );
-
+ 
 //delete decideur
 routerGestionComptes.delete(
   "/gestioncomptes/supprimer_decideur/:id",

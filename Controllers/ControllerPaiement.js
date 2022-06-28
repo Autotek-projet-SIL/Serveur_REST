@@ -4,7 +4,7 @@ const firebaseVerifyToken = require("../config/firebase.js");
 const log = require("../config/Logger");
 
 // Payment controller functions
-
+ 
 //verifyPayment
 const verifierPaiement = async (request, response) => {
   await firebaseVerifyToken

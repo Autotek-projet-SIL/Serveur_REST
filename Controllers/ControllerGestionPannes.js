@@ -1,20 +1,21 @@
-// Variables Declaration 
-const ServiceGestionPannes = require("../Services/ServiceGestionPannes.js");   // Service of this controller Pannes
-const firebaseVerifyToken = require("../config/firebase.js");                     // FireBase Configuration
-let serviceNotification = require("../Services/ServiceNotification");                 // Service to send Notifications
-const log = require("../config/Logger");                                  // Display Configuration
+// Variables Declaration
+const ServiceGestionPannes = require("../Services/ServiceGestionPannes.js"); // Service of this controller Pannes
+const firebaseVerifyToken = require("../config/firebase.js"); // FireBase Configuration
+let serviceNotification = require("../Services/ServiceNotification"); // Service to send Notifications
+const log = require("../config/Logger"); // Display Configuration
 
 // Controller of service panne Declaration
 
-//add a panne 
+//add a panne
 const addPanne = async (request, response) => {
   await firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionPannes.addPanne(request, response);
-      if (response.statusCode == 200) {                   // if panne added correctly
+      if (response.statusCode == 200) {
+        // if panne added correctly
         if (process.env.NODE_ENV === "production") {
-          // send a notification to AM 
+          // send a notification to AM
           await serviceNotification.sendNotification(
             "Nouvelle tache attribuée",
             request.body.descriptif,
@@ -48,7 +49,7 @@ const getPannes = async (request, response) => {
     });
 };
 
-// get a panne by id 
+// get a panne by id
 const getPanneById = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)

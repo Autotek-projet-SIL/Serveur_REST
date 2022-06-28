@@ -14,7 +14,7 @@ const getLocataireById = async (request, response) => {
 const getLocataires = async (request, response) => {
   await ModelLocataire.getLocataires(request, response);
 };
-
+  
 //update locataire
 const updateLocataire = async (request, response) => {
   await ModelLocataire.updateLocataire(request, response);

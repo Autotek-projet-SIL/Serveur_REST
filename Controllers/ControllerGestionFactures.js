@@ -1,9 +1,9 @@
-// Variables Declaration 
-const ServiceGestionFactures = require("../Services/ServiceGestionFactures");            // the Service of this Controller : Facture
-const firebaseVerifyToken = require("../config/firebase.js");                         // FireBase Configurations
-const log = require("../config/Logger");                                              // Display Configuration
+// Variables Declaration
+const ServiceGestionFactures = require("../Services/ServiceGestionFactures"); // the Service of this Controller : Facture
+const firebaseVerifyToken = require("../config/firebase.js"); // FireBase Configurations
+const log = require("../config/Logger"); // Display Configuration
 
-//Functions of Facture Management Controller  
+//Functions of Facture Management Controller
 
 // add a Facture
 const addFacture = async (request, response) => {

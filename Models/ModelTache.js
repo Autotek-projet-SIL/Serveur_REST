@@ -84,7 +84,7 @@ const updateEtatAvancementTache = async (request, response) => {
     }
   );
 };
-
+ 
 //recuperate the liste of all taches by id AM
 const getTacheByIdAm = async (request, response) => {
   let id = request.params.id;

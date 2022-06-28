@@ -16,3 +16,4 @@ routerPaiement.get(
 
 // Export methods
 module.exports = routerPaiement;
+ 

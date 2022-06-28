@@ -56,7 +56,7 @@ const updateJustificatif = async (request, response) => {
     }
   );
 };
-
+ 
 //Export crud functions from the credential
 module.exports = {
   getJustificatifById,

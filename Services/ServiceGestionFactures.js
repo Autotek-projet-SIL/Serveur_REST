@@ -13,7 +13,7 @@ const addFacture = async (request, response) => {
 const getFactures = async (request, response) => {
   await ModelFacture.getFactures(request, response);
 };
-
+ 
 // recuperate a facture by id
 const getFactureById = async (request, response) => {
   await ModelFacture.getFactureById(request, response);

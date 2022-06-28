@@ -1,9 +1,9 @@
-// Variables Declaration 
-const ServiceFlotte = require("../Services/ServiceFlotte");         // the service of this controller : Flotte
-const firebaseVerifyToken = require("../config/firebase.js");         // FireBase configuration
-const log = require("../config/Logger");                          // Display configuration
+// Variables Declaration
+const ServiceFlotte = require("../Services/ServiceFlotte"); // the service of this controller : Flotte
+const firebaseVerifyToken = require("../config/firebase.js"); // FireBase configuration
+const log = require("../config/Logger"); // Display configuration
 
-//Controller of Flotte service Declaration 
+//Controller of Flotte service Declaration
 
 //recuperate all vehicules
 const getVehicles = async (request, response) => {
@@ -192,16 +192,16 @@ const updateVehicleType = async (request, response) => {
     });
 };
 
-//delete a vehicule 
+//delete a vehicule
 const deleteVehicule = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
     .then(async (res) => {
       if (process.env.NODE_ENV === "production") {
-        await ServiceFlotte.deleteVehiculeFB(request, response);        //delete vehicule from firebase
+        await ServiceFlotte.deleteVehiculeFB(request, response); //delete vehicule from firebase
       }
       if (response.statusCode != 500) {
-        await ServiceFlotte.deleteVehicule(request, response);          // delete vehicule from database
+        await ServiceFlotte.deleteVehicule(request, response); // delete vehicule from database
       }
     })
     .catch((error) => {
@@ -239,7 +239,7 @@ const getModelsByIdMarque = async (request, response) => {
     });
 };
 
-//delete a vehicule type 
+//delete a vehicule type
 const deleteVehiculeType = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -253,7 +253,7 @@ const deleteVehiculeType = async (request, response) => {
     });
 };
 
-//Export controller Flotte functions 
+//Export controller Flotte functions
 module.exports = {
   getVehicles,
   getVehiclesByAmID,

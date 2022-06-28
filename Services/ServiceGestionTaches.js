@@ -33,7 +33,7 @@ const updateEtatAvancementTache = async (request, response) => {
 const updateEtatTache = async (request, response) => {
   await ModelTache.updateEtatTache(request, response);
 };
-
+ 
 // Export all the Service of Taches Functions
 module.exports = {
   addTache,

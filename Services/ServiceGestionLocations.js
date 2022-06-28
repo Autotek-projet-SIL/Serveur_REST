@@ -15,7 +15,7 @@ const updateLocationHeureDebut = async (request, response) => {
 const endLocation = async (request, response) => {
   await modelLouer.endLocation(request, response);
 };
-
+ 
 //update tracking location
 const updateLocationSuiviLocation = async (request, response) => {
   await modelLouer.updateLocationSuiviLocation(request, response);

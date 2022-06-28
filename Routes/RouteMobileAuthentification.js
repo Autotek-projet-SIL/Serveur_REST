@@ -21,6 +21,6 @@ routerMobileAuthentification.post(
   "/authentification_mobile/envoyer_demande_inscription/",
   controllerMobileAuthentification.envoyerDemandeInscription
 );
-
+ 
 // Export all methods
 module.exports = routerMobileAuthentification;

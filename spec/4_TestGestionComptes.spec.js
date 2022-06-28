@@ -22,7 +22,7 @@ describe("Tester le service Gestion des Comptes", () => {
         .then((res) => {
           expect(res.status).toEqual(200);
         });
-      //-----
+      //----- 
       await axios
         .get(
           url + "authentification_web/decideur_connexion/test_decideur2@esi.dz"

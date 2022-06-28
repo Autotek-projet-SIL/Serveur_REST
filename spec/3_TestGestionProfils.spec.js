@@ -5,7 +5,7 @@ const url = "http://localhost:4000/";
 describe("Tester le service Gestion des Profils", () => {
   //-----
   describe("Recuperer la liste des utilisateurs", () => {
-    //-----
+    //----- 
     it("Recuperer la liste des locataires", async () => {
       await axios.get(url + "gestionprofils/locataire/").then((res) => {
         res.data.forEach((element) => {

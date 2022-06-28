@@ -37,7 +37,7 @@ routerGestionLocations.get(
   "/gestionlocations/regions",
   controllerGestionLocations.getAllRegions
 );
-
+ 
 //get location by id
 routerGestionLocations.get(
   "/gestionlocations/location/:id",

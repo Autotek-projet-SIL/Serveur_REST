@@ -1,7 +1,7 @@
 // variable declaration
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
-
+ 
 // Retrieve the list of decision makers
 const getDecideurs = async (request, response) => {
   pool.query(

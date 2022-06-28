@@ -16,7 +16,7 @@ routerGestionPannes.get(
   "/gestionpannes/get_pannes/",
   controllerGestionPannes.getPannes
 );
-
+ 
 // get a panne by id
 routerGestionPannes.get(
   "/gestionpannes/panne/:id",

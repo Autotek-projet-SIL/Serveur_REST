@@ -3,7 +3,7 @@ const pool = require("../config/config_pool"); // DataBase Configuration
 const log = require("../config/Logger"); // Display Configurations
 
 //Functions of Facture Management Model
-
+ 
 // add a Facture
 const addFacture = async (request, response) => {
   let body = request.body;

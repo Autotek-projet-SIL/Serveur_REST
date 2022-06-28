@@ -89,4 +89,4 @@ npm run test
 ```
 3. Consulter la couverture du code: Pour connaitre la couverture du code, il faut se rendre dans le repertoire /converage et ouvrir le fichier index.html avec votre navigateur par défaut.
 
-**Remarque:** Avant de lancer les tests unitaires, il faut s'assurer qu'aucune application occupe le port 4000, car le serveur de test demarre sur le port 4000.
+**Remarque:** Avant de lancer les tests unitaires, il faut s'assurer qu'aucune application occupe le port 4000, car le serveur de test demarre sur le port 4000. 

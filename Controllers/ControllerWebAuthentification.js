@@ -31,7 +31,6 @@ const validerDemandeInscription = async (request, response) => {
     });
 };
 
-
 //refuse registration request
 const refuserDemandeInscription = async (request, response) => {
   firebaseVerifyToken
@@ -57,7 +56,6 @@ const refuserDemandeInscription = async (request, response) => {
     });
 };
 
-
 //get Requests Registration
 const getDemandesInscription = async (request, response) => {
   firebaseVerifyToken
@@ -74,7 +72,6 @@ const getDemandesInscription = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //get Decideur By Email
 const getDecideurByEmail = async (request, response) => {

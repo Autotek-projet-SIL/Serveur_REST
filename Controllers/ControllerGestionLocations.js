@@ -20,7 +20,6 @@ const updateLocationHeureDebut = async (request, response) => {
     });
 };
 
-
 //end location
 const endLocation = async (request, response) => {
   firebaseVerifyToken
@@ -47,7 +46,6 @@ const endLocation = async (request, response) => {
     });
 };
 
-
 //update Location Tracking Location
 const updateLocationSuiviLocation = async (request, response) => {
   firebaseVerifyToken
@@ -65,7 +63,6 @@ const updateLocationSuiviLocation = async (request, response) => {
     });
 };
 
-
 //get all locations
 const getAllLocations = async (request, response) => {
   firebaseVerifyToken
@@ -80,7 +77,6 @@ const getAllLocations = async (request, response) => {
     });
 };
 
-
 // get  all regions
 const getAllRegions = async (request, response) => {
   firebaseVerifyToken
@@ -94,7 +90,6 @@ const getAllRegions = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //get locations in progress
 const getLocationsEnCours = async (request, response) => {
@@ -124,7 +119,7 @@ const getLocationsLocataire = async (request, response) => {
     });
 };
 
-//get ended locations 
+//get ended locations
 const getLocationsTermines = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -137,7 +132,6 @@ const getLocationsTermines = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //add location
 const addLocation = async (request, response) => {
@@ -174,7 +168,6 @@ const getLocationById = async (request, response) => {
     });
 };
 
-
 //get locations ended by id locataire
 const getLocationsTerminesByIdLocataire = async (request, response) => {
   firebaseVerifyToken
@@ -207,7 +200,6 @@ const getLocataireByNumeroChassis = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 // Export the functions of the rental management controller
 module.exports = {

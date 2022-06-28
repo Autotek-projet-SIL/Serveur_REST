@@ -17,7 +17,6 @@ const deleteLocataire = async (request, response) => {
     });
 };
 
-
 //delete atc
 const deleteATC = async (request, response) => {
   await firebaseVerifyToken
@@ -31,7 +30,6 @@ const deleteATC = async (request, response) => {
       log.loggerFile.error(error);
     });
 };
-
 
 //delete am
 const deleteAM = async (request, response) => {
@@ -100,7 +98,6 @@ const addATC = async (request, response) => {
       log.loggerFile.error(error);
     });
 };
-
 
 //add am
 const addAM = async (request, response) => {

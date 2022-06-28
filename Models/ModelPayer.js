@@ -1,7 +1,7 @@
 // Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
-
+ 
 //Add a payment
 const addPaiement = async (request, response) => {
   let body = request.body;

@@ -12,7 +12,7 @@ let transporter = nodemailer.createTransport({
 });
 
 // Function of service mailing
-
+ 
 //get facture detail
 const getFactureDetailByID = async (request, response) => {
   let facture_detail = await ModelFacture.getFactureDetailByID(

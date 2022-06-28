@@ -67,7 +67,7 @@ const addDemandeInscription = async (request, response) => {
     }
   );
 };
-
+ 
 // Update the information of a registration request
 const updateDemandeInscription = async (request, response, status) => {
   let email = request.params.id_demande_inscription;

@@ -251,21 +251,21 @@ const endLocation = async (request, response) => {
 // add location
 const addLocation = async (request, response) => {
   let body = request.body;
-  let latd=body.latitude_depart
-  let longd=body.longitude_depart
-  let lata=body.latitude_arrive
-  let longa=body.longitude_arrive
-  if(latd===""){
-    latd=0.0
+  let latd = body.latitude_depart;
+  let longd = body.longitude_depart;
+  let lata = body.latitude_arrive;
+  let longa = body.longitude_arrive;
+  if (latd === "") {
+    latd = 0.0;
   }
-  if(longd===""){
-    longd=0.0
+  if (longd === "") {
+    longd = 0.0;
   }
-  if(lata===""){
-    lata=0.0
+  if (lata === "") {
+    lata = 0.0;
   }
-  if(longa===""){
-    longa=0.0
+  if (longa === "") {
+    longa = 0.0;
   }
   pool.query(
     "INSERT INTO louer(date_debut,status_demande_location, id_locataire,region,numero_chassis,suivi_location,en_cours,latitude_depart,longitude_depart,latitude_arrive,longitude_arrive)VALUES ($1, $2, $3, $4, $5, $6,$7,$8,$9,$10,$11) RETURNING id_louer",
@@ -287,7 +287,7 @@ const addLocation = async (request, response) => {
         log.loggerConsole.error(error);
         log.loggerFile.error(error);
         response.statusCode = 500;
-      }else{
+      } else {
         response.status(200).json(results.rows);
       }
     }

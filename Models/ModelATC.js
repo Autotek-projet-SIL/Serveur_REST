@@ -1,7 +1,7 @@
 // Declaration of variables
 const pool = require("../config/config_pool");
 const log = require("../config/Logger");
-
+ 
 // Retrieve the list of atcs
 const getATCs = async (request, response) => {
   pool.query(

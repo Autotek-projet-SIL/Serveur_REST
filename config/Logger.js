@@ -6,7 +6,7 @@ const { format } = require("logform");
 
 // The 2 types of loggers declaration
 
-// (1) Logger for display erreurs in console  
+// (1) Logger for display erreurs in console
 const loggerConsole = winston.createLogger({
   format: format.combine(
     format.timestamp({ format: "MMM-DD-YYYY HH:mm:ss" }),

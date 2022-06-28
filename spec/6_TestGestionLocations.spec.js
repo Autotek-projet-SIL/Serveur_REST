@@ -51,7 +51,7 @@ describe("Tester le service Gestion des Locations", () => {
       });
     });
   });
-  //-----
+  //----- 
   it("Terminer une location", async () => {
     let data = {
       heure: "15:00",

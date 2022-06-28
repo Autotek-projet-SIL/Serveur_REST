@@ -4,7 +4,7 @@ const routerFlotte = express.Router(); // this router : Flotte
 const controllerFlotte = require("../Controllers/ControllerFlotte"); // the controller of this router : Flotte
 
 //Routers of Flotte service Declaration
-
+ 
 //recuperate all vehicules
 routerFlotte.get("/flotte/vehicule/", controllerFlotte.getVehicles);
 

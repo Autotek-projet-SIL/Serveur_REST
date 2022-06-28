@@ -20,7 +20,7 @@ const getLocationsRejetes = async (request, response) => {
 const getLocationStatistics = async (request, response) => {
   await modelLouer.getLocationStatistics(request, response);
 };
-
+ 
 // get inscription request statistics
 const getDemandeInscriptionStatistics = async (request, response) => {
   await modelDemandeInscription.getDemandeInscriptionStatistics(

@@ -11,7 +11,7 @@ const log = require("../config/Logger");
 const deleteLocataire = async (request, response) => {
   await ModelLocataire.deleteLocataire(request, response);
 };
-
+ 
 //delete atc
 const deleteATC = async (request, response) => {
   await ModelATC.deleteATC(request, response);

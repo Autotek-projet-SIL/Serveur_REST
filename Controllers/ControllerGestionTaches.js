@@ -1,8 +1,8 @@
-// Variables Declaration 
-const ServiceGestionTaches = require("../Services/ServiceGestionTaches.js");     // Service of this Controller : Tache
-const firebaseVerifyToken = require("../config/firebase.js");            // FireBase Configuration
-const log = require("../config/Logger");                                  // Display Configuration
-let serviceNotification = require("../Services/ServiceNotification");       // Service to send Notifications
+// Variables Declaration
+const ServiceGestionTaches = require("../Services/ServiceGestionTaches.js"); // Service of this Controller : Tache
+const firebaseVerifyToken = require("../config/firebase.js"); // FireBase Configuration
+const log = require("../config/Logger"); // Display Configuration
+let serviceNotification = require("../Services/ServiceNotification"); // Service to send Notifications
 
 // Controller of service Tache Declaration
 
@@ -12,7 +12,8 @@ const addTache = async (request, response) => {
     .verifyToken(request)
     .then(async (res) => {
       await ServiceGestionTaches.addTache(request, response);
-      if (response.statusCode == 200) {                         // if the tache added correctly
+      if (response.statusCode == 200) {
+        // if the tache added correctly
         if (process.env.NODE_ENV === "production") {
           // send a notification
           await serviceNotification.sendNotification(
@@ -76,7 +77,7 @@ const updateEtatAvancementTache = async (request, response) => {
     });
 };
 
-//Update etat field in a Tache 
+//Update etat field in a Tache
 const updateEtatTache = async (request, response) => {
   firebaseVerifyToken
     .verifyToken(request)
@@ -104,7 +105,7 @@ const getTacheByIdAm = async (request, response) => {
     });
 };
 
-// Export all the Controller of Taches Functions 
+// Export all the Controller of Taches Functions
 module.exports = {
   addTache,
   getTaches,

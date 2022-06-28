@@ -22,7 +22,6 @@ const inscriptionLocataire = async (request, response) => {
     });
 };
 
-
 //login locataire
 const connexionLocataire = async (request, response) => {
   firebaseVerifyToken
@@ -37,7 +36,6 @@ const connexionLocataire = async (request, response) => {
     });
 };
 
-
 //login am
 const connexionAM = async (request, response) => {
   firebaseVerifyToken
@@ -51,7 +49,6 @@ const connexionAM = async (request, response) => {
       response.sendStatus(403);
     });
 };
-
 
 //send registration request
 const envoyerDemandeInscription = async (request, response) => {
